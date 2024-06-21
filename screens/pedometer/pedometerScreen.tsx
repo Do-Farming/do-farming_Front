@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, Button } from "react-native";
+import { View, Text, Button, StyleSheet } from "react-native";
 import { Pedometer } from "expo-sensors";
 import * as Application from "expo-application";
 
@@ -84,5 +84,10 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    backgroundColor: "#fff",
+  },
+  text: {
+    fontSize: 18,
+    color: "#000",
   },
 });
