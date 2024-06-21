@@ -35,11 +35,12 @@ function MyTabs() {
           return <Ionicons name={iconName} size={size} color={color} />;
         },
         headerShown: true, // 헤더를 표시하도록 설정
+        tabBarActiveTintColor: "tomato",
+        tabBarInactiveTintColor: "gray",
+        tabBarStyle: {
+          display: "flex",
+        },
       })}
-      tabBarOptions={{
-        activeTintColor: "tomato",
-        inactiveTintColor: "gray",
-      }}
     >
       <Tab.Screen
         name="Home"
