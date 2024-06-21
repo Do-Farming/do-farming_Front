@@ -1,17 +1,16 @@
 import * as React from "react";
-import {
-  NavigationContainer,
-  DarkTheme,
-  DefaultTheme,
-} from "@react-navigation/native";
+import { NavigationContainer, DefaultTheme, DarkTheme } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
+import { ThemeProvider as StyledComponentsThemeProvider } from "styled-components/native"; // styled-components의 ThemeProvider import
+import theme from "./src/styles/theme"; // styled-components에서 사용할 테마 import
 
 // Screens
-import ExploreScreen from "./screens/ExploreScreen";
-import ExampleScreen from "./screens/ExampleScreen";
-import HomeScreen from "./screens/home/HomeScreen";
+import { useColorScheme } from "react-native";
+import HomeScreen from "./src/screens/home/HomeScreen";
+import ExploreScreen from "./src/screens/ExploreScreen";
+import ExampleScreen from "./src/screens/ExampleScreen";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -30,7 +29,7 @@ function MyTabs() {
           } else if (route.name === "Example") {
             iconName = focused ? "star" : "star-outline";
           } else {
-            iconName = "home"; // 기본값 설정
+            iconName = "home"; 
           }
           return <Ionicons name={iconName} size={size} color={color} />;
         },
@@ -62,14 +61,16 @@ export default function App() {
   const scheme = useColorScheme();
 
   return (
-    <NavigationContainer theme={scheme === "dark" ? DarkTheme : DefaultTheme}>
-      <Stack.Navigator>
-        <Stack.Screen
-          name="Root"
-          component={MyTabs}
-          options={{ headerShown: true }}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <StyledComponentsThemeProvider theme={theme}>
+      <NavigationContainer theme={scheme === "dark" ? DarkTheme : DefaultTheme}>
+        <Stack.Navigator>
+          <Stack.Screen
+            name="Root"
+            component={MyTabs}
+            options={{ headerShown: true }}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </StyledComponentsThemeProvider>
   );
 }
