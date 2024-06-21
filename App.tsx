@@ -22,7 +22,7 @@ function MyTabs() {
     <Tab.Navigator
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused, color, size }) => {
-          let iconName;
+          let iconName: keyof typeof Ionicons.glyphMap;
 
           if (route.name === "Home") {
             iconName = focused ? "home" : "home-outline";
@@ -30,6 +30,8 @@ function MyTabs() {
             iconName = focused ? "search" : "search-outline";
           } else if (route.name === "Example") {
             iconName = focused ? "star" : "star-outline";
+          } else {
+            iconName = "home"; // 기본값 설정
           }
 
           return <Ionicons name={iconName} size={size} color={color} />;
