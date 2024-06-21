@@ -51,7 +51,7 @@ function MyTabs() {
       <Tab.Screen
         name="Example"
         component={ExampleScreen}
-        options={{ title: "Example Screen" }}
+        options={{ title: "방 찾기" }}
       />
     </Tab.Navigator>
   );
@@ -67,7 +67,7 @@ export default function App() {
           <Stack.Screen
             name="Root"
             component={MyTabs}
-            options={{ headerShown: true }}
+            options={{ headerShown: false }}
           />
         </Stack.Navigator>
       </NavigationContainer>
