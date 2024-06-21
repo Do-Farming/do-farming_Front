@@ -7,12 +7,11 @@ import {
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
-import { useColorScheme } from "react-native";
 
 // Screens
-import HomeScreen from "./screens/HomeScreen";
 import ExploreScreen from "./screens/ExploreScreen";
 import ExampleScreen from "./screens/ExampleScreen";
+import HomeScreen from "./screens/home/HomeScreen";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -33,15 +32,11 @@ function MyTabs() {
           } else {
             iconName = "home"; // 기본값 설정
           }
-
           return <Ionicons name={iconName} size={size} color={color} />;
         },
-        headerShown: true, // 헤더를 표시하도록 설정
         tabBarActiveTintColor: "tomato",
         tabBarInactiveTintColor: "gray",
-        tabBarStyle: {
-          display: "flex",
-        },
+        tabBarStyle: { display: "flex" },
       })}
     >
       <Tab.Screen
