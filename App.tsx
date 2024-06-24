@@ -67,7 +67,7 @@ export default function App() {
           <Stack.Screen
             name="Root"
             component={MyTabs}
-            options={{ headerShown: true }}
+            options={{ headerShown: false }}
           />
         </Stack.Navigator>
       </NavigationContainer>
