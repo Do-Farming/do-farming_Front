@@ -1,3 +1,3 @@
 export interface BangProps {
-    onPress?: () => "void";
+  onPress?: () => 'void';
 }

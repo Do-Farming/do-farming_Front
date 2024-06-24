@@ -15,8 +15,9 @@ import { useColorScheme } from 'react-native';
 import HomeScreen from './src/screens/home/HomeScreen';
 import ExploreScreen from './src/screens/ExploreScreen';
 import ExampleScreen from './src/screens/ExampleScreen';
-import BangSearchScreen from './src/screens/bang/BangSearchScreen';
+import BangSearchScreen from "./src/screens/bang/bangSearch/BangSearchScreen";
 import StartScreen from './src/screens/login/StartScreen';
+
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
