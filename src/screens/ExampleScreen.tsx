@@ -5,11 +5,11 @@ export default function ExampleScreen({ navigation }: any) {
   return (
     <View style={styles.container}>
       <Button
-        title='챌린지 방 찾기 페이지로'
+        title="챌린지 방 찾기 페이지로"
         onPress={() => navigation.navigate('challengeBang')}
       />
       <Button
-        title='시작 페이지로'
+        title="시작 페이지로"
         onPress={() => navigation.navigate('StartScreen')}
       />
     </View>

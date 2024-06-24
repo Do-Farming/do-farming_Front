@@ -17,9 +17,9 @@ export default function StartScreen() {
         <MainTitle>Do! farming</MainTitle>
       </TitleWrapper>
       <ButtonWrapper>
-        <LongButton text='로그인'></LongButton>
+        <LongButton text="로그인"></LongButton>
         <LongButton
-          text='회원가입'
+          text="회원가입"
           backgroundColor={theme.buttonBoldColor}
         ></LongButton>
       </ButtonWrapper>
