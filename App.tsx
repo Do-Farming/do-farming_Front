@@ -45,7 +45,7 @@ function MyTabs() {
     >
       <Tab.Screen
         name='Home'
-        component={StartScreen}
+        component={HomeScreen}
         options={{ title: 'Home Screen' }}
       />
       <Tab.Screen
@@ -70,9 +70,14 @@ export default function App() {
       <NavigationContainer theme={scheme === 'dark' ? DarkTheme : DefaultTheme}>
         <Stack.Navigator>
           <Stack.Screen
-            name='Root'
+            name=' '
             component={MyTabs}
-            options={{ headerShown: true }}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name='Start'
+            component={StartScreen}
+            options={{ title: 'Start Screen' }}
           />
         </Stack.Navigator>
       </NavigationContainer>
