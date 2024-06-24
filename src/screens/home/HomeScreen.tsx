@@ -1,6 +1,6 @@
-import React from "react";
-import { View, Text, StyleSheet } from "react-native";
-import { styles } from "./HomeScreen.styled";
+import React from 'react';
+import { View, Text, StyleSheet } from 'react-native';
+import { styles } from './HomeScreen.styled';
 
 export default function HomeScreen() {
   return (

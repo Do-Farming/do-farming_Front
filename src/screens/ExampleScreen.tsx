@@ -1,28 +1,14 @@
-import React from "react";
-import { View, Text, StyleSheet } from "react-native";
-import styled from 'styled-components/native';
-import theme from "../styles/theme";
+import { useNavigation } from '@react-navigation/native';
+import React from 'react';
+import { View, Text, StyleSheet, Button } from 'react-native';
 
-const Button = styled.TouchableOpacity`
-  background-color: ${props => props.theme.mainColor};
-  padding: 10px;
-  border-radius: 5px;
-  align-items: center;
-  font-size: 16px;
-  color: white;
-`;
-
-const ButtonText = styled.Text`
-  font-size: 16px;
-  color: white;
-`;
-
-export default function ExampleScreen() {
+export default function ExampleScreen({ navigation }: any) {
   return (
     <View style={styles.container}>
-      <Button>
-        <ButtonText>방 만들기</ButtonText>
-      </Button>
+      <Button
+        title='챌린지 방 찾기 페이지로'
+        onPress={() => navigation.navigate('challengeBang')}
+      />
     </View>
   );
 }
@@ -30,10 +16,8 @@ export default function ExampleScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#fff",
+    backgroundColor: '#EEEEEE',
     paddingHorizontal: 20,
+    paddingVertical: 30,
   },
 });
-
