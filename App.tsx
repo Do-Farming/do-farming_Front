@@ -10,14 +10,13 @@ import { Ionicons } from "@expo/vector-icons";
 import { ThemeProvider as StyledComponentsThemeProvider } from "styled-components/native"; // styled-components의 ThemeProvider import
 import theme from "./src/styles/theme"; // styled-components에서 사용할 테마 import
 
-// Screens
-import { useColorScheme } from "react-native";
-import HomeScreen from "./src/screens/home/HomeScreen";
-import ExploreScreen from "./src/screens/ExploreScreen";
-import ExampleScreen from "./src/screens/ExampleScreen";
-import BangSearch from "./src/screens/bang/bangSearch/BangSearchScreen";
 import BangDetailScreen from "./src/screens/bang/bangDetail/BangDetailScreen";
-// import BangSearch from './bang/src/screens/BangSearchScreen';
+import { useColorScheme } from 'react-native';
+import HomeScreen from './src/screens/home/HomeScreen';
+import ExploreScreen from './src/screens/ExploreScreen';
+import ExampleScreen from './src/screens/ExampleScreen';
+import BangSearchScreen from './src/screens/bang/BangSearchScreen';
+import StartScreen from './src/screens/login/StartScreen';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -81,8 +80,13 @@ export default function App() {
                         options={{ headerShown: false }}
                     />
                     <Stack.Screen
+                        name='StartScreen'
+                        component={StartScreen}
+                        options={{ title: '시작 화면' }}
+                    />
+                    <Stack.Screen
                         name="BangSearch"
-                        component={BangSearch}
+                        component={BangSearchScreen}
                         options={{ title: "방 찾기" }}
                     />
                     <Stack.Screen
