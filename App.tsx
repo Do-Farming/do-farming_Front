@@ -45,17 +45,17 @@ function MyTabs() {
       })}
     >
       <Tab.Screen
-        name='Home'
+        name="Home"
         component={HomeScreen}
         options={{ title: 'Home Screen' }}
       />
       <Tab.Screen
-        name='Explore'
+        name="Explore"
         component={ExploreScreen}
         options={{ title: 'Explore Screen' }}
       />
       <Tab.Screen
-        name='Example'
+        name="Example"
         component={ExampleScreen}
         options={{ title: 'Example Screen' }}
       />
@@ -71,17 +71,17 @@ export default function App() {
       <NavigationContainer theme={scheme === 'dark' ? DarkTheme : DefaultTheme}>
         <Stack.Navigator>
           <Stack.Screen
-            name=' '
+            name=" "
             component={MyTabs}
             options={{ headerShown: false }}
           />
           <Stack.Screen
-            name='StartScreen'
+            name="StartScreen"
             component={StartScreen}
             options={{ title: '시작 화면' }}
           />
           <Stack.Screen
-            name='challengeBang'
+            name="challengeBang"
             component={BangSearchScreen}
             options={{ title: '방 찾기' }}
           />
