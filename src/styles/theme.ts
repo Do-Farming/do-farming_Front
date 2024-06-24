@@ -5,6 +5,9 @@ const theme: DefaultTheme = {
   mainDarkColor: '#FFB526',
   grayColor: '#EEEEEE',
   DarkGrayColor: '#4A4A4A',
+  buttonLigthColor: '#FDCE2E',
+  buttonBoldColor: '#FFB526',
+  defaultWhiteColor: '#FFFFFF',
 };
 
 export default theme;

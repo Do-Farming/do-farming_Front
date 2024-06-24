@@ -1,6 +1,5 @@
-import { useNavigation } from '@react-navigation/native';
 import React from 'react';
-import { View, Text, StyleSheet, Button } from 'react-native';
+import { View, StyleSheet, Button } from 'react-native';
 
 export default function ExampleScreen({ navigation }: any) {
   return (
@@ -8,6 +7,10 @@ export default function ExampleScreen({ navigation }: any) {
       <Button
         title='챌린지 방 찾기 페이지로'
         onPress={() => navigation.navigate('challengeBang')}
+      />
+      <Button
+        title='시작 페이지로'
+        onPress={() => navigation.navigate('StartScreen')}
       />
     </View>
   );
