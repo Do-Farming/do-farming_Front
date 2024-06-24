@@ -1,14 +1,28 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { MainTitle, styles } from './StartScreen.styled';
+import {
+  ButtonWrapper,
+  Container,
+  MainTitle,
+  Space,
+  TitleWrapper,
+} from './StartScreen.styled';
 import LongButton from '../../components/LongButton';
+import theme from '../../styles/theme';
 
 export default function StartScreen() {
   return (
-    <View style={styles.container}>
-      <MainTitle>Do! farming</MainTitle>
-      <LongButton text='로그인' backgroundColor='#FFB526'></LongButton>
-      {/* <LongButton text='회원가입'></LongButton> */}
-    </View>
+    <Container>
+      <TitleWrapper>
+        <Space />
+        <MainTitle>Do! farming</MainTitle>
+      </TitleWrapper>
+      <ButtonWrapper>
+        <LongButton text='로그인'></LongButton>
+        <LongButton
+          text='회원가입'
+          backgroundColor={theme.buttonBoldColor}
+        ></LongButton>
+      </ButtonWrapper>
+    </Container>
   );
 }

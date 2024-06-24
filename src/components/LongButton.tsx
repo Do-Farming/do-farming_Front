@@ -1,10 +1,10 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
 import { Button, ButtonText } from './LongButton.styled';
+import theme from '../styles/theme';
 
-const LongButton: React.FC<{ text: string; backgroundColor: string }> = ({
+const LongButton: React.FC<{ text: string; backgroundColor?: string }> = ({
   text,
-  backgroundColor,
+  backgroundColor = theme.buttonLigthColor,
 }) => {
   return (
     <Button backgroundColor={backgroundColor}>

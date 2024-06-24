@@ -1,4 +1,3 @@
-import { StyleSheet } from 'react-native';
 import styled from 'styled-components/native';
 
 export const Button = styled.TouchableOpacity<{ backgroundColor: string }>`
@@ -12,5 +11,5 @@ export const Button = styled.TouchableOpacity<{ backgroundColor: string }>`
 `;
 
 export const ButtonText = styled.Text`
-  color: #ffffff;
+  color: ${(props) => props.theme.defaultWhiteColor};
 `;
