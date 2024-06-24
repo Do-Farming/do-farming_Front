@@ -15,6 +15,7 @@ import { useColorScheme } from 'react-native';
 import HomeScreen from './src/screens/home/HomeScreen';
 import ExploreScreen from './src/screens/ExploreScreen';
 import ExampleScreen from './src/screens/ExampleScreen';
+import BangSearchScreen from './src/screens/bang/BangSearchScreen';
 import StartScreen from './src/screens/login/StartScreen';
 
 const Stack = createNativeStackNavigator();
@@ -75,9 +76,14 @@ export default function App() {
             options={{ headerShown: false }}
           />
           <Stack.Screen
-            name='Start'
+            name='StartScreen'
             component={StartScreen}
-            options={{ title: 'Start Screen' }}
+            options={{ title: '시작 화면' }}
+          />
+          <Stack.Screen
+            name='challengeBang'
+            component={BangSearchScreen}
+            options={{ title: '방 찾기' }}
           />
         </Stack.Navigator>
       </NavigationContainer>

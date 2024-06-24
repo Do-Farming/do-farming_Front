@@ -3,6 +3,7 @@ import 'styled-components';
 declare module 'styled-components' {
   export interface DefaultTheme {
     mainColor: string;
+    DarkGrayColor: string;
     buttonLigthColor: string;
     buttonBoldColor: string;
     defaultWhiteColor: string;
