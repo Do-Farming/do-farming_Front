@@ -1,10 +1,10 @@
-import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import React from 'react';
+import { View, Text, StyleSheet } from 'react-native';
 import styled from 'styled-components/native';
-import theme from "../styles/theme";
+import theme from '../styles/theme';
 
 const Button = styled.TouchableOpacity`
-  background-color: ${props => props.theme.mainColor};
+  background-color: ${(props) => props.theme.mainColor};
   padding: 10px;
   border-radius: 5px;
   align-items: center;
@@ -30,10 +30,9 @@ export default function ExampleScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#fff",
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#fff',
     paddingHorizontal: 20,
   },
 });
-
