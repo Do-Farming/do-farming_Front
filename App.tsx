@@ -1,5 +1,9 @@
 import * as React from "react";
-import { NavigationContainer, DefaultTheme, DarkTheme } from "@react-navigation/native";
+import {
+    NavigationContainer,
+    DefaultTheme,
+    DarkTheme,
+} from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
@@ -11,66 +15,76 @@ import { useColorScheme } from "react-native";
 import HomeScreen from "./src/screens/home/HomeScreen";
 import ExploreScreen from "./src/screens/ExploreScreen";
 import ExampleScreen from "./src/screens/ExampleScreen";
+import BangSearch from "./src/screens/BangSearchScreen";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
 function MyTabs() {
-  return (
-    <Tab.Navigator
-      screenOptions={({ route }) => ({
-        tabBarIcon: ({ focused, color, size }) => {
-          let iconName: keyof typeof Ionicons.glyphMap;
+    return (
+        <Tab.Navigator
+            screenOptions={({ route }) => ({
+                tabBarIcon: ({ focused, color, size }) => {
+                    let iconName: keyof typeof Ionicons.glyphMap;
 
-          if (route.name === "Home") {
-            iconName = focused ? "home" : "home-outline";
-          } else if (route.name === "Explore") {
-            iconName = focused ? "search" : "search-outline";
-          } else if (route.name === "Example") {
-            iconName = focused ? "star" : "star-outline";
-          } else {
-            iconName = "home"; 
-          }
-          return <Ionicons name={iconName} size={size} color={color} />;
-        },
-        tabBarActiveTintColor: "tomato",
-        tabBarInactiveTintColor: "gray",
-        tabBarStyle: { display: "flex" },
-      })}
-    >
-      <Tab.Screen
-        name="Home"
-        component={HomeScreen}
-        options={{ title: "Home Screen" }}
-      />
-      <Tab.Screen
-        name="Explore"
-        component={ExploreScreen}
-        options={{ title: "Explore Screen" }}
-      />
-      <Tab.Screen
-        name="Example"
-        component={ExampleScreen}
-        options={{ title: "방 찾기" }}
-      />
-    </Tab.Navigator>
-  );
+                    if (route.name === "Home") {
+                        iconName = focused ? "home" : "home-outline";
+                    } else if (route.name === "Explore") {
+                        iconName = focused ? "search" : "search-outline";
+                    } else if (route.name === "Example") {
+                        iconName = focused ? "star" : "star-outline";
+                    } else {
+                        iconName = "home";
+                    }
+                    return (
+                        <Ionicons name={iconName} size={size} color={color} />
+                    );
+                },
+                tabBarActiveTintColor: "tomato",
+                tabBarInactiveTintColor: "gray",
+                tabBarStyle: { display: "flex" },
+            })}
+        >
+            <Tab.Screen
+                name="Home"
+                component={HomeScreen}
+                options={{ title: "Home Screen" }}
+            />
+            <Tab.Screen
+                name="Explore"
+                component={ExploreScreen}
+                options={{ title: "Explore Screen" }}
+            />
+            <Tab.Screen
+                name="Example"
+                component={ExampleScreen}
+                options={{ title: "Example Screen" }}
+            />
+        </Tab.Navigator>
+    );
 }
 
 export default function App() {
-  const scheme = useColorScheme();
+    const scheme = useColorScheme();
 
-  return (
-    <StyledComponentsThemeProvider theme={theme}>
-      <NavigationContainer theme={scheme === "dark" ? DarkTheme : DefaultTheme}>
-        <Stack.Navigator>
-          <Stack.Screen
-            name="Root"
-            component={MyTabs}
-            options={{ headerShown: false }}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
-    </StyledComponentsThemeProvider>
-  );
+    return (
+        <StyledComponentsThemeProvider theme={theme}>
+            <NavigationContainer
+                theme={scheme === "dark" ? DarkTheme : DefaultTheme}
+            >
+                <Stack.Navigator>
+                    <Stack.Screen
+                        name=" "
+                        component={MyTabs}
+                        options={{ headerShown: false }}
+                    />
+                    <Stack.Screen
+                        name="challengeBang"
+                        component={BangSearch}
+                        options={{ title: "방 찾기" }}
+                    />
+                </Stack.Navigator>
+            </NavigationContainer>
+        </StyledComponentsThemeProvider>
+    );
 }
