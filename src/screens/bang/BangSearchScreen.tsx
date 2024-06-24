@@ -10,8 +10,8 @@ import {
   NewBang,
   NewBangText,
   RowContainer,
+  Title,
 } from './BangSearchScreen.styled';
-import { Title } from '../components/Title';
 
 export default function BangSearchScreen() {
   return (
