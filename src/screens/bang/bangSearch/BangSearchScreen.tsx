@@ -18,7 +18,7 @@ export default function BangSearchScreen({ navigation }: any) {
         <Container>
             <RowContainer>
                 <Title>챌린지 모임모임</Title>
-                <NewBang>
+                <NewBang onPress={() => navigation.navigate("BangCreate")}>
                     <NewBangText>방 만들기</NewBangText>
                 </NewBang>
             </RowContainer>
