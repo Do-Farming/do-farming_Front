@@ -10,7 +10,7 @@ import {
   InputLabel,
   Title,
   TitleBox,
-} from './LoginScreen.styled';
+} from './InputForm.styled';
 
 export default function LoginScreen() {
   return (
@@ -22,11 +22,11 @@ export default function LoginScreen() {
         <InputBox>
           <InputContent>
             <InputLabel>전화번호</InputLabel>
-            <Input placeholder="'-'를 빼고 입력해주세요"></Input>
+            <Input placeholder="'-'를 빼고 입력해주세요" />
           </InputContent>
           <InputContent>
             <InputLabel>비밀번호</InputLabel>
-            <Input></Input>
+            <Input />
           </InputContent>
         </InputBox>
       </ContentBox>

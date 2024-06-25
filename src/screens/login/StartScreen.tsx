@@ -18,7 +18,7 @@ export default function StartScreen({ navigation }: any) {
         <LongButton
           text="회원가입"
           backgroundColor={theme.buttonBoldColor}
-          onPress={() => navigation.navigate('Login')}
+          onPress={() => navigation.navigate('Signup')}
         ></LongButton>
         <LongButton
           text="로그인"

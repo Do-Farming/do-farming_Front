@@ -15,8 +15,8 @@ export const TitleBox = styled.View`
   display: flex;
   justify-content: center;
   align-items: center;
-  border-color: #eeeeee;
-  border-bottom-width: 1;
+  border-color: ${(props) => props.theme.grayColor};
+  border-bottom-width: 1px;
 `;
 
 export const Title = styled.Text`
@@ -37,21 +37,41 @@ export const InputContent = styled.View`
   align-items: center;
   padding-horizontal: 2%;
   padding-vertical: 3%;
-  border-color: #eeeeee;
-  border-bottom-width: 1;
+  border-color: ${(props) => props.theme.grayColor};
+  border-bottom-width: 1px;
 `;
 
-export const InputLabel = styled.Text`
-  width: 20%;
+export const InputLabel = styled.Text<{ width?: string }>`
+  width: ${(props) => props.width || '20%'};
+`;
+
+export const NonContainLabelBox = styled.View<{ width?: string }>`
+  width: 80%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 `;
 
 export const Input = styled.TextInput.attrs((props) => ({
   placeholderTextColor: props.theme.placeholderColor,
-}))`
+}))<{ width?: string }>`
   background-color: ${(props) => props.theme.grayColor};
-  width: 80%;
+  width: ${(props) => props.width || '80%'};
   padding: 8px;
   border-radius: 8px;
+`;
+
+export const Button = styled.TouchableOpacity<{ width?: string }>`
+  width: ${(props) => props.width || '22%'};
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  border-radius: 8px;
+  background-color: ${(props) => props.theme.buttonBackgroundColor};
+`;
+
+export const ButtonText = styled.Text`
+  color: ${(props) => props.theme.buttonBoldColor};
 `;
 
 export const ButtonBox = styled.View`
