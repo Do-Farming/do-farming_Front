@@ -10,7 +10,6 @@ import { Ionicons } from '@expo/vector-icons';
 import { ThemeProvider as StyledComponentsThemeProvider } from 'styled-components/native'; // styled-components의 ThemeProvider import
 import theme from './src/styles/theme'; // styled-components에서 사용할 테마 import
 
-import BangDetailScreen from './src/screens/bang/bangDetail/BangDetailScreen';
 import { useColorScheme } from 'react-native';
 import HomeScreen from './src/screens/home/HomeScreen';
 import ExploreScreen from './src/screens/ExploreScreen';
@@ -18,6 +17,7 @@ import ExampleScreen from './src/screens/ExampleScreen';
 import BangSearchScreen from './src/screens/bang/bangSearch/BangSearchScreen';
 import StartScreen from './src/screens/login/StartScreen';
 import BangCreateScreen from './src/screens/bang/bangCreate/BangCreateScreen';
+import PedometerScreen from "./src/screens/pedometer/PedometerScreen";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -35,7 +35,7 @@ function MyTabs() {
           } else if (route.name === 'Example') {
             iconName = focused ? 'star' : 'star-outline';
           } else {
-            iconName = 'home';
+            iconName = "home";
           }
           return <Ionicons name={iconName} size={size} color={color} />;
         },
@@ -47,7 +47,7 @@ function MyTabs() {
       <Tab.Screen
         name="Home"
         component={HomeScreen}
-        options={{ title: 'Home Screen' }}
+        options={{ title: "Home Screen", headerShown: false }}
       />
       <Tab.Screen
         name="Explore"
@@ -65,38 +65,44 @@ function MyTabs() {
 
 export default function App() {
   const scheme = useColorScheme();
-
-  return (
-    <StyledComponentsThemeProvider theme={theme}>
-      <NavigationContainer theme={scheme === 'dark' ? DarkTheme : DefaultTheme}>
-        <Stack.Navigator>
-          <Stack.Screen
-            name=" "
-            component={MyTabs}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="StartScreen"
-            component={StartScreen}
-            options={{ title: '시작 화면' }}
-          />
-          <Stack.Screen
-            name="BangSearch"
-            component={BangSearchScreen}
-            options={{ title: '방 찾기' }}
-          />
-          <Stack.Screen
-            name="BangDetail"
-            component={BangDetailScreen}
-            options={{ title: '방 상세' }}
-          />
-          <Stack.Screen
-            name="BangCreate"
-            component={BangCreateScreen}
-            options={{ title: '방 만들기' }}
+    return (
+        <StyledComponentsThemeProvider theme={theme}>
+            <NavigationContainer
+                theme={scheme === "dark" ? DarkTheme : DefaultTheme}
+            >
+                <Stack.Navigator>
+                    <Stack.Screen
+                        name=" "
+                        component={MyTabs}
+                        options={{ headerShown: false }}
+                    />
+                    <Stack.Screen
+                        name='StartScreen'
+                        component={StartScreen}
+                        options={{ title: '시작 화면' }}
+                    />
+                    <Stack.Screen
+                        name="BangSearch"
+                        component={BangSearchScreen}
+                        options={{ title: "방 찾기" }}
+                    />
+                    <Stack.Screen
+                        name="BangDetail"
+                        component={BangDetailScreen}
+                        options={{ title: "방 상세" }}
+                    />
+                    <Stack.Screen
+                      name="BangCreate"
+                      component={BangCreateScreen}
+                      options={{ title: '방 만들기' }}
+                    />
+                  <Stack.Screen
+            name="Pedometer"
+            component={PedometerScreen}
+            options={{ title: "Pedometer" }}
           />
         </Stack.Navigator>
-      </NavigationContainer>
-    </StyledComponentsThemeProvider>
-  );
+            </NavigationContainer>
+        </StyledComponentsThemeProvider>
+    );
 }
