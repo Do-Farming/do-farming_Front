@@ -12,7 +12,7 @@ export const Title = styled.Text`
     font-weight: 800;
 `;
 
-export const NewBang = styled.TouchableOpacity`
+export const NewBang = styled.TouchableOpacity<BangProps>`
     background-color: ${(props) => props.theme.DarkGrayColor};
     border-radius: 10px;
     padding: 10px;
