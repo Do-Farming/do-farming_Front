@@ -10,7 +10,7 @@ export default function ExampleScreen({ navigation }: any) {
       />
       <Button
         title="시작 페이지로"
-        onPress={() => navigation.navigate('StartScreen')}
+        onPress={() => navigation.navigate('Start')}
       />
     </View>
   );
