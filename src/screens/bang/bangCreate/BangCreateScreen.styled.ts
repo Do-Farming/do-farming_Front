@@ -1,9 +1,11 @@
 import styled from 'styled-components/native';
+import { BangProps } from '../../../types/BangTypes';
 
-export const Container = styled.View`
+export const Container = styled.ScrollView`
   flex: 1;
   padding: 20px;
   background-color: ${(props) => props.theme.grayColor};
+  height: 100vh;
 `;
 
 export const Title = styled.Text`
@@ -40,7 +42,10 @@ export const Input = styled.TextInput.attrs((props) => ({
 }))`
   width: 100%;
   background-color: ${(props) => props.theme.grayColor};
-  padding: 12px;
+  padding-left: 12px;
+  padding-right: 12px;
+  padding-top: 15px;
+  padding-bottom: 15px;
   border-radius: 8px;
 `;
 
@@ -58,4 +63,17 @@ export const SelectBox = styled.SectionList`
   width: 100%;
   background-color: ${(props) => props.theme.grayColor};
   border-radius: 8px;
+`;
+
+export const EnterButton = styled.TouchableOpacity<BangProps>`
+  background-color: ${(props) => props.theme.mainColor};
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 80px;
+`;
+
+export const EnterText = styled.Text`
+  font-size: 15px;
+  font-weight: 700;
+  text-align: center;
 `;
