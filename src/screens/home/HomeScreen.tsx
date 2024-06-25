@@ -45,17 +45,6 @@ import axios from "axios";
 
 const { width: windowWidth } = Dimensions.get("window");
 
-interface Benefit {
-  idx: number;
-  tags: string[];
-  title: string;
-  logo_img: {
-    url: string;
-    name: string;
-  };
-  inputValue: string;
-}
-
 const products = [
   {
     name: "도파밍 예금",
