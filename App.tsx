@@ -19,6 +19,8 @@ import StartScreen from './src/screens/login/StartScreen';
 import BangCreateScreen from './src/screens/bang/bangCreate/BangCreateScreen';
 import PedometerScreen from './src/screens/pedometer/PedometerScreen';
 import BangDetailScreen from './src/screens/bang/bangDetail/BangDetailScreen';
+import LoginScreen from './src/screens/login/LoginScreen';
+import SignupScreen from './src/screens/login/SignupScreen';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -76,9 +78,19 @@ export default function App() {
             options={{ headerShown: false }}
           />
           <Stack.Screen
-            name="StartScreen"
+            name="Start"
             component={StartScreen}
             options={{ title: '시작 화면' }}
+          />
+          <Stack.Screen
+            name="Login"
+            component={LoginScreen}
+            options={{ title: '로그인' }}
+          />
+          <Stack.Screen
+            name="Signup"
+            component={SignupScreen}
+            options={{ title: '회원가입' }}
           />
           <Stack.Screen
             name="BangSearch"

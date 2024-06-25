@@ -1,17 +1,18 @@
 import styled from 'styled-components/native';
 
-export const Container = styled.View`
-  flex: 1;
-  align-items: center;
-  background-color: ${(props) => props.theme.defaultWhiteColor};
-`;
-
 export const Space = styled.Text`
   flex: 1;
 `;
 
-export const TitleWrapper = styled.View`
-  flex: 2;
+export const Container = styled.View`
+  flex: 1;
+  align-items: center;
+  justify-content: space-between;
+  background-color: ${(props) => props.theme.defaultWhiteColor};
+`;
+
+export const TitleBox = styled.View`
+  margin-top: 30%;
 `;
 
 export const MainTitle = styled.Text`
@@ -19,15 +20,12 @@ export const MainTitle = styled.Text`
   align-contents: center;
   font-size: 24px;
   font-weight: bold;
-  flex: 3;
 `;
 
-export const ButtonWrapper = styled.View`
+export const ButtonBox = styled.View`
   display: flex;
-  flex-direction: column;
+  flex-direction: column-reverse;
   align-items: center;
   width: 100%;
-  flex: 1;
-  justify-content: space-evenly;
-  margin-vertical: 60px;
+  margin-bottom: 20%;
 `;
