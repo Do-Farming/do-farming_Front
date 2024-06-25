@@ -1,28 +1,30 @@
 import React from 'react';
 import {
-  ButtonWrapper,
+  ButtonBox,
   Container,
   MainTitle,
-  Space,
-  TitleWrapper,
+  TitleBox,
 } from './StartScreen.styled';
 import LongButton from '../../components/LongButton';
 import theme from '../../styles/theme';
 
-export default function StartScreen() {
+export default function StartScreen({ navigation }: any) {
   return (
     <Container>
-      <TitleWrapper>
-        <Space />
+      <TitleBox>
         <MainTitle>Do! farming</MainTitle>
-      </TitleWrapper>
-      <ButtonWrapper>
-        <LongButton text="로그인"></LongButton>
+      </TitleBox>
+      <ButtonBox>
         <LongButton
           text="회원가입"
           backgroundColor={theme.buttonBoldColor}
+          onPress={() => navigation.navigate('Login')}
         ></LongButton>
-      </ButtonWrapper>
+        <LongButton
+          text="로그인"
+          onPress={() => navigation.navigate('Login')}
+        ></LongButton>
+      </ButtonBox>
     </Container>
   );
 }
