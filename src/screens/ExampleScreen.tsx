@@ -12,6 +12,10 @@ export default function ExampleScreen({ navigation }: any) {
         title="시작 페이지로"
         onPress={() => navigation.navigate('StartScreen')}
       />
+      <Button
+        title="이상형 월드컵 페이지로"
+        onPress={() => navigation.navigate("Worldcup")}
+      />
     </View>
   );
 }

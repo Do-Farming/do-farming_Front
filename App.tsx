@@ -19,6 +19,7 @@ import StartScreen from './src/screens/login/StartScreen';
 import BangCreateScreen from './src/screens/bang/bangCreate/BangCreateScreen';
 import PedometerScreen from './src/screens/pedometer/PedometerScreen';
 import BangDetailScreen from './src/screens/bang/bangDetail/BangDetailScreen';
+import WorldCupSelectScreen from './src/screens/worldcup/WorldCupSelectScreen';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -48,7 +49,7 @@ function MyTabs() {
       <Tab.Screen
         name="Home"
         component={HomeScreen}
-        options={{ title: 'Home Screen', headerShown: false }}
+        options={{ title: 'Do! Farming', headerShown: true }}
       />
       <Tab.Screen
         name="Explore"
@@ -99,6 +100,21 @@ export default function App() {
             name="Pedometer"
             component={PedometerScreen}
             options={{ title: 'Pedometer' }}
+          />
+          <Stack.Screen
+            name="Worldcup"
+            component={WorldCupSelectScreen}
+            options={{ title: '이상형 월드컵' }}
+          />
+          <Stack.Screen
+            name="TasteWorldCup"
+            component={WorldCupSelectScreen}
+            options={{ title: '취향 이상형 월드컵' }}
+          />
+          <Stack.Screen
+            name="CardWorldCup"
+            component={WorldCupSelectScreen}
+            options={{ title: '카드 이상형 월드컵' }}
           />
         </Stack.Navigator>
       </NavigationContainer>
