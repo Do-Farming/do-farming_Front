@@ -8,6 +8,7 @@ const theme: DefaultTheme = {
   buttonLigthColor: '#FDCE2E',
   buttonBoldColor: '#FFB526',
   defaultWhiteColor: '#FFFFFF',
+  placeholderColor: '#CCCCCC',
 };
 
 export default theme;
