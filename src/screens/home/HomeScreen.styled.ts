@@ -1,9 +1,9 @@
-import styled from 'styled-components/native';
+import styled from "styled-components/native";
 
 export const Container = styled.View`
   flex: 1;
   padding: 20px;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
 `;
 
 export const Header = styled.View`
@@ -47,7 +47,7 @@ export const Product = styled.View`
   width: 350px;
   border-radius: 15px;
   height: 160px;
-  background-color: #FFD262;
+  background-color: #ffd262;
   padding: 20px;
   display: flex;
 `;
@@ -115,52 +115,78 @@ export const ButtonText = styled.Text<{ isSelected: boolean }>`
   font-size: 15px;
 `;
 
-export const CardList = styled.View`
+export const CardListView = styled.View`
   margin: 15px 0;
 `;
 
 export const CardContainer = styled.View`
-  padding: 10px 15px;
-  padding-left: 5px;
+  padding: 20px 15px;
+  padding-left: 10px;
   margin-bottom: 15px;
   display: flex;
   flex-direction: row;
-  background: #FFFFFF;
-  border: 1px solid #F8F8FA;
+  background: #ffffff;
+  border: 1px solid #f8f8fa;
   box-shadow: 0px 4px 4px rgba(77, 77, 77, 0.25);
   border-radius: 15px;
 `;
 
+export const CardImgView = styled.View`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
 export const CardImg = styled.Image`
   object-fit: contain;
-  height: 100px;
 `;
 
 export const CardInfo = styled.View`
   flex-grow: 1;
+  flex-shrink: 1;
+`;
+
+export const CardName = styled.Text`
+  font-size: 20x;
+  font-weight: bold;
+  margin-left: 10px;
+  margin-bottom: 10px;
 `;
 
 export const CardBenefitList = styled.View`
   display: flex;
   flex-direction: row;
+  align-items: center;
   justify-content: space-between;
   flex-grow: 1;
+  margin-left: 5px;
 `;
 
 export const CardBenefit = styled.View`
   display: flex;
   flex-direction: row;
-  border-right: 1px solid black;
+  flex-shrink: 1;
 `;
 
 export const CardBenefitImg = styled.Image`
-
+  margin-right: 5px;
 `;
 
 export const CardBenefitTextView = styled.View`
   display: flex;
+  aligh-items: center;
+  margin-right: 5px;
+`;
+
+export const CardBenefitSmallText = styled.Text`
+  font-size: 8px;
 `;
 
 export const CardBenefitText = styled.Text`
-  
+  font-size: 12px;
+`;
+
+export const CardBenefitImportantText = styled.Text`
+  color: #ffd262;
+  font-weight: bold;
 `;

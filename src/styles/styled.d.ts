@@ -8,6 +8,7 @@ declare module 'styled-components' {
     buttonBoldColor: string;
     defaultWhiteColor: string;
     placeholderColor: string;
+    buttonBackgroundColor: string;
     // fontLarge: number;
     // fontMedium: number;
     // fontRegular: number;

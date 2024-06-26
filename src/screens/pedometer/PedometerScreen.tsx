@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
-import { View, Text, TouchableOpacity } from "react-native";
-import { Pedometer } from "expo-sensors";
-import * as Application from "expo-application";
+import React, { useState, useEffect } from 'react';
+import { View, Text, TouchableOpacity } from 'react-native';
+import { Pedometer } from 'expo-sensors';
+import * as Application from 'expo-application';
 import {
   Container,
   ProgressCard,
@@ -20,16 +20,17 @@ import {
   ProgressLabel,
   PinContainer,
   ProfileImage,
-} from "./PedometerScreen.styled";
-import { RunIcon } from "../../assets";
+  ProgressLabelText,
+} from './PedometerScreen.styled';
+import { RunIcon } from '../../assets';
 
 export default function PedometerScreen() {
-  const [isPedometerAvailable, setIsPedometerAvailable] = useState("checking");
+  const [isPedometerAvailable, setIsPedometerAvailable] = useState('checking');
   const [pastStepCount, setPastStepCount] = useState(0);
   const [currentStepCount, setCurrentStepCount] = useState(0);
   const [deviceId, setDeviceId] = useState<string | null>(null);
   const [visibleLabelIndex, setVisibleLabelIndex] = useState<number | null>(
-    null
+    null,
   );
 
   useEffect(() => {
@@ -51,7 +52,7 @@ export default function PedometerScreen() {
 
         const pastStepCountResult = await Pedometer.getStepCountAsync(
           start,
-          end
+          end,
         );
         if (pastStepCountResult) {
           setPastStepCount(pastStepCountResult.steps);
@@ -74,7 +75,7 @@ export default function PedometerScreen() {
     });
 
     return () => {
-      if (subscription && typeof subscription.remove === "function") {
+      if (subscription && typeof subscription.remove === 'function') {
         subscription.remove();
       }
     };
@@ -83,31 +84,38 @@ export default function PedometerScreen() {
   const users = [
     {
       rank: 1,
-      name: "변정흠1님",
+      name: '변정흠',
       steps: 9000,
-      achieved: "11/12 달성",
-      rate: "이율 3.5%",
+      achieved: '11/12 달성',
+      rate: '이율 3.5%',
     },
     {
       rank: 2,
-      name: "변정흠2님",
+      name: '변정합',
       steps: 8000,
-      achieved: "11/12 달성",
-      rate: "이율 3.5%",
+      achieved: '11/12 달성',
+      rate: '이율 3.5%',
     },
     {
       rank: 3,
-      name: "변정흠3님",
+      name: '변정헙',
       steps: 7000,
-      achieved: "11/12 달성",
-      rate: "이율 3.5%",
+      achieved: '11/12 달성',
+      rate: '이율 3.5%',
     },
     {
       rank: 4,
-      name: "변정흠4님",
+      name: '변정홉',
+      steps: 5000,
+      achieved: '11/12 달성',
+      rate: '이율 3.5%',
+    },
+    {
+      rank: 5,
+      name: '변정훕',
       steps: pastStepCount,
-      achieved: "11/12 달성",
-      rate: "이율 3.5%",
+      achieved: '11/13 달성',
+      rate: '이율 3.5%',
     },
   ];
 
@@ -115,6 +123,11 @@ export default function PedometerScreen() {
 
   const toggleLabelVisibility = (index: number) => {
     setVisibleLabelIndex((prevIndex) => (prevIndex === index ? null : index));
+  };
+
+  const getRandomColor = () => {
+    const colors = ['#ffafaf', '#ffd700', '#90ee90', '#add8e6', '#ff69b4'];
+    return colors[Math.floor(Math.random() * colors.length)];
   };
 
   return (
@@ -139,10 +152,12 @@ export default function PedometerScreen() {
                 style={{ left: `${(user.steps / 10000) * 100}%` }}
               >
                 <TouchableOpacity onPress={() => toggleLabelVisibility(index)}>
-                  {visibleLabelIndex === index && (
-                    <ProgressLabel>{user.name}</ProgressLabel>
-                  )}
                   <RunIcon style={{ marginTop: -5 }} />
+                  {visibleLabelIndex === index && (
+                    <ProgressLabel bgColor={getRandomColor()}>
+                      <ProgressLabelText>{user.name}</ProgressLabelText>
+                    </ProgressLabel>
+                  )}
                 </TouchableOpacity>
               </PinContainer>
             ))}
@@ -153,7 +168,7 @@ export default function PedometerScreen() {
         {users.map((user, index) => (
           <UserCard key={index}>
             <RankNumber>{user.rank}</RankNumber>
-            <ProfileImage source={require("../../assets/profile.png")} />
+            <ProfileImage source={require('../../assets/profile.png')} />
             <View>
               <UserName>{user.name}</UserName>
               <AchievedGoal>{user.achieved}</AchievedGoal>
