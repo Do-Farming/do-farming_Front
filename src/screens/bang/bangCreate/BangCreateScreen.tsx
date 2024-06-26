@@ -164,7 +164,7 @@ export default function BangCreateScreen() {
             dropDownDirection="BOTTOM"
             placeholderStyle={{ color: '#CCCCCC' }}
             style={{
-              backgroundColor: '#f2f2f5',
+              backgroundColor: '#f2f2f5 ㅇ',
               borderWidth: 0,
             }}
             dropDownContainerStyle={{
