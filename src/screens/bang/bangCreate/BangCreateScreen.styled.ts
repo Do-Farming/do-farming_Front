@@ -77,3 +77,62 @@ export const EnterText = styled.Text`
   font-weight: 700;
   text-align: center;
 `;
+
+export const TextModal = styled.Text`
+  color: #17191c;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 50px;
+`;
+
+export const CenteredView = styled.View`
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.5);
+`;
+
+export const ModalView = styled.View`
+  width: 220px;
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 30px;
+  align-items: center;
+  justify-items: center;
+  shadow-color: #000;
+  shadow-offset: {
+    width: 0;
+    height: 2;
+  }
+  shadow-opacity: 0.25;
+  shadow-radius: 4px;
+  elevation: 5;
+`;
+
+export const ModalText = styled.Text`
+  color: #17191c;
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 20px;
+  margin-bottom: 30px;
+  text-align: center;
+`;
+
+export const ModalButton = styled.Pressable`
+  background-color: ${(props) => props.theme.mainColor};
+  border-radius: 10px;
+  padding: 10px;
+  width: 100%;
+  margin: 0;
+`;
+
+export const ModalButtonText = styled.Text`
+  font-weight: 600;
+  text-align: center;
+`;
+
+export const CancelButton = styled.Pressable`
+  position: absolute;
+  right: 20;
+  top: 15;
+`;
