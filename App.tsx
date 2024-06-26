@@ -26,6 +26,7 @@ import CompetitiveScreen from './src/screens/compation/CompetitiveScreen';
 import ProductSignUpScreen from './src/screens/product/ProductSignUpScreen';
 import ProductPasswordScreen from './src/screens/product/auth/ProductPasswordScreen';
 import ProductSignInScreen from './src/screens/product/complete/ProductSignInScreen';
+import MyPageScreen from './src/screens/mypage/MyPageScreen';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -96,6 +97,11 @@ export default function App() {
             name="Signup"
             component={SignupScreen}
             options={{ title: '회원가입' }}
+          />
+          <Stack.Screen
+            name="MyPage"
+            component={MyPageScreen}
+            options={{ title: '마이페이지' }}
           />
           <Stack.Screen
             name="BangSearch"
