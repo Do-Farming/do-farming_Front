@@ -22,6 +22,7 @@ import BangDetailScreen from './src/screens/bang/bangDetail/BangDetailScreen';
 import BangJoinScreen from './src/screens/bang/bangJoin/BangJoinScreen';
 import LoginScreen from './src/screens/login/LoginScreen';
 import SignupScreen from './src/screens/login/SignupScreen';
+import CompetitiveScreen from './src/screens/compation/CompetitiveScreen';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -118,6 +119,11 @@ export default function App() {
             name="BangJoin"
             component={BangJoinScreen}
             options={{ title: '도파밍 상품 가입' }}
+          />
+          <Stack.Screen
+            name="Competitive"
+            component={CompetitiveScreen}
+            options={{ title: 'Competitive' }}
           />
         </Stack.Navigator>
       </NavigationContainer>
