@@ -21,6 +21,7 @@ import PedometerScreen from './src/screens/pedometer/PedometerScreen';
 import BangDetailScreen from './src/screens/bang/bangDetail/BangDetailScreen';
 import LoginScreen from './src/screens/login/LoginScreen';
 import SignupScreen from './src/screens/login/SignupScreen';
+import MyPageScreen from './src/screens/mypage/MyPageScreen';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -91,6 +92,11 @@ export default function App() {
             name="Signup"
             component={SignupScreen}
             options={{ title: '회원가입' }}
+          />
+          <Stack.Screen
+            name="MyPage"
+            component={MyPageScreen}
+            options={{ title: '마이페이지' }}
           />
           <Stack.Screen
             name="BangSearch"
