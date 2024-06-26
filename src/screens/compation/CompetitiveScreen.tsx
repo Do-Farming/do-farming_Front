@@ -14,30 +14,7 @@ import {
   AchievedGoal,
   InterestRate,
 } from './CompetitiveScreen.styled';
-
-interface DailyRanking {
-  status: number;
-  message: string;
-  data: {
-    date: string;
-    ranking: Array<{
-      name: string;
-      dailyRate: string;
-      challengeType: number;
-      challengeDate: string;
-    }>;
-  };
-}
-
-interface WeeklyRate {
-  data: {
-    weekly: number;
-    user: Array<{
-      name: string;
-      weeklyRate: number;
-    }>;
-  };
-}
+import { DailyRanking, WeeklyRate } from '../../types';
 
 const getRandomColor = (): string => {
   const colors = [
@@ -134,11 +111,6 @@ const CompetitiveScreen: React.FC = () => {
               endFillColor="rgba(255, 140, 0, 0.1)" // 영역 끝 색상 (오렌지)
               startOpacity={0.3} // 시작 색상 불투명도
               endOpacity={0.1} // 끝 색상 불투명도
-              //   areaGradientComponent={() => (
-              //     <SvgComp>
-              //       <DoFarmingIcon />
-              //     </SvgComp>
-              //   )}
             />
           </ScrollView>
         </ChartCard>
