@@ -116,7 +116,7 @@ export default function BangCreateScreen() {
             stickyHeader={true}
             placeholderStyle={{ color: '#CCCCCC' }}
             style={{
-              backgroundColor: '#EEEEEE',
+              backgroundColor: '#f2f2f5',
               borderWidth: 0,
             }}
             dropDownContainerStyle={{
@@ -140,7 +140,7 @@ export default function BangCreateScreen() {
             dropDownDirection="BOTTOM"
             placeholderStyle={{ color: '#CCCCCC' }}
             style={{
-              backgroundColor: '#EEEEEE',
+              backgroundColor: '#f2f2f5',
               borderWidth: 0,
             }}
             dropDownContainerStyle={{
@@ -164,7 +164,7 @@ export default function BangCreateScreen() {
             dropDownDirection="BOTTOM"
             placeholderStyle={{ color: '#CCCCCC' }}
             style={{
-              backgroundColor: '#EEEEEE',
+              backgroundColor: '#f2f2f5',
               borderWidth: 0,
             }}
             dropDownContainerStyle={{
