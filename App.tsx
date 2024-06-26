@@ -19,6 +19,7 @@ import StartScreen from './src/screens/login/StartScreen';
 import BangCreateScreen from './src/screens/bang/bangCreate/BangCreateScreen';
 import PedometerScreen from './src/screens/pedometer/PedometerScreen';
 import BangDetailScreen from './src/screens/bang/bangDetail/BangDetailScreen';
+import BangJoinScreen from './src/screens/bang/bangJoin/BangJoinScreen';
 import LoginScreen from './src/screens/login/LoginScreen';
 import SignupScreen from './src/screens/login/SignupScreen';
 
@@ -111,6 +112,12 @@ export default function App() {
             name="Pedometer"
             component={PedometerScreen}
             options={{ title: 'Pedometer' }}
+          />
+
+          <Stack.Screen
+            name="BangJoin"
+            component={BangJoinScreen}
+            options={{ title: '도파밍 상품 가입' }}
           />
         </Stack.Navigator>
       </NavigationContainer>

@@ -21,7 +21,7 @@ import {
 } from '../../../constants/SelectBox';
 import CustomModal from '../../../components/CustomModal/CustomModal';
 
-export default function BangCreateScreen() {
+export default function BangCreateScreen({ navigation }: any) {
   const [personOpen, setPersonOpen] = useState(false);
   const [disclosureOpen, setDisclosureOpen] = useState(false);
   const [waketimeOpen, setWaketimeOpen] = useState(false);
@@ -73,6 +73,11 @@ export default function BangCreateScreen() {
     setIsModalVisible(false);
   };
 
+  const onPressBangJoin = () => {
+    setIsModalVisible(false);
+    navigation.navigate('BangJoin');
+  };
+
   return (
     <Container>
       <Title>챌린지 모임모임 생성</Title>
@@ -116,7 +121,7 @@ export default function BangCreateScreen() {
             stickyHeader={true}
             placeholderStyle={{ color: '#CCCCCC' }}
             style={{
-              backgroundColor: '#EEEEEE',
+              backgroundColor: '#f2f2f5',
               borderWidth: 0,
             }}
             dropDownContainerStyle={{
@@ -140,7 +145,7 @@ export default function BangCreateScreen() {
             dropDownDirection="BOTTOM"
             placeholderStyle={{ color: '#CCCCCC' }}
             style={{
-              backgroundColor: '#EEEEEE',
+              backgroundColor: '#f2f2f5',
               borderWidth: 0,
             }}
             dropDownContainerStyle={{
@@ -164,7 +169,7 @@ export default function BangCreateScreen() {
             dropDownDirection="BOTTOM"
             placeholderStyle={{ color: '#CCCCCC' }}
             style={{
-              backgroundColor: '#EEEEEE',
+              backgroundColor: '#f2f2f5',
               borderWidth: 0,
             }}
             dropDownContainerStyle={{
@@ -184,7 +189,7 @@ export default function BangCreateScreen() {
         onClose={onPressModalClose}
         text={'챌린지 시작 전 \n상품 가입을 진행합니다.'}
       >
-        <ModalButton onPress={onPressModalClose}>
+        <ModalButton onPress={onPressBangJoin}>
           <ModalButtonText>확인</ModalButtonText>
         </ModalButton>
       </CustomModal>

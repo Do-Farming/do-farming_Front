@@ -9,7 +9,7 @@ export const CenteredView = styled.View`
 `;
 
 export const ModalView = styled.View`
-  width: 220px;
+  width: 240px;
   max-width: 400px;
   background-color: #ffffff;
   padding: 35px;
