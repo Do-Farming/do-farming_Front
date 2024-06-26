@@ -1,4 +1,4 @@
-import styled from "styled-components/native";
+import styled from 'styled-components/native';
 
 export const Container = styled.View`
   flex: 1;
@@ -41,23 +41,34 @@ export const ProgressBarContainer = styled.View`
   height: 20px;
   background-color: #e0e0e0;
   border-radius: 10px;
-  margin-top: 30px;
-  /* overflow: hidden; */
+  margin: 30px 0 20px 0;
 `;
 
 export const ProgressBar = styled.View<{ progress: number }>`
-  width: ${(props) => props.progress}%;
+  width: ${(props) => props.progress + 4}%;
   height: 100%;
   background-color: #ff8c00;
 `;
 
-export const ProgressLabel = styled.Text`
+export const ProgressLabel = styled.View`
   position: absolute;
-  bottom: 100%;
-  margin-bottom: 5px;
+  bottom: -25px;
+  margin-bottom: 8px;
+  padding: 3px 5px;
+  background-color: ${(props: any) =>
+    props.bgColor}; /* 배경색을 prop으로 받음 */
+  border-radius: 5px; /* border-radius 설정 */
+  align-self: center;
+`;
+
+export const ProgressLabelText = styled.Text`
   color: #000;
   font-weight: bold;
   font-size: 12px;
+  white-space: nowrap; /* 텍스트가 한 줄에 머물도록 설정 */
+  overflow: hidden; /* 넘치는 텍스트를 숨김 */
+  text-overflow: ellipsis; /* 넘치는 텍스트에 ... 표시 */
+  width: 32px;
 `;
 
 export const PinContainer = styled.View`
@@ -65,13 +76,6 @@ export const PinContainer = styled.View`
   bottom: 0;
   height: 100%;
   align-items: center;
-`;
-
-export const Pin = styled.View`
-  width: 10px;
-  height: 20px;
-  background-color: #000;
-  border-radius: 5px;
 `;
 
 export const UserList = styled.View`
