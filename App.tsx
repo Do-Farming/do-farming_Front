@@ -23,6 +23,7 @@ import BangJoinScreen from './src/screens/bang/bangJoin/BangJoinScreen';
 import LoginScreen from './src/screens/login/LoginScreen';
 import SignupScreen from './src/screens/login/SignupScreen';
 import CompetitiveScreen from './src/screens/compation/CompetitiveScreen';
+import ProductSignUpScreen from './src/screens/product/ProductSignUpScreen';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -124,6 +125,11 @@ export default function App() {
             name="Competitive"
             component={CompetitiveScreen}
             options={{ title: 'Competitive' }}
+          />
+          <Stack.Screen
+            name="ProductSignUp"
+            component={ProductSignUpScreen}
+            options={{ title: '입출금' }}
           />
         </Stack.Navigator>
       </NavigationContainer>

@@ -13,6 +13,10 @@ export default function ExploreScreen({ navigation }: any) {
         title="경쟁화면 페이지로"
         onPress={() => navigation.navigate('Competitive')}
       />
+      <Button
+        title="상품가입 페이지로"
+        onPress={() => navigation.navigate('ProductSignUp')}
+      />
     </View>
   );
 }
