@@ -22,6 +22,7 @@ import BangDetailScreen from './src/screens/bang/bangDetail/BangDetailScreen';
 import BangJoinScreen from './src/screens/bang/bangJoin/BangJoinScreen';
 import LoginScreen from './src/screens/login/LoginScreen';
 import SignupScreen from './src/screens/login/SignupScreen';
+import MyPageScreen from './src/screens/mypage/MyPageScreen';
 import CompetitiveScreen from './src/screens/compation/CompetitiveScreen';
 
 const Stack = createNativeStackNavigator();
@@ -93,6 +94,11 @@ export default function App() {
             name="Signup"
             component={SignupScreen}
             options={{ title: '회원가입' }}
+          />
+          <Stack.Screen
+            name="MyPage"
+            component={MyPageScreen}
+            options={{ title: '마이페이지' }}
           />
           <Stack.Screen
             name="BangSearch"
