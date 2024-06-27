@@ -21,6 +21,7 @@ const ProductSignInScreen = ({ navigation }: any) => {
       </GreenCheckContainer>
       <SubHeader>상품가입이 완료되었습니다!</SubHeader>
       <ButtonContainer onPress={() => navigation.navigate('StartScreen')}>
+        {/* TODO: 상품추천 페이지 만들고 적절한 경로로 변경 */}
         <Text>다른 상품을 찾아볼까요?</Text>
         <ButtonT>
           <ButtonText>다른 상품 알아보기</ButtonText>
