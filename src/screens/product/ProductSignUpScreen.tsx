@@ -25,7 +25,7 @@ import {
   SubHeader,
 } from './ProductSignUpScreen.styled';
 
-const ProductSignUpScreen: React.FC = () => {
+const ProductSignUpScreen: React.FC = ({ navigation }: any) => {
   return (
     <Container>
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
@@ -59,7 +59,8 @@ const ProductSignUpScreen: React.FC = () => {
       </ScrollView>
       <SignUpButton
         onPress={() => {
-          /* 상품가입 로직 */
+          navigation.navigate('ProductPassword');
+          console.log('클릭');
         }}
       >
         <SignUpButtonText>가입 신청하기</SignUpButtonText>
