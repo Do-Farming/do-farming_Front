@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react';
-
+import React, { useState, useEffect } from 'react';
 import {
   BoardContainer,
   Container,
@@ -8,6 +7,8 @@ import {
   Input,
   InputContainer,
   InputTitle,
+  ModalButton,
+  ModalButtonText,
   TextArea,
   Title,
 } from './BangCreateScreen.styled';
@@ -18,25 +19,23 @@ import {
   recruitNumList,
   wakeupTimeList,
 } from '../../../constants/SelectBox';
+import CustomModal from '../../../components/CustomModal/CustomModal';
 
-export default function BangCreateScreen() {
+export default function BangCreateScreen({ navigation }: any) {
   const [personOpen, setPersonOpen] = useState(false);
   const [disclosureOpen, setDisclosureOpen] = useState(false);
   const [waketimeOpen, setWaketimeOpen] = useState(false);
 
-  const debouncedSetBang = debounce(
-    (name: string, value: string | number | boolean) => {
-      setBang((prevBang) => ({
-        ...prevBang,
-        [name]: value,
-      }));
-    },
-    300,
-  );
+  const debouncedSetBang = debounce((name, value) => {
+    setBang((prevBang) => ({
+      ...prevBang,
+      [name]: value,
+    }));
+  }, 300);
 
   const handleInputChange = (
     name: string,
-    value: string | number | boolean,
+    value: string | boolean | number,
   ) => {
     debouncedSetBang(name, value);
   };
@@ -63,10 +62,26 @@ export default function BangCreateScreen() {
     }));
   }, [recruitNum, wakeupTime, disclosure]);
 
+  const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
+
+  const onPressModalOpen = () => {
+    console.log('팝업을 여는 중입니다.');
+    setIsModalVisible(true);
+  };
+
+  const onPressModalClose = () => {
+    setIsModalVisible(false);
+  };
+
+  const onPressBangJoin = () => {
+    setIsModalVisible(false);
+    navigation.navigate('BangJoin');
+  };
+
   return (
     <Container>
       <Title>챌린지 모임모임 생성</Title>
-      <BoardContainer style={{ zIndex: 100 }}>
+      <BoardContainer style={{ zIndex: 1000 }}>
         <InputContainer>
           <InputTitle>제목</InputTitle>
           <Input
@@ -101,13 +116,12 @@ export default function BangCreateScreen() {
             setOpen={setPersonOpen}
             placeholder="모집인원을 선택하세요"
             listMode="SCROLLVIEW"
+            maxHeight={100}
             closeOnBackPressed={true}
             stickyHeader={true}
-            zIndex={3000}
-            maxHeight={100}
             placeholderStyle={{ color: '#CCCCCC' }}
             style={{
-              backgroundColor: '#EEEEEE',
+              backgroundColor: '#f2f2f5',
               borderWidth: 0,
             }}
             dropDownContainerStyle={{
@@ -127,12 +141,11 @@ export default function BangCreateScreen() {
             setValue={setWakeupTime}
             placeholder="기상시간을 선택하세요"
             listMode="SCROLLVIEW"
-            dropDownDirection="BOTTOM"
             maxHeight={100}
-            closeOnBackPressed={true}
+            dropDownDirection="BOTTOM"
             placeholderStyle={{ color: '#CCCCCC' }}
             style={{
-              backgroundColor: '#EEEEEE',
+              backgroundColor: '#f2f2f5',
               borderWidth: 0,
             }}
             dropDownContainerStyle={{
@@ -152,11 +165,11 @@ export default function BangCreateScreen() {
             setValue={setDisclosure}
             placeholder="공개여부를 선택하세요"
             listMode="SCROLLVIEW"
+            maxHeight={100}
             dropDownDirection="BOTTOM"
-            closeOnBackPressed={true}
             placeholderStyle={{ color: '#CCCCCC' }}
             style={{
-              backgroundColor: '#EEEEEE',
+              backgroundColor: '#f2f2f5',
               borderWidth: 0,
             }}
             dropDownContainerStyle={{
@@ -167,9 +180,19 @@ export default function BangCreateScreen() {
           />
         </InputContainer>
       </BoardContainer>
-      <EnterButton>
+
+      <EnterButton onPressOut={onPressModalOpen} style={{ zIndex: 500 }}>
         <EnterText>입장하기</EnterText>
       </EnterButton>
+      <CustomModal
+        isVisible={isModalVisible}
+        onClose={onPressModalClose}
+        text={'챌린지 시작 전 \n상품 가입을 진행합니다.'}
+      >
+        <ModalButton onPress={onPressBangJoin}>
+          <ModalButtonText>확인</ModalButtonText>
+        </ModalButton>
+      </CustomModal>
     </Container>
   );
 }
