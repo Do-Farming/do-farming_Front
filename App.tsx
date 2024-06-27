@@ -27,6 +27,7 @@ import ProductSignUpScreen from './src/screens/product/ProductSignUpScreen';
 import ProductPasswordScreen from './src/screens/product/auth/ProductPasswordScreen';
 import ProductSignInScreen from './src/screens/product/complete/ProductSignInScreen';
 import MyPageScreen from './src/screens/mypage/MyPageScreen';
+import ProductSignUpScreen from './src/screens/product/ProductSignUpScreen';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -148,6 +149,11 @@ export default function App() {
             name="ProductSignIn"
             component={ProductSignInScreen}
             options={{ title: '가입완료' }}
+          />
+          <Stack.Screen
+            name="ProductSignUp"
+            component={ProductSignUpScreen}
+            options={{ title: '입출금' }}
           />
         </Stack.Navigator>
       </NavigationContainer>
