@@ -27,11 +27,6 @@ import CompetitiveScreen from './src/screens/compation/CompetitiveScreen';
 import ProductSignUpScreen from './src/screens/product/ProductSignUpScreen';
 import ProductPasswordScreen from './src/screens/product/auth/ProductPasswordScreen';
 import ProductSignInScreen from './src/screens/product/complete/ProductSignInScreen';
-<<<<<<< HEAD
-import MyPageScreen from './src/screens/mypage/MyPageScreen';
-import ProductSignUpScreen from './src/screens/product/ProductSignUpScreen';
-=======
->>>>>>> 4592e23 (feat: 라우팅설정)
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -154,14 +149,6 @@ export default function App() {
             component={ProductSignInScreen}
             options={{ title: '가입완료' }}
           />
-<<<<<<< HEAD
-          <Stack.Screen
-            name="ProductSignUp"
-            component={ProductSignUpScreen}
-            options={{ title: '입출금' }}
-          />
-=======
->>>>>>> 4592e23 (feat: 라우팅설정)
         </Stack.Navigator>
       </NavigationContainer>
     </StyledComponentsThemeProvider>
