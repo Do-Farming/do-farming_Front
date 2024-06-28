@@ -9,7 +9,7 @@ export const Container = styled.ScrollView`
 `;
 
 export const BoardContainer = styled.View`
-  background-color: #fff;
+  background-color: ${(props) => props.theme.whiteColor};
   min-height: 190px;
   margin-top: 20px;
   margin-bottom: 30px;
@@ -32,5 +32,5 @@ export const InputTitle = styled.Text`
 export const InfoText = styled.Text`
   font-size: 15px;
   font-weight: 600;
-  color: ${(props) => props.theme.DarkGrayColor};
+  color: ${(props) => props.theme.darkGrayColor};
 `;

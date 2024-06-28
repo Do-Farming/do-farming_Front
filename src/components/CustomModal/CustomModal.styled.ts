@@ -11,7 +11,7 @@ export const CenteredView = styled.View`
 export const ModalView = styled.View`
   width: 240px;
   max-width: 400px;
-  background-color: #ffffff;
+  background-color: ${(props) => props.theme.whiteColor};
   padding: 35px;
   border-radius: 10px;
   align-items: center;

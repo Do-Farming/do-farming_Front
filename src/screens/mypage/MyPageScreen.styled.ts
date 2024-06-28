@@ -2,7 +2,7 @@ import styled from 'styled-components/native';
 
 export const Container = styled.View`
   flex: 1;
-  background-color: ${(props) => props.theme.defaultWhiteColor};
+  background-color: ${(props) => props.theme.whiteColor};
 `;
 
 export const Header = styled.View`
@@ -48,7 +48,7 @@ export const MenuItem = styled.View`
 export const MenuItemButton = styled.TouchableOpacity`
   width: 64px;
   height: 64px;
-  background-color: #fff;
+  background-color: ${(props) => props.theme.whiteColor};
   border-radius: 15px;
   justify-content: center;
   align-items: center;
@@ -89,7 +89,7 @@ export const Content = styled.View`
 export const Item = styled.View`
   flex-direction: row;
   align-items: center;
-  background-color: #fff;
+  background-color: ${(props) => props.theme.whiteColor};
   padding: 10px;
   border-radius: 8px;
 `;
@@ -118,6 +118,6 @@ export const Footer = styled.View`
 `;
 
 export const FooterItem = styled.Text`
-  color: #fff;
+  color: ${(props) => props.theme.whiteColor};
   font-size: 24px;
 `;

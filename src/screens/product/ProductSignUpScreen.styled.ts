@@ -2,11 +2,11 @@ import styled from 'styled-components/native';
 
 export const Container = styled.View`
   flex: 1;
-  background-color: #ffffff;
+  background-color: ${(props) => props.theme.whiteColor};
 `;
 
 export const GreenBackground = styled.View`
-  background-color: #008e71;
+  background-color: ${(props) => props.theme.hanaMainColor};
   padding: 20px;
 `;
 
@@ -77,12 +77,12 @@ export const BenefitText2 = styled.Text`
 export const HighlightedText = styled.Text`
   font-weight: bold;
   font-size: 16px;
-  color: #008e71;
+  color: ${(props) => props.theme.hanaMainColor};
   margin-bottom: 10px;
 `;
 
 export const SignUpButton = styled.TouchableOpacity`
-  background-color: #008e71;
+  background-color: ${(props) => props.theme.hanaMainColor};
   padding: 15px;
   border-radius: 15px;
   position: absolute;

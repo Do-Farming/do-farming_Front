@@ -16,7 +16,7 @@ export const Title = styled.Text`
 `;
 
 export const BoardContainer = styled.View`
-  background-color: #fff;
+  background-color: ${(props) => props.theme.whiteColor};
   min-height: 210px;
   margin-top: 20px;
   margin-bottom: 30px;
@@ -94,7 +94,7 @@ export const CenteredView = styled.View`
 
 export const ModalView = styled.View`
   width: 220px;
-  background-color: #fff;
+  background-color: ${(props) => props.theme.whiteColor};
   border-radius: 10px;
   padding: 30px;
   align-items: center;

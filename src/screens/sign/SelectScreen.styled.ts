@@ -8,7 +8,7 @@ export const Container = styled.View`
   flex: 1;
   align-items: center;
   justify-content: space-between;
-  background-color: ${(props) => props.theme.defaultWhiteColor};
+  background-color: ${(props) => props.theme.whiteColor};
 `;
 
 export const TitleBox = styled.View`
