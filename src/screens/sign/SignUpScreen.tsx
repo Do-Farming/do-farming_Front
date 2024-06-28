@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import LongButton from '../../components/LongButton';
 import {
   ButtonBox,
@@ -16,6 +16,8 @@ import {
 } from './InputForm.styled';
 
 export default function SignUpScreen() {
+  const [isSended, setIsSended] = useState(false);
+
   return (
     <Container>
       <ContentBox>
@@ -42,24 +44,31 @@ export default function SignUpScreen() {
             <InputLabel>번호</InputLabel>
             <NonContainLabelBox>
               <Input width="74%" />
-              <Button width="22%">
-                <ButtonText>확인</ButtonText>
+              <Button
+                width="22%"
+                onPress={() => {
+                  setIsSended(true);
+                }}
+              >
+                <ButtonText>전송</ButtonText>
               </Button>
             </NonContainLabelBox>
           </InputContent>
-          <InputContent>
-            <InputLabel>인증코드</InputLabel>
-            <NonContainLabelBox>
-              <Input width="74%" />
-              <Button width="22%">
-                <ButtonText>확인</ButtonText>
-              </Button>
-            </NonContainLabelBox>
-          </InputContent>
+          {isSended && (
+            <InputContent>
+              <InputLabel>인증코드</InputLabel>
+              <NonContainLabelBox>
+                <Input width="74%" />
+                <Button width="22%">
+                  <ButtonText>확인</ButtonText>
+                </Button>
+              </NonContainLabelBox>
+            </InputContent>
+          )}
         </InputBox>
       </ContentBox>
       <ButtonBox>
-        <LongButton text="로그인"></LongButton>
+        <LongButton text="회원가입"></LongButton>
       </ButtonBox>
     </Container>
   );
