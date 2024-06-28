@@ -20,6 +20,8 @@ import BangCreateScreen from './src/screens/bang/bangCreate/BangCreateScreen';
 import PedometerScreen from './src/screens/pedometer/PedometerScreen';
 import BangDetailScreen from './src/screens/bang/bangDetail/BangDetailScreen';
 import WorldCupSelectScreen from './src/screens/worldcup/WorldCupSelectScreen';
+import CardWorldCupScreen from './src/screens/worldcup/card/CardWorldCupScreen';
+import CardWorldCupWinnnerScreen from './src/screens/worldcup/card/CardWorldCupWinnerScreen';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -104,7 +106,7 @@ export default function App() {
           <Stack.Screen
             name="Worldcup"
             component={WorldCupSelectScreen}
-            options={{ title: '이상형 월드컵' }}
+            options={{ title: '이상형 월드컵 선택' }}
           />
           <Stack.Screen
             name="TasteWorldCup"
@@ -113,8 +115,13 @@ export default function App() {
           />
           <Stack.Screen
             name="CardWorldCup"
-            component={WorldCupSelectScreen}
+            component={CardWorldCupScreen}
             options={{ title: '카드 이상형 월드컵' }}
+          />
+          <Stack.Screen
+            name="CardWorldCupWinner"
+            component={CardWorldCupWinnnerScreen}
+            options={{ title: '우승한 카드는?' }}
           />
         </Stack.Navigator>
       </NavigationContainer>

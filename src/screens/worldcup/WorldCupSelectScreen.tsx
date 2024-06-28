@@ -1,6 +1,7 @@
 import React from 'react';
 import {
   BoldText,
+  CautionText,
   Container,
   InfoTextView,
   WorldCulSelectionDetail,
@@ -20,7 +21,9 @@ export default function WorldCupSelectScreen({ navigation }: any) {
         <BoldText>어떤 방식으로</BoldText>
         <BoldText>내게 맞는 카드를 찾을까요? 🧚‍♂️</BoldText>
         <WorldCupSelectionView>
-          <WorldCupSelection onPress={() => navigation.navigate('TasteWorldCup')}>
+          <WorldCupSelection
+            onPress={() => navigation.navigate('TasteWorldCup')}
+          >
             <WorldCupImgView>
               <Image
                 source={require('../../assets/worldcup/taste.png')}
@@ -38,7 +41,9 @@ export default function WorldCupSelectScreen({ navigation }: any) {
               style={{ width: 18, height: 18 }}
             />
           </WorldCupSelection>
-          <WorldCupSelection onPress={() => navigation.navigate('CardWorldCup')}>
+          <WorldCupSelection
+            onPress={() => navigation.navigate('CardWorldCup', { type: 'CRD' })}
+          >
             <WorldCupImgView>
               <Image
                 source={require('../../assets/worldcup/card.png')}
@@ -46,7 +51,31 @@ export default function WorldCupSelectScreen({ navigation }: any) {
               />
             </WorldCupImgView>
             <WorldCupTextView>
-              <WorldCupSelectionText>카드 이상형 월드컵</WorldCupSelectionText>
+              <WorldCupSelectionText>
+                신용카드 이상형 월드컵
+              </WorldCupSelectionText>
+              <WorldCupSelectionSmallText>
+                카드 비교로 최종 카드 선정
+              </WorldCupSelectionSmallText>
+            </WorldCupTextView>
+            <WorldCulSelectionDetail
+              source={require('../../assets/worldcup/detail.png')}
+              style={{ width: 18, height: 18 }}
+            />
+          </WorldCupSelection>
+          <WorldCupSelection
+            onPress={() => navigation.navigate('CardWorldCup', { type: "CHK" })}
+          >
+            <WorldCupImgView>
+              <Image
+                source={require('../../assets/worldcup/card2.png')}
+                style={{ width: 50, height: 50 }}
+              />
+            </WorldCupImgView>
+            <WorldCupTextView>
+              <WorldCupSelectionText>
+                체크카드 이상형 월드컵
+              </WorldCupSelectionText>
               <WorldCupSelectionSmallText>
                 카드 비교로 최종 카드 선정
               </WorldCupSelectionSmallText>
@@ -57,6 +86,9 @@ export default function WorldCupSelectScreen({ navigation }: any) {
             />
           </WorldCupSelection>
         </WorldCupSelectionView>
+        <CautionText>
+          카드 월드컵은 매번 다른 결과를 가져올 수 있습니다
+        </CautionText>
       </InfoTextView>
     </Container>
   );

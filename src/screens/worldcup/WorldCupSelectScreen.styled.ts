@@ -22,7 +22,7 @@ export const WorldCupSelectionView = styled.View`
 `;
 
 export const WorldCupSelection = styled.TouchableOpacity`
-  display:flex;
+  display: flex;
   flex-direction: row;
   align-items: center;
   border-radius: 15px;
@@ -36,7 +36,7 @@ export const WorldCupImgView = styled.View`
   justify-content: center;
   align-items: center;
   border-radius: 15px;
-  background-color: #D9D9D9;
+  background-color: #d9d9d9;
   padding: 10px;
   width: 70px;
   height: 70px;
@@ -63,4 +63,14 @@ export const WorldCupSelectionSmallText = styled.Text`
 export const WorldCulSelectionDetail = styled.Image`
   position: absolute;
   right: 10px;
+`;
+
+export const CautionText = styled.Text`
+  position: absolute;
+  bottom: 30px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #cecece;
+  text-align: center;
+  width: 100%;
 `;
