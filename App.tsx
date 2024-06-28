@@ -22,6 +22,7 @@ import BangDetailScreen from './src/screens/bang/bangDetail/BangDetailScreen';
 import BangJoinScreen from './src/screens/bang/bangJoin/BangJoinScreen';
 import LoginScreen from './src/screens/login/LoginScreen';
 import SignupScreen from './src/screens/login/SignupScreen';
+import MyPageScreen from './src/screens/mypage/MyPageScreen';
 import CompetitiveScreen from './src/screens/compation/CompetitiveScreen';
 import ProductSignUpScreen from './src/screens/product/ProductSignUpScreen';
 import ProductPasswordScreen from './src/screens/product/auth/ProductPasswordScreen';
