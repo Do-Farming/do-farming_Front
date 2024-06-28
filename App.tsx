@@ -15,10 +15,17 @@ import HomeScreen from './src/screens/home/HomeScreen';
 import ExploreScreen from './src/screens/ExploreScreen';
 import ExampleScreen from './src/screens/ExampleScreen';
 import BangSearchScreen from './src/screens/bang/bangSearch/BangSearchScreen';
-import StartScreen from './src/screens/login/StartScreen';
 import BangCreateScreen from './src/screens/bang/bangCreate/BangCreateScreen';
 import PedometerScreen from './src/screens/pedometer/PedometerScreen';
 import BangDetailScreen from './src/screens/bang/bangDetail/BangDetailScreen';
+import BangJoinScreen from './src/screens/bang/bangJoin/BangJoinScreen';
+import SignInScreen from './src/screens/sign/SignInScreen';
+import SignUpScreen from './src/screens/sign/SignUpScreen';
+import MyPageScreen from './src/screens/mypage/MyPageScreen';
+import CompetitiveScreen from './src/screens/compation/CompetitiveScreen';
+import ProductSignUpScreen from './src/screens/product/ProductSignUpScreen';
+import ProductPasswordScreen from './src/screens/product/auth/ProductPasswordScreen';
+import ProductSignInScreen from './src/screens/product/complete/ProductSignInScreen';
 import WorldCupSelectScreen from './src/screens/worldcup/WorldCupSelectScreen';
 import CardWorldCupScreen from './src/screens/worldcup/card/CardWorldCupScreen';
 import CardWorldCupWinnnerScreen from './src/screens/worldcup/card/CardWorldCupWinnerScreen';
@@ -79,9 +86,19 @@ export default function App() {
             options={{ headerShown: false }}
           />
           <Stack.Screen
-            name="StartScreen"
-            component={StartScreen}
-            options={{ title: '시작 화면' }}
+            name="SignIn"
+            component={SignInScreen}
+            options={{ title: '로그인' }}
+          />
+          <Stack.Screen
+            name="SignUp"
+            component={SignUpScreen}
+            options={{ title: '회원가입' }}
+          />
+          <Stack.Screen
+            name="MyPage"
+            component={MyPageScreen}
+            options={{ title: '마이페이지' }}
           />
           <Stack.Screen
             name="BangSearch"
@@ -102,6 +119,31 @@ export default function App() {
             name="Pedometer"
             component={PedometerScreen}
             options={{ title: 'Pedometer' }}
+          />
+          <Stack.Screen
+            name="BangJoin"
+            component={BangJoinScreen}
+            options={{ title: '도파밍 상품 가입' }}
+          />
+          <Stack.Screen
+            name="Competitive"
+            component={CompetitiveScreen}
+            options={{ title: 'Competitive' }}
+          />
+          <Stack.Screen
+            name="ProductSignUp"
+            component={ProductSignUpScreen}
+            options={{ title: '입출금' }}
+          />
+          <Stack.Screen
+            name="ProductPassword"
+            component={ProductPasswordScreen}
+            options={{ title: '계좌 비밀번호' }}
+          />
+          <Stack.Screen
+            name="ProductSignIn"
+            component={ProductSignInScreen}
+            options={{ title: '가입완료' }}
           />
           <Stack.Screen
             name="Worldcup"

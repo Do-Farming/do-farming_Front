@@ -1,9 +1,9 @@
-import styled from "styled-components/native";
+import styled from 'styled-components/native';
 
 export const Container = styled.View`
   flex: 1;
   padding: 20px;
-  background-color: #ffffff;
+  background-color: ${(props) => props.theme.whiteColor};
 `;
 
 export const Header = styled.View`
@@ -47,7 +47,7 @@ export const Product = styled.View`
   width: 350px;
   border-radius: 15px;
   height: 160px;
-  background-color: #ffd262;
+  background-color: ${(props) => props.theme.mainColor};
   padding: 20px;
   display: flex;
 `;
@@ -68,7 +68,7 @@ export const InterestRateContainer = styled.View`
 `;
 
 export const InterestRateText = styled.Text`
-  color: #fff;
+  color: ${(props) => props.theme.whiteColor};
   font-size: 14px;
 `;
 
@@ -98,19 +98,19 @@ export const PaginationDot = styled.View<{ isActive: boolean }>`
   width: 10px;
   height: 10px;
   border-radius: 5px;
-  background-color: ${(props) => (props.isActive ? "#FFD262" : "#ccc")};
+  background-color: ${(props) => (props.isActive ? '#FFD262' : '#ccc')};
   margin-horizontal: 5px;
 `;
 
 export const Button = styled.View<{ isSelected: boolean }>`
   padding: 10px 20px;
-  background-color: ${(props) => (props.isSelected ? "#FFD262" : "#FFFFFF")};
+  background-color: ${(props) => (props.isSelected ? '#FFD262' : '#FFFFFF')};
   border-radius: 15px;
   margin-right: 10px;
 `;
 
 export const ButtonText = styled.Text<{ isSelected: boolean }>`
-  color: ${(props) => (props.isSelected ? "#ffffff" : "#000000")};
+  color: ${(props) => (props.isSelected ? '#ffffff' : '#000000')};
   font-weight: bold;
   font-size: 15px;
 `;
@@ -125,7 +125,7 @@ export const CardContainer = styled.View`
   margin-bottom: 15px;
   display: flex;
   flex-direction: row;
-  background: #ffffff;
+  background: ${(props) => props.theme.whiteColor};
   border: 1px solid #f8f8fa;
   box-shadow: 0px 4px 4px rgba(77, 77, 77, 0.25);
   border-radius: 15px;
@@ -147,7 +147,7 @@ export const CardInfo = styled.View`
 `;
 
 export const CardName = styled.Text`
-  font-size: 20x;
+  font-size: 20px;
   font-weight: bold;
   margin-left: 10px;
   margin-bottom: 10px;
@@ -187,6 +187,6 @@ export const CardBenefitText = styled.Text`
 `;
 
 export const CardBenefitImportantText = styled.Text`
-  color: #ffd262;
+  color: ${(props) => props.theme.mainColor};
   font-weight: bold;
 `;
