@@ -15,7 +15,7 @@ import {
   ButtonText,
 } from './InputForm.styled';
 
-export default function SignupScreen() {
+export default function SignUpScreen() {
   return (
     <Container>
       <ContentBox>

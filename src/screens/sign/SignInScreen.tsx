@@ -12,7 +12,7 @@ import {
   TitleBox,
 } from './InputForm.styled';
 
-export default function LoginScreen() {
+export default function SignInScreen() {
   return (
     <Container>
       <ContentBox>

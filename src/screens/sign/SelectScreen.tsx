@@ -4,11 +4,11 @@ import {
   Container,
   MainTitle,
   TitleBox,
-} from './StartScreen.styled';
+} from './SelectScreen.styled';
 import LongButton from '../../components/LongButton';
 import theme from '../../styles/theme';
 
-export default function StartScreen({ navigation }: any) {
+export default function SelectScreen({ navigation }: any) {
   return (
     <Container>
       <TitleBox>

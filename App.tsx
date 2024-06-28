@@ -15,13 +15,13 @@ import HomeScreen from './src/screens/home/HomeScreen';
 import ExploreScreen from './src/screens/ExploreScreen';
 import ExampleScreen from './src/screens/ExampleScreen';
 import BangSearchScreen from './src/screens/bang/bangSearch/BangSearchScreen';
-import StartScreen from './src/screens/login/StartScreen';
 import BangCreateScreen from './src/screens/bang/bangCreate/BangCreateScreen';
 import PedometerScreen from './src/screens/pedometer/PedometerScreen';
 import BangDetailScreen from './src/screens/bang/bangDetail/BangDetailScreen';
 import BangJoinScreen from './src/screens/bang/bangJoin/BangJoinScreen';
-import LoginScreen from './src/screens/login/LoginScreen';
-import SignupScreen from './src/screens/login/SignupScreen';
+import SelectScreen from './src/screens/sign/SelectScreen';
+import SignInScreen from './src/screens/sign/SignInScreen';
+import SignUpScreen from './src/screens/sign/SignUpScreen';
 import MyPageScreen from './src/screens/mypage/MyPageScreen';
 import CompetitiveScreen from './src/screens/compation/CompetitiveScreen';
 import ProductSignUpScreen from './src/screens/product/ProductSignUpScreen';
@@ -85,17 +85,17 @@ export default function App() {
           />
           <Stack.Screen
             name="Start"
-            component={StartScreen}
+            component={SelectScreen}
             options={{ title: '시작 화면' }}
           />
           <Stack.Screen
             name="Login"
-            component={LoginScreen}
+            component={SignInScreen}
             options={{ title: '로그인' }}
           />
           <Stack.Screen
             name="Signup"
-            component={SignupScreen}
+            component={SignUpScreen}
             options={{ title: '회원가입' }}
           />
           <Stack.Screen
