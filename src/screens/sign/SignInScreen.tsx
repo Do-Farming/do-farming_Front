@@ -1,13 +1,14 @@
 import React from 'react';
-import LongButton from '../../components/LongButton';
 import {
   ButtonBox,
+  ButtonText,
   Container,
   ContentBox,
   Input,
   InputBox,
   InputContent,
   InputLabel,
+  LongButton,
   Title,
   TitleBox,
 } from './InputForm.styled';
@@ -31,7 +32,9 @@ export default function SignInScreen() {
         </InputBox>
       </ContentBox>
       <ButtonBox>
-        <LongButton text="로그인"></LongButton>
+        <LongButton>
+          <ButtonText>로그인</ButtonText>
+        </LongButton>
       </ButtonBox>
     </Container>
   );

@@ -10,6 +10,9 @@ const theme: DefaultTheme = {
   defaultWhiteColor: '#FFFFFF',
   placeholderColor: '#CCCCCC',
   buttonBackgroundColor: '#FFF5D2',
+
+  hanaMainColor: '#008E71',
+  hanaSubColor: '#00A585',
 };
 
 export default theme;

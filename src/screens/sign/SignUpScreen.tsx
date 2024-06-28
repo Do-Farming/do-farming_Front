@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import LongButton from '../../components/LongButton';
 import {
   ButtonBox,
   Button,
@@ -13,6 +12,7 @@ import {
   Title,
   TitleBox,
   ButtonText,
+  LongButton,
 } from './InputForm.styled';
 
 export default function SignUpScreen() {
@@ -68,7 +68,9 @@ export default function SignUpScreen() {
         </InputBox>
       </ContentBox>
       <ButtonBox>
-        <LongButton text="회원가입"></LongButton>
+        <LongButton>
+          <ButtonText>회원가입</ButtonText>
+        </LongButton>
       </ButtonBox>
     </Container>
   );

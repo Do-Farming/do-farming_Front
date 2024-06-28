@@ -9,6 +9,9 @@ declare module 'styled-components' {
     defaultWhiteColor: string;
     placeholderColor: string;
     buttonBackgroundColor: string;
+
+    hanaMainColor: string;
+    hanaSubColor: string;
     // fontLarge: number;
     // fontMedium: number;
     // fontRegular: number;

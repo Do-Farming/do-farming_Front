@@ -19,7 +19,6 @@ import BangCreateScreen from './src/screens/bang/bangCreate/BangCreateScreen';
 import PedometerScreen from './src/screens/pedometer/PedometerScreen';
 import BangDetailScreen from './src/screens/bang/bangDetail/BangDetailScreen';
 import BangJoinScreen from './src/screens/bang/bangJoin/BangJoinScreen';
-import SelectScreen from './src/screens/sign/SelectScreen';
 import SignInScreen from './src/screens/sign/SignInScreen';
 import SignUpScreen from './src/screens/sign/SignUpScreen';
 import MyPageScreen from './src/screens/mypage/MyPageScreen';
@@ -84,17 +83,12 @@ export default function App() {
             options={{ headerShown: false }}
           />
           <Stack.Screen
-            name="Start"
-            component={SelectScreen}
-            options={{ title: '시작 화면' }}
-          />
-          <Stack.Screen
-            name="Login"
+            name="SignIn"
             component={SignInScreen}
             options={{ title: '로그인' }}
           />
           <Stack.Screen
-            name="Signup"
+            name="SignUp"
             component={SignUpScreen}
             options={{ title: '회원가입' }}
           />
