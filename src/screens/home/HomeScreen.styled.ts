@@ -1,4 +1,4 @@
-import styled from "styled-components/native";
+import styled from 'styled-components/native';
 
 export const Container = styled.View`
   flex: 1;
@@ -98,19 +98,19 @@ export const PaginationDot = styled.View<{ isActive: boolean }>`
   width: 10px;
   height: 10px;
   border-radius: 5px;
-  background-color: ${(props) => (props.isActive ? "#FFD262" : "#ccc")};
+  background-color: ${(props) => (props.isActive ? '#FFD262' : '#ccc')};
   margin-horizontal: 5px;
 `;
 
 export const Button = styled.View<{ isSelected: boolean }>`
   padding: 10px 20px;
-  background-color: ${(props) => (props.isSelected ? "#FFD262" : "#FFFFFF")};
+  background-color: ${(props) => (props.isSelected ? '#FFD262' : '#FFFFFF')};
   border-radius: 15px;
   margin-right: 10px;
 `;
 
 export const ButtonText = styled.Text<{ isSelected: boolean }>`
-  color: ${(props) => (props.isSelected ? "#ffffff" : "#000000")};
+  color: ${(props) => (props.isSelected ? '#ffffff' : '#000000')};
   font-weight: bold;
   font-size: 15px;
 `;
@@ -147,7 +147,7 @@ export const CardInfo = styled.View`
 `;
 
 export const CardName = styled.Text`
-  font-size: 20x;
+  font-size: 20px;
   font-weight: bold;
   margin-left: 10px;
   margin-bottom: 10px;
