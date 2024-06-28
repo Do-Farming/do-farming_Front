@@ -67,11 +67,11 @@ export const Button = styled.TouchableOpacity<{ width?: string }>`
   justify-content: center;
   padding: 8px;
   border-radius: 8px;
-  background-color: ${(props) => props.theme.buttonBackgroundColor};
+  background-color: ${(props) => props.theme.hanaMainColor};
 `;
 
 export const ButtonText = styled.Text`
-  color: ${(props) => props.theme.buttonBoldColor};
+  color: ${(props) => props.theme.defaultWhiteColor};
 `;
 
 export const ButtonBox = styled.View`
@@ -80,4 +80,15 @@ export const ButtonBox = styled.View`
   align-items: center;
   width: 100%;
   margin-bottom: 20%;
+`;
+
+export const LongButton = styled.TouchableOpacity`
+  border-radius: 8px;
+  width: 80%;
+  height: 44px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: ${(props) => props.theme.hanaMainColor};
+  margin-vertical: 12px;
 `;

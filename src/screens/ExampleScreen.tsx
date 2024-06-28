@@ -9,8 +9,12 @@ export default function ExampleScreen({ navigation }: any) {
         onPress={() => navigation.navigate('BangSearch')}
       />
       <Button
-        title="시작 페이지로"
-        onPress={() => navigation.navigate('Start')}
+        title="로그인 페이지로"
+        onPress={() => navigation.navigate('SignIn')}
+      />
+      <Button
+        title="회원가입 페이지로"
+        onPress={() => navigation.navigate('SignUp')}
       />
       <Button
         title="마이 페이지로"
