@@ -3,16 +3,15 @@ import styled from 'styled-components/native';
 export const Container = styled.View`
   flex: 1;
   padding: 20px;
-  background-color: #ffffff;
+  background-color: ${(props) => props.theme.whiteColor};
 `;
 
 export const ChartCard = styled.View`
-  background-color: #ffffff;
+  background-color: ${(props) => props.theme.whiteColor};
   border-radius: 10px;
   padding: 15px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   margin-bottom: 20px;
-  /* overflow: hidden; */
 `;
 
 export const ProgressHeader = styled.Text`
@@ -28,7 +27,7 @@ export const UserList = styled.View`
 export const UserCard = styled.View`
   flex-direction: row;
   align-items: center;
-  background-color: #ffffff;
+  background-color: ${(props) => props.theme.whiteColor};
   padding: 20px 10px;
   margin-bottom: 10px;
   border-radius: 10px;

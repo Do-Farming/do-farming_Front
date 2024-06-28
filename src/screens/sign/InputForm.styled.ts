@@ -4,7 +4,7 @@ export const Container = styled.View`
   flex: 1;
   align-items: center;
   justify-content: space-between;
-  background-color: ${(props) => props.theme.defaultWhiteColor};
+  background-color: ${(props) => props.theme.whiteColor};
 `;
 
 export const ContentBox = styled.View`
@@ -71,7 +71,7 @@ export const Button = styled.TouchableOpacity<{ width?: string }>`
 `;
 
 export const ButtonText = styled.Text`
-  color: ${(props) => props.theme.defaultWhiteColor};
+  color: ${(props) => props.theme.whiteColor};
 `;
 
 export const ButtonBox = styled.View`

@@ -3,7 +3,7 @@ import styled from 'styled-components/native';
 export const Container = styled.View`
   flex: 1;
   padding: 20px;
-  background-color: #ffffff;
+  background-color: ${(props) => props.theme.whiteColor};
 `;
 
 export const Header = styled.View`
@@ -47,7 +47,7 @@ export const Product = styled.View`
   width: 350px;
   border-radius: 15px;
   height: 160px;
-  background-color: #ffd262;
+  background-color: ${(props) => props.theme.mainColor};
   padding: 20px;
   display: flex;
 `;
@@ -68,7 +68,7 @@ export const InterestRateContainer = styled.View`
 `;
 
 export const InterestRateText = styled.Text`
-  color: #fff;
+  color: ${(props) => props.theme.whiteColor};
   font-size: 14px;
 `;
 
@@ -125,7 +125,7 @@ export const CardContainer = styled.View`
   margin-bottom: 15px;
   display: flex;
   flex-direction: row;
-  background: #ffffff;
+  background: ${(props) => props.theme.whiteColor};
   border: 1px solid #f8f8fa;
   box-shadow: 0px 4px 4px rgba(77, 77, 77, 0.25);
   border-radius: 15px;
@@ -187,6 +187,6 @@ export const CardBenefitText = styled.Text`
 `;
 
 export const CardBenefitImportantText = styled.Text`
-  color: #ffd262;
+  color: ${(props) => props.theme.mainColor};
   font-weight: bold;
 `;

@@ -10,7 +10,7 @@ export const Container = styled.View`
 export const Item = styled.View`
   flex-direction: row;
   align-items: center;
-  background-color: ${(props) => props.theme.defaultWhiteColor};
+  background-color: ${(props) => props.theme.whiteColor};
   padding: 10px;
   border-radius: 8px;
 `;
@@ -55,7 +55,7 @@ export const ItemStatus = styled.Text`
 export const ItemProgressFigure = styled.Text`
   text-align: right;
   font-size: 8px;
-  color: ${(props) => props.theme.buttonLigthColor};
+  color: ${(props) => props.theme.mainLightColor};
 `;
 
 export const ItemProgressBar = styled(Progress.Bar)``;

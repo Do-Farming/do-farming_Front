@@ -10,7 +10,7 @@ export const Item = styled.View`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  background-color: ${(props) => props.theme.defaultWhiteColor};
+  background-color: ${(props) => props.theme.whiteColor};
   padding-vertical: 20px;
   padding-horizontal: 10px;
   margin: 10px;
@@ -24,5 +24,5 @@ export const ItemType = styled.Text`
   background-color: ${(props) => props.theme.mainColor};
   padding: 5px;
   font-size: 10px;
-  color: ${(props) => props.theme.defaultWhiteColor};
+  color: ${(props) => props.theme.whiteColor};
 `;

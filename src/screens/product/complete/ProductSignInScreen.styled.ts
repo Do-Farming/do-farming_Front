@@ -5,7 +5,7 @@ export const Container = styled.View`
   flex: 1;
   justify-content: center;
   align-items: center;
-  background-color: #ffffff;
+  background-color: ${(props) => props.theme.whiteColor};
   padding: 20px;
 `;
 
@@ -40,7 +40,7 @@ export const ButtonContainer = styled.View`
 
 export const ButtonT = styled.TouchableOpacity`
   margin-top: 10px;
-  background-color: #ffff;
+  background-color: ${(props) => props.theme.whiteColor};
   padding: 15px;
   border-radius: 10px;
 `;
