@@ -26,6 +26,7 @@ import CompetitiveScreen from './src/screens/compation/CompetitiveScreen';
 import ProductSignUpScreen from './src/screens/product/ProductSignUpScreen';
 import ProductPasswordScreen from './src/screens/product/auth/ProductPasswordScreen';
 import ProductSignInScreen from './src/screens/product/complete/ProductSignInScreen';
+import TransactionHistoryScreen from './src/screens/transactionHistory/TransactionHistoryScreen';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -142,6 +143,11 @@ export default function App() {
             name="ProductSignIn"
             component={ProductSignInScreen}
             options={{ title: '가입완료' }}
+          />
+          <Stack.Screen
+            name="TransactionHistory"
+            component={TransactionHistoryScreen}
+            options={{ title: '거래 내역' }}
           />
         </Stack.Navigator>
       </NavigationContainer>
