@@ -50,13 +50,12 @@ export const ProgressBar = styled.View<{ progress: number }>`
   background-color: #ff8c00;
 `;
 
-export const ProgressLabel = styled.View<{bgColor: string}>`
+export const ProgressLabel = styled.View<{ bgColor: string }>`
   position: absolute;
   bottom: -25px;
   margin-bottom: 8px;
   padding: 3px 5px;
-  background-color: ${(props) =>
-    props.bgColor}; /* 배경색을 prop으로 받음 */
+  background-color: ${(props) => props.bgColor}; /* 배경색을 prop으로 받음 */
   border-radius: 5px; /* border-radius 설정 */
   align-self: center;
 `;
@@ -86,8 +85,8 @@ export const UserCard = styled.View`
   flex-direction: row;
   align-items: center;
   background-color: ${(props) => props.theme.whiteColor};
-  padding: 20px 10px;
-  margin-bottom: 10px;
+  padding: 20px 14px;
+  margin-bottom: 14px;
   border-radius: 10px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 `;
@@ -107,17 +106,18 @@ export const ProfileImage = styled.Image`
 `;
 
 export const UserName = styled.Text`
-  font-size: 18px;
+  font-size: 17px;
+  font-weight: 500;
 `;
 
 export const AchievedGoal = styled.Text`
-  font-size: 16px;
+  font-size: 15px;
   color: #888888;
 `;
 
 export const InterestRate = styled.Text`
   font-size: 16px;
-  color: red;
+  color: #e22f2f;
   font-weight: bold;
   margin-left: auto;
 `;
