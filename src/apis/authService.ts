@@ -1,11 +1,7 @@
+import { LoginParams } from '../types/auth/AuthTypes';
 import axiosInstance from './axiosInstance';
 
-interface LoginParams {
-  phoneNumber: string;
-  password: string;
-}
-
-export const postLogin = async ({ phoneNumber, password }: LoginParams) => {
+export const login = async ({ phoneNumber, password }: LoginParams) => {
   try {
     const response = await axiosInstance.post('/api/v1/auth/login', {
       phoneNumber,

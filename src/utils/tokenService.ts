@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { signOut } from '../states/authState';
+// import { signOut } from '../states/authState';
 
 export const getAccessToken = () => {
   return localStorage.getItem('jwtToken');
@@ -9,7 +9,7 @@ export const resetTokenAndReattemptRequest = async (error: any) => {
   try {
     const refreshToken = localStorage.getItem('refreshToken');
     if (!refreshToken) {
-      signOut();
+      // signOut();
       return Promise.reject(error);
     }
 
@@ -30,7 +30,7 @@ export const resetTokenAndReattemptRequest = async (error: any) => {
     error.response.config.headers.Authorization = `Bearer ${accessToken}`;
     return axios(error.response.config);
   } catch (err) {
-    signOut();
+    // signOut();
     return Promise.reject(err);
   }
 };
