@@ -50,12 +50,12 @@ export const ProgressBar = styled.View<{ progress: number }>`
   background-color: #ff8c00;
 `;
 
-export const ProgressLabel = styled.View`
+export const ProgressLabel = styled.View<{bgColor: string}>`
   position: absolute;
   bottom: -25px;
   margin-bottom: 8px;
   padding: 3px 5px;
-  background-color: ${(props: any) =>
+  background-color: ${(props) =>
     props.bgColor}; /* 배경색을 prop으로 받음 */
   border-radius: 5px; /* border-radius 설정 */
   align-self: center;

@@ -112,6 +112,7 @@ export const EnterButton = styled.TouchableOpacity<BangProps>`
   border-radius: 10px;
   padding: 15px;
   margin-bottom: 50px;
+  width: 100%;
 `;
 
 export const EnterText = styled.Text`

@@ -94,7 +94,7 @@ const CardList = ({ SelectedCardList }: { SelectedCardList: any[] }) => (
     {SelectedCardList.map((card, index) => (
       <CardContainer key={index}>
         <CardImg
-          source={{ uri: "https://api.card-gorilla.com:8080/" + card.card_img }}
+          source={{ uri: "https://d1c5n4ri2guedi.cloudfront.net" + card.card_img }}
           style={{ width: 50, height: 75 }}
         />
         <CardInfo>
