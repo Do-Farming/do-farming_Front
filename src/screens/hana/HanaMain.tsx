@@ -1,14 +1,13 @@
 // HomeScreen.js
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from 'react';
 import {
-  TouchableOpacity, Text, 
+  Text,
   Image,
-  View,
   FlatList,
   Dimensions,
   NativeSyntheticEvent,
   NativeScrollEvent,
-} from "react-native";
+} from 'react-native';
 import {
   Container,
   Header,
@@ -33,14 +32,11 @@ import {
   HanaPaginationButton,
   HanaPaginationContainer,
   Product2,
-  Product3
-} from "./HomeScreen.styled";
-import axios from "axios";
-import {mainContents, saleContents} from "../../mocks/hanaMainDatas";
-const { width: windowWidth } = Dimensions.get("window");
+  Product3,
+} from './HomeScreen.styled';
+import { mainContents, saleContents } from '../../mocks/hanaMainDatas';
 
-
-
+const { width: windowWidth } = Dimensions.get('window');
 
 const Pagination: React.FC<{ length: number; currentIndex: number }> = ({
   currentIndex,
@@ -56,22 +52,21 @@ const Pagination2: React.FC<{ length: number; currentIndex2: number }> = ({
   currentIndex2,
 }) => (
   <PaginationContainer>
-        <PaginationDot isActive={true} index={currentIndex2} />
+    <PaginationDot isActive={true} index={currentIndex2} />
   </PaginationContainer>
 );
 
-
 export default function HanaMain() {
-  const [selectedCardType, setSelectedCardType] = useState("check");
+  const [selectedCardType, setSelectedCardType] = useState('check');
   const [currentIndex, setCurrentIndex] = useState(0);
   const [currentIndex2, setCurrentIndex2] = useState(0);
   const flatListRef = useRef<FlatList>(null);
   const flatListRef2 = useRef<FlatList>(null);
-  
+
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) =>
-        prevIndex === saleContents.length - 1 ? 0 : prevIndex + 1
+        prevIndex === saleContents.length - 1 ? 0 : prevIndex + 1,
       );
     }, 3000);
 
@@ -92,7 +87,7 @@ export default function HanaMain() {
   }, [currentIndex]);
 
   const handleMomentumScrollEnd = (
-    event: NativeSyntheticEvent<NativeScrollEvent>
+    event: NativeSyntheticEvent<NativeScrollEvent>,
   ) => {
     const contentOffsetX = event.nativeEvent.contentOffset.x;
     const index = Math.round(contentOffsetX / windowWidth);
@@ -103,10 +98,13 @@ export default function HanaMain() {
   };
 
   const handlePrev = () => {
-    setCurrentIndex((prevIndex) => (prevIndex - 1 + saleContents.length) % saleContents.length);
+    setCurrentIndex(
+      (prevIndex) =>
+        (prevIndex - 1 + saleContents.length) % saleContents.length,
+    );
   };
   const handleMomentumScrollEnd2 = (
-    event: NativeSyntheticEvent<NativeScrollEvent>
+    event: NativeSyntheticEvent<NativeScrollEvent>,
   ) => {
     const contentOffsetX = event.nativeEvent.contentOffset.x;
     const index = Math.round(contentOffsetX / windowWidth);
@@ -129,35 +127,38 @@ export default function HanaMain() {
           keyExtractor={(item, index) => index.toString()}
           renderItem={({ item, index }) => (
             <Product2 key={index}>
-              <DescriptionSmallTexts>{item.descriptrions.text1}</DescriptionSmallTexts>
+              <DescriptionSmallTexts>
+                {item.descriptrions.text1}
+              </DescriptionSmallTexts>
               <RowCenter>
                 <DescriptionTexts>{item.descriptrions.text2}</DescriptionTexts>
-                  <Image 
-                        style={{ width: 20, height: 15 }}
-                        source={item.images[1]} />
+                <Image
+                  style={{ width: 20, height: 15 }}
+                  source={item.images[1]}
+                />
               </RowCenter>
-              <ProductImgView >
-                <Image 
-                      style={{ width: 125, height: 100 }}
-                      source={item.images[0]} />
+              <ProductImgView>
+                <Image
+                  style={{ width: 125, height: 100 }}
+                  source={item.images[0]}
+                />
               </ProductImgView>
               <Row>
-                <Button width="50%" backgroundColor="#EFF0F4"> 
-                  <ButtonText>
-                    {item.btnText.option1}
-                  </ButtonText>
+                <Button width="50%" backgroundColor="#EFF0F4">
+                  <ButtonText>{item.btnText.option1}</ButtonText>
                 </Button>
-                <Button width="50%" backgroundColor="#1EA698"> 
-                  <ButtonText color="white">
-                    {item.btnText.option2}
-                  </ButtonText>
+                <Button width="50%" backgroundColor="#1EA698">
+                  <ButtonText color="white">{item.btnText.option2}</ButtonText>
                 </Button>
-                </Row>
+              </Row>
             </Product2>
           )}
           onMomentumScrollEnd={handleMomentumScrollEnd2}
         />
-        <Pagination2 length={mainContents.length} currentIndex2={currentIndex2} />
+        <Pagination2
+          length={mainContents.length}
+          currentIndex2={currentIndex2}
+        />
       </MainProduct>
       <MainProduct>
         <FlatList
@@ -182,9 +183,12 @@ export default function HanaMain() {
                     <HanaPaginationButton onPress={handleNext}>
                       <Text>{'>'}</Text>
                     </HanaPaginationButton>
-                </HanaPaginationContainer>
+                  </HanaPaginationContainer>
                 </HanaTextContainer>
-                <Image source={item.images[0]} style={{ width: 100, height: 100 }} />
+                <Image
+                  source={item.images[0]}
+                  style={{ width: 100, height: 100 }}
+                />
               </HanaCard>
             </Product>
           )}
@@ -193,15 +197,18 @@ export default function HanaMain() {
       </MainProduct>
       <MainProduct>
         <Product3>
-            <HanaCard>
-              <HanaTextContainer>
-                <HanaTitle>적립식 이율 적금</HanaTitle>
-                <HanaSubtitle>MZ를 위한 예금 상품</HanaSubtitle>
-                <HanaSubtitle>최대 8% 이율</HanaSubtitle>
-              </HanaTextContainer>
-              <Image source={require("../../assets/ch.png") }style={{ width: 100, height: 100 }} />
-            </HanaCard>
-          </Product3>
+          <HanaCard>
+            <HanaTextContainer>
+              <HanaTitle>적립식 이율 적금</HanaTitle>
+              <HanaSubtitle>MZ를 위한 예금 상품</HanaSubtitle>
+              <HanaSubtitle>최대 8% 이율</HanaSubtitle>
+            </HanaTextContainer>
+            <Image
+              source={require('../../assets/ch.png')}
+              style={{ width: 100, height: 100 }}
+            />
+          </HanaCard>
+        </Product3>
       </MainProduct>
     </Container>
   );

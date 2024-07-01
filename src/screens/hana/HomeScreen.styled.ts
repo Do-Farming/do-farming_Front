@@ -1,11 +1,10 @@
-import styled from "styled-components/native";
+import styled from 'styled-components/native';
 import { TouchableOpacity } from 'react-native';
-
 
 export const Container = styled.View`
   flex: 1;
   padding: 20px;
-  background-color: #F6F7F9;
+  background-color: #f6f7f9;
 `;
 
 export const Header = styled.View`
@@ -16,12 +15,14 @@ export const Row = styled.View`
   flex-direction: row;
   align-items: baseline;
 `;
+
 export const RowImage = styled.View`
   flex-direction: row;
   align-items: baseline;
-    justify-content: space-between;
-    padding: 5px 0px 1px 5px;
+  justify-content: space-between;
+  padding: 5px 0px 1px 5px;
 `;
+
 export const RowCenter = styled.View`
   flex-direction: row;
   justify-content: center;
@@ -51,7 +52,7 @@ export const DescriptionTexts = styled.Text`
 
 export const DescriptionSmallTexts = styled.Text`
   font-size: 15px;
-  color : gray;
+  color: gray;
 `;
 
 export const BalanceTexts = styled.Text`
@@ -86,13 +87,15 @@ export const Product2 = styled.View`
   margin: 0px 5px;
   display: flex;
 `;
+
 export const Product3 = styled.View`
   width: 340px;
   border-radius: 15px;
-  background-color: #FEE88A;
+  background-color: #fee88a;
   margin: 0px 5px;
   display: flex;
 `;
+
 export const ProductName = styled.Text`
   font-size: 18px;
   font-weight: bold;
@@ -128,7 +131,7 @@ export const ProductInfo = styled.Text`
 `;
 
 export const PaginationContainer = styled.View`
-  margin-top : 10px;
+  margin-top: 10px;
   height: 1px;
   background-color: #e0e0e0;
   border-radius: 5px;
@@ -148,6 +151,7 @@ export const PaginationDot = styled.View<PaginationDotProps>`
   transition: left 0.3s ease;
   box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1);
 `;
+
 export const Button = styled.View<ButtonProps>`
   justify-content: center;
   align-items: center;
@@ -167,7 +171,6 @@ export const smallButton = styled.View<ButtonProps>`
   border-radius: 10px;
   margin-right: 10px;
 `;
-
 
 export const ButtonText = styled.Text<ButtonProps>`
   color: ${({ color }) => color};
@@ -280,10 +283,10 @@ export const HanaSubtitle = styled.Text`
 export const HanaPaginationContainer = styled.View`
   background-color: #e0e0e0;
   flex-direction: row;
-  height:18px;
+  height: 18px;
   align-items: center;
   margin-top: 10px;
-  border-radius: 15px; 
+  border-radius: 15px;
   align-self: flex-start;
 `;
 
