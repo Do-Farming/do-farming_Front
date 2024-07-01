@@ -12,6 +12,7 @@ export const postLogin = async ({ phoneNumber, password }: LoginParams) => {
       password,
     });
     if (response.data.result.accessToken && response.data.result.refreshToken) {
+      // console.log(response.data.result);
       localStorage.setItem('jwtToken', response.data.result.accessToken);
       localStorage.setItem('refreshToken', response.data.result.refreshToken);
     }

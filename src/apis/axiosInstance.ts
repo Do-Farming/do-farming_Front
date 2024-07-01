@@ -3,7 +3,7 @@ import { resetTokenAndReattemptRequest } from '../utils/tokenService';
 import { isExpired } from 'react-jwt';
 
 const axiosInstance = axios.create({
-  baseURL: '',
+  baseURL: 'http://localhost',
   headers: {
     'Content-Type': 'application/json',
   },
