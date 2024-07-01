@@ -9,13 +9,13 @@ import {
   CardBenefitTextView,
   CardBenefitSmallText,
   CardBenefitImportantText,
-  CardBenefitText,
   CardImgView,
   CardBenefitList,
 } from './CardWorldCupWinnerScreen.styled';
 import { Image } from 'react-native';
+import { EnterButton, EnterText } from '../../bang/bangDetail/BangDetailScreen.styled';
 
-export default function CardWorldCupWinnnerScreen({ route }) {
+export default function CardWorldCupWinnnerScreen({ route }: any) {
   const { winner } = route.params;
   const cardImageUrl =
     'https://d1c5n4ri2guedi.cloudfront.net' + winner.card_img;
@@ -48,15 +48,17 @@ export default function CardWorldCupWinnnerScreen({ route }) {
                 <CardBenefitSmallText>{benefit.tags[0]}</CardBenefitSmallText>
                 <>
                   <CardBenefitImportantText>
-                    {benefit.tags[1]}
+                    {benefit.tags[1]} {benefit.tags[2]}
                   </CardBenefitImportantText>
-                  <CardBenefitText>{benefit.tags[2]}</CardBenefitText>
                 </>
               </CardBenefitTextView>
             </CardBenefit>
           );
         })}
       </CardBenefitList>
+      <EnterButton>
+        <EnterText>확인</EnterText>
+      </EnterButton>
     </Container>
   );
 }

@@ -29,6 +29,9 @@ import ProductSignInScreen from './src/screens/product/complete/ProductSignInScr
 import WorldCupSelectScreen from './src/screens/worldcup/WorldCupSelectScreen';
 import CardWorldCupScreen from './src/screens/worldcup/card/CardWorldCupScreen';
 import CardWorldCupWinnnerScreen from './src/screens/worldcup/card/CardWorldCupWinnerScreen';
+import GenerateCardScreen from './src/screens/generateCard/GenerateCardScreen';
+import QuizScreen from './src/screens/quiz/QuizScreen';
+import WorldcupInfoScreen from './src/screens/worldcup/WorldCupInfoScreen';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -156,6 +159,11 @@ export default function App() {
             options={{ title: '취향 이상형 월드컵' }}
           />
           <Stack.Screen
+            name="WorldCupInfo"
+            component={WorldcupInfoScreen}
+            options={{ title: '이상형 월드컵 소개', headerShown: false }}
+          />
+          <Stack.Screen
             name="CardWorldCup"
             component={CardWorldCupScreen}
             options={{ title: '카드 이상형 월드컵' }}
@@ -164,6 +172,16 @@ export default function App() {
             name="CardWorldCupWinner"
             component={CardWorldCupWinnnerScreen}
             options={{ title: '우승한 카드는?' }}
+          />
+          <Stack.Screen
+            name="GenerateCard"
+            component={GenerateCardScreen}
+            options={{ title: '나만의 카드 생성' }}
+          />
+          <Stack.Screen
+            name="Quiz"
+            component={QuizScreen}
+            options={{ title: '퀴즈' }}
           />
         </Stack.Navigator>
       </NavigationContainer>

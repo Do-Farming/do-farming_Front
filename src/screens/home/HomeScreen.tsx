@@ -224,7 +224,7 @@ export default function HomeScreen() {
           horizontal
           pagingEnabled
           showsHorizontalScrollIndicator={false}
-          keyExtractor={( item, index) => index.toString()}
+          keyExtractor={(item, index) => index.toString()}
           renderItem={({ item, index }) => (
             <Product key={index}>
               <ProductName>{item.name}</ProductName>
