@@ -32,6 +32,7 @@ import CardWorldCupWinnnerScreen from './src/screens/worldcup/card/CardWorldCupW
 import GenerateCardScreen from './src/screens/generateCard/GenerateCardScreen';
 import QuizScreen from './src/screens/quiz/QuizScreen';
 import WorldcupInfoScreen from './src/screens/worldcup/WorldCupInfoScreen';
+import WakeupScreen from './src/screens/wakeup/WakeupScreen';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -182,6 +183,11 @@ export default function App() {
             name="Quiz"
             component={QuizScreen}
             options={{ title: '퀴즈' }}
+          />
+          <Stack.Screen
+            name="WakeUp"
+            component={WakeupScreen}
+            options={{ title: '기상 미션' }}
           />
         </Stack.Navigator>
       </NavigationContainer>
