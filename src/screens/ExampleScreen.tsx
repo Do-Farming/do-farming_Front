@@ -20,6 +20,14 @@ export default function ExampleScreen({ navigation }: any) {
         title="마이 페이지로"
         onPress={() => navigation.navigate('MyPage')}
       />
+      <Button
+        title="하나 메인페이지로"
+        onPress={() => navigation.navigate('HanaMain')}
+      />
+      <Button
+        title="하나 메인 이후 페이지로"
+        onPress={() => navigation.navigate('HanaMainAfter')}
+      />
     </View>
   );
 }
