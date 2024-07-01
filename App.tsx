@@ -26,6 +26,12 @@ import CompetitiveScreen from './src/screens/compation/CompetitiveScreen';
 import ProductSignUpScreen from './src/screens/product/ProductSignUpScreen';
 import ProductPasswordScreen from './src/screens/product/auth/ProductPasswordScreen';
 import ProductSignInScreen from './src/screens/product/complete/ProductSignInScreen';
+import WorldCupSelectScreen from './src/screens/worldcup/WorldCupSelectScreen';
+import CardWorldCupScreen from './src/screens/worldcup/card/CardWorldCupScreen';
+import CardWorldCupWinnnerScreen from './src/screens/worldcup/card/CardWorldCupWinnerScreen';
+import GenerateCardScreen from './src/screens/generateCard/GenerateCardScreen';
+import QuizScreen from './src/screens/quiz/QuizScreen';
+import WorldcupInfoScreen from './src/screens/worldcup/WorldCupInfoScreen';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -55,7 +61,7 @@ function MyTabs() {
       <Tab.Screen
         name="Home"
         component={HomeScreen}
-        options={{ title: 'Home Screen', headerShown: false }}
+        options={{ title: 'Do! Farming', headerShown: true }}
       />
       <Tab.Screen
         name="Explore"
@@ -117,7 +123,6 @@ export default function App() {
             component={PedometerScreen}
             options={{ title: 'Pedometer' }}
           />
-
           <Stack.Screen
             name="BangJoin"
             component={BangJoinScreen}
@@ -142,6 +147,41 @@ export default function App() {
             name="ProductSignIn"
             component={ProductSignInScreen}
             options={{ title: '가입완료' }}
+          />
+          <Stack.Screen
+            name="Worldcup"
+            component={WorldCupSelectScreen}
+            options={{ title: '이상형 월드컵 선택' }}
+          />
+          <Stack.Screen
+            name="TasteWorldCup"
+            component={WorldCupSelectScreen}
+            options={{ title: '취향 이상형 월드컵' }}
+          />
+          <Stack.Screen
+            name="WorldCupInfo"
+            component={WorldcupInfoScreen}
+            options={{ title: '이상형 월드컵 소개', headerShown: false }}
+          />
+          <Stack.Screen
+            name="CardWorldCup"
+            component={CardWorldCupScreen}
+            options={{ title: '카드 이상형 월드컵' }}
+          />
+          <Stack.Screen
+            name="CardWorldCupWinner"
+            component={CardWorldCupWinnnerScreen}
+            options={{ title: '우승한 카드는?' }}
+          />
+          <Stack.Screen
+            name="GenerateCard"
+            component={GenerateCardScreen}
+            options={{ title: '나만의 카드 생성' }}
+          />
+          <Stack.Screen
+            name="Quiz"
+            component={QuizScreen}
+            options={{ title: '퀴즈' }}
           />
         </Stack.Navigator>
       </NavigationContainer>
