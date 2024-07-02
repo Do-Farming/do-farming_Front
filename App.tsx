@@ -9,7 +9,6 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
 import { ThemeProvider as StyledComponentsThemeProvider } from 'styled-components/native'; // styled-components의 ThemeProvider import
 import theme from './src/styles/theme'; // styled-components에서 사용할 테마 import
-
 import { Button, useColorScheme } from 'react-native';
 import HomeScreen from './src/screens/home/HomeScreen';
 import ExploreScreen from './src/screens/ExploreScreen';
@@ -32,12 +31,13 @@ import CardWorldCupWinnnerScreen from './src/screens/worldcup/card/CardWorldCupW
 import GenerateCardScreen from './src/screens/generateCard/GenerateCardScreen';
 import QuizScreen from './src/screens/quiz/QuizScreen';
 import WorldcupInfoScreen from './src/screens/worldcup/WorldCupInfoScreen';
-import WakeupScreen from './src/screens/wakeup/wakeup/WakeupScreen';
+import DoFarmingInfoScreen from './src/screens/product/dofarming/DoFarmingInfoScreen';
+import WakeupScreen from './src/screens/wakeup/WakeupScreen';
 import WakeupCamera from './src/screens/wakeup/camera/CameraScreen';
+
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
-
 function MyTabs() {
   return (
     <Tab.Navigator
@@ -78,7 +78,6 @@ function MyTabs() {
     </Tab.Navigator>
   );
 }
-
 export default function App() {
   const scheme = useColorScheme();
   return (
@@ -162,8 +161,7 @@ export default function App() {
           <Stack.Screen
             name="TasteWorldCup"
             component={WorldCupSelectScreen}
-            options={{ headerTransparent: false,
-              headerTitle: '', }}
+            options={{ headerTransparent: false, headerTitle: '' }}
           />
           <Stack.Screen
             name="WorldCupInfo"
