@@ -10,7 +10,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { ThemeProvider as StyledComponentsThemeProvider } from 'styled-components/native'; // styled-components의 ThemeProvider import
 import theme from './src/styles/theme'; // styled-components에서 사용할 테마 import
 
-import { useColorScheme } from 'react-native';
+import { Button, useColorScheme } from 'react-native';
 import HomeScreen from './src/screens/home/HomeScreen';
 import ExploreScreen from './src/screens/ExploreScreen';
 import ExampleScreen from './src/screens/ExampleScreen';
@@ -32,9 +32,9 @@ import CardWorldCupWinnnerScreen from './src/screens/worldcup/card/CardWorldCupW
 import GenerateCardScreen from './src/screens/generateCard/GenerateCardScreen';
 import QuizScreen from './src/screens/quiz/QuizScreen';
 import WorldcupInfoScreen from './src/screens/worldcup/WorldCupInfoScreen';
-import WakeupScreen from './src/screens/wakeup/wakeup/WakeupScreen';
-import WakeupCamera from './src/screens/wakeup/camera/CameraScreen';
 import DoFarmingInfoScreen from './src/screens/product/dofarming/DoFarmingInfoScreen';
+import CameraScreen from './src/screens/wakeup/camera/CameraScreen';
+import WakeupScreen from './src/screens/wakeup/wakeup/WakeupScreen';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -152,19 +152,36 @@ export default function App() {
             options={{ title: '가입완료' }}
           />
           <Stack.Screen
-            name="Worldcup"
+            name="WorldCup"
             component={WorldCupSelectScreen}
-            options={{ title: '이상형 월드컵 선택' }}
+            options={{
+              title: '이상형 월드컵 선택',
+              headerTransparent: true,
+              headerTitle: '',
+            }}
+          />
+          <Stack.Screen
+            name="WorldCup"
+            component={WorldCupSelectScreen}
+            options={{
+              title: '이상형 월드컵 선택',
+              headerTransparent: true,
+              headerTitle: '',
+            }}
           />
           <Stack.Screen
             name="TasteWorldCup"
             component={WorldCupSelectScreen}
-            options={{ title: '취향 이상형 월드컵' }}
+            options={{ headerTransparent: false, headerTitle: '' }}
           />
           <Stack.Screen
             name="WorldCupInfo"
             component={WorldcupInfoScreen}
-            options={{ title: '이상형 월드컵 소개', headerShown: false }}
+            options={{
+              title: '이상형 월드컵 소개',
+              headerTransparent: true,
+              headerTitle: '',
+            }}
           />
           <Stack.Screen
             name="CardWorldCup"
@@ -187,19 +204,19 @@ export default function App() {
             options={{ title: '퀴즈' }}
           />
           <Stack.Screen
-            name="WakeUp"
-            component={WakeupScreen}
-            options={{ title: '기상 미션' }}
-          />
-          <Stack.Screen
             name="DoFarmingInfo"
             component={DoFarmingInfoScreen}
             options={{ headerTransparent: true, headerTitle: '' }}
           />
           <Stack.Screen
+            name="WakeUp"
+            component={WakeupScreen}
+            options={{ title: '기상 미션' }}
+          />{' '}
+          <Stack.Screen
             name="WakeUpCamera"
-            component={WakeupCamera}
-            options={{ title: '기상 인증하기' }}
+            component={CameraScreen}
+            options={{ title: '기상 인증' }}
           />
         </Stack.Navigator>
       </NavigationContainer>
