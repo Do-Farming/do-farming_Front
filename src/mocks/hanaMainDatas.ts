@@ -1,8 +1,8 @@
 export const mainContents = [
   {
     images: [
-      require('../assets/hanamain1.png'),
-      require('../assets/arrow.png'),
+      require('../assets/hanaMain/hanamain1.png'),
+      require('../assets/hanaMain/arrow.png'),
     ],
     descriptrions: {
       text1: '로그인하고 안전하게',
@@ -19,8 +19,8 @@ export const mainContents = [
   },
   {
     images: [
-      require('../assets/hanamain2.png'),
-      require('../assets/arrow.png'),
+      require('../assets/hanaMain/hanamain2.png'),
+      require('../assets/hanaMain/arrow.png'),
     ],
     descriptrions: {
       text1: '마이데이터로 스마트하게',
@@ -37,8 +37,8 @@ export const mainContents = [
   },
   {
     images: [
-      require('../assets/hanamain3.png'),
-      require('../assets/arrow.png'),
+      require('../assets/hanaMain/hanamain3.png'),
+      require('../assets/hanaMain/arrow.png'),
     ],
     descriptrions: {
       text1: '로그인하고 안전하게',
@@ -55,8 +55,8 @@ export const mainContents = [
   },
   {
     images: [
-      require('../assets/hanamain4.png'),
-      require('../assets/arrow.png'),
+      require('../assets/hanaMain/hanamain4.png'),
+      require('../assets/hanaMain/arrow.png'),
     ],
     descriptrions: {
       text1: '로그인하고 안전하게',

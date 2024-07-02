@@ -26,7 +26,7 @@ import CompetitiveScreen from './src/screens/compation/CompetitiveScreen';
 import ProductSignUpScreen from './src/screens/product/ProductSignUpScreen';
 import ProductPasswordScreen from './src/screens/product/auth/ProductPasswordScreen';
 import ProductSignInScreen from './src/screens/product/complete/ProductSignInScreen';
-import HanaMain from './src/screens/hana/HanaMain';
+import HanaMain from './src/screens/hana/HanaMainScreen';
 import HanaMainAfter from './src/screens/hana/HanaMainAfter';
 
 const Stack = createNativeStackNavigator();
