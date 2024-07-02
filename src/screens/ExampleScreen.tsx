@@ -43,7 +43,7 @@ export default function ExampleScreen({ navigation }: any) {
       <Button
         title="챗봇 페이지로"
         onPress={() => navigation.navigate('ChatBot')}
-        onPress={() => navigation.navigate('WorldCupInfo')}
+        // onPress={() => navigation.navigate('WorldCupInfo')}
       />
       <Button
         title="기상 미션 페이지로"
