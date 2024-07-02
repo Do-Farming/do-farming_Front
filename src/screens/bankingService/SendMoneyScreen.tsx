@@ -1,10 +1,7 @@
 import React, { useRef, useState } from 'react';
-import { View, Text, TouchableOpacity, Animated, Dimensions, FlatList } from 'react-native';
-import styled from 'styled-components/native';
-import DropDownPicker from 'react-native-dropdown-picker';
+import { View, Text, Animated, Dimensions, FlatList } from 'react-native';
 import {
   ItemContainer,
-  BankIcon,
   ItemTextContainer,
   ItemTitle,
   ItemSubtitle,
@@ -22,7 +19,6 @@ import {
   AccountNumber,
   AccountBalance,
   ActionButton,
-  SectionTitle,
   StyledTextInput,
   InputContainer,
   ActionsContainer,
@@ -31,7 +27,6 @@ import {
   AnimatedTabContainer,
   StyledAccountInput,
   AccountTextInput,
-  GreenLine,
   LabelText,
   AccountIcon,
   AccountInput,
@@ -44,17 +39,15 @@ import {
   KeypadButton,
   KeypadButtonText,
   LabelText2,
-  TextInputContainer,
   SubHeaderText,
   ConfirmButton,
   ConfirmButtonText,
-  StyledTextInputAccount
-
-} from "./sendMoney.styled";
+  StyledTextInputAccount,
+} from './SendMoneyScreen.styled';
 import { Row } from '../home/HomeScreen.styled';
-import ic_hanologo from '../../assets/svg/ic_hanologo.svg';
+import { Account } from '../../types/account/AccountTypes';
 
-const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
+const { width: windowWidth, height: windowHeight } = Dimensions.get('window');
 
 const formatAmount = (amount: string) => {
   if (!amount) return '';
@@ -63,10 +56,34 @@ const formatAmount = (amount: string) => {
 };
 // Test용 Data > 추후 삭제 예정
 const accountData = [
-  { id: '1', name: '서인석(옥수공예)', bank: '국민', account: '23560104202636', date: '2024-06-15' },
-  { id: '2', name: '한국산업인력공단', bank: '하나', account: '298-910862-02537', date: '2024-03-26' },
-  { id: '3', name: '오유나', bank: '카카오뱅크', account: '3333221546301', date: '2024-03-21' },
-  { id: '4', name: '오유나', bank: '카카오뱅크', account: '3333221546301', date: '2024-03-21' },
+  {
+    id: '1',
+    name: '서인석(옥수공예)',
+    bank: '국민',
+    account: '23560104202636',
+    date: '2024-06-15',
+  },
+  {
+    id: '2',
+    name: '한국산업인력공단',
+    bank: '하나',
+    account: '298-910862-02537',
+    date: '2024-03-26',
+  },
+  {
+    id: '3',
+    name: '오유나',
+    bank: '카카오뱅크',
+    account: '3333221546301',
+    date: '2024-03-21',
+  },
+  {
+    id: '4',
+    name: '오유나',
+    bank: '카카오뱅크',
+    account: '3333221546301',
+    date: '2024-03-21',
+  },
 ];
 
 const myAccountData = [
@@ -82,7 +99,7 @@ const myAccountData = [
   },
 ];
 
-export const SendMoney = () => {
+export const SendMoneyScreen = () => {
   const [activeTab, setActiveTab] = useState('one');
   const [isTabVisible, setIsTabVisible] = useState(false);
   const [isAccountVisible, setIsAccountVisible] = useState(false);
@@ -91,7 +108,6 @@ export const SendMoney = () => {
   const slideAnimOne = useRef(new Animated.Value(windowHeight)).current;
   const slideAnimTwo = useRef(new Animated.Value(windowHeight)).current;
   const slideAnimThree = useRef(new Animated.Value(windowHeight)).current;
-  const [items, setItems] = useState(myAccountData);
   const [account, setAccount] = useState(null);
   const [amount, setAmount] = useState('');
   const [send, setSend] = useState('강민주');
@@ -102,7 +118,7 @@ export const SendMoney = () => {
 
   const handleKeypadPress = (value: string) => {
     if (value === '완료') {
-      handleBalanceInputPress()
+      handleBalanceInputPress();
       return;
     }
     if (value === 'X') {
@@ -117,7 +133,8 @@ export const SendMoney = () => {
 
   const handleAmountButtonPress = (value: number) => {
     setAmount((prevAmount) => {
-      const currentAmount = parseInt(prevAmount.replace(/,/g, '').replace(' 원', '')) || 0;
+      const currentAmount =
+        parseInt(prevAmount.replace(/,/g, '').replace(' 원', '')) || 0;
       const newAmount = currentAmount + value;
       return formatAmount(newAmount.toString());
     });
@@ -132,9 +149,9 @@ export const SendMoney = () => {
     }).start();
   };
 
-  const AccountInputPress = (item) => {
+  const AccountInputPress = (item: Account) => {
     setAccount(item);
-    setRecive(item.name)
+    setRecive(item.name);
     setIsTabVisible(!isTabVisible);
     Animated.timing(slideAnimTwo, {
       toValue: isTabVisible ? windowHeight : windowHeight * 0.5, // Adjust to the desired height of the tab container
@@ -151,7 +168,7 @@ export const SendMoney = () => {
       useNativeDriver: false,
     }).start();
   };
-  
+
   const handleBalanceInputPress = () => {
     setIsBalanceVisible(!isBalanceVisible);
     Animated.timing(slideAnimThree, {
@@ -165,33 +182,37 @@ export const SendMoney = () => {
     <ItemContainer onPress={() => AccountInputPress(item)}>
       <ItemTextContainer>
         <ItemTitle>{item.name}</ItemTitle>
-        <ItemSubtitle>{item.bank} {item.account}</ItemSubtitle>
+        <ItemSubtitle>
+          {item.bank} {item.account}
+        </ItemSubtitle>
       </ItemTextContainer>
       <ItemDate>{item.date}</ItemDate>
     </ItemContainer>
   );
 
-  const afterBalance = ()=>(
+  const afterBalance = () => (
     <>
-      <AccountInput onPress={handleBalanceInputPress}><LabelText>{amount} 원</LabelText></AccountInput>
-        <SubHeaderText>보내는 사람</SubHeaderText>
-            <StyledTextInputAccount
-            placeholder="입금계좌번호 직접입력"
-            value={send}
-            onChangeText={setSend}
-            />
-        <SubHeaderText>받는사람</SubHeaderText>
-        <StyledTextInputAccount
-          placeholder="입금계좌번호 직접입력"
-          value={recive}
-          onChangeText={setRecive}
-          editable={false} // 수정 불가하게 설정
-        />
-        <ConfirmButton onPress={() => console.log('Confirm pressed')} >
-          <ConfirmButtonText>확인</ConfirmButtonText>
-        </ConfirmButton>
+      <AccountInput onPress={handleBalanceInputPress}>
+        <LabelText>{amount} 원</LabelText>
+      </AccountInput>
+      <SubHeaderText>보내는 사람</SubHeaderText>
+      <StyledTextInputAccount
+        placeholder="입금계좌번호 직접입력"
+        value={send}
+        onChangeText={setSend}
+      />
+      <SubHeaderText>받는사람</SubHeaderText>
+      <StyledTextInputAccount
+        placeholder="입금계좌번호 직접입력"
+        value={recive}
+        onChangeText={setRecive}
+        editable={false} // 수정 불가하게 설정
+      />
+      <ConfirmButton onPress={() => console.log('Confirm pressed')}>
+        <ConfirmButtonText>확인</ConfirmButtonText>
+      </ConfirmButton>
     </>
-  )
+  );
 
   return (
     <Container>
@@ -204,14 +225,19 @@ export const SendMoney = () => {
         <AccountInfo>
           <Row>
             <AccountIcon source={require('../../assets/hana-symbol.png')} />
-            <AccountText>{myAccountData[currentAccountIndex].accountName}</AccountText>
+            <AccountText>
+              {myAccountData[currentAccountIndex].accountName}
+            </AccountText>
           </Row>
           <AccountDetails>
-            <AccountNumber>{myAccountData[currentAccountIndex].accountNumber}</AccountNumber>
-            <AccountBalance>{myAccountData[currentAccountIndex].balance}</AccountBalance>
+            <AccountNumber>
+              {myAccountData[currentAccountIndex].accountNumber}
+            </AccountNumber>
+            <AccountBalance>
+              {myAccountData[currentAccountIndex].balance}
+            </AccountBalance>
           </AccountDetails>
         </AccountInfo>
-        
       </StyledAccountInput>
 
       {account ? (
@@ -231,11 +257,13 @@ export const SendMoney = () => {
             </ActionsContainer>
           </InputContainer>
 
-          {amount == ''?(<AccountInput onPress={handleBalanceInputPress}>
-            <LabelText>얼마를 보낼까요?</LabelText></AccountInput>):(
+          {amount == '' ? (
+            <AccountInput onPress={handleBalanceInputPress}>
+              <LabelText>얼마를 보낼까요?</LabelText>
+            </AccountInput>
+          ) : (
             afterBalance()
           )}
-          
         </View>
       ) : (
         <View>
@@ -258,17 +286,23 @@ export const SendMoney = () => {
 
       <AnimatedTabContainer style={{ top: slideAnimOne }}>
         <TabContainer>
-          <Tab onPress={() => handleTabPress('one')} isActive={activeTab === 'one'}>
+          <Tab
+            onPress={() => handleTabPress('one')}
+            isActive={activeTab === 'one'}
+          >
             <TabText isActive={activeTab === 'one'}>최근</TabText>
           </Tab>
-          <Tab onPress={() => handleTabPress('two')} isActive={activeTab === 'two'}>
+          <Tab
+            onPress={() => handleTabPress('two')}
+            isActive={activeTab === 'two'}
+          >
             <TabText isActive={activeTab === 'two'}>자주</TabText>
           </Tab>
         </TabContainer>
         <FlatList
           data={myAccountData}
           renderItem={renderItem}
-          keyExtractor={item => item.accountNumber}
+          keyExtractor={(item) => item.accountNumber}
           contentContainerStyle={{ paddingBottom: 20 }}
         />
       </AnimatedTabContainer>
@@ -278,54 +312,74 @@ export const SendMoney = () => {
           <TextInputText>이름, 계좌번호, 연락처, 국세 등 입력 </TextInputText>
         </AccountTextInput>
         <TabContainer>
-          <Tab onPress={() => handleTabPress('one')} isActive={activeTab === 'one'}>
+          <Tab
+            onPress={() => handleTabPress('one')}
+            isActive={activeTab === 'one'}
+          >
             <TabText isActive={activeTab === 'one'}>최근</TabText>
           </Tab>
-          <Tab onPress={() => handleTabPress('two')} isActive={activeTab === 'two'}>
+          <Tab
+            onPress={() => handleTabPress('two')}
+            isActive={activeTab === 'two'}
+          >
             <TabText isActive={activeTab === 'two'}>자주</TabText>
           </Tab>
-          <Tab onPress={() => handleTabPress('three')} isActive={activeTab === 'three'}>
+          <Tab
+            onPress={() => handleTabPress('three')}
+            isActive={activeTab === 'three'}
+          >
             <TabText isActive={activeTab === 'three'}>내계좌</TabText>
           </Tab>
-          <Tab onPress={() => handleTabPress('four')} isActive={activeTab === 'four'}>
+          <Tab
+            onPress={() => handleTabPress('four')}
+            isActive={activeTab === 'four'}
+          >
             <TabText isActive={activeTab === 'four'}>심플</TabText>
           </Tab>
         </TabContainer>
         <FlatList
           data={accountData}
           renderItem={renderItem}
-          keyExtractor={item => item.id}
+          keyExtractor={(item) => item.id}
           contentContainerStyle={{ paddingBottom: 20 }}
         />
       </AnimatedTabContainer>
 
       <AnimatedBalanceContainer style={{ top: slideAnimThree }}>
+        <KeypadContainer>
+          <LabelText2>얼마를 보낼까요?</LabelText2>
 
-      <KeypadContainer>
-        <LabelText2>얼마를 보낼까요?</LabelText2>
-        
-        <AmountInputContainer>
-        {Object.entries({'+1만': 10000, '+5만': 50000, '+10만': 100000, '+100만': 1000000, '전액': 1000000}).map(([key, value]) => (
-          <AmountButton key={key} onPress={() => handleAmountButtonPress(value)}>
-            <AmountButtonText>{key}</AmountButtonText>
-          </AmountButton>
-        ))}
-      </AmountInputContainer>
-        {[
-          ['1', '2', '3'],
-          ['4', '5', '6'],
-          ['7', '8', '9'],
-          ['←', '0', '완료'],
-        ].map((row, rowIndex) => (
-          <KeypadRow key={rowIndex}>
-            {row.map((num) => (
-              <KeypadButton key={num} onPress={() => handleKeypadPress(num)}>
-                <KeypadButtonText>{num}</KeypadButtonText>
-              </KeypadButton>
+          <AmountInputContainer>
+            {Object.entries({
+              '+1만': 10000,
+              '+5만': 50000,
+              '+10만': 100000,
+              '+100만': 1000000,
+              전액: 1000000,
+            }).map(([key, value]) => (
+              <AmountButton
+                key={key}
+                onPress={() => handleAmountButtonPress(value)}
+              >
+                <AmountButtonText>{key}</AmountButtonText>
+              </AmountButton>
             ))}
-          </KeypadRow>
-        ))} 
-      </KeypadContainer>
+          </AmountInputContainer>
+          {[
+            ['1', '2', '3'],
+            ['4', '5', '6'],
+            ['7', '8', '9'],
+            ['←', '0', '완료'],
+          ].map((row, rowIndex) => (
+            <KeypadRow key={rowIndex}>
+              {row.map((num) => (
+                <KeypadButton key={num} onPress={() => handleKeypadPress(num)}>
+                  <KeypadButtonText>{num}</KeypadButtonText>
+                </KeypadButton>
+              ))}
+            </KeypadRow>
+          ))}
+        </KeypadContainer>
       </AnimatedBalanceContainer>
     </Container>
   );
