@@ -40,6 +40,10 @@ export default function ExampleScreen({ navigation }: any) {
         title="기상 미션 페이지로"
         onPress={() => navigation.navigate('WakeUp')}
       />
+      <Button
+        title="도파밍 소개 페이지로"
+        onPress={() => navigation.navigate("DoFarmingInfo")}
+      />
     </View>
   );
 }
