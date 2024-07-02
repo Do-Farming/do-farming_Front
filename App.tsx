@@ -1,4 +1,3 @@
-
 import * as React from 'react';
 import {
   NavigationContainer,
@@ -33,10 +32,11 @@ import CardWorldCupWinnnerScreen from './src/screens/worldcup/card/CardWorldCupW
 import GenerateCardScreen from './src/screens/generateCard/GenerateCardScreen';
 import QuizScreen from './src/screens/quiz/QuizScreen';
 import WorldcupInfoScreen from './src/screens/worldcup/WorldCupInfoScreen';
+import ImageCreationScreen from './src/screens/imageCreation/ImageCreationScreen';
+import ChatBotScreen from './src/screens/chatbot/ChatBotScreen';
 import DoFarmingInfoScreen from './src/screens/product/dofarming/DoFarmingInfoScreen';
 import WakeupScreen from './src/screens/wakeup/wakeup/WakeupScreen';
 import WakeupCamera from './src/screens/wakeup/camera/CameraScreen';
-
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -195,6 +195,16 @@ export default function App() {
             name="Quiz"
             component={QuizScreen}
             options={{ title: '퀴즈' }}
+          />
+          <Stack.Screen
+            name="ImageCreation"
+            component={ImageCreationScreen}
+            options={{ title: '이미지 생성' }}
+          />
+          <Stack.Screen
+            name="ChatBot"
+            component={ChatBotScreen}
+            options={{ title: '챗봇 스크린' }}
           />
           <Stack.Screen
             name="DoFarmingInfo"
