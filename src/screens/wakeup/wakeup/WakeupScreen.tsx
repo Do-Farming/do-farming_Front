@@ -58,7 +58,7 @@ export default function WakeupScreen({ navigation }: any) {
       </CameraButton>
       <UserList>
         {dailyRate.map((user, index) => (
-          <UserCard key={`${user.name}`+`${user.dailyRate}`}>
+          <UserCard key={index}>
             <RankNumber>{index + 1}</RankNumber>
             <ProfileImage source={require('../../../assets/profile.png')} />
             <View>
