@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   ButtonBox,
   ButtonText,
@@ -12,8 +12,31 @@ import {
   Title,
   TitleBox,
 } from './InputForm.styled';
+import { postLogin } from '../../apis/authService';
 
 export default function SignInScreen() {
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handlePhoneNumberChange = (text: string) => {
+    setPhoneNumber(text);
+  };
+
+  const handlePasswordChange = (text: string) => {
+    setPassword(text);
+  };
+
+  const handleSubmit = async () => {
+    // console.log('phoneNumber:', phoneNumber, 'password:', password);
+    try {
+      const response = await postLogin({ phoneNumber, password });
+      // Handle successful login if needed, e.g., redirect to another page
+      console.log('Login successful:', response);
+    } catch (error) {
+      console.error('Login failed:', error);
+    }
+  };
+
   return (
     <Container>
       <ContentBox>
@@ -23,16 +46,24 @@ export default function SignInScreen() {
         <InputBox>
           <InputContent>
             <InputLabel>전화번호</InputLabel>
-            <Input placeholder="'-'를 빼고 입력해주세요" />
+            <Input
+              placeholder="'-'를 빼고 입력해주세요"
+              value={phoneNumber}
+              onChangeText={handlePhoneNumberChange}
+            />
           </InputContent>
           <InputContent>
             <InputLabel>비밀번호</InputLabel>
-            <Input />
+            <Input
+              value={password}
+              onChangeText={handlePasswordChange}
+              secureTextEntry
+            />
           </InputContent>
         </InputBox>
       </ContentBox>
       <ButtonBox>
-        <LongButton>
+        <LongButton onPress={handleSubmit}>
           <ButtonText>로그인</ButtonText>
         </LongButton>
       </ButtonBox>
