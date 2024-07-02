@@ -22,7 +22,7 @@ export default function ExampleScreen({ navigation }: any) {
       />
       <Button
         title="이상형 월드컵 페이지로"
-        onPress={() => navigation.navigate('Worldcup')}
+        onPress={() => navigation.navigate('WorldCup')}
       />
       <Button
         title="카드 생성 페이지로"
