@@ -26,6 +26,8 @@ import CompetitiveScreen from './src/screens/compation/CompetitiveScreen';
 import ProductSignUpScreen from './src/screens/product/ProductSignUpScreen';
 import ProductPasswordScreen from './src/screens/product/auth/ProductPasswordScreen';
 import ProductSignInScreen from './src/screens/product/complete/ProductSignInScreen';
+import HanaMain from './src/screens/hana/HanaMain';
+import HanaMainAfter from './src/screens/hana/HanaMainAfter';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -142,6 +144,16 @@ export default function App() {
             name="ProductSignIn"
             component={ProductSignInScreen}
             options={{ title: '가입완료' }}
+          />
+          <Stack.Screen
+            name="HanaMain"
+            component={HanaMain}
+            options={{ title: '하나은행 메인화면' }}
+          />
+          <Stack.Screen
+            name="HanaMainAfter"
+            component={HanaMainAfter}
+            options={{ title: '하나은행 메인 이후 화면' }}
           />
         </Stack.Navigator>
       </NavigationContainer>
