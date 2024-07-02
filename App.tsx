@@ -32,7 +32,8 @@ import CardWorldCupWinnnerScreen from './src/screens/worldcup/card/CardWorldCupW
 import GenerateCardScreen from './src/screens/generateCard/GenerateCardScreen';
 import QuizScreen from './src/screens/quiz/QuizScreen';
 import WorldcupInfoScreen from './src/screens/worldcup/WorldCupInfoScreen';
-import WakeupScreen from './src/screens/wakeup/WakeupScreen';
+import WakeupScreen from './src/screens/wakeup/wakeup/WakeupScreen';
+import WakeupCamera from './src/screens/wakeup/camera/CameraScreen';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -188,6 +189,11 @@ export default function App() {
             name="WakeUp"
             component={WakeupScreen}
             options={{ title: '기상 미션' }}
+          />
+          <Stack.Screen
+            name="WakeUpCamera"
+            component={WakeupCamera}
+            options={{ title: '기상 인증하기' }}
           />
         </Stack.Navigator>
       </NavigationContainer>
