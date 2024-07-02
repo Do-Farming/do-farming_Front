@@ -37,12 +37,21 @@ export default function ExampleScreen({ navigation }: any) {
         onPress={() => navigation.navigate('WorldCupInfo')}
       />
       <Button
+        title="이미지 생성 페이지로"
+        onPress={() => navigation.navigate('ImageCreation')}
+      />
+      <Button
+        title="챗봇 페이지로"
+        onPress={() => navigation.navigate('ChatBot')}
+        onPress={() => navigation.navigate('WorldCupInfo')}
+      />
+      <Button
         title="기상 미션 페이지로"
         onPress={() => navigation.navigate('WakeUp')}
       />
       <Button
         title="도파밍 소개 페이지로"
-        onPress={() => navigation.navigate("DoFarmingInfo")}
+        onPress={() => navigation.navigate('DoFarmingInfo')}
       />
     </View>
   );
