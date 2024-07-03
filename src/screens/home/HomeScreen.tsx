@@ -20,7 +20,6 @@ import {
   Product,
   ProductName,
   ProductInfo,
-  CardImg,
   CardContainer,
   CardInfo,
   Button,
@@ -42,6 +41,7 @@ import {
   CardBenefitSmallText,
 } from './HomeScreen.styled';
 import axios from 'axios';
+import CardImage from '../../components/CardImage/CardImage';
 
 const { width: windowWidth } = Dimensions.get('window');
 
@@ -79,61 +79,60 @@ const products = [
   },
 ];
 
-const Pagination: React.FC<{ length: number; currentIndex: number }> = React.memo(
-  ({ length, currentIndex }) => (
+const Pagination: React.FC<{ length: number; currentIndex: number }> =
+  React.memo(({ length, currentIndex }) => (
     <PaginationContainer>
       {Array.from({ length }, (_, index) => (
         <PaginationDot key={index} isActive={index === currentIndex} />
       ))}
     </PaginationContainer>
-  )
+  ));
+
+const CardList = React.memo(
+  ({ SelectedCardList }: { SelectedCardList: any[] }) => (
+    <>
+      {SelectedCardList.map((card, index) => (
+        <CardContainer key={index}>
+          <CardImage
+            uri={`https://d1c5n4ri2guedi.cloudfront.net${card.card_img}`}
+            ImgHeight={75}
+            ImgWidth={50}
+          />
+          <CardInfo>
+            <CardName numberOfLines={1} ellipsizeMode="tail">
+              {card.name}
+            </CardName>
+            <CardBenefitList>
+              {card.top_benefit.map((benefit: any, benefitIndex: number) => {
+                return (
+                  <CardBenefit key={benefitIndex}>
+                    <CardImgView>
+                      <CardBenefitImg
+                        source={{ uri: benefit.logo_img.url }}
+                        style={{ width: 30, height: 30 }}
+                      />
+                    </CardImgView>
+                    <CardBenefitTextView>
+                      <CardBenefitSmallText>
+                        {benefit.tags[0]}
+                      </CardBenefitSmallText>
+                      <>
+                        <CardBenefitImportantText>
+                          {benefit.tags[1]}
+                        </CardBenefitImportantText>
+                        <CardBenefitText>{benefit.tags[2]}</CardBenefitText>
+                      </>
+                    </CardBenefitTextView>
+                  </CardBenefit>
+                );
+              })}
+            </CardBenefitList>
+          </CardInfo>
+        </CardContainer>
+      ))}
+    </>
+  ),
 );
-
-const CardList = React.memo(({ SelectedCardList }: { SelectedCardList: any[] }) => (
-  <>
-    {SelectedCardList.map((card, index) => (
-      <CardContainer key={index}>
-        <CardImg
-          source={{
-            uri: 'https://d1c5n4ri2guedi.cloudfront.net' + card.card_img,
-          }}
-          style={{ width: 50, height: 75 }}
-        />
-        <CardInfo>
-          <CardName numberOfLines={1} ellipsizeMode="tail">
-            {card.name}
-          </CardName>
-          <CardBenefitList>
-            {card.top_benefit.map((benefit: any, benefitIndex: number) => {
-              return (
-                <CardBenefit key={benefitIndex}>
-                  <CardImgView>
-                    <CardBenefitImg
-                      source={{ uri: benefit.logo_img.url }}
-                      style={{ width: 35, height: 35 }}
-                    />
-                  </CardImgView>
-
-                  <CardBenefitTextView>
-                    <CardBenefitSmallText>
-                      {benefit.tags[0]}
-                    </CardBenefitSmallText>
-                    <>
-                      <CardBenefitImportantText>
-                        {benefit.tags[1]}
-                      </CardBenefitImportantText>
-                      <CardBenefitText>{benefit.tags[2]}</CardBenefitText>
-                    </>
-                  </CardBenefitTextView>
-                </CardBenefit>
-              );
-            })}
-          </CardBenefitList>
-        </CardInfo>
-      </CardContainer>
-    ))}
-  </>
-));
 
 export default function HomeScreen() {
   const [selectedCardType, setSelectedCardType] = useState('check');
@@ -168,7 +167,8 @@ export default function HomeScreen() {
 
         const checkCardData = checkCardsResponse.data.map((card: any) => ({
           ...card,
-          top_benefit: JSON.parse(card.top_benefit),handleMomentumScrollEnd
+          top_benefit: JSON.parse(card.top_benefit),
+          handleMomentumScrollEnd,
         }));
 
         setCreditCardList(creditCardData);
@@ -211,7 +211,7 @@ export default function HomeScreen() {
         setCurrentIndex(index);
       }
     },
-    [currentIndex]
+    [currentIndex],
   );
 
   return (

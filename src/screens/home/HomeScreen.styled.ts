@@ -188,4 +188,5 @@ export const CardBenefitText = styled.Text`
 export const CardBenefitImportantText = styled.Text`
   color: ${(props) => props.theme.mainColor};
   font-weight: bold;
+  font-size: 11.5px;
 `;
