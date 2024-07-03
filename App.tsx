@@ -156,7 +156,14 @@ export default function App() {
           <Stack.Screen
             name="SendMoney"
             component={SendMoneyScreen}
-            options={{ title: '송금' }}
+            options={{
+              title: '송금',
+              headerTransparent: true,
+              headerTitle: '',
+            }}
+            
+          />
+          <Stack.Screen
             name="WorldCup"
             component={WorldCupSelectScreen}
             options={{

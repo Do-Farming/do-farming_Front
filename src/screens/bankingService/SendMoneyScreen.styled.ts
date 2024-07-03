@@ -118,6 +118,7 @@ export const ActionsContainer = styled.View`
 
 export const AnimatedTabContainer = styled(Animated.View)`
   border-radius: 20px;
+  margin-top: 20px;
   position: absolute;
   width: 100%;
   background-color: white;
@@ -125,6 +126,7 @@ export const AnimatedTabContainer = styled(Animated.View)`
 `;
 
 export const AnimatedBalanceContainer = styled(Animated.View)`
+  margin-top: 20px;
   border-radius: 20px;
   position: absolute;
   width: 100%;
@@ -256,6 +258,21 @@ export const SubHeaderText = styled.Text`
   margin: 10px 20px;
 `;
 
+
+export const DotContainer = styled.View`
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+`;
+
+export const Dot = styled.View<{ filled: boolean }>`
+  width: 15px;
+  height: 15px;
+  border-radius: 7.5px;
+  margin:10px 20px 0px 0px;
+  background-color: ${(props) => (props.filled ? '#00a585' : '#ccc')};
+`;
 export const DropdownDetails = styled.View`
   flex: 1;
   padding-left: 10px;

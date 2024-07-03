@@ -43,6 +43,8 @@ import {
   ConfirmButton,
   ConfirmButtonText,
   StyledTextInputAccount,
+  DotContainer,
+  Dot
 } from './SendMoneyScreen.styled';
 import { Row } from '../home/HomeScreen.styled';
 import { Account } from '../../types/account/AccountTypes';
@@ -104,14 +106,17 @@ export const SendMoneyScreen = () => {
   const [isTabVisible, setIsTabVisible] = useState(false);
   const [isAccountVisible, setIsAccountVisible] = useState(false);
   const [isBalanceVisible, setIsBalanceVisible] = useState(false);
+  const [isSecretVisible, setIsSecretVisible] = useState(false);
   const [currentAccountIndex, setCurrentAccountIndex] = useState(0);
   const slideAnimOne = useRef(new Animated.Value(windowHeight)).current;
   const slideAnimTwo = useRef(new Animated.Value(windowHeight)).current;
   const slideAnimThree = useRef(new Animated.Value(windowHeight)).current;
+  const slideAnimFour = useRef(new Animated.Value(windowHeight)).current;
   const [account, setAccount] = useState(null);
   const [amount, setAmount] = useState('');
   const [send, setSend] = useState('강민주');
   const [recive, setRecive] = useState('');
+  const [secretKey, setSecretKey] = useState('');
   const handleTabPress = (tabName: string) => {
     setActiveTab(tabName);
   };
@@ -130,7 +135,19 @@ export const SendMoneyScreen = () => {
       return formatAmount(newAmount);
     });
   };
-
+  const handleSecretKeypadPress = (num: string) => {
+    if (num === '완료') {
+      // 완료 버튼 처리
+      return;
+    }
+    if (num === '←') {
+      setSecretKey((prevSecertKey) => prevSecertKey.slice(0, -1));
+      return;
+    }
+    if (secretKey.length < 4) {
+      setSecretKey((prevSecertKey) => prevSecertKey + num);
+    }
+  };
   const handleAmountButtonPress = (value: number) => {
     setAmount((prevAmount) => {
       const currentAmount =
@@ -154,7 +171,7 @@ export const SendMoneyScreen = () => {
     setRecive(item.name);
     setIsTabVisible(!isTabVisible);
     Animated.timing(slideAnimTwo, {
-      toValue: isTabVisible ? windowHeight : windowHeight * 0.5, // Adjust to the desired height of the tab container
+      toValue: isTabVisible ? windowHeight + 100 : windowHeight * 0.5, // Adjust to the desired height of the tab container
       duration: 300,
       useNativeDriver: false,
     }).start();
@@ -163,7 +180,7 @@ export const SendMoneyScreen = () => {
   const handleTextInputPress = () => {
     setIsTabVisible(!isTabVisible);
     Animated.timing(slideAnimTwo, {
-      toValue: isTabVisible ? windowHeight : windowHeight * 0.5, // Adjust to the desired height of the tab container
+      toValue: isTabVisible ? windowHeight + 100 : windowHeight * 0.5, // Adjust to the desired height of the tab container
       duration: 300,
       useNativeDriver: false,
     }).start();
@@ -172,12 +189,19 @@ export const SendMoneyScreen = () => {
   const handleBalanceInputPress = () => {
     setIsBalanceVisible(!isBalanceVisible);
     Animated.timing(slideAnimThree, {
-      toValue: isBalanceVisible ? windowHeight : windowHeight * 0.5, // Adjust to the desired height of the tab container
+      toValue: isBalanceVisible ? windowHeight + 100 : windowHeight - 350, // Adjust to the desired height of the tab container
       duration: 300,
       useNativeDriver: false,
     }).start();
   };
-
+  const handleSecretInputPress = () => {
+    setIsSecretVisible(!isSecretVisible);
+    Animated.timing(slideAnimFour, {
+      toValue: isSecretVisible ? windowHeight + 100 : windowHeight -300, // Adjust to the desired height of the tab container
+      duration: 300,
+      useNativeDriver: false,
+    }).start();
+  };
   const renderItem = ({ item }) => (
     <ItemContainer onPress={() => AccountInputPress(item)}>
       <ItemTextContainer>
@@ -208,7 +232,8 @@ export const SendMoneyScreen = () => {
         onChangeText={setRecive}
         editable={false} // 수정 불가하게 설정
       />
-      <ConfirmButton onPress={() => console.log('Confirm pressed')}>
+
+<ConfirmButton onPress={handleSecretInputPress}>
         <ConfirmButtonText>확인</ConfirmButtonText>
       </ConfirmButton>
     </>
@@ -374,6 +399,30 @@ export const SendMoneyScreen = () => {
             <KeypadRow key={rowIndex}>
               {row.map((num) => (
                 <KeypadButton key={num} onPress={() => handleKeypadPress(num)}>
+                  <KeypadButtonText>{num}</KeypadButtonText>
+                </KeypadButton>
+              ))}
+            </KeypadRow>
+          ))}
+        </KeypadContainer>
+      </AnimatedBalanceContainer>
+      <AnimatedBalanceContainer style={{ top: slideAnimFour }}>
+        <KeypadContainer>
+        <DotContainer>
+        {[0, 1, 2, 3].map((index) => (
+          <Dot key={index} filled={index < secretKey.length} />
+        ))}
+      </DotContainer>       
+          
+          {[
+            ['1', '2', '3'],
+            ['4', '5', '6'],
+            ['7', '8', '9'],
+            ['←', '0', '완료'],
+          ].map((row, rowIndex) => (
+            <KeypadRow key={rowIndex}>
+              {row.map((num) => (
+                <KeypadButton key={num} onPress={() => handleSecretKeypadPress(num)}>
                   <KeypadButtonText>{num}</KeypadButtonText>
                 </KeypadButton>
               ))}
