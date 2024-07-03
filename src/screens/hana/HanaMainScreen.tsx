@@ -32,9 +32,10 @@ import {
   HanaPaginationContainer,
   Product2,
   Product3,
-  BalanceTexts
+  BalanceTexts,
 } from './HomeScreen.styled';
 import { mainContents, saleContents } from '../../mocks/hanaMainDatas';
+import { useAuth } from '../../contexts/authContext';
 
 const { width: windowWidth } = Dimensions.get('window');
 
@@ -56,12 +57,10 @@ const Pagination2: React.FC<{ length: number; currentIndex2: number }> = ({
   </PaginationContainer>
 );
 
-
-
 export default function HanaMain() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [currentIndex2, setCurrentIndex2] = useState(0);
-  const [isLogin, setIsLogin] = useState(false);
+  const { isLogin } = useAuth();
   const flatListRef = useRef<FlatList>(null);
   const flatListRef2 = useRef<FlatList>(null);
 
@@ -127,59 +126,67 @@ export default function HanaMain() {
           pagingEnabled
           showsHorizontalScrollIndicator={false}
           keyExtractor={(item, index) => index.toString()}
-          renderItem={isLogin == false ? (({ item, index }) => (
-            <Product2 key={index}>
-              <DescriptionSmallTexts>
-                {item.descriptrions.text1}
-              </DescriptionSmallTexts>
-              <RowCenter>
-                <DescriptionTexts>{item.descriptrions.text2}</DescriptionTexts>
-                <Image
-                  style={{ width: 20, height: 15 }}
-                  source={item.images[1]}
-                />
-              </RowCenter>
-              <ProductImgView>
-                <Image
-                  style={{ width: 125, height: 100 }}
-                  source={item.images[0]}
-                />
-              </ProductImgView>
-              <Row>
-                <Button width="50%" backgroundColor="#EFF0F4">
-                  <ButtonText>{item.btnText.option1}</ButtonText>
-                </Button>
-                <Button width="50%" backgroundColor="#1EA698">
-                  <ButtonText color="white">{item.btnText.option2}</ButtonText>
-                </Button>
-              </Row>
-            </Product2>
-          )):(({ item, index }) => (
-            <Product2 key={index}>
-              <DescriptionTexts>{item.descriptrions.text2}</DescriptionTexts>
-              <Row>
-                  <DescriptionSmallTexts>{item.descriptrions.text1}</DescriptionSmallTexts>
-              </Row>
-              <BalanceTexts>{item.balance} 원</BalanceTexts>
-              <Row>
-                <Button width="38%" backgroundColor="#EFF0F4"> 
-                  <ButtonText>
-                    {item.btnText.option1}
-                  </ButtonText>
-                </Button>
-                <Button width="38%" backgroundColor="#1EA698"> 
-                  <ButtonText color="white">
-                    {item.btnText.option2}
-                  </ButtonText>
-                </Button>
-                <Button width="18%" backgroundColor="#EFF0F4"> 
-                  <ButtonText color="black">
-                    ...
-                  </ButtonText>
-                </Button>
-                </Row>
-            </Product2>
-          ))}
+          renderItem={
+            !isLogin
+              ? ({ item, index }) => (
+                  <Product2 key={index}>
+                    <DescriptionSmallTexts>
+                      {item.descriptrions.text1}
+                    </DescriptionSmallTexts>
+                    <RowCenter>
+                      <DescriptionTexts>
+                        {item.descriptrions.text2}
+                      </DescriptionTexts>
+                      <Image
+                        style={{ width: 20, height: 15 }}
+                        source={item.images[1]}
+                      />
+                    </RowCenter>
+                    <ProductImgView>
+                      <Image
+                        style={{ width: 125, height: 100 }}
+                        source={item.images[0]}
+                      />
+                    </ProductImgView>
+                    <Row>
+                      <Button width="50%" backgroundColor="#EFF0F4">
+                        <ButtonText>{item.btnText.option1}</ButtonText>
+                      </Button>
+                      <Button width="50%" backgroundColor="#1EA698">
+                        <ButtonText color="white">
+                          {item.btnText.option2}
+                        </ButtonText>
+                      </Button>
+                    </Row>
+                  </Product2>
+                )
+              : ({ item, index }) => (
+                  <Product2 key={index}>
+                    <DescriptionTexts>
+                      {item.descriptrions.text2}
+                    </DescriptionTexts>
+                    <Row>
+                      <DescriptionSmallTexts>
+                        {item.descriptrions.text1}
+                      </DescriptionSmallTexts>
+                    </Row>
+                    <BalanceTexts>{item.balance} 원</BalanceTexts>
+                    <Row>
+                      <Button width="38%" backgroundColor="#EFF0F4">
+                        <ButtonText>{item.btnText.option1}</ButtonText>
+                      </Button>
+                      <Button width="38%" backgroundColor="#1EA698">
+                        <ButtonText color="white">
+                          {item.btnText.option2}
+                        </ButtonText>
+                      </Button>
+                      <Button width="18%" backgroundColor="#EFF0F4">
+                        <ButtonText color="black">...</ButtonText>
+                      </Button>
+                    </Row>
+                  </Product2>
+                )
+          }
           onMomentumScrollEnd={handleMomentumScrollEnd2}
         />
         <Pagination2
