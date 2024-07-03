@@ -16,6 +16,7 @@ import {
   Input,
   SendButton,
 } from './ChatBotScreen.styled';
+import axiosInstance from '../../apis/axiosInstance';
 
 interface Message {
   role: 'user' | 'assistant';
@@ -37,10 +38,11 @@ const ChatBotScreen: React.FC = () => {
     setInput('');
 
     try {
-      const response = await axios.get('http://172.16.21.100/api/gpt/chat', {
+      const response = await axiosInstance.get('/api/gpt/chat', {
         params: { prompt: input },
       });
-      console.log(response);
+
+      // console.log(response);
 
       let updatedMessages = response.data.conversation;
       if (updatedMessages?.length > 0) {
