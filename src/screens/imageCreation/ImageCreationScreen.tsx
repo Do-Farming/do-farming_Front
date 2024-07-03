@@ -8,14 +8,14 @@ const ImageCreationScreen = () => {
 
   const generateImage = async () => {
     try {
-      const response = await axios.get(
+      const response = await axios.post(
         'http://172.16.21.100/api/gpt/generate-image',
+        { prompt },
         {
-          params: { prompt },
-          //   headers: {
-          //     Accept: 'application/json',
-          //     'Content-Type': 'application/json',
-          //   },
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+          },
         },
       );
       const imageUrl = response.data.data[0].url;

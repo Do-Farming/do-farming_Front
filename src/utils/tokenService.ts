@@ -1,13 +1,16 @@
 import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 // import { signOut } from '../states/authState';
 
-export const getAccessToken = () => {
-  return localStorage.getItem('jwtToken');
+export const getAccessToken = async () => {
+  // return localStorage.getItem('jwtToken');
+  return await AsyncStorage.getItem('jwtToken');
 };
 
 export const resetTokenAndReattemptRequest = async (error: any) => {
   try {
-    const refreshToken = localStorage.getItem('refreshToken');
+    // const refreshToken = localStorage.getItem('refreshToken');
+    const refreshToken = await AsyncStorage.getItem('refreshToken');
     if (!refreshToken) {
       // signOut();
       return Promise.reject(error);
@@ -25,7 +28,8 @@ export const resetTokenAndReattemptRequest = async (error: any) => {
       },
     );
     const { accessToken } = response.data;
-    localStorage.setItem('jwtToken', accessToken);
+    // localStorage.setItem('jwtToken', accessToken);
+    await AsyncStorage.setItem('jwtToken', accessToken);
 
     error.response.config.headers.Authorization = `Bearer ${accessToken}`;
     return axios(error.response.config);
