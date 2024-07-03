@@ -26,6 +26,8 @@ import CompetitiveScreen from './src/screens/compation/CompetitiveScreen';
 import ProductSignUpScreen from './src/screens/product/ProductSignUpScreen';
 import ProductPasswordScreen from './src/screens/product/auth/ProductPasswordScreen';
 import ProductSignInScreen from './src/screens/product/complete/ProductSignInScreen';
+import HanaMain from './src/screens/hana/HanaMainScreen';
+import HanaMainAfter from './src/screens/hana/HanaMainAfter';
 import { SendMoneyScreen } from './src/screens/bankingService/SendMoneyScreen';
 import WorldCupSelectScreen from './src/screens/worldcup/WorldCupSelectScreen';
 import CardWorldCupScreen from './src/screens/worldcup/card/CardWorldCupScreen';
@@ -155,6 +157,17 @@ export default function App() {
             options={{ title: '가입완료' }}
           />
           <Stack.Screen
+            name="HanaMain"
+            component={HanaMain}
+            options={{ title: '하나은행 메인화면' }}
+          />
+          <Stack.Screen
+            name="HanaMainAfter"
+            component={HanaMainAfter}
+            options={{ title: '하나은행 메인 이후 화면' }}
+
+          />
+          <Stack.Screen
             name="SendMoney"
             component={SendMoneyScreen}
             options={{
@@ -162,7 +175,6 @@ export default function App() {
               headerTransparent: true,
               headerTitle: '',
             }}
-            
           />
           <Stack.Screen
             name="WorldCup"
