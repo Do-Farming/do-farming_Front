@@ -23,6 +23,28 @@ export default function ExampleScreen({ navigation }: any) {
       <Button
         title="송금 페이지로"
         onPress={() => navigation.navigate('SendMoney')}
+        title="이상형 월드컵 페이지로"
+        onPress={() => navigation.navigate('WorldCup')}
+      />
+      <Button
+        title="카드 생성 페이지로"
+        onPress={() => navigation.navigate('GenerateCard')}
+      />
+      <Button
+        title="퀴즈 페이지로"
+        onPress={() => navigation.navigate('Quiz')}
+      />
+      <Button
+        title="월드컵 소개 페이지로"
+        onPress={() => navigation.navigate('WorldCupInfo')}
+      />
+      <Button
+        title="기상 미션 페이지로"
+        onPress={() => navigation.navigate('WakeUp')}
+      />
+      <Button
+        title="도파밍 소개 페이지로"
+        onPress={() => navigation.navigate("DoFarmingInfo")}
       />
     </View>
   );

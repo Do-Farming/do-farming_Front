@@ -1,3 +1,4 @@
+
 import * as React from 'react';
 import {
   NavigationContainer,
@@ -10,7 +11,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { ThemeProvider as StyledComponentsThemeProvider } from 'styled-components/native'; // styled-components의 ThemeProvider import
 import theme from './src/styles/theme'; // styled-components에서 사용할 테마 import
 
-import { useColorScheme } from 'react-native';
+import { Button, useColorScheme } from 'react-native';
 import HomeScreen from './src/screens/home/HomeScreen';
 import ExploreScreen from './src/screens/ExploreScreen';
 import ExampleScreen from './src/screens/ExampleScreen';
@@ -27,6 +28,15 @@ import ProductSignUpScreen from './src/screens/product/ProductSignUpScreen';
 import ProductPasswordScreen from './src/screens/product/auth/ProductPasswordScreen';
 import ProductSignInScreen from './src/screens/product/complete/ProductSignInScreen';
 import { SendMoneyScreen } from './src/screens/bankingService/SendMoneyScreen';
+import WorldCupSelectScreen from './src/screens/worldcup/WorldCupSelectScreen';
+import CardWorldCupScreen from './src/screens/worldcup/card/CardWorldCupScreen';
+import CardWorldCupWinnnerScreen from './src/screens/worldcup/card/CardWorldCupWinnerScreen';
+import GenerateCardScreen from './src/screens/generateCard/GenerateCardScreen';
+import QuizScreen from './src/screens/quiz/QuizScreen';
+import WorldcupInfoScreen from './src/screens/worldcup/WorldCupInfoScreen';
+import DoFarmingInfoScreen from './src/screens/product/dofarming/DoFarmingInfoScreen';
+import WakeupScreen from './src/screens/wakeup/wakeup/WakeupScreen';
+import WakeupCamera from './src/screens/wakeup/camera/CameraScreen';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -56,7 +66,7 @@ function MyTabs() {
       <Tab.Screen
         name="Home"
         component={HomeScreen}
-        options={{ title: 'Home Screen', headerShown: false }}
+        options={{ title: 'Do! Farming', headerShown: true }}
       />
       <Tab.Screen
         name="Explore"
@@ -118,7 +128,6 @@ export default function App() {
             component={PedometerScreen}
             options={{ title: 'Pedometer' }}
           />
-
           <Stack.Screen
             name="BangJoin"
             component={BangJoinScreen}
@@ -148,6 +157,62 @@ export default function App() {
             name="SendMoney"
             component={SendMoneyScreen}
             options={{ title: '송금' }}
+            name="WorldCup"
+            component={WorldCupSelectScreen}
+            options={{
+              title: '이상형 월드컵 선택',
+              headerTransparent: true,
+              headerTitle: '',
+            }}
+          />
+          <Stack.Screen
+            name="TasteWorldCup"
+            component={WorldCupSelectScreen}
+            options={{ headerTransparent: false, headerTitle: '' }}
+          />
+          <Stack.Screen
+            name="WorldCupInfo"
+            component={WorldcupInfoScreen}
+            options={{
+              title: '이상형 월드컵 소개',
+              headerTransparent: true,
+              headerTitle: '',
+            }}
+          />
+          <Stack.Screen
+            name="CardWorldCup"
+            component={CardWorldCupScreen}
+            options={{ title: '카드 이상형 월드컵' }}
+          />
+          <Stack.Screen
+            name="CardWorldCupWinner"
+            component={CardWorldCupWinnnerScreen}
+            options={{ title: '우승한 카드는?' }}
+          />
+          <Stack.Screen
+            name="GenerateCard"
+            component={GenerateCardScreen}
+            options={{ title: '나만의 카드 생성' }}
+          />
+          <Stack.Screen
+            name="Quiz"
+            component={QuizScreen}
+            options={{ title: '퀴즈' }}
+          />
+          <Stack.Screen
+            name="DoFarmingInfo"
+            component={DoFarmingInfoScreen}
+            options={{ headerTransparent: true, headerTitle: '' }}
+          />
+          <Stack.Screen
+            name="WakeUp"
+            component={WakeupScreen}
+            options={{ title: '기상 미션' }}
+          />
+          <Stack.Screen
+            name="WakeUpCamera"
+            component={WakeupCamera}
+            options={{ title: '기상 인증하기' }}
           />
         </Stack.Navigator>
       </NavigationContainer>
