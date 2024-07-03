@@ -123,7 +123,6 @@ export const CardContainer = styled.View`
   padding: 20px 15px;
   padding-left: 10px;
   margin-bottom: 15px;
-  display: flex;
   flex-direction: row;
   background: ${(props) => props.theme.whiteColor};
   border: 1px solid #f8f8fa;
