@@ -16,22 +16,30 @@ export const ProgressBarContainer = styled.View`
 
 export const ProgressBar = styled(Animated.View)`
   height: 100%;
-  background-color: ${(props) => props.theme.mainColor};
+  background-color: rgb(231, 92, 85);
   transition: width 1s linear;
   border-radius: 5px;
 `;
 
-export const SketchbookImage = styled.Image`
+export const TimeLeftText = styled.Text`
+  text-align: center;
+  background-color: ${(props) => props.theme.whiteColor};
+  font-weight: bold;
+  padding-top: 10px;
+  font-size: 20px;
+`
+
+export const SketchbookImage = styled.View`
   position: absolute;
-  object-fit: contain;
+  width: 100%;
+  height: 300px;
 `;
 
 export const QuizContainer = styled.View`
   padding: 5% 10%;
-  padding-bottom: 10%;
   justify-content: space-between;
   height: 220px;
-  margin: 6% 0;
+  margin: 6% 0
 `;
 
 export const QuizNumber = styled.Text`

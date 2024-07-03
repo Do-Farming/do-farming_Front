@@ -15,9 +15,11 @@ import {
   ResultContainer,
   ResultText,
   ResultScoreText,
+  TimeLeftText,
 } from './QuizScreen.styled';
 import { Animated } from 'react-native';
 import { InfoText } from '../home/HomeScreen.styled';
+import { SketchBook } from '../../assets';
 
 export default function QuizScreen() {
   const [timeLeft, setTimeLeft] = useState(0); // 10초 타이머
@@ -75,7 +77,7 @@ export default function QuizScreen() {
     intervalRef.current = setInterval(() => {
       setTimeLeft((prev) => {
         if (prev < 10) {
-          return prev + 1;
+          return prev + 0.1;
         }
         clearInterval(intervalRef.current as NodeJS.Timeout);
         setShowAnswer(true);
@@ -83,7 +85,7 @@ export default function QuizScreen() {
         setTimeout(() => nextQuestion(), 5000);
         return prev;
       });
-    }, 1000);
+    }, 100);
 
     return () => {
       if (intervalRef.current) {
@@ -95,7 +97,7 @@ export default function QuizScreen() {
   useEffect(() => {
     Animated.timing(progressAnim, {
       toValue: (timeLeft / 10) * 100,
-      duration: 1000,
+      duration: 100,
       useNativeDriver: false,
     }).start();
   }, [timeLeft]);
@@ -148,11 +150,11 @@ export default function QuizScreen() {
               }}
             />
           </ProgressBarContainer>
+          <TimeLeftText>{Math.max(0, parseInt((10 - timeLeft).toFixed(0)))}초</TimeLeftText>
           <Container>
-            <SketchbookImage
-              source={require('../../assets/quiz/sketchbook.png')}
-              style={{ width: '100%', height: 300 }}
-            />
+            <SketchbookImage>
+              <SketchBook width={'100%'} height={'100%'} />
+            </SketchbookImage>
             <QuizContainer>
               <QuizNumber>Q.</QuizNumber>
               <QuizContent>{currentQuiz.question}</QuizContent>
@@ -175,12 +177,12 @@ export default function QuizScreen() {
                           : '#fff'
                       : '#fff',
                     borderColor: showAnswer
-                    ? index === currentQuiz.correctAnswer
-                      ? '#85D788'
-                      : index === selectedChoice
-                        ? '#FA8282'
-                        : '#fff'
-                    : '#fff',
+                      ? index === currentQuiz.correctAnswer
+                        ? '#85D788'
+                        : index === selectedChoice
+                          ? '#FA8282'
+                          : '#fff'
+                      : '#fff',
                   }}
                 >
                   <ChoiceButtonText>{choice}</ChoiceButtonText>
@@ -194,9 +196,7 @@ export default function QuizScreen() {
           <InfoText>오늘의 퀴즈 종료!</InfoText>
           <ResultContainer>
             <ResultScoreText>{score}점</ResultScoreText>
-            <ResultText>
-              맞힌 문제: {correctCount}개
-            </ResultText>
+            <ResultText>맞힌 문제: {correctCount}개</ResultText>
             <ResultText>
               틀린 문제: {quizData.length - correctCount}개
             </ResultText>

@@ -8,3 +8,4 @@ export { default as RunningIcon } from './ic_running.svg';
 export { default as MorningIcon } from './ic_morning.svg';
 export { default as QuizIcon } from './ic_quiz.svg';
 export { default as CustomIcon } from './ic_custom.svg';
+export { default as SketchBook } from './sketchbook.svg';
