@@ -4,13 +4,10 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const login = async ({ phoneNumber, password }: LoginParams) => {
   try {
-    const response = await axiosInstance.post(
-      'http://172.16.20.74/api/v1/auth/login',
-      {
-        phoneNumber,
-        password,
-      },
-    );
+    const response = await axiosInstance.post('/api/v1/auth/login', {
+      phoneNumber,
+      password,
+    });
     if (response.data.result.accessToken && response.data.result.refreshToken) {
       // localStorage.setItem('jwtToken', response.data.result.accessToken);
       // localStorage.setItem('refreshToken', response.data.result.refreshToken);
