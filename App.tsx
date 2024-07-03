@@ -69,7 +69,7 @@ function MyTabs() {
       <Tab.Screen
         name="Home"
         component={HomeScreen}
-        options={{ title: 'Do! Farming', headerShown: true }}
+        options={{ title: 'Do! Farming', headerShown: false }}
       />
       <Tab.Screen
         name="Explore"
@@ -165,7 +165,6 @@ export default function App() {
             name="HanaMainAfter"
             component={HanaMainAfter}
             options={{ title: '하나은행 메인 이후 화면' }}
-
           />
           <Stack.Screen
             name="SendMoney"

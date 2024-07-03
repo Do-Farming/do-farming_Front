@@ -39,6 +39,7 @@ import {
   CardImgView,
   CardListView,
   CardBenefitSmallText,
+  SafeAreaView,
 } from './HomeScreen.styled';
 import axios from 'axios';
 import CardImage from '../../components/CardImage/CardImage';
@@ -215,69 +216,69 @@ export default function HomeScreen() {
   );
 
   return (
-    <Container>
-      <Header>
+    <SafeAreaView>
+      <Container>
+        <Header>
+          <Row>
+            <TextNormal>안녕하세요 </TextNormal>
+            <Username>홍길동</Username>
+            <TextNormal> 님</TextNormal>
+          </Row>
+        </Header>
+        <InfoText>주요 상품</InfoText>
+        <MainProduct>
+          <FlatList
+            ref={flatListRef}
+            data={products}
+            horizontal
+            pagingEnabled
+            showsHorizontalScrollIndicator={false}
+            keyExtractor={(item, index) => index.toString()}
+            renderItem={({ item, index }) => (
+              <Product key={index}>
+                <ProductName>{item.name}</ProductName>
+                <InterestRateContainer>
+                  <InterestRateText>
+                    최소 {item.interestRate.min} ~ 최대 {item.interestRate.max}
+                  </InterestRateText>
+                </InterestRateContainer>
+                <ProductImgView>
+                  <Image source={item.images[0]} />
+                  <Image source={item.images[1]} />
+                  <Image source={item.images[2]} />
+                </ProductImgView>
+                <ProductInfo>{item.description}</ProductInfo>
+              </Product>
+            )}
+            onMomentumScrollEnd={handleMomentumScrollEnd}
+          />
+          <Pagination length={products.length} currentIndex={currentIndex} />
+        </MainProduct>
+        <InfoText>💳 요즘 가장 인기있는 카드에요!</InfoText>
         <Row>
-          <TextNormal>안녕하세요 </TextNormal>
-          <Username>홍길동</Username>
-          <TextNormal> 님</TextNormal>
+          <TouchableOpacity onPress={() => setSelectedCardType('check')}>
+            <Button isSelected={selectedCardType === 'check'}>
+              <ButtonText isSelected={selectedCardType === 'check'}>
+                체크카드
+              </ButtonText>
+            </Button>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => setSelectedCardType('credit')}>
+            <Button isSelected={selectedCardType === 'credit'}>
+              <ButtonText isSelected={selectedCardType === 'credit'}>
+                신용카드
+              </ButtonText>
+            </Button>
+          </TouchableOpacity>
         </Row>
-      </Header>
-      <InfoText>주요 상품</InfoText>
-      <MainProduct>
-        <FlatList
-          ref={flatListRef}
-          data={products}
-          horizontal
-          pagingEnabled
-          showsHorizontalScrollIndicator={false}
-          keyExtractor={(item, index) => index.toString()}
-          renderItem={({ item, index }) => (
-            <Product key={index}>
-              <ProductName>{item.name}</ProductName>
-              <InterestRateContainer>
-                <InterestRateText>
-                  최소 {item.interestRate.min} ~ 최대 {item.interestRate.max}
-                </InterestRateText>
-              </InterestRateContainer>
-              <ProductImgView>
-                <Image source={item.images[0]} />
-                <Image source={item.images[1]} />
-                <Image source={item.images[2]} />
-              </ProductImgView>
-              <ProductInfo>{item.description}</ProductInfo>
-            </Product>
-          )}
-          onMomentumScrollEnd={handleMomentumScrollEnd}
-        />
-        <Pagination length={products.length} currentIndex={currentIndex} />
-      </MainProduct>
-      <InfoText>💳 요즘 가장 인기있는 카드에요!</InfoText>
-      <Row>
-        <TouchableOpacity onPress={() => setSelectedCardType('check')}>
-          <Button isSelected={selectedCardType === 'check'}>
-            <ButtonText isSelected={selectedCardType === 'check'}>
-              체크카드
-            </ButtonText>
-          </Button>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => setSelectedCardType('credit')}>
-          <Button isSelected={selectedCardType === 'credit'}>
-            <ButtonText isSelected={selectedCardType === 'credit'}>
-              신용카드
-            </ButtonText>
-          </Button>
-        </TouchableOpacity>
-      </Row>
-      <CardListView>
-        {selectedCardType === 'check' ? (
-          <View>
+        <CardListView>
+          {selectedCardType === 'check' ? (
             <CardList SelectedCardList={checkCardList} />
-          </View>
-        ) : (
-          <CardList SelectedCardList={creditCardList} />
-        )}
-      </CardListView>
-    </Container>
+          ) : (
+            <CardList SelectedCardList={creditCardList} />
+          )}
+        </CardListView>
+      </Container>
+    </SafeAreaView>
   );
 }

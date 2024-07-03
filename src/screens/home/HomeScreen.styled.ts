@@ -1,5 +1,10 @@
 import styled from 'styled-components/native';
 
+export const SafeAreaView = styled.SafeAreaView`
+  flex: 1;
+  background-color: ${(props) => props.theme.whiteColor}
+`
+
 export const Container = styled.View`
   flex: 1;
   padding: 20px;
@@ -116,13 +121,14 @@ export const ButtonText = styled.Text<{ isSelected: boolean }>`
 `;
 
 export const CardListView = styled.View`
+  flex: 1;
   margin: 15px 0;
+  justify-content: space-between;
 `;
 
 export const CardContainer = styled.View`
-  padding: 20px 15px;
+  padding: 25px 15px;
   padding-left: 10px;
-  margin-bottom: 15px;
   flex-direction: row;
   background: ${(props) => props.theme.whiteColor};
   border: 1px solid #f8f8fa;
