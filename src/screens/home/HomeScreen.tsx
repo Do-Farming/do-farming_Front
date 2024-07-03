@@ -143,11 +143,12 @@ export default function HomeScreen() {
   const [checkCardList, setCheckCardList] = useState([]);
   const flatListRef = useRef<FlatList>(null);
 
-  /* Test Code */
+  /* Test Code ... */
   const { isLogin } = useAuth();
   useEffect(() => {
     console.log('isLogin:', isLogin);
   }, [isLogin]);
+  /* ... Test Code */
 
   useEffect(() => {
     async function getCardChart(CardAmount: number) {
