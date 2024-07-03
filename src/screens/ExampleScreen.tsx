@@ -21,6 +21,10 @@ export default function ExampleScreen({ navigation }: any) {
         onPress={() => navigation.navigate('MyPage')}
       />
       <Button
+        title="송금 페이지로"
+        onPress={() => navigation.navigate('SendMoney')}
+      />
+      <Button
         title="이상형 월드컵 페이지로"
         onPress={() => navigation.navigate('WorldCup')}
       />
