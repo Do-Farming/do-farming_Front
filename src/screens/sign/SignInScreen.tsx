@@ -12,7 +12,7 @@ import {
   Title,
   TitleBox,
 } from './InputForm.styled';
-import { postLogin } from '../../apis/authService';
+import { login } from '../../apis/authService';
 
 export default function SignInScreen() {
   const [phoneNumber, setPhoneNumber] = useState('');
@@ -29,7 +29,7 @@ export default function SignInScreen() {
   const handleSubmit = async () => {
     // console.log('phoneNumber:', phoneNumber, 'password:', password);
     try {
-      const response = await postLogin({ phoneNumber, password });
+      const response = await login({ phoneNumber, password });
       // Handle successful login if needed, e.g., redirect to another page
       console.log('Login successful:', response);
     } catch (error) {
