@@ -128,22 +128,20 @@ export const CardListView = styled.View`
 
 export const CardContainer = styled.View`
   padding: 25px 15px;
-  padding-left: 10px;
+  padding-left: 8px;
   flex-direction: row;
   background: ${(props) => props.theme.whiteColor};
   border: 1px solid #f8f8fa;
   box-shadow: 0px 4px 4px rgba(77, 77, 77, 0.25);
   border-radius: 15px;
+  height: 45%;
+  align-items: center;
 `;
 
 export const CardImgView = styled.View`
   display: flex;
   justify-content: center;
   align-items: center;
-`;
-
-export const CardImg = styled.Image`
-  object-fit: contain;
 `;
 
 export const CardInfo = styled.View`

@@ -3,7 +3,6 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import {
   TouchableOpacity,
   Image,
-  View,
   FlatList,
   Dimensions,
   NativeSyntheticEvent,
@@ -36,10 +35,10 @@ import {
   InterestRateText,
   CardName,
   CardBenefitImportantText,
-  CardImgView,
   CardListView,
   CardBenefitSmallText,
   SafeAreaView,
+  CardImgView,
 } from './HomeScreen.styled';
 import axios from 'axios';
 import CardImage from '../../components/CardImage/CardImage';
@@ -110,7 +109,7 @@ const CardList = React.memo(
                     <CardImgView>
                       <CardBenefitImg
                         source={{ uri: benefit.logo_img.url }}
-                        style={{ width: 30, height: 30 }}
+                        style={{ width: 25, height: 25 }}
                       />
                     </CardImgView>
                     <CardBenefitTextView>
@@ -235,7 +234,7 @@ export default function HomeScreen() {
             showsHorizontalScrollIndicator={false}
             keyExtractor={(item, index) => index.toString()}
             renderItem={({ item, index }) => (
-              <Product key={index}>
+              <Product key={index} style={{ width: windowWidth - 40 }}>
                 <ProductName>{item.name}</ProductName>
                 <InterestRateContainer>
                   <InterestRateText>
