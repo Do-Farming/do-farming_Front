@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, Image, StyleSheet } from 'react-native';
 import axios from 'axios';
+import axiosInstance from '../../apis/axiosInstance';
 
 const ImageCreationScreen = () => {
   const [prompt, setPrompt] = useState('');
@@ -8,8 +9,8 @@ const ImageCreationScreen = () => {
 
   const generateImage = async () => {
     try {
-      const response = await axios.post(
-        'http://172.16.21.100/api/gpt/generate-image',
+      const response = await axiosInstance.post(
+        '/api/gpt/generate-image',
         { prompt },
         {
           headers: {
