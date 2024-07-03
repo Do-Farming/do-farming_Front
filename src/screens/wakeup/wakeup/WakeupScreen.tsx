@@ -18,7 +18,7 @@ import {
 } from '../../pedometer/PedometerScreen.styled';
 import { Alert, View } from 'react-native';
 import { DailyRanking } from '../../../types';
-import { Camera } from 'expo-camera';
+import { Camera } from 'expo-camera/legacy';
 
 export default function WakeupScreen({ navigation }: any) {
   const [dailyRate, setDailyRate] = useState<DailyRanking['data']['ranking']>(
