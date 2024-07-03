@@ -26,7 +26,6 @@ import CompetitiveScreen from './src/screens/compation/CompetitiveScreen';
 import ProductSignUpScreen from './src/screens/product/ProductSignUpScreen';
 import ProductPasswordScreen from './src/screens/product/auth/ProductPasswordScreen';
 import ProductSignInScreen from './src/screens/product/complete/ProductSignInScreen';
-import { SendMoneyScreen } from './src/screens/bankingService/SendMoneyScreen';
 import WorldCupSelectScreen from './src/screens/worldcup/WorldCupSelectScreen';
 import CardWorldCupScreen from './src/screens/worldcup/card/CardWorldCupScreen';
 import CardWorldCupWinnnerScreen from './src/screens/worldcup/card/CardWorldCupWinnerScreen';
@@ -153,16 +152,6 @@ export default function App() {
             name="ProductSignIn"
             component={ProductSignInScreen}
             options={{ title: '가입완료' }}
-          />
-          <Stack.Screen
-            name="SendMoney"
-            component={SendMoneyScreen}
-            options={{
-              title: '송금',
-              headerTransparent: true,
-              headerTitle: '',
-            }}
-            
           />
           <Stack.Screen
             name="WorldCup"
