@@ -36,21 +36,16 @@ export const CardContainer = styled.View`
   border: 1px solid #f8f8fa;
   box-shadow: 0px 4px 4px rgba(77, 77, 77, 0.25);
   border-radius: 15px;
-  align-items: center;
   height: 45%;
+  width: 100%
 `;
 
 export const CardImgContainer = styled.TouchableOpacity`
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
   margin-bottom: 15%;
   width: 120px;
   height: 180px;
-`;
-
-export const CardImg = styled.Image`
-  border-radius: 5px;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const CardFeeText = styled.Text`
@@ -64,25 +59,11 @@ export const CardInfoContainer = styled.View`
   height: 100%;
 `;
 
-export const CardName = styled.Text`
-  max-width: 100%;
-  margin-bottom: 5%;
-  font-weight: bold;
-  font-size: 18px;
-`;
-
-export const CardCorpName = styled.Text`
-  font-weight: bold;
-  font-size: 18px;
-  text-align: center;
-  margin-top: 10%;
-`;
-
 export const CardBenefitList = styled.View`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  flex-grow: 1;
+  flex-shrink: 1;
   margin-top: 5%;
 `;
 
@@ -90,6 +71,7 @@ export const CardBenefit = styled.View`
   flex-direction: row;
   width: 100%;
   margin-bottom: 10px;
+  align-items: center;
 `;
 
 export const CardBenefitImg = styled.Image`
@@ -97,18 +79,18 @@ export const CardBenefitImg = styled.Image`
 `;
 
 export const CardBenefitTextView = styled.View`
-  flex-grow: 8;
   justify-content: center;
   margin-right: 5px;
+  justify-content: center;
 `;
 
 export const CardBenefitText = styled.Text`
-  font-size: 13px;
+  font-size: 11px;
   flex-shrink: 1;
 `;
 
 export const CardBenefitImportantText = styled.Text`
   color: #ffd262;
   font-weight: bold;
-  font-size: 15px;
+  font-size: 16px;
 `;

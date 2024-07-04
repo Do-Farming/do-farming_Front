@@ -16,6 +16,8 @@ const CardImage: React.FC<CardImageProps> = ({ uri, ImgHeight, ImgWidth }) => {
     // 이미지의 가로가 세로보다 길 경우 회전 플래그 설정
     if (width > height) {
       setShouldRotate(true);
+    } else {
+      setShouldRotate(false);
     }
   };
 
@@ -26,7 +28,7 @@ const CardImage: React.FC<CardImageProps> = ({ uri, ImgHeight, ImgWidth }) => {
         width: shouldRotate ? ImgHeight : ImgWidth, // 회전 후 가로 길이
         height: shouldRotate ? ImgWidth : ImgHeight, // 회전 후 세로 길이
         transform: shouldRotate ? [{ rotate: '90deg' }] : [], // 회전 조건 추가
-        objectFit: 'contain',
+        resizeMode: 'contain',
       }}
       onLoad={handleImageLoad}
     />
