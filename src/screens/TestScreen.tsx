@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components/native';
 import axiosInstance from '../apis/axiosInstance';
-import { Image } from 'react-native';
 import { Taste } from '../types/taste/TasteTypes';
 
 export default function TestScreen({ navigation }: any) {
@@ -12,7 +11,7 @@ export default function TestScreen({ navigation }: any) {
       try {
         const response = await axiosInstance.get('/api/v1/taste');
         setTasteList(response.data.result.tasteList);
-        console.log(response.data.result.tasteList);
+        // console.log(response.data.result.tasteList);
       } catch (error) {
         console.error(error);
       }
@@ -22,9 +21,9 @@ export default function TestScreen({ navigation }: any) {
 
   return (
     <Container>
-      <TestText>{tasteList[0].tasteImg}</TestText>
-      <TestImage source={{ uri: tasteList[0].tasteImg }} />
-      <Image source={{ uri: tasteList[0].tasteImg }} />
+      {tasteList.map((taste) => (
+        <TestText key={taste.id}>{tasteList[0].tasteTitle}</TestText>
+      ))}
     </Container>
   );
 }
