@@ -60,6 +60,10 @@ export default function ExampleScreen({ navigation }: any) {
         title="도파밍 소개 페이지로"
         onPress={() => navigation.navigate('DoFarmingInfo')}
       />
+      <Button
+        title="테스트 페이지로"
+        onPress={() => navigation.navigate('Test')}
+      />
     </View>
   );
 }
