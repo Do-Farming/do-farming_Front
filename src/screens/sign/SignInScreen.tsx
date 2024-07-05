@@ -13,10 +13,12 @@ import {
   TitleBox,
 } from './InputForm.styled';
 import { login } from '../../apis/authService';
+import { useAuth } from '../../contexts/authContext';
 
 export default function SignInScreen() {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [password, setPassword] = useState('');
+  const { setIsLogin } = useAuth();
 
   const handlePhoneNumberChange = (text: string) => {
     setPhoneNumber(text);
@@ -31,6 +33,7 @@ export default function SignInScreen() {
     try {
       const response = await login({ phoneNumber, password });
       // Handle successful login if needed, e.g., redirect to another page
+      setIsLogin(true);
       console.log('Login successful:', response);
     } catch (error) {
       console.error('Login failed:', error);

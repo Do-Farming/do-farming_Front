@@ -42,6 +42,7 @@ import {
 } from './HomeScreen.styled';
 import axios from 'axios';
 import CardImage from '../../components/CardImage/CardImage';
+import { useAuth } from '../../contexts/authContext';
 
 const { width: windowWidth } = Dimensions.get('window');
 
@@ -140,6 +141,13 @@ export default function HomeScreen() {
   const [creditCardList, setCreditCardList] = useState([]);
   const [checkCardList, setCheckCardList] = useState([]);
   const flatListRef = useRef<FlatList>(null);
+
+  /* Test Code ... */
+  const { isLogin } = useAuth();
+  useEffect(() => {
+    console.log('isLogin:', isLogin);
+  }, [isLogin]);
+  /* ... Test Code */
 
   useEffect(() => {
     async function getCardChart(CardAmount: number) {
