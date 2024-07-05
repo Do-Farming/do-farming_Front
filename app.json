@@ -15,13 +15,20 @@
       "supportsTablet": true
     },
     "android": {
+      "googleServiceFile":"./google-services.json",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.hana"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "27342df8-0f15-43ba-b966-5680d093b227"
+      }
     }
   }
 }
