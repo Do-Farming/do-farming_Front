@@ -27,6 +27,7 @@ import WakeupScreen from '../screens/wakeup/wakeup/WakeupScreen';
 import CameraScreen from '../screens/wakeup/camera/CameraScreen';
 import TabNavigator from './TabNavigator';
 import TestScreen from '../screens/TestScreen';
+import TasteWorldCupScreen from '../screens/worldcup/card/TasteWorldCupScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -113,6 +114,15 @@ function StackNavigator() {
         }}
       />
       <Stack.Screen
+        name="WorldCupInfo"
+        component={WorldcupInfoScreen}
+        options={{
+          title: '이상형 월드컵 소개',
+          headerTransparent: true,
+          headerTitle: '',
+        }}
+      />
+      <Stack.Screen
         name="WorldCup"
         component={WorldCupSelectScreen}
         options={{
@@ -123,17 +133,8 @@ function StackNavigator() {
       />
       <Stack.Screen
         name="TasteWorldCup"
-        component={WorldCupSelectScreen}
-        options={{ headerTransparent: false, headerTitle: '' }}
-      />
-      <Stack.Screen
-        name="WorldCupInfo"
-        component={WorldcupInfoScreen}
-        options={{
-          title: '이상형 월드컵 소개',
-          headerTransparent: true,
-          headerTitle: '',
-        }}
+        component={TasteWorldCupScreen}
+        options={{ title: '취향 이상형 월드컵' }}
       />
       <Stack.Screen
         name="CardWorldCup"
@@ -143,7 +144,7 @@ function StackNavigator() {
       <Stack.Screen
         name="CardWorldCupWinner"
         component={CardWorldCupWinnnerScreen}
-        options={{ headerTransparent: true, headerTitle: ''  }}
+        options={{ headerTransparent: true, headerTitle: '' }}
       />
       <Stack.Screen
         name="GenerateCard"

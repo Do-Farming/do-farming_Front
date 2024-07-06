@@ -14,7 +14,7 @@ import {
   InfoText,
   RoundText,
   SelectionView,
-} from './CardWorldCupScreen.styled';
+} from './TasteWorldCupScreen.styled';
 import {
   Animated,
   Dimensions,
@@ -34,8 +34,8 @@ const getRandomCards = (cardList: any[], count: number) => {
 
 const { width: screenWidth } = Dimensions.get('window');
 
-export default function CardWorldCupScreen({ navigation, route }: any) {
-  const { type } = route.params;
+export default function TasteWorldCupScreen({ navigation, route }: any) {
+  const type = 'CRD';
   const colorValue = useRef(new Animated.Value(0)).current;
   const hologramValue = useRef(new Animated.Value(0)).current;
   const [currentCards, setCurrentCards] = useState<any[]>([]); // 랜덤으로 선택된 32개의 카드들
