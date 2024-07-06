@@ -15,3 +15,14 @@ export interface BangType {
   wakeupTime: string;
   isPublic: boolean;
 }
+
+export interface BangListType {
+  id: number;
+  groupName: string;
+  groupNumber: number;
+  participantNumber: number;
+  title: string;
+  createdDate: number[];
+  startedAt: number[];
+  endedAt: number[];
+}
