@@ -20,6 +20,8 @@ import {
   wakeupTimeList,
 } from '../../../constants/SelectBox';
 import CustomModal from '../../../components/CustomModal/CustomModal';
+import { bangCreate } from '../../../apis/bangService';
+import { BangType } from '../../../types/BangTypes';
 
 export default function BangCreateScreen({ navigation }: any) {
   const [personOpen, setPersonOpen] = useState(false);
@@ -40,17 +42,17 @@ export default function BangCreateScreen({ navigation }: any) {
     debouncedSetBang(name, value);
   };
 
-  const [recruitNum, setRecruitNum] = useState(null);
-  const [wakeupTime, setWakeupTime] = useState(null);
-  const [disclosure, setDisclosure] = useState(null);
+  const [recruitNum, setRecruitNum] = useState<number>(0);
+  const [wakeupTime, setWakeupTime] = useState<string>('');
+  const [disclosure, setDisclosure] = useState<boolean>(false);
 
-  const [bang, setBang] = useState({
-    groupName: null,
+  const [bang, setBang] = useState<BangType>({
+    groupName: '',
     groupNumber: recruitNum,
-    title: null,
-    desc: null,
+    title: '',
+    desc: '',
     wakeupTime: wakeupTime,
-    public: disclosure,
+    isPublic: disclosure,
   });
 
   useEffect(() => {
@@ -58,7 +60,7 @@ export default function BangCreateScreen({ navigation }: any) {
       ...prevBang,
       groupNumber: recruitNum,
       wakeupTime: wakeupTime,
-      public: disclosure,
+      isPublic: disclosure,
     }));
   }, [recruitNum, wakeupTime, disclosure]);
 
@@ -74,6 +76,7 @@ export default function BangCreateScreen({ navigation }: any) {
   };
 
   const onPressBangJoin = () => {
+    bangCreate(bang);
     setIsModalVisible(false);
     navigation.navigate('BangJoin');
   };
