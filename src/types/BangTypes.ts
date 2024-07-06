@@ -26,3 +26,25 @@ export interface BangListType {
   startedAt: number[];
   endedAt: number[];
 }
+
+export interface GroupMemberType {
+  id: number;
+  memberName: string;
+}
+
+export interface BangDetailType {
+  id: number;
+  groupName: string;
+  groupNumber: number;
+  participantNumber: number;
+  title: string;
+  description: string;
+  wakeupTime: string;
+  createdDate: number[];
+  status: number;
+  groupMembers: GroupMemberType[];
+  startedAt: number[];
+  endedAt: number[];
+  joined: boolean;
+  admin: boolean;
+}
