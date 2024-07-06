@@ -143,12 +143,12 @@ function StackNavigator() {
       <Stack.Screen
         name="CardWorldCupWinner"
         component={CardWorldCupWinnnerScreen}
-        options={{ title: '우승한 카드는?' }}
+        options={{ headerTransparent: true, headerTitle: ''  }}
       />
       <Stack.Screen
         name="GenerateCard"
         component={GenerateCardScreen}
-        options={{ title: '나만의 카드 생성' }}
+        options={{ headerTransparent: true, headerTitle: '' }}
       />
       <Stack.Screen
         name="Quiz"

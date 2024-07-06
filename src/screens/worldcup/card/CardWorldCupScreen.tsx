@@ -8,18 +8,24 @@ import {
   CardBenefitTextView,
   CardContainer,
   CardFeeText,
-  CardImg,
   CardImgContainer,
   CardInfoContainer,
-  CardName,
   Container,
   InfoText,
   RoundText,
   SelectionView,
 } from './CardWorldCupScreen.styled';
-import { Animated, Dimensions, Image, StyleSheet, View } from 'react-native';
+import {
+  Animated,
+  Dimensions,
+  Image,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 import axios from 'axios';
 import * as Progress from 'react-native-progress';
+import CardImage from '../../../components/CardImage/CardImage';
 
 const getRandomCards = (cardList: any[], count: number) => {
   let shuffled = cardList.sort(() => 0.5 - Math.random());
@@ -111,8 +117,9 @@ export default function CardWorldCupScreen({ navigation, route }: any) {
   }, [colorValue, hologramValue]);
 
   const renderCard = (card: any, handleCardPress: any) => {
-    const cardImageUrl = "https://d1c5n4ri2guedi.cloudfront.net" + card.card_img;
-    const annualFeeParts = card.annual_fee_basic.split('/');
+    const cardImageUrl =
+      'https://d1c5n4ri2guedi.cloudfront.net' + card.card_img;
+    const annualFeeParts = card.annual_fee_basic.split('/ ');
 
     const hologramStyle = {
       opacity: hologramValue.interpolate({
@@ -125,13 +132,7 @@ export default function CardWorldCupScreen({ navigation, route }: any) {
       <>
         <View>
           <CardImgContainer onPress={() => handleCardPress(card)}>
-            <CardImg
-              source={{ uri: cardImageUrl }}
-              style={{
-                width: 120,
-                height: 180,
-              }}
-            />
+            <CardImage uri={cardImageUrl} ImgHeight={180} ImgWidth={120} />
             <Animated.Image
               source={require('../../../assets/worldcup/hologram.png')}
               style={[
@@ -139,7 +140,7 @@ export default function CardWorldCupScreen({ navigation, route }: any) {
                 {
                   width: 120,
                   height: 180,
-                  borderRadius: 5
+                  borderRadius: 5,
                 },
                 hologramStyle,
               ]}
@@ -150,7 +151,18 @@ export default function CardWorldCupScreen({ navigation, route }: any) {
           ))}
         </View>
         <CardInfoContainer>
-          <CardName>{card.name}</CardName>
+          <Text
+            numberOfLines={1}
+            ellipsizeMode="tail"
+            style={{
+              flexShrink: 1,
+              maxWidth: '80%',
+              fontSize: 18,
+              fontWeight: 'bold',
+            }}
+          >
+            {card.name}
+          </Text>
           <Image
             source={{ uri: card.corp.logo_img.url }}
             style={{ width: 100, height: 40 }}
@@ -161,7 +173,7 @@ export default function CardWorldCupScreen({ navigation, route }: any) {
                 {benefit.logo_img && (
                   <CardBenefitImg
                     source={{ uri: benefit.logo_img.url }}
-                    style={{ width: 40, height: 40 }}
+                    style={{ width: 35, height: 35 }}
                   />
                 )}
                 <CardBenefitTextView>
@@ -185,7 +197,9 @@ export default function CardWorldCupScreen({ navigation, route }: any) {
 
     if (nextSelectedCards.length === 1 && round === 2) {
       // 최종 우승 카드가 결정됨
-      navigation.navigate('CardWorldCupWinner', { winner: nextSelectedCards[0] });
+      navigation.navigate('CardWorldCupWinner', {
+        winner: nextSelectedCards[0],
+      });
     } else if (nextIndex >= currentCards.length) {
       setCurrentCards(nextSelectedCards);
       setSelectedCards([]);
@@ -203,14 +217,14 @@ export default function CardWorldCupScreen({ navigation, route }: any) {
 
   return (
     <Container>
-      <Progress.Bar 
-        progress={progressValue} 
-        width={screenWidth} 
+      <Progress.Bar
+        progress={progressValue}
+        width={screenWidth}
         color="#FDCE2E" // 진행된 부분의 색상
         unfilledColor="#D9D9D9" // 배경색
         borderWidth={0} // 경계선 없애기
         height={5} // Progress Bar 높이
-        style={{ marginBottom: "2%" }}
+        style={{ marginBottom: '2%' }}
       />
 
       <>

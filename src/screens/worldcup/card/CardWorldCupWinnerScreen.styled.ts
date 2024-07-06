@@ -1,4 +1,4 @@
-import { Animated } from 'react-native';
+import { Animated, TouchableOpacity } from 'react-native';
 import styled from 'styled-components/native';
 // import LottieView from 'lottie-react-native';
 
@@ -13,6 +13,13 @@ export const InfoText = styled.Text`
   font-size: 20px;
   font-weight: bold;
   margin-bottom: 10%;
+`;
+
+export const CardImgContainer = styled.View`
+  width: 200;
+  height: 300;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const CardName = styled.Text`
@@ -59,5 +66,32 @@ export const CardBenefitImportantText = styled.Text`
   color: #ffd262;
   font-weight: bold;
   font-size: 20px;
+  text-align: center;
+`;
+
+export const ButtonContainer = styled.View`
+  flex-direction: row;
+  width: 100%;
+  padding: 0 10px;
+  justify-content: space-between;
+`
+
+export const CancelButton = styled.TouchableOpacity`
+  background-color: ${(props) => props.theme.grayColor};
+  border-radius: 10px;
+  padding: 15px;
+  width: 45%;
+`;
+
+export const EnterButton = styled.TouchableOpacity`
+  background-color: transparent;
+  border-radius: 10px;
+  padding: 15px;
+  width: 100%;
+`;
+
+export const EnterText = styled.Text`
+  font-size: 15px;
+  font-weight: 700;
   text-align: center;
 `;
