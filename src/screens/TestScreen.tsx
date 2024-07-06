@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components/native';
 import axiosInstance from '../apis/axiosInstance';
-import { Taste } from '../types/taste/TasteTypes';
+import { GetTasteListResponse, Taste } from '../types/taste/TasteTypes';
 
 export default function TestScreen({ navigation }: any) {
   const [tasteList, setTasteList] = useState<Taste[]>([]);
@@ -9,9 +9,15 @@ export default function TestScreen({ navigation }: any) {
   useEffect(() => {
     const getTasteList = async () => {
       try {
-        const response = await axiosInstance.get('/api/v1/taste');
-        setTasteList(response.data.result.tasteList);
-        // console.log(response.data.result.tasteList);
+        const response = await axiosInstance.get<GetTasteListResponse>(
+          '/api/v1/taste?category=여가',
+        );
+        // console.log(response.data);
+        if (response.data.isSuccess) {
+          setTasteList(response.data.result.tasteList);
+        } else {
+          console.log('취향 이상형 월드컵 데이터 요청 실패');
+        }
       } catch (error) {
         console.error(error);
       }

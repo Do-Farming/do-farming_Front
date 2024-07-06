@@ -5,3 +5,12 @@ export interface Taste {
   tasteTag: string;
   tasteImg: string;
 }
+
+export interface GetTasteListResponse {
+  message: string;
+  code: number;
+  result: {
+    tasteList: Taste[];
+  };
+  isSuccess: boolean;
+}
