@@ -37,7 +37,9 @@ export default function BangSearchScreen({ navigation }: any) {
       {bangs &&
         bangs.map((bang, index) => (
           <BangContainer key={bang.id + bang.groupName + bang.title + index}>
-            <Bang onPress={() => navigation.navigate('BangDetail')}>
+            <Bang
+              onPress={() => navigation.navigate('BangDetail', { id: bang.id })}
+            >
               <BangInfoContainer>
                 <BangText>{bang.title}</BangText>
                 <BangNumber>

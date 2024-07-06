@@ -1,110 +1,104 @@
 import {
-    BangNumber,
-    BangParticipantContainer,
-    BoardContainer,
-    BoardContent,
-    BoardDate,
-    BoardTitle,
-    ColumnContainer,
-    Container,
-    EnterButton,
-    EnterText,
-    ParticipantContainer,
-    ParticipantName,
-    RowContainer,
-    StyledImage,
-    Title,
-    WakeUpContainer,
-    WakeUpTime,
-} from "./BangDetailScreen.styled";
-import React from "react";
+  BangNumber,
+  BangParticipantContainer,
+  BoardContainer,
+  BoardContent,
+  BoardDate,
+  BoardTitle,
+  ColumnContainer,
+  Container,
+  EnterButton,
+  EnterText,
+  ParticipantContainer,
+  ParticipantName,
+  RowContainer,
+  StyledImage,
+  Title,
+  WakeUpContainer,
+  WakeUpTime,
+} from './BangDetailScreen.styled';
+import React, { useEffect, useState } from 'react';
 
-import Icon from "react-native-vector-icons/FontAwesome";
+import Icon from 'react-native-vector-icons/FontAwesome';
+import { bangDetail } from '../../../apis/bangService';
+import { BangDetailType } from '../../../types/BangTypes';
 
-export default function BangDetailScreen({ navigation }: any) {
-    return (
+export default function BangDetailScreen({ route, navigation }: any) {
+  const { id } = route.params;
+  const [bang, setBang] = useState<BangDetailType>();
+  useEffect(() => {
+    const fetchBangDetail = async (id: number) => {
+      await bangDetail(id).then((res) => setBang(res));
+    };
+    fetchBangDetail(id);
+  }, []);
+  return (
+    <>
+      {bang && (
         <Container>
-            <RowContainer>
-                <Title>챌린지 모임모임</Title>
-                <Icon name="link" size={20} color="#4A4A4A" />
-            </RowContainer>
-            <BoardContainer>
-                <ColumnContainer>
-                    <RowContainer>
-                        <BoardTitle>갓생기</BoardTitle>
-                        <BoardDate>24.06.14</BoardDate>
-                    </RowContainer>
+          <RowContainer>
+            <Title>챌린지 모임모임</Title>
+            <Icon name="link" size={20} color="#4A4A4A" />
+          </RowContainer>
+          <BoardContainer>
+            <ColumnContainer>
+              <RowContainer>
+                <BoardTitle>{bang.title}</BoardTitle>
+                <BoardDate>
+                  {bang.createdDate[0]}.{bang.createdDate[1]}.
+                  {bang.createdDate[2]}
+                </BoardDate>
+              </RowContainer>
 
-                    <BoardContent>
-                        나 28살인디 나보다 갓생 살 자신있는넘들 덤벼라
-                    </BoardContent>
-                </ColumnContainer>
-                <WakeUpContainer>
-                    <WakeUpTime>
-                        🚨 방장이 설정한 기상시간은 7시 입니다.
-                    </WakeUpTime>
-                </WakeUpContainer>
-            </BoardContainer>
-            <Title>
-                현재 참여 인원 <BangNumber>(3/5)</BangNumber>
-            </Title>
+              <BoardContent>{bang.description}</BoardContent>
+            </ColumnContainer>
+            <WakeUpContainer>
+              <WakeUpTime>
+                🚨 방장이 설정한 기상시간은 {bang.wakeupTime}시 입니다.
+              </WakeUpTime>
+            </WakeUpContainer>
+          </BoardContainer>
+          <Title>
+            현재 참여 인원{' '}
+            <BangNumber>
+              ({bang.participantNumber}/{bang.groupNumber})
+            </BangNumber>
+          </Title>
 
-            <BangParticipantContainer
-                horizontal={true}
-                showsHorizontalScrollIndicator={false}
-            >
-                <ParticipantContainer>
-                    <StyledImage
-                        source={require("../../../assets/1.png")}
-                        width={50}
-                        height={50}
-                    ></StyledImage>
-                    <ParticipantName>양채연님</ParticipantName>
-                </ParticipantContainer>
-                <ParticipantContainer>
-                    <StyledImage
-                        source={require("../../../assets/1.png")}
-                        width={50}
-                        height={50}
-                    ></StyledImage>
-                    <ParticipantName>양채연님</ParticipantName>
-                </ParticipantContainer>
-                <ParticipantContainer>
-                    <StyledImage
-                        source={require("../../../assets/1.png")}
-                        width={50}
-                        height={50}
-                    ></StyledImage>
-                    <ParticipantName>양채연님</ParticipantName>
-                </ParticipantContainer>
-                <ParticipantContainer>
-                    <StyledImage
-                        source={require("../../../assets/1.png")}
-                        width={50}
-                        height={50}
-                    ></StyledImage>
-                    <ParticipantName>양채연님</ParticipantName>
-                </ParticipantContainer>
-                <ParticipantContainer>
-                    <StyledImage
-                        source={require("../../../assets/1.png")}
-                        width={50}
-                        height={50}
-                    ></StyledImage>
-                    <ParticipantName>양채연님</ParticipantName>
-                </ParticipantContainer>
-                <ParticipantContainer>
-                    <StyledImage
-                        source={require("../../../assets/1.png")}
-                        width={50}
-                        height={50}
-                    ></StyledImage>
-                    <ParticipantName>양채연님</ParticipantName>
-                </ParticipantContainer>
-            </BangParticipantContainer>
-            <EnterButton>
-                <EnterText>입장하기</EnterText>
-            </EnterButton>
+          <BangParticipantContainer
+            horizontal={true}
+            showsHorizontalScrollIndicator={false}
+          >
+            {bang.groupMembers.map((member, index) => (
+              <ParticipantContainer>
+                <StyledImage
+                  source={require('../../../assets/1.png')}
+                  width={50}
+                  height={50}
+                ></StyledImage>
+                <ParticipantName>{member.memberName}</ParticipantName>
+              </ParticipantContainer>
+            ))}
+          </BangParticipantContainer>
+          <EnterButton
+            status={bang.status}
+            disabled={bang.status !== 0}
+            onPress={() => {
+              if (bang.status === 0) {
+                navigation.navigate('BangJoin');
+              }
+            }}
+          >
+            <EnterText>
+              {bang.status === 0
+                ? '입장하기'
+                : bang.status === 1
+                  ? '챌린지 시작 대기중 입니다...'
+                  : '이미 진행중인 챌린지입니다.'}
+            </EnterText>
+          </EnterButton>
         </Container>
-    );
+      )}
+    </>
+  );
 }
