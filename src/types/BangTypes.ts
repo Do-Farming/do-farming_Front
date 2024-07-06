@@ -2,6 +2,10 @@ export interface BangProps {
   onPress?: () => 'void';
 }
 
+export interface BangStatus {
+  status: number;
+}
+
 export interface SelectBoxType {
   label: string;
   value: boolean | string | number;

@@ -23,7 +23,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { bangDetail } from '../../../apis/bangService';
 import { BangDetailType } from '../../../types/BangTypes';
 
-export default function BangDetailScreen({ route }: any) {
+export default function BangDetailScreen({ route, navigation }: any) {
   const { id } = route.params;
   const [bang, setBang] = useState<BangDetailType>();
   useEffect(() => {
@@ -80,13 +80,21 @@ export default function BangDetailScreen({ route }: any) {
               </ParticipantContainer>
             ))}
           </BangParticipantContainer>
-          <EnterButton>
+          <EnterButton
+            status={bang.status}
+            disabled={bang.status !== 0}
+            onPress={() => {
+              if (bang.status === 0) {
+                navigation.navigate('BangJoin');
+              }
+            }}
+          >
             <EnterText>
               {bang.status === 0
                 ? '입장하기'
                 : bang.status === 1
                   ? '챌린지 시작 대기중 입니다...'
-                  : '이미 진행중인 챌린징입니다.'}
+                  : '이미 진행중인 챌린지입니다.'}
             </EnterText>
           </EnterButton>
         </Container>
