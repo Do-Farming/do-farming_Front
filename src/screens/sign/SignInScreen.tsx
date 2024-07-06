@@ -15,7 +15,7 @@ import {
 import { login } from '../../apis/authService';
 import { useAuth } from '../../contexts/authContext';
 
-export default function SignInScreen() {
+export default function SignInScreen({ navigation }: any) {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [password, setPassword] = useState('');
   const { setIsLogin } = useAuth();
@@ -29,11 +29,11 @@ export default function SignInScreen() {
   };
 
   const handleSubmit = async () => {
-    // console.log('phoneNumber:', phoneNumber, 'password:', password);
     try {
       const response = await login({ phoneNumber, password });
-      // Handle successful login if needed, e.g., redirect to another page
+      navigation.navigate('Home');
       setIsLogin(true);
+
       console.log('Login successful:', response);
     } catch (error) {
       console.error('Login failed:', error);

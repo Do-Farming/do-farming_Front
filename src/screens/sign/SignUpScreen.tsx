@@ -13,6 +13,9 @@ import {
   TitleBox,
   ButtonText,
   LongButton,
+  MediumInput,
+  Slash,
+  LongInput,
 } from './InputForm.styled';
 
 export default function SignUpScreen() {
@@ -27,25 +30,25 @@ export default function SignUpScreen() {
         <InputBox>
           <InputContent>
             <InputLabel>이름</InputLabel>
-            <Input />
+            <Input placeholder="홍길동" />
           </InputContent>
           <InputContent>
             <InputLabel>비밀번호</InputLabel>
-            <Input />
+            <Input placeholder="대/소문자 구분 6자리 이상" secureTextEntry />
           </InputContent>
           <InputContent>
             <InputLabel>주민번호</InputLabel>
             <NonContainLabelBox>
-              <Input width="48%" />
-              <Input width="48%" />
+              <MediumInput placeholder="010203" />
+              <Slash />
+              <MediumInput placeholder="*******" secureTextEntry />
             </NonContainLabelBox>
           </InputContent>
           <InputContent>
             <InputLabel>번호</InputLabel>
             <NonContainLabelBox>
-              <Input width="74%" />
+              <LongInput placeholder="'-'를 빼고 입력해주세요" />
               <Button
-                width="22%"
                 onPress={() => {
                   setIsSended(true);
                 }}
@@ -58,8 +61,8 @@ export default function SignUpScreen() {
             <InputContent>
               <InputLabel>인증코드</InputLabel>
               <NonContainLabelBox>
-                <Input width="74%" />
-                <Button width="22%">
+                <LongInput placeholder="1234" />
+                <Button>
                   <ButtonText>확인</ButtonText>
                 </Button>
               </NonContainLabelBox>
