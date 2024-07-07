@@ -27,7 +27,6 @@ import DoFarmingInfoScreen from '../screens/product/dofarming/DoFarmingInfoScree
 import WakeupScreen from '../screens/wakeup/wakeup/WakeupScreen';
 import CameraScreen from '../screens/wakeup/camera/CameraScreen';
 import TabNavigator from './TabNavigator';
-import TestScreen from '../screens/TestScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -180,11 +179,6 @@ function StackNavigator() {
         name="WakeUpCamera"
         component={CameraScreen}
         options={{ title: '기상 인증하기' }}
-      />
-      <Stack.Screen
-        name="Test"
-        component={TestScreen}
-        options={{ title: '테스트 화면' }}
       />
     </Stack.Navigator>
   );
