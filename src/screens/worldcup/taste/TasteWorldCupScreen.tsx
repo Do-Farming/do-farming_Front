@@ -10,7 +10,7 @@ import {
   TasteTitle,
   TasteTitleContainer,
 } from './TasteWorldCupScreen.styled';
-import { Animated, Dimensions, Text } from 'react-native';
+import { Animated, Dimensions } from 'react-native';
 import * as Progress from 'react-native-progress';
 import { GetTasteListResponse, Taste } from '../../../types/taste/TasteTypes';
 import axiosInstance from '../../../apis/axiosInstance';
@@ -52,7 +52,7 @@ export default function TasteWorldCupScreen({ navigation, category }: any) {
         console.error(error);
       }
     };
-    getTasteList('여가');
+    getTasteList('음식');
   }, []);
 
   useEffect(() => {

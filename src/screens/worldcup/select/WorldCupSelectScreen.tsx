@@ -64,7 +64,7 @@ export default function WorldCupSelectScreen({ navigation }: any) {
             />
           </WorldCupSelection>
           <WorldCupSelection
-            onPress={() => navigation.navigate('CardWorldCup', { type: "CHK" })}
+            onPress={() => navigation.navigate('CardWorldCup', { type: 'CHK' })}
           >
             <WorldCupImgView>
               <Image

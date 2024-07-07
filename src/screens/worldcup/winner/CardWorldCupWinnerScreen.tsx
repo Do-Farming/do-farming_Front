@@ -26,7 +26,7 @@ export default function CardWorldCupWinnnerScreen({ route, navigation }: any) {
   const cardImageUrl =
     'https://d1c5n4ri2guedi.cloudfront.net' + winner.card_img;
 
-      // State and animated value for button color
+  // State and animated value for button color
   const [colorIndex, setColorIndex] = useState(0);
   const animatedValue = useRef(new Animated.Value(0)).current;
 
@@ -38,7 +38,7 @@ export default function CardWorldCupWinnnerScreen({ route, navigation }: any) {
           duration: 4000,
           easing: Easing.linear,
           useNativeDriver: false,
-        })
+        }),
       ).start();
     };
 
@@ -105,7 +105,13 @@ export default function CardWorldCupWinnnerScreen({ route, navigation }: any) {
           <CancelButton onPress={() => navigation.navigate('Home')}>
             <EnterText>홈으로</EnterText>
           </CancelButton>
-          <Animated.View style={{ width: "45%", borderRadius: 10, backgroundColor: interpolatedColor }}>
+          <Animated.View
+            style={{
+              width: '45%',
+              borderRadius: 10,
+              backgroundColor: interpolatedColor,
+            }}
+          >
             <EnterButton onPress={() => navigation.navigate('GenerateCard')}>
               <EnterText>나만의 카드 생성</EnterText>
             </EnterButton>
