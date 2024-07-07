@@ -69,6 +69,7 @@ export const EnterButton = styled.TouchableOpacity<BangProps>`
   background-color: ${(props) => props.theme.mainColor};
   border-radius: 10px;
   padding: 15px;
+  margin-horizontal: 20px;
   margin-bottom: 80px;
 `;
 
