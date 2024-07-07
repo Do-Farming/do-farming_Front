@@ -14,6 +14,7 @@ import {
 } from './InputForm.styled';
 import { login } from '../../apis/authService';
 import { useAuth } from '../../contexts/authContext';
+import { Button } from 'react-native';
 
 export default function SignInScreen({ navigation }: any) {
   const [phoneNumber, setPhoneNumber] = useState('');
@@ -69,6 +70,10 @@ export default function SignInScreen({ navigation }: any) {
         <LongButton onPress={handleSubmit}>
           <ButtonText>로그인</ButtonText>
         </LongButton>
+        <Button
+          title="회원가입 페이지로"
+          onPress={() => navigation.navigate('SignUp')}
+        />
       </ButtonBox>
     </Container>
   );
