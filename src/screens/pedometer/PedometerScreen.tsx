@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, TextInput } from 'react-native';
 import { Pedometer } from 'expo-sensors';
 import * as Application from 'expo-application';
 import {
@@ -22,6 +22,8 @@ import {
   ProfileImage,
   ProgressLabelText,
 } from './PedometerScreen.styled';
+import { ApiResponse, PedometerResponse } from '../../types';
+import axiosInstance from '../../apis/axiosInstance';
 import { RunIcon } from '../../assets';
 
 export default function PedometerScreen() {
@@ -29,9 +31,11 @@ export default function PedometerScreen() {
   const [pastStepCount, setPastStepCount] = useState(0);
   const [currentStepCount, setCurrentStepCount] = useState(0);
   const [deviceId, setDeviceId] = useState<string | null>(null);
+  const [users, setUsers] = useState<PedometerResponse[]>([]);
   const [visibleLabelIndex, setVisibleLabelIndex] = useState<number | null>(
     null,
   );
+  const [inputSteps, setInputSteps] = useState<string>('');
 
   useEffect(() => {
     const getDeviceId = async () => {
@@ -56,6 +60,7 @@ export default function PedometerScreen() {
         );
         if (pastStepCountResult) {
           setPastStepCount(pastStepCountResult.steps);
+          postPedometerData(pastStepCountResult.steps);
         }
 
         const subscription = Pedometer.watchStepCount((result) => {
@@ -81,43 +86,41 @@ export default function PedometerScreen() {
     };
   }, []);
 
-  const users = [
-    {
-      rank: 1,
-      name: '변정흠',
-      steps: 9000,
-      achieved: '11/12 달성',
-      rate: '이율 3.5%',
-    },
-    {
-      rank: 2,
-      name: '변정합',
-      steps: 8000,
-      achieved: '11/12 달성',
-      rate: '이율 3.5%',
-    },
-    {
-      rank: 3,
-      name: '변정헙',
-      steps: 7000,
-      achieved: '11/12 달성',
-      rate: '이율 3.5%',
-    },
-    {
-      rank: 4,
-      name: '변정홉',
-      steps: 5000,
-      achieved: '11/12 달성',
-      rate: '이율 3.5%',
-    },
-    {
-      rank: 5,
-      name: '변정훕',
-      steps: pastStepCount,
-      achieved: '11/13 달성',
-      rate: '이율 3.5%',
-    },
-  ];
+  useEffect(() => {
+    const fetchPedometerData = async (groupId: string) => {
+      try {
+        const response = await axiosInstance.get<
+          ApiResponse<PedometerResponse[]>
+        >(`/pedometer/get?groupId=${2}`);
+        console.log(response);
+
+        if (response.data.isSuccess) {
+          setUsers(response.data.result);
+        }
+      } catch (error) {
+        console.error('Failed to fetch pedometer data:', error);
+      }
+    };
+
+    if (deviceId) {
+      fetchPedometerData(deviceId);
+    }
+  }, [deviceId]);
+
+  const postPedometerData = async (steps: number) => {
+    try {
+      await axiosInstance.post(`/pedometer/post?step=${steps}`);
+    } catch (error) {
+      console.error('Failed to post pedometer data:', error);
+    }
+  };
+
+  const handlePostSteps = () => {
+    const steps = parseInt(inputSteps);
+    if (!isNaN(steps)) {
+      postPedometerData(steps);
+    }
+  };
 
   const progress = (pastStepCount / 10000) * 100;
 
@@ -140,7 +143,7 @@ export default function PedometerScreen() {
           <ProgressSmallHeader>
             총 걸음 수 <StepCount>{pastStepCount}</StepCount> 걸음
           </ProgressSmallHeader>
-          <Text>06.18.14:31 기준</Text>
+          <Text>07.07.11:12 기준</Text>
           <Text>Sensor: {isPedometerAvailable}</Text>
           <Text>24시간 걸음 수: {pastStepCount}</Text>
           <Text>실시간 걸음 수: {currentStepCount}</Text>
@@ -149,7 +152,7 @@ export default function PedometerScreen() {
             {users.map((user, index) => (
               <PinContainer
                 key={index}
-                style={{ left: `${(user.steps / 10000) * 100}%` }}
+                style={{ left: `${(user.step / 10000) * 100}%` }}
               >
                 <TouchableOpacity onPress={() => toggleLabelVisibility(index)}>
                   <RunIcon style={{ marginTop: -5 }} />
@@ -167,13 +170,13 @@ export default function PedometerScreen() {
       <UserList>
         {users.map((user, index) => (
           <UserCard key={index}>
-            <RankNumber>{user.rank}</RankNumber>
+            <RankNumber>{index + 1}</RankNumber>
             <ProfileImage source={require('../../assets/profile.png')} />
             <View>
               <UserName>{user.name}</UserName>
-              <AchievedGoal>{user.achieved}</AchievedGoal>
+              <AchievedGoal>{`${user.step} 걸음`}</AchievedGoal>
             </View>
-            <InterestRate>{user.rate}</InterestRate>
+            <InterestRate>{`이율 ${user.rate}%`}</InterestRate>
           </UserCard>
         ))}
       </UserList>
