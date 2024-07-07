@@ -4,6 +4,8 @@ import { Ionicons } from '@expo/vector-icons';
 import HomeScreen from '../screens/home/HomeScreen';
 import ExploreScreen from '../screens/ExploreScreen';
 import ExampleScreen from '../screens/ExampleScreen';
+import HanaMain from '../screens/hana/HanaMainScreen';
+import HanaMainScreen from '../screens/hana/HanaMainScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -27,8 +29,8 @@ function TabNavigator() {
       })}
     >
       <Tab.Screen
-        name="Home"
-        component={HomeScreen}
+        name="HanaMain"
+        component={HanaMainScreen}
         options={{ title: 'Do! Farming', headerShown: false }}
       />
       <Tab.Screen

@@ -57,7 +57,7 @@ const Pagination2: React.FC<{ length: number; currentIndex2: number }> = ({
   </PaginationContainer>
 );
 
-export default function HanaMain() {
+export default function HanaMainScreen() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [currentIndex2, setCurrentIndex2] = useState(0);
   const { isLogin } = useAuth();
