@@ -2,10 +2,10 @@ import * as React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
 import HomeScreen from '../screens/home/HomeScreen';
-import ExploreScreen from '../screens/ExploreScreen';
-import ExampleScreen from '../screens/ExampleScreen';
-import HanaMain from '../screens/hana/HanaMainScreen';
 import HanaMainScreen from '../screens/hana/HanaMainScreen';
+import MyPageScreen from '../screens/mypage/MyPageScreen';
+import WorldCupInfoScreen from '../screens/worldcup/information/WorldCupInfoScreen';
+import ExampleScreen from '../screens/ExampleScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -34,14 +34,23 @@ function TabNavigator() {
         options={{ title: 'Do! Farming', headerShown: false }}
       />
       <Tab.Screen
-        name="Explore"
-        component={ExploreScreen}
-        options={{ title: 'Explore Screen' }}
+        name="DoFarmingMain"
+        component={HomeScreen}
+        options={{ headerTransparent: true, headerTitle: '' }}
       />
       <Tab.Screen
-        name="Example"
+        name="작업용"
         component={ExampleScreen}
-        options={{ title: 'Example Screen' }}
+        options={{ headerTransparent: true, headerTitle: '' }}
+      />
+      <Tab.Screen
+        name="이상형 월드컵"
+        component={WorldCupInfoScreen}
+      />
+      <Tab.Screen
+        name="마이페이지"
+        component={MyPageScreen}
+        options={{ headerTransparent: true, headerTitle: '' }}
       />
     </Tab.Navigator>
   );

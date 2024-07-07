@@ -44,7 +44,6 @@ function StackNavigator() {
         component={HanaMainScreen}
         options={{ title: '하나은행 메인화면' }}
       />
-
       <Stack.Screen
         name="SignIn"
         component={SignInScreen}

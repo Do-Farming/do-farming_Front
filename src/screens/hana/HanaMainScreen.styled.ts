@@ -152,7 +152,7 @@ export const PaginationDot = styled.View<PaginationDotProps>`
   box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1);
 `;
 
-export const Button = styled.View<ButtonProps>`
+export const Button = styled.TouchableOpacity<ButtonProps>`
   justify-content: center;
   align-items: center;
   padding: 10px 20px;
