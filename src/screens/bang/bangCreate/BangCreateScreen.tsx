@@ -105,7 +105,7 @@ export default function BangCreateScreen({ navigation }: any) {
   const onPressBangCreate = () => {
     bangCreate(bang);
     setIsModalVisible(false);
-    navigation.navigate('BangSearch');
+    navigation.navigate('ProductPassword');
   };
 
   return (
@@ -248,7 +248,7 @@ export default function BangCreateScreen({ navigation }: any) {
       <CustomModal
         isVisible={isModalVisible}
         onClose={onPressModalClose}
-        text={'챌린지 방이 생성되었습니다'}
+        text={'해당 상품의 계좌 비밀번호 설정페이지로 이동합니다.'}
       >
         <ModalButton onPress={onPressBangCreate}>
           <ModalButtonText>확인</ModalButtonText>
