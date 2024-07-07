@@ -20,11 +20,23 @@ import {
   wakeupTimeList,
 } from '../../../constants/SelectBox';
 import CustomModal from '../../../components/CustomModal/CustomModal';
+import { bangCreate } from '../../../apis/bangService';
+import { BangType, SelectBoxType } from '../../../types/BangTypes';
+import { InfoText } from '../bangJoin/BangJoinScreen.styled';
+import { getChecking } from '../../../apis/accountService';
+import { CheckingAccount } from '../../../types/account/AccountTypes';
+import { accountList } from '../../../mocks/userAccount';
 
 export default function BangCreateScreen({ navigation }: any) {
   const [personOpen, setPersonOpen] = useState(false);
   const [disclosureOpen, setDisclosureOpen] = useState(false);
   const [waketimeOpen, setWaketimeOpen] = useState(false);
+
+  const [myChecking, setMyChecking] = useState<CheckingAccount[]>();
+  const [userAccountList, setUserAccountList] = useState<SelectBoxType[]>([]);
+
+  const [accountOpen, setAccountOpen] = useState<boolean>(false);
+  const [outAccount, setOutAccount] = useState<string>('');
 
   const debouncedSetBang = debounce((name, value) => {
     setBang((prevBang) => ({
@@ -40,17 +52,17 @@ export default function BangCreateScreen({ navigation }: any) {
     debouncedSetBang(name, value);
   };
 
-  const [recruitNum, setRecruitNum] = useState(null);
-  const [wakeupTime, setWakeupTime] = useState(null);
-  const [disclosure, setDisclosure] = useState(null);
+  const [recruitNum, setRecruitNum] = useState<number>(0);
+  const [wakeupTime, setWakeupTime] = useState<string>('');
+  const [disclosure, setDisclosure] = useState<boolean>(false);
 
-  const [bang, setBang] = useState({
-    groupName: null,
+  const [bang, setBang] = useState<BangType>({
+    groupName: '',
     groupNumber: recruitNum,
-    title: null,
-    desc: null,
+    title: '',
+    desc: '',
     wakeupTime: wakeupTime,
-    public: disclosure,
+    isPublic: disclosure,
   });
 
   useEffect(() => {
@@ -58,9 +70,26 @@ export default function BangCreateScreen({ navigation }: any) {
       ...prevBang,
       groupNumber: recruitNum,
       wakeupTime: wakeupTime,
-      public: disclosure,
+      isPublic: disclosure,
     }));
   }, [recruitNum, wakeupTime, disclosure]);
+
+  useEffect(() => {
+    const fetchMyChecking = async () => {
+      await getChecking().then((res) => setMyChecking(res));
+    };
+    fetchMyChecking();
+  }, []);
+
+  useEffect(() => {
+    if (myChecking && myChecking.length > 0) {
+      const updatedUserAccountList = myChecking.map((element) => ({
+        label: `하나은행 ${element.accountNumber}`,
+        value: element.accountNumber,
+      }));
+      setUserAccountList(updatedUserAccountList);
+    }
+  }, [myChecking]);
 
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
 
@@ -73,9 +102,10 @@ export default function BangCreateScreen({ navigation }: any) {
     setIsModalVisible(false);
   };
 
-  const onPressBangJoin = () => {
+  const onPressBangCreate = () => {
+    bangCreate(bang);
     setIsModalVisible(false);
-    navigation.navigate('BangJoin');
+    navigation.navigate('BangSearch');
   };
 
   return (
@@ -180,16 +210,47 @@ export default function BangCreateScreen({ navigation }: any) {
           />
         </InputContainer>
       </BoardContainer>
+      <BoardContainer style={{ zIndex: 1000 }}>
+        <InputContainer style={{ zIndex: 1000 }}>
+          {accountList && (
+            <>
+              <InputTitle>출금할 계좌를 선택해주세요.</InputTitle>
+              <DropDownPicker
+                open={accountOpen}
+                value={outAccount}
+                items={userAccountList}
+                setOpen={setAccountOpen}
+                setValue={setOutAccount}
+                placeholder="출금 계좌를 선택하세요"
+                listMode="SCROLLVIEW"
+                maxHeight={100}
+                dropDownDirection="BOTTOM"
+                placeholderStyle={{ color: '#CCCCCC' }}
+                style={{
+                  backgroundColor: '#f2f2f5',
+                  borderWidth: 0,
+                }}
+                dropDownContainerStyle={{
+                  borderWidth: 1,
+                  borderColor: '#EEEEEE',
+                  zIndex: 2000,
+                }}
+              />
+            </>
+          )}
+        </InputContainer>
+        <InfoText>🚨 상품 가입 금액은 1,000,000원 입니다.</InfoText>
+      </BoardContainer>
 
       <EnterButton onPressOut={onPressModalOpen} style={{ zIndex: 500 }}>
-        <EnterText>입장하기</EnterText>
+        <EnterText>생성하기</EnterText>
       </EnterButton>
       <CustomModal
         isVisible={isModalVisible}
         onClose={onPressModalClose}
-        text={'챌린지 시작 전 \n상품 가입을 진행합니다.'}
+        text={'챌린지 방이 생성되었습니다'}
       >
-        <ModalButton onPress={onPressBangJoin}>
+        <ModalButton onPress={onPressBangCreate}>
           <ModalButtonText>확인</ModalButtonText>
         </ModalButton>
       </CustomModal>

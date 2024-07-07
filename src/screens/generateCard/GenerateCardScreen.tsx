@@ -1,7 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { SafeAreaView } from '../home/HomeScreen.styled';
 import {
   Container
-} from '../worldcup/card/CardWorldCupWinnerScreen.styled';
+} from '../worldcup/winner/CardWorldCupWinnerScreen.styled';
 import { Animated, Easing, Image, TouchableOpacity, View } from 'react-native';
 import {
   EnterText,
@@ -23,7 +24,6 @@ import {
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import axiosInstance from '../../apis/axiosInstance';
 import { ChipIcon, DoFarmingIcon } from '../../assets';
-import { SafeAreaView } from '../home/HomeScreen.styled';
 
 const styles = ['선택 없음', '동양풍', '만화책', '귀엽게'];
 

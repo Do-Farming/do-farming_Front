@@ -24,6 +24,7 @@ export const ProfileImage = styled.Image`
   width: 64px;
   height: 64px;
   border-radius: 25px;
+  object-fit: contain;
 `;
 
 export const ProfileName = styled.Text`

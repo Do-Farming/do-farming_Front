@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import HanaMainScreen from '../screens/hana/HanaMainScreen';
 import SignInScreen from '../screens/sign/SignInScreen';
 import SignUpScreen from '../screens/sign/SignUpScreen';
 import MyPageScreen from '../screens/mypage/MyPageScreen';
@@ -12,12 +13,12 @@ import CompetitiveScreen from '../screens/compation/CompetitiveScreen';
 import ProductSignUpScreen from '../screens/product/ProductSignUpScreen';
 import ProductPasswordScreen from '../screens/product/auth/ProductPasswordScreen';
 import ProductSignInScreen from '../screens/product/complete/ProductSignInScreen';
-import HanaMain from '../screens/hana/HanaMainScreen';
 import { SendMoneyScreen } from '../screens/bankingService/SendMoneyScreen';
-import WorldCupSelectScreen from '../screens/worldcup/WorldCupSelectScreen';
-import WorldcupInfoScreen from '../screens/worldcup/WorldCupInfoScreen';
+import WorldCupInfoScreen from '../screens/worldcup/information/WorldCupInfoScreen';
+import WorldCupSelectScreen from '../screens/worldcup/select/WorldCupSelectScreen';
 import CardWorldCupScreen from '../screens/worldcup/card/CardWorldCupScreen';
-import CardWorldCupWinnnerScreen from '../screens/worldcup/card/CardWorldCupWinnerScreen';
+import TasteWorldCupScreen from '../screens/worldcup/taste/TasteWorldCupScreen';
+import CardWorldCupWinnnerScreen from '../screens/worldcup/winner/CardWorldCupWinnerScreen';
 import GenerateCardScreen from '../screens/generateCard/GenerateCardScreen';
 import QuizScreen from '../screens/quiz/QuizScreen';
 import ImageCreationScreen from '../screens/imageCreation/ImageCreationScreen';
@@ -26,6 +27,7 @@ import DoFarmingInfoScreen from '../screens/product/dofarming/DoFarmingInfoScree
 import WakeupScreen from '../screens/wakeup/wakeup/WakeupScreen';
 import CameraScreen from '../screens/wakeup/camera/CameraScreen';
 import TabNavigator from './TabNavigator';
+import BangJoinScreen2 from '../screens/bang/bangJoin/BangJoinScreen2';
 
 const Stack = createNativeStackNavigator();
 
@@ -36,6 +38,11 @@ function StackNavigator() {
         name="Tabs"
         component={TabNavigator}
         options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="HanaMain"
+        component={HanaMainScreen}
+        options={{ title: '하나은행 메인화면' }}
       />
       <Stack.Screen
         name="SignIn"
@@ -78,6 +85,11 @@ function StackNavigator() {
         options={{ title: '도파밍 상품 가입' }}
       />
       <Stack.Screen
+        name="BangJoin2"
+        component={BangJoinScreen2}
+        options={{ title: '도파밍 상품 가입2' }}
+      />
+      <Stack.Screen
         name="Competitive"
         component={CompetitiveScreen}
         options={{ title: 'Competitive' }}
@@ -97,16 +109,21 @@ function StackNavigator() {
         component={ProductSignInScreen}
         options={{ title: '가입완료' }}
       />
-      <Stack.Screen
-        name="HanaMain"
-        component={HanaMain}
-        options={{ title: '하나은행 메인화면' }}
-      />
+
       <Stack.Screen
         name="SendMoney"
         component={SendMoneyScreen}
         options={{
           title: '송금',
+          headerTransparent: true,
+          headerTitle: '',
+        }}
+      />
+      <Stack.Screen
+        name="WorldCupInfo"
+        component={WorldCupInfoScreen}
+        options={{
+          title: '이상형 월드컵 소개',
           headerTransparent: true,
           headerTitle: '',
         }}
@@ -122,17 +139,8 @@ function StackNavigator() {
       />
       <Stack.Screen
         name="TasteWorldCup"
-        component={WorldCupSelectScreen}
-        options={{ headerTransparent: false, headerTitle: '' }}
-      />
-      <Stack.Screen
-        name="WorldCupInfo"
-        component={WorldcupInfoScreen}
-        options={{
-          title: '이상형 월드컵 소개',
-          headerTransparent: true,
-          headerTitle: '',
-        }}
+        component={TasteWorldCupScreen}
+        options={{ title: '취향 이상형 월드컵' }}
       />
       <Stack.Screen
         name="CardWorldCup"
@@ -142,7 +150,7 @@ function StackNavigator() {
       <Stack.Screen
         name="CardWorldCupWinner"
         component={CardWorldCupWinnnerScreen}
-        options={{ headerTransparent: true, headerTitle: ''  }}
+        options={{ headerTransparent: true, headerTitle: '' }}
       />
       <Stack.Screen
         name="GenerateCard"

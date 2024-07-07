@@ -15,8 +15,8 @@ export const InfoText = styled.Text`
 `;
 
 export const CardImgContainer = styled.View`
-  width: 200;
-  height: 300;
+  width: 200px;
+  height: 300px;
   justify-content: center;
   align-items: center;
 `;
@@ -73,7 +73,7 @@ export const ButtonContainer = styled.View`
   width: 100%;
   padding: 0 10px;
   justify-content: space-between;
-`
+`;
 
 export const CancelButton = styled.TouchableOpacity`
   background-color: ${(props) => props.theme.grayColor};

@@ -19,6 +19,7 @@ import {
 import CardImage from '../../../components/CardImage/CardImage';
 import { SafeAreaView } from '../../home/HomeScreen.styled';
 import { Animated, Easing } from 'react-native';
+import { CardLottieView } from '../../generateCard/GenerateCardScreen.styled';
 
 export default function CardWorldCupWinnnerScreen({ route, navigation }: any) {
   const { winner } = route.params;
@@ -34,7 +35,7 @@ export default function CardWorldCupWinnnerScreen({ route, navigation }: any) {
           duration: 4000,
           easing: Easing.linear,
           useNativeDriver: false,
-        })
+        }),
       ).start();
     };
 
@@ -60,12 +61,12 @@ export default function CardWorldCupWinnnerScreen({ route, navigation }: any) {
   return (
     <SafeAreaView>
       <Container>
-        {/* <CardLottieView
+        <CardLottieView
         source={require('../../../assets/worldcup/confetti.json')}
         autoPlay={true}
         loop={false}
         resizeMode="cover"
-      /> */}
+      />
         <InfoText>추천해주는 카드는! 🧚‍♂️</InfoText>
         <CardImgContainer>
           <CardImage uri={cardImageUrl} ImgWidth={200} ImgHeight={300} />
@@ -97,7 +98,13 @@ export default function CardWorldCupWinnnerScreen({ route, navigation }: any) {
           <CancelButton onPress={() => navigation.navigate('Home')}>
             <EnterText>홈으로</EnterText>
           </CancelButton>
-          <Animated.View style={{ width: "45%", borderRadius: 10, backgroundColor: interpolatedColor }}>
+          <Animated.View
+            style={{
+              width: '45%',
+              borderRadius: 10,
+              backgroundColor: interpolatedColor,
+            }}
+          >
             <EnterButton onPress={() => navigation.navigate('GenerateCard')}>
               <EnterText>나만의 카드 생성</EnterText>
             </EnterButton>

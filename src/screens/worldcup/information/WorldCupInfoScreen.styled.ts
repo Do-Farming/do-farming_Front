@@ -6,8 +6,7 @@ export const Container = styled.View`
   background-color: #ffffff;
 `;
 
-export const ScrollViewContainer = styled.ScrollView`
-`
+export const ScrollViewContainer = styled.ScrollView``;
 
 export const WorldCupInfoImgContainer = styled.View`
   width: 100%;
