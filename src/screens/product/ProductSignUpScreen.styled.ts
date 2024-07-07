@@ -10,6 +10,12 @@ export const GreenBackground = styled.View`
   padding: 20px;
 `;
 
+export const YellowBackground = styled.View`
+  background-color: ${(props) => props.theme.mainColor};
+  padding: 20px;
+  padding: 20px;
+`;
+
 export const Header = styled.Text`
   color: white;
   font-weight: bold;
@@ -50,10 +56,11 @@ export const ProductName = styled.Text`
 `;
 
 export const BenefitContainer = styled.View`
-  background-color: #f2f2f2;
+  background-color: white;
   padding: 15px;
   border-radius: 10px;
   margin-bottom: 20px;
+  box-shadow: 0px 4px 4px rgba(77, 77, 77, 0.25);
 `;
 
 export const AmountContainer = styled.View`
@@ -79,10 +86,11 @@ export const HighlightedText = styled.Text`
   font-size: 16px;
   color: ${(props) => props.theme.hanaMainColor};
   margin-bottom: 10px;
+  color: ##ffc603;
 `;
 
 export const SignUpButton = styled.TouchableOpacity`
-  background-color: ${(props) => props.theme.hanaMainColor};
+  background-color: ${(props) => props.theme.mainColor};
   padding: 15px;
   border-radius: 15px;
   position: absolute;

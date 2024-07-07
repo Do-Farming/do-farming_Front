@@ -28,6 +28,7 @@ import DoFarmingInfoScreen from '../screens/product/dofarming/DoFarmingInfoScree
 import WakeupScreen from '../screens/wakeup/wakeup/WakeupScreen';
 import CameraScreen from '../screens/wakeup/camera/CameraScreen';
 import TabNavigator from './TabNavigator';
+import BangJoinScreen2 from '../screens/bang/bangJoin/BangJoinScreen2';
 
 const Stack = createNativeStackNavigator();
 
@@ -83,6 +84,11 @@ function StackNavigator() {
         name="BangJoin"
         component={BangJoinScreen}
         options={{ title: '도파밍 상품 가입' }}
+      />
+      <Stack.Screen
+        name="BangJoin2"
+        component={BangJoinScreen2}
+        options={{ title: '도파밍 상품 가입2' }}
       />
       <Stack.Screen
         name="Competitive"
