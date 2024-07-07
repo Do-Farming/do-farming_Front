@@ -19,7 +19,7 @@ export const BoardContainer = styled.View`
   background-color: ${(props) => props.theme.whiteColor};
   min-height: 210px;
   margin-top: 20px;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   border-radius: 10px;
   box-shadow: 0px 4px 4px rgba(77, 77, 77, 0.25);
   padding: 20px;
@@ -69,7 +69,6 @@ export const EnterButton = styled.TouchableOpacity<BangProps>`
   background-color: ${(props) => props.theme.mainColor};
   border-radius: 10px;
   padding: 15px;
-  margin-horizontal: 20px;
   margin-bottom: 80px;
 `;
 
