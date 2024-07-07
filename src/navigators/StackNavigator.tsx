@@ -123,7 +123,7 @@ function StackNavigator() {
         }}
       />
       <Stack.Screen
-        name="WorldCup"
+        name="WorldCupSelect"
         component={WorldCupSelectScreen}
         options={{
           title: '이상형 월드컵 선택',

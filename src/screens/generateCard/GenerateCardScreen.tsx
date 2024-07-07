@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
+import { SafeAreaView } from '../home/HomeScreen.styled';
 import {
   Container,
   InfoText,
-} from '../worldcup/card/CardWorldCupWinnerScreen.styled';
+} from '../worldcup/winner/CardWorldCupWinnerScreen.styled';
 import { Image } from 'react-native';
 import {
   EnterText,
@@ -16,7 +17,6 @@ import {
   TextArea,
 } from './GenerateCardScreen.styled';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { SafeAreaView } from '../home/HomeScreen.styled';
 
 export default function GenerateCardScreen({ route }: any) {
   const [imgDesc, setImgDesc] = useState('');
