@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { View, Text, TouchableOpacity, TextInput } from 'react-native';
 import { Pedometer } from 'expo-sensors';
 import * as Application from 'expo-application';
@@ -36,7 +36,25 @@ export default function PedometerScreen() {
     null,
   );
   const [inputSteps, setInputSteps] = useState<string>('');
+  const ws = useRef<WebSocket | null>(null);
 
+  // 특정 groupId에 대한 만보기 데이터를 가져오는 함수
+  const fetchPedometerData = async (groupId: string) => {
+    try {
+      const response = await axiosInstance.get<
+        ApiResponse<PedometerResponse[]>
+      >(`/pedometer/get?groupId=${2}`);
+      console.log(response);
+
+      if (response.data.isSuccess) {
+        setUsers(response.data.result);
+      }
+    } catch (error) {
+      console.error('만보기 데이터를 가져오는 데 실패했습니다:', error);
+    }
+  };
+
+  // 디바이스 ID를 설정하고 만보기 업데이트를 구독하는 useEffect 훅
   useEffect(() => {
     const getDeviceId = async () => {
       const id = await Application.getIosIdForVendorAsync();
@@ -52,7 +70,7 @@ export default function PedometerScreen() {
       if (isAvailable) {
         const end = new Date();
         const start = new Date();
-        start.setHours(0, 0, 0, 0); // Set startDate to the beginning of the day
+        start.setHours(0, 0, 0, 0); // start를 하루의 시작으로 설정
 
         const pastStepCountResult = await Pedometer.getStepCountAsync(
           start,
@@ -86,35 +104,54 @@ export default function PedometerScreen() {
     };
   }, []);
 
+  // WebSocket을 통해 실시간으로 데이터를 업데이트하는 useEffect 훅
   useEffect(() => {
-    const fetchPedometerData = async (groupId: string) => {
-      try {
-        const response = await axiosInstance.get<
-          ApiResponse<PedometerResponse[]>
-        >(`/pedometer/get?groupId=${2}`);
-        console.log(response);
-
-        if (response.data.isSuccess) {
-          setUsers(response.data.result);
-        }
-      } catch (error) {
-        console.error('Failed to fetch pedometer data:', error);
-      }
-    };
-
     if (deviceId) {
       fetchPedometerData(deviceId);
+
+      ws.current = new WebSocket('ws://172.30.1.71/pedometer');
+
+      ws.current.onopen = () => {
+        console.log('WebSocket 연결이 열렸습니다');
+      };
+
+      ws.current.onmessage = (e) => {
+        const updatedUser = JSON.parse(e.data);
+        setUsers((prevUsers) =>
+          prevUsers.map((user) =>
+            user.name === updatedUser.name ? updatedUser : user,
+          ),
+        );
+      };
+
+      ws.current.onclose = () => {
+        console.log('WebSocket 연결이 닫혔습니다');
+      };
+
+      return () => {
+        if (ws.current) {
+          ws.current.close();
+        }
+      };
     }
   }, [deviceId]);
 
+  // 만보기 데이터를 서버에 POST하는 함수
   const postPedometerData = async (steps: number) => {
     try {
-      await axiosInstance.post(`/pedometer/post?step=${steps}`);
+      const response = await axiosInstance.post(
+        `/pedometer/post?step=${steps}`,
+      );
+      if (response.data.isSuccess) {
+        // POST 요청이 성공하면 데이터를 다시 가져옵니다.
+        fetchPedometerData(deviceId);
+      }
     } catch (error) {
-      console.error('Failed to post pedometer data:', error);
+      console.error('만보기 데이터를 전송하는 데 실패했습니다:', error);
     }
   };
 
+  // 사용자가 입력한 걸음 수를 서버에 전송하는 함수
   const handlePostSteps = () => {
     const steps = parseInt(inputSteps);
     if (!isNaN(steps)) {
@@ -128,6 +165,7 @@ export default function PedometerScreen() {
     setVisibleLabelIndex((prevIndex) => (prevIndex === index ? null : index));
   };
 
+  // 랜덤 색상을 반환하는 함수
   const getRandomColor = () => {
     const colors = ['#ffafaf', '#ffd700', '#90ee90', '#add8e6', '#ff69b4'];
     return colors[Math.floor(Math.random() * colors.length)];
