@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { SafeAreaView } from '../home/HomeScreen.styled';
 import {
-  Container,
   InfoText,
-} from '../worldcup/winner/CardWorldCupWinnerScreen.styled';
+  Container,
+} from '../worldcup/card/CardWorldCupScreen.styled';
 import { Image } from 'react-native';
 import {
   EnterText,

@@ -1,7 +1,6 @@
 import React from 'react';
 import {
   BoldText,
-  CautionText,
   Container,
   InfoTextView,
   WorldCulSelectionDetail,
@@ -11,7 +10,7 @@ import {
   WorldCupSelectionText,
   WorldCupSelectionView,
   WorldCupTextView,
-} from './SelectCategoryScreen.styled';
+} from '../../select/WorldCupSelectScreen.styled';
 import { Image } from 'react-native';
 
 export default function SelectCategoryScreen({ navigation }: any) {
@@ -21,7 +20,9 @@ export default function SelectCategoryScreen({ navigation }: any) {
         <BoldText>Category를 선택하세요 🧚‍♂️</BoldText>
         <WorldCupSelectionView>
           <WorldCupSelection
-            onPress={() => navigation.navigate('TasteWorldCup')}
+            onPress={() =>
+              navigation.navigate('TasteWorldCup', { category: '음식' })
+            }
           >
             <WorldCupImgView>
               <Image
@@ -41,7 +42,9 @@ export default function SelectCategoryScreen({ navigation }: any) {
             />
           </WorldCupSelection>
           <WorldCupSelection
-            onPress={() => navigation.navigate('CardWorldCup', { type: 'CRD' })}
+            onPress={() =>
+              navigation.navigate('TasteWorldCup', { category: '여가' })
+            }
           >
             <WorldCupImgView>
               <Image

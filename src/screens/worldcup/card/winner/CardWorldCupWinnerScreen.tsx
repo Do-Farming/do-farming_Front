@@ -17,9 +17,9 @@ import {
   EnterButton,
   EnterText,
 } from './CardWorldCupWinnerScreen.styled';
-import CardImage from '../../../components/CardImage/CardImage';
-import { SafeAreaView } from '../../home/HomeScreen.styled';
+import CardImage from '../../../../components/CardImage/CardImage';
 import { Animated, Easing } from 'react-native';
+import { SafeAreaView } from '../../../home/HomeScreen.styled';
 
 export default function CardWorldCupWinnnerScreen({ route, navigation }: any) {
   const { winner } = route.params;
