@@ -14,10 +14,11 @@ import ProductPasswordScreen from '../screens/product/auth/ProductPasswordScreen
 import ProductSignInScreen from '../screens/product/complete/ProductSignInScreen';
 import HanaMain from '../screens/hana/HanaMainScreen';
 import { SendMoneyScreen } from '../screens/bankingService/SendMoneyScreen';
-import WorldCupSelectScreen from '../screens/worldcup/WorldCupSelectScreen';
-import WorldcupInfoScreen from '../screens/worldcup/WorldCupInfoScreen';
+import WorldCupInfoScreen from '../screens/worldcup/information/WorldCupInfoScreen';
+import WorldCupSelectScreen from '../screens/worldcup/select/WorldCupSelectScreen';
 import CardWorldCupScreen from '../screens/worldcup/card/CardWorldCupScreen';
-import CardWorldCupWinnnerScreen from '../screens/worldcup/card/CardWorldCupWinnerScreen';
+import TasteWorldCupScreen from '../screens/worldcup/taste/TasteWorldCupScreen';
+import CardWorldCupWinnnerScreen from '../screens/worldcup/winner/CardWorldCupWinnerScreen';
 import GenerateCardScreen from '../screens/generateCard/GenerateCardScreen';
 import QuizScreen from '../screens/quiz/QuizScreen';
 import ImageCreationScreen from '../screens/imageCreation/ImageCreationScreen';
@@ -27,7 +28,6 @@ import WakeupScreen from '../screens/wakeup/wakeup/WakeupScreen';
 import CameraScreen from '../screens/wakeup/camera/CameraScreen';
 import TabNavigator from './TabNavigator';
 import TestScreen from '../screens/TestScreen';
-import TasteWorldCupScreen from '../screens/worldcup/card/TasteWorldCupScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -115,7 +115,7 @@ function StackNavigator() {
       />
       <Stack.Screen
         name="WorldCupInfo"
-        component={WorldcupInfoScreen}
+        component={WorldCupInfoScreen}
         options={{
           title: '이상형 월드컵 소개',
           headerTransparent: true,
