@@ -14,10 +14,11 @@ import ProductPasswordScreen from '../screens/product/auth/ProductPasswordScreen
 import ProductSignInScreen from '../screens/product/complete/ProductSignInScreen';
 import HanaMain from '../screens/hana/HanaMainScreen';
 import { SendMoneyScreen } from '../screens/bankingService/SendMoneyScreen';
-import WorldCupSelectScreen from '../screens/worldcup/WorldCupSelectScreen';
-import WorldcupInfoScreen from '../screens/worldcup/WorldCupInfoScreen';
+import WorldCupInfoScreen from '../screens/worldcup/information/WorldCupInfoScreen';
+import WorldCupSelectScreen from '../screens/worldcup/select/WorldCupSelectScreen';
 import CardWorldCupScreen from '../screens/worldcup/card/CardWorldCupScreen';
-import CardWorldCupWinnnerScreen from '../screens/worldcup/card/CardWorldCupWinnerScreen';
+import TasteWorldCupScreen from '../screens/worldcup/taste/TasteWorldCupScreen';
+import CardWorldCupWinnnerScreen from '../screens/worldcup/winner/CardWorldCupWinnerScreen';
 import GenerateCardScreen from '../screens/generateCard/GenerateCardScreen';
 import QuizScreen from '../screens/quiz/QuizScreen';
 import ImageCreationScreen from '../screens/imageCreation/ImageCreationScreen';
@@ -112,7 +113,16 @@ function StackNavigator() {
         }}
       />
       <Stack.Screen
-        name="WorldCup"
+        name="WorldCupInfo"
+        component={WorldCupInfoScreen}
+        options={{
+          title: '이상형 월드컵 소개',
+          headerTransparent: true,
+          headerTitle: '',
+        }}
+      />
+      <Stack.Screen
+        name="WorldCupSelect"
         component={WorldCupSelectScreen}
         options={{
           title: '이상형 월드컵 선택',
@@ -122,17 +132,8 @@ function StackNavigator() {
       />
       <Stack.Screen
         name="TasteWorldCup"
-        component={WorldCupSelectScreen}
-        options={{ headerTransparent: false, headerTitle: '' }}
-      />
-      <Stack.Screen
-        name="WorldCupInfo"
-        component={WorldcupInfoScreen}
-        options={{
-          title: '이상형 월드컵 소개',
-          headerTransparent: true,
-          headerTitle: '',
-        }}
+        component={TasteWorldCupScreen}
+        options={{ title: '취향 이상형 월드컵' }}
       />
       <Stack.Screen
         name="CardWorldCup"
@@ -142,7 +143,7 @@ function StackNavigator() {
       <Stack.Screen
         name="CardWorldCupWinner"
         component={CardWorldCupWinnnerScreen}
-        options={{ headerTransparent: true, headerTitle: ''  }}
+        options={{ headerTransparent: true, headerTitle: '' }}
       />
       <Stack.Screen
         name="GenerateCard"

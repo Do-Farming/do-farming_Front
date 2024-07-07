@@ -26,7 +26,8 @@ export default function WorldCupSelectScreen({ navigation }: any) {
           >
             <WorldCupImgView>
               <Image
-                source={require('../../assets/worldcup/taste.png')}
+                // source={require('../../assets/worldcup/taste.png')}
+                source={require('../../../assets/worldcup/taste.png')}
                 style={{ width: 50, height: 50 }}
               />
             </WorldCupImgView>
@@ -37,7 +38,7 @@ export default function WorldCupSelectScreen({ navigation }: any) {
               </WorldCupSelectionSmallText>
             </WorldCupTextView>
             <WorldCulSelectionDetail
-              source={require('../../assets/worldcup/detail.png')}
+              source={require('../../../assets/worldcup/detail.png')}
               style={{ width: 18, height: 18 }}
             />
           </WorldCupSelection>
@@ -46,7 +47,7 @@ export default function WorldCupSelectScreen({ navigation }: any) {
           >
             <WorldCupImgView>
               <Image
-                source={require('../../assets/worldcup/card.png')}
+                source={require('../../../assets/worldcup/card.png')}
                 style={{ width: 50, height: 50 }}
               />
             </WorldCupImgView>
@@ -59,16 +60,16 @@ export default function WorldCupSelectScreen({ navigation }: any) {
               </WorldCupSelectionSmallText>
             </WorldCupTextView>
             <WorldCulSelectionDetail
-              source={require('../../assets/worldcup/detail.png')}
+              source={require('../../../assets/worldcup/detail.png')}
               style={{ width: 18, height: 18 }}
             />
           </WorldCupSelection>
           <WorldCupSelection
-            onPress={() => navigation.navigate('CardWorldCup', { type: "CHK" })}
+            onPress={() => navigation.navigate('CardWorldCup', { type: 'CHK' })}
           >
             <WorldCupImgView>
               <Image
-                source={require('../../assets/worldcup/card2.png')}
+                source={require('../../../assets/worldcup/card2.png')}
                 style={{ width: 50, height: 50 }}
               />
             </WorldCupImgView>
@@ -81,7 +82,7 @@ export default function WorldCupSelectScreen({ navigation }: any) {
               </WorldCupSelectionSmallText>
             </WorldCupTextView>
             <WorldCulSelectionDetail
-              source={require('../../assets/worldcup/detail.png')}
+              source={require('../../../assets/worldcup/detail.png')}
               style={{ width: 18, height: 18 }}
             />
           </WorldCupSelection>
