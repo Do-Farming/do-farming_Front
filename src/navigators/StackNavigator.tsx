@@ -1,5 +1,7 @@
 import * as React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import HanaMainScreen from '../screens/hana/HanaMainScreen';
+
 import SignInScreen from '../screens/sign/SignInScreen';
 import SignUpScreen from '../screens/sign/SignUpScreen';
 import MyPageScreen from '../screens/mypage/MyPageScreen';
@@ -12,7 +14,6 @@ import CompetitiveScreen from '../screens/compation/CompetitiveScreen';
 import ProductSignUpScreen from '../screens/product/ProductSignUpScreen';
 import ProductPasswordScreen from '../screens/product/auth/ProductPasswordScreen';
 import ProductSignInScreen from '../screens/product/complete/ProductSignInScreen';
-import HanaMain from '../screens/hana/HanaMainScreen';
 import { SendMoneyScreen } from '../screens/bankingService/SendMoneyScreen';
 import WorldCupInfoScreen from '../screens/worldcup/information/WorldCupInfoScreen';
 import WorldCupSelectScreen from '../screens/worldcup/select/WorldCupSelectScreen';
@@ -27,6 +28,7 @@ import DoFarmingInfoScreen from '../screens/product/dofarming/DoFarmingInfoScree
 import WakeupScreen from '../screens/wakeup/wakeup/WakeupScreen';
 import CameraScreen from '../screens/wakeup/camera/CameraScreen';
 import TabNavigator from './TabNavigator';
+import BangJoinScreen2 from '../screens/bang/bangJoin/BangJoinScreen2';
 import SelectCategoryScreen from '../screens/worldcup/taste/selectCategory/SelectCategoryScreen';
 import TasteWorldCupWinnnerScreen from '../screens/worldcup/taste/winner/TasteWorldCupWinnerScreen';
 
@@ -39,6 +41,11 @@ function StackNavigator() {
         name="Tabs"
         component={TabNavigator}
         options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="HanaMain"
+        component={HanaMainScreen}
+        options={{ title: '하나은행 메인화면' }}
       />
       <Stack.Screen
         name="SignIn"
@@ -81,6 +88,11 @@ function StackNavigator() {
         options={{ title: '도파밍 상품 가입' }}
       />
       <Stack.Screen
+        name="BangJoin2"
+        component={BangJoinScreen2}
+        options={{ title: '도파밍 상품 가입2' }}
+      />
+      <Stack.Screen
         name="Competitive"
         component={CompetitiveScreen}
         options={{ title: 'Competitive' }}
@@ -100,11 +112,7 @@ function StackNavigator() {
         component={ProductSignInScreen}
         options={{ title: '가입완료' }}
       />
-      <Stack.Screen
-        name="HanaMain"
-        component={HanaMain}
-        options={{ title: '하나은행 메인화면' }}
-      />
+
       <Stack.Screen
         name="SendMoney"
         component={SendMoneyScreen}

@@ -18,7 +18,7 @@ import {
   LongInput,
 } from './InputForm.styled';
 
-export default function SignUpScreen() {
+export default function SignUpScreen({ navigation } : any) {
   const [isSended, setIsSended] = useState(false);
 
   return (
@@ -71,7 +71,7 @@ export default function SignUpScreen() {
         </InputBox>
       </ContentBox>
       <ButtonBox>
-        <LongButton>
+        <LongButton onPress={() => navigation.navigate('HanaMain')}>
           <ButtonText>회원가입</ButtonText>
         </LongButton>
       </ButtonBox>

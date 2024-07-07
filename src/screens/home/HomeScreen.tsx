@@ -135,7 +135,7 @@ const CardList = React.memo(
   ),
 );
 
-export default function HomeScreen() {
+export default function HomeScreen({ navigation } : any) {
   const [selectedCardType, setSelectedCardType] = useState('check');
   const [currentIndex, setCurrentIndex] = useState(0);
   const [creditCardList, setCreditCardList] = useState([]);
@@ -242,20 +242,27 @@ export default function HomeScreen() {
             showsHorizontalScrollIndicator={false}
             keyExtractor={(item, index) => index.toString()}
             renderItem={({ item, index }) => (
-              <Product key={index} style={{ width: windowWidth - 40 }}>
-                <ProductName>{item.name}</ProductName>
-                <InterestRateContainer>
-                  <InterestRateText>
-                    최소 {item.interestRate.min} ~ 최대 {item.interestRate.max}
-                  </InterestRateText>
-                </InterestRateContainer>
-                <ProductImgView>
-                  <Image source={item.images[0]} />
-                  <Image source={item.images[1]} />
-                  <Image source={item.images[2]} />
-                </ProductImgView>
-                <ProductInfo>{item.description}</ProductInfo>
-              </Product>
+              <TouchableOpacity onPress={() => {
+                if(index === 0) {
+                  navigation.navigate('DoFarmingInfo')
+                }
+              }}>
+                <Product key={index} style={{ width: windowWidth - 40 }}>
+                  <ProductName>{item.name}</ProductName>
+                  <InterestRateContainer>
+                    <InterestRateText>
+                      최소 {item.interestRate.min} ~ 최대{' '}
+                      {item.interestRate.max}
+                    </InterestRateText>
+                  </InterestRateContainer>
+                  <ProductImgView>
+                    <Image source={item.images[0]} />
+                    <Image source={item.images[1]} />
+                    <Image source={item.images[2]} />
+                  </ProductImgView>
+                  <ProductInfo>{item.description}</ProductInfo>
+                </Product>
+              </TouchableOpacity>
             )}
             onMomentumScrollEnd={handleMomentumScrollEnd}
           />
