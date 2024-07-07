@@ -3,7 +3,6 @@ import {
   Container,
   InfoText,
   CardName,
-  // CardLottieView,
   CardBenefit,
   CardBenefitImg,
   CardBenefitTextView,
@@ -25,9 +24,6 @@ export default function CardWorldCupWinnnerScreen({ route, navigation }: any) {
   const { winner } = route.params;
   const cardImageUrl =
     'https://d1c5n4ri2guedi.cloudfront.net' + winner.card_img;
-
-      // State and animated value for button color
-  const [colorIndex, setColorIndex] = useState(0);
   const animatedValue = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
@@ -60,10 +56,6 @@ export default function CardWorldCupWinnnerScreen({ route, navigation }: any) {
       '#FFB3B3',
     ],
   });
-
-  const buttonStyle = {
-    backgroundColor: interpolatedColor,
-  };
 
   return (
     <SafeAreaView>

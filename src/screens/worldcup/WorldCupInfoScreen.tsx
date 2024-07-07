@@ -27,7 +27,7 @@ export default function WorldcupInfoScreen({ navigation }: any) {
         <WorldCupTitle>이상형 월드컵</WorldCupTitle>
         <WorldCupExplaination>내게 맞는 카드</WorldCupExplaination>
         <WorldCupExplaination>일대일 비교로 간편하게</WorldCupExplaination>
-        <EnterButton onPress={() => navigation.navigate("WorldCup")}>
+        <EnterButton onPress={() => navigation.navigate("WorldCupSelect")}>
           <EnterText>지금 시작!</EnterText>
         </EnterButton>
         <TouchableOpacity>
