@@ -27,6 +27,7 @@ import DoFarmingInfoScreen from '../screens/product/dofarming/DoFarmingInfoScree
 import WakeupScreen from '../screens/wakeup/wakeup/WakeupScreen';
 import CameraScreen from '../screens/wakeup/camera/CameraScreen';
 import TabNavigator from './TabNavigator';
+import SelectCategoryScreen from '../screens/worldcup/taste/selectCategory/SelectCategoryScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -129,6 +130,11 @@ function StackNavigator() {
           headerTransparent: true,
           headerTitle: '',
         }}
+      />
+      <Stack.Screen
+        name="SelectCategory"
+        component={SelectCategoryScreen}
+        options={{ title: '취향 이상형 월드컵 카테고리 선택' }}
       />
       <Stack.Screen
         name="TasteWorldCup"

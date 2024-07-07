@@ -22,11 +22,10 @@ export default function WorldCupSelectScreen({ navigation }: any) {
         <BoldText>내게 맞는 카드를 찾을까요? 🧚‍♂️</BoldText>
         <WorldCupSelectionView>
           <WorldCupSelection
-            onPress={() => navigation.navigate('TasteWorldCup')}
+            onPress={() => navigation.navigate('SelectCategory')}
           >
             <WorldCupImgView>
               <Image
-                // source={require('../../assets/worldcup/taste.png')}
                 source={require('../../../assets/worldcup/taste.png')}
                 style={{ width: 50, height: 50 }}
               />
