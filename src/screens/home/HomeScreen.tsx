@@ -7,6 +7,7 @@ import {
   Dimensions,
   NativeSyntheticEvent,
   NativeScrollEvent,
+  View,
 } from 'react-native';
 import {
   Container,
@@ -39,10 +40,13 @@ import {
   CardBenefitSmallText,
   SafeAreaView,
   CardImgView,
+  IconView,
 } from './HomeScreen.styled';
 import axios from 'axios';
 import CardImage from '../../components/CardImage/CardImage';
 import { useAuth } from '../../contexts/authContext';
+import { DoFarmingIcon } from '../../assets';
+import { StyledImage } from '../bang/bangDetail/BangDetailScreen.styled';
 
 const { width: windowWidth } = Dimensions.get('window');
 

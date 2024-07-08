@@ -15,6 +15,7 @@ import {
   InputContainer,
   Input,
   SendButton,
+  SendText,
 } from './ChatBotScreen.styled';
 import axiosInstance from '../../apis/axiosInstance';
 
@@ -115,7 +116,9 @@ const ChatBotScreen: React.FC = () => {
           value={input}
           onChangeText={setInput}
         />
-        <SendButton title="Send" onPress={sendMessage} />
+        <SendButton onPress={sendMessage}>
+          <SendText>전송</SendText>
+        </SendButton>
       </InputContainer>
     </Container>
   );

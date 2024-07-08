@@ -53,6 +53,11 @@ export const MainProduct = styled.View`
   box-shadow: 0px 4px 4px rgba(77, 77, 77, 0.25);
 `;
 
+export const IconView = styled.View`
+  width: 20px;
+  height: 20px;
+`;
+
 export const Product = styled.View`
   width: 350px;
   border-radius: 15px;
