@@ -11,10 +11,7 @@ import {
 } from 'react-native';
 import {
   Container,
-  Header,
   Row,
-  TextNormal,
-  Username,
   InfoText,
   MainProduct,
   Product,
@@ -41,12 +38,13 @@ import {
   SafeAreaView,
   CardImgView,
   IconView,
+  ChatBotButton,
 } from './HomeScreen.styled';
 import axios from 'axios';
 import CardImage from '../../components/CardImage/CardImage';
 import { useAuth } from '../../contexts/authContext';
-import { DoFarmingIcon } from '../../assets';
-import { StyledImage } from '../bang/bangDetail/BangDetailScreen.styled';
+
+import MsgIcon from 'react-native-vector-icons/AntDesign';
 
 const { width: windowWidth } = Dimensions.get('window');
 
@@ -292,6 +290,9 @@ export default function HomeScreen({ navigation }: any) {
             <CardList SelectedCardList={creditCardList} />
           )}
         </CardListView>
+        <ChatBotButton onPress={() => navigation.navigate('ChatBot')}>
+          <MsgIcon name="message1" size={30} color="#FFFFFF" />
+        </ChatBotButton>
       </Container>
     </SafeAreaView>
   );
