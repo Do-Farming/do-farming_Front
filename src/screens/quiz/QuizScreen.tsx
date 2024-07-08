@@ -21,6 +21,7 @@ import { Animated } from 'react-native';
 import { InfoText } from '../home/HomeScreen.styled';
 import { SketchBook } from '../../assets';
 import axiosInstance from '../../apis/axiosInstance';
+import { QuizItem } from '../../types/quiz/QuizTypes';
 
 export default function QuizScreen() {
   const [timeLeft, setTimeLeft] = useState(0); // 10초 타이머
