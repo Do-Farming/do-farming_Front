@@ -8,5 +8,6 @@ export { default as MorningIcon } from './ic_morning.svg';
 export { default as QuizIcon } from './ic_quiz.svg';
 export { default as CustomIcon } from './ic_custom.svg';
 export { default as SketchBook } from './sketchbook.svg';
+export { default as CancelIcon } from './cancel.svg';
 export { default as ChipIcon } from  "./ic_chip.svg"
 export { default as DoFarmingIcon } from  "./dofarming.svg";

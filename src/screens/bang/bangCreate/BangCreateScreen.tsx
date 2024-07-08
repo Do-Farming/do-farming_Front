@@ -20,7 +20,6 @@ import {
   wakeupTimeList,
 } from '../../../constants/SelectBox';
 import CustomModal from '../../../components/CustomModal/CustomModal';
-import { bangCreate } from '../../../apis/bangService';
 import { BangType, SelectBoxType } from '../../../types/BangTypes';
 import { InfoText } from '../bangJoin/BangJoinScreen.styled';
 import { getChecking } from '../../../apis/accountService';

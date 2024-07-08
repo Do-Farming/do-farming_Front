@@ -18,10 +18,13 @@ import {
 } from '../bangCreate/BangCreateScreen.styled';
 import { accountList } from '../../../mocks/userAccount';
 import { getChecking } from '../../../apis/accountService';
-import { CheckingAccount } from '../../../types/account/AccountTypes';
+import {
+  CheckingAccount,
+  JoinDofarmingType,
+} from '../../../types/account/AccountTypes';
 import { View } from 'react-native';
 
-export default function BangJoinScreen2({ navigation }: any) {
+export default function BangJoinScreen2({ navigation, route }: any) {
   const [accountOpen, setAccountOpen] = useState<boolean>(false);
   const [outAccount, setOutAccount] = useState<string>('');
 
@@ -29,6 +32,15 @@ export default function BangJoinScreen2({ navigation }: any) {
   const [userAccountList, setUserAccountList] = useState<SelectBoxType[]>([]);
 
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
+
+  const [joinDofarming, setJoinDofarming] = useState<JoinDofarmingType>({
+    dofarmingProductId: 102,
+    withdrawAccountId: 0,
+    depositAmount: 1000000,
+    accountPassword: '',
+  });
+
+  const { bang } = route.params;
 
   useEffect(() => {
     const fetchMyChecking = async () => {
@@ -41,11 +53,18 @@ export default function BangJoinScreen2({ navigation }: any) {
     if (myChecking && myChecking.length > 0) {
       const updatedUserAccountList = myChecking.map((element) => ({
         label: `하나은행 ${element.accountNumber}`,
-        value: element.accountNumber,
+        value: element.id,
       }));
       setUserAccountList(updatedUserAccountList);
     }
   }, [myChecking]);
+
+  useEffect(() => {
+    setJoinDofarming((prevjoin) => ({
+      ...prevjoin,
+      withdrawAccountId: Number(outAccount),
+    }));
+  }, [outAccount]);
 
   const onPressModalOpen = () => {
     console.log('팝업을 여는 중입니다.');
@@ -54,7 +73,8 @@ export default function BangJoinScreen2({ navigation }: any) {
 
   const onPressBangJoin = () => {
     setIsModalVisible(false);
-    navigation.navigate('ProductPassword');
+    const from = 'bangJoin2';
+    navigation.navigate('ProductPassword', { joinDofarming, bang, from });
   };
 
   const onPressModalClose = () => {

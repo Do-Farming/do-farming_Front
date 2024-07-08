@@ -29,7 +29,7 @@ export const SubHeader = styled.Text`
   text-align: center;
 `;
 
-export const ButtonContainer = styled.View`
+export const ButtonContainer = styled.Pressable`
   background-color: #f5f5f5;
   padding: 15px;
   border-radius: 10px;

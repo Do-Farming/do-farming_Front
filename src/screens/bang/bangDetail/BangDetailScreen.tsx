@@ -85,7 +85,7 @@ export default function BangDetailScreen({ route, navigation }: any) {
             disabled={bang.status !== 0}
             onPress={() => {
               if (bang.status === 0) {
-                navigation.navigate('BangJoin');
+                navigation.navigate('BangJoin', { bang: bang.id });
               }
             }}
           >

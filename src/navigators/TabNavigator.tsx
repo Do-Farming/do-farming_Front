@@ -43,10 +43,7 @@ function TabNavigator() {
         component={ExampleScreen}
         options={{ headerTransparent: true, headerTitle: '' }}
       />
-      <Tab.Screen
-        name="이상형 월드컵"
-        component={WorldCupInfoScreen}
-      />
+      <Tab.Screen name="이상형 월드컵" component={WorldCupInfoScreen} />
       <Tab.Screen
         name="마이페이지"
         component={MyPageScreen}
