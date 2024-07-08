@@ -15,14 +15,17 @@ import {
   PreviewImage,
 } from './CameraScreen.styled';
 
-import { objectDetect } from '../../../apis/wakeupService';
+import { objectDetect, wakeupCertificate } from '../../../apis/wakeupService';
+import { ObjectMapping } from '../../../constants/WakeupObject';
 
-export default function CameraScreen({ navigation }: any) {
+export default function CameraScreen({ navigation, route }: any) {
   const [cameraType, setCameraType] = useState(CameraType.back);
   const [camera, setCamera] = useState<Camera | null>(null);
   const [previewVisible, setPreviewVisible] = useState(false);
   const [capturedImage, setCapturedImage] = useState<null | any>(null);
   const [detect, setDetect] = useState<boolean | null>(null);
+
+  const object = route.params;
 
   const takePictureHandler = async () => {
     if (camera) {
@@ -40,7 +43,7 @@ export default function CameraScreen({ navigation }: any) {
           const detectedClasses = res.data.map((item: any) => item.class);
           console.log(detectedClasses);
           setDetect(false);
-          if (detectedClasses.includes('toothbrush')) {
+          if (detectedClasses.includes(object)) {
             setDetect(true);
           }
         }
@@ -57,8 +60,12 @@ export default function CameraScreen({ navigation }: any) {
   // detect가 true일 때 3.5초 후에 메인 페이지로 이동
   useEffect(() => {
     if (detect) {
-      const timer = setTimeout(() => {
-        navigation.navigate('Home');
+      const fetchWakeup = async () => {
+        await wakeupCertificate();
+      };
+      fetchWakeup();
+      const timer = setTimeout(async () => {
+        navigation.navigate('WakeUp');
       }, 3500);
 
       return () => clearTimeout(timer);
@@ -75,12 +82,16 @@ export default function CameraScreen({ navigation }: any) {
           {detect != null ? (
             detect ? (
               <DetectView>
-                <DetectResult>칫솔 인식에 성공했습니다.</DetectResult>
+                <DetectResult>
+                  {ObjectMapping[object]} 인식에 성공했습니다.
+                </DetectResult>
                 <DetectResult>기상 인증 완료 되었습니다.</DetectResult>
               </DetectView>
             ) : (
               <DetectView>
-                <DetectFail>칫솔 인식에 실패했습니다.</DetectFail>
+                <DetectFail>
+                  {ObjectMapping[object]} 인식에 실패했습니다.
+                </DetectFail>
                 <Button onPress={resetCamera}>
                   <CameraIcon name="camera" size={35} />
                 </Button>

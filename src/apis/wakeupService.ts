@@ -28,3 +28,9 @@ export const todayObject = async () => {
   const response = await axiosInstance.get('/wakeup/object');
   return response.data.result;
 };
+
+export const wakeupCertificate = async () => {
+  const response = await axiosInstance.post('/wakeup/certificate');
+  console.log(response.data);
+  return response.data;
+};
