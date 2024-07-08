@@ -7,47 +7,75 @@ import MyPageScreen from '../screens/mypage/MyPageScreen';
 import WorldCupInfoScreen from '../screens/worldcup/information/WorldCupInfoScreen';
 import ExampleScreen from '../screens/ExampleScreen';
 
+import FightIcon from 'react-native-vector-icons/MaterialIcons';
+import PersonIcon from 'react-native-vector-icons/Octicons';
+import HomeIcon from 'react-native-vector-icons/MaterialIcons';
+
 const Tab = createBottomTabNavigator();
 
 function TabNavigator() {
   return (
-    <Tab.Navigator
-      screenOptions={({ route }) => ({
-        tabBarIcon: ({ focused, color, size }) => {
-          let iconName: keyof typeof Ionicons.glyphMap = 'home-outline';
-          if (route.name === 'Home') {
-            iconName = focused ? 'home' : 'home-outline';
-          } else if (route.name === 'Explore') {
-            iconName = focused ? 'search' : 'search-outline';
-          } else if (route.name === 'Example') {
-            iconName = focused ? 'star' : 'star-outline';
-          }
-          return <Ionicons name={iconName} size={size} color={color} />;
-        },
-        tabBarActiveTintColor: 'tomato',
-        tabBarInactiveTintColor: 'gray',
-      })}
-    >
+    <Tab.Navigator>
       <Tab.Screen
         name="HanaMain"
         component={HanaMainScreen}
-        options={{ title: 'Do! Farming', headerShown: false }}
+        options={{
+          headerTransparent: true,
+          tabBarIcon: ({ focused }) => (
+            <HomeIcon name="home" size={30} color={'red'} />
+          ),
+        }}
       />
       <Tab.Screen
-        name="DoFarmingMain"
+        name="홈"
         component={HomeScreen}
-        options={{ headerTransparent: true, headerTitle: '' }}
+        options={{
+          headerTransparent: true,
+          tabBarIcon: ({ focused }) => (
+            <HomeIcon
+              name="home"
+              size={30}
+              color={focused ? '#1b1b1b' : '#535353'}
+            />
+          ),
+        }}
       />
       <Tab.Screen
         name="작업용"
         component={ExampleScreen}
-        options={{ headerTransparent: true, headerTitle: '' }}
+        options={{
+          headerTransparent: true,
+          tabBarIcon: ({ focused }) => (
+            <HomeIcon name="home" size={30} color={'red'} />
+          ),
+        }}
       />
-      <Tab.Screen name="이상형 월드컵" component={WorldCupInfoScreen} />
+      <Tab.Screen
+        name="이상형 월드컵"
+        component={WorldCupInfoScreen}
+        options={{
+          tabBarIcon: ({ focused }) => (
+            <FightIcon
+              name="sports-mma"
+              size={32}
+              color={focused ? '#1b1b1b' : '#535353'}
+            />
+          ),
+        }}
+      />
       <Tab.Screen
         name="마이페이지"
         component={MyPageScreen}
-        options={{ headerTransparent: true, headerTitle: '' }}
+        options={{
+          headerTransparent: true,
+          tabBarIcon: ({ focused }) => (
+            <PersonIcon
+              name="person-fill"
+              size={30}
+              color={focused ? '#1b1b1b' : '#535353'}
+            />
+          ),
+        }}
       />
     </Tab.Navigator>
   );
