@@ -27,7 +27,7 @@ export const AccountInfoContainer = styled.View`
 `;
 
 export const AccountTitle = styled.Text`
-  font-size: 20x;
+  font-size: 20px;
   font-weight: 500;
   color: ${(props) => props.theme.blackColor};
 `;
@@ -43,7 +43,7 @@ export const AccountBalanceContainer = styled.View`
   justify-content: flex-end;
   align-items: center;
   margin-top: 5px;
-`
+`;
 
 export const AccountBalance = styled.Text`
   font-size: 30px;
@@ -55,14 +55,14 @@ export const AccountBalanceWon = styled.Text`
   font-size: 20px;
   color: ${(props) => props.theme.blackColor};
   font-weight: 500;
-`
+`;
 
 export const WithdrawAvailableMoneyContainer = styled.View`
   flex-direction: row;
   justify-content: flex-end;
   align-items: center;
   margin: 5px 0;
-`
+`;
 
 export const WithdrawAvailableMoney = styled.Text`
   font-size: 15px;
@@ -73,7 +73,7 @@ export const ButtonContainer = styled.View`
   flex-direction: row;
   width: 100%;
   justify-content: space-between;
-`
+`;
 
 export const CancelButton = styled.TouchableOpacity`
   background-color: ${(props) => props.theme.grayColor};
@@ -92,7 +92,8 @@ export const TransferButton = styled.TouchableOpacity`
 `;
 
 export const ButtonText = styled.Text<{ isTransfer: boolean }>`
-  color: ${(props) => (props.isTransfer ? props.theme.whiteColor : props.theme.blackColor)};
+  color: ${(props) =>
+    props.isTransfer ? props.theme.whiteColor : props.theme.blackColor};
   font-weight: bold;
   font-size: 15px;
 `;
