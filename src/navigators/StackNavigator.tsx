@@ -29,6 +29,7 @@ import CameraScreen from '../screens/wakeup/camera/CameraScreen';
 import TabNavigator from './TabNavigator';
 import BangJoinScreen2 from '../screens/bang/bangJoin/BangJoinScreen2';
 import TransactionHistoryScreen from '../screens/transactionHistory/TransactionHistoryScreen';
+import { ProductScreen } from '../screens/product/allproduct/ProductScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -192,6 +193,11 @@ function StackNavigator() {
         name="TransactionHistory"
         component={TransactionHistoryScreen}
         options={{ headerTransparent: true, headerTitle: '거래내역 조회' }}
+      />
+      <Stack.Screen
+        name="AllProduct"
+        component={ProductScreen}
+        options={{ title: '전체 상품 페이지' }}
       />
     </Stack.Navigator>
   );
