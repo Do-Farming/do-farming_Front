@@ -18,14 +18,32 @@ import {
 } from './CardWorldCupWinnerScreen.styled';
 import CardImage from '../../../components/CardImage/CardImage';
 import { SafeAreaView } from '../../home/HomeScreen.styled';
-import { Animated, Easing } from 'react-native';
-import { CardLottieView } from '../../generateCard/GenerateCardScreen.styled';
+import { Animated, Easing, Image } from 'react-native';
+import {
+  CardLottieView,
+  GenerateCardContainer,
+} from '../../generateCard/GenerateCardScreen.styled';
+import { ChipIcon, DoFarmingIcon } from '../../../assets';
+import CustomModal from '../../../components/CustomModal/CustomModal';
+import { ModalButton, ModalButtonText } from '../../bang/bangCreate/BangCreateScreen.styled';
 
 export default function CardWorldCupWinnnerScreen({ route, navigation }: any) {
-  const { winner } = route.params;
-  const cardImageUrl =
-    'https://d1c5n4ri2guedi.cloudfront.net' + winner.card_img;
+  const { winner, imageUrl } = route.params;
+  const cardImageUrl = imageUrl
+    ? imageUrl
+    : 'https://d1c5n4ri2guedi.cloudfront.net' + winner.card_img;
   const animatedValue = useRef(new Animated.Value(0)).current;
+  const [isImgLoaded, setIsImgLoaded] = useState(false);
+  const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
+
+  const onPressModalClose = () => {
+    setIsModalVisible(false);
+  };
+
+  const onPressBangCreate = () => {
+    setIsModalVisible(false);
+    navigation.navigate('DoFarmingMain');
+  };
 
   useEffect(() => {
     const animateColor = () => {
@@ -62,15 +80,30 @@ export default function CardWorldCupWinnnerScreen({ route, navigation }: any) {
     <SafeAreaView>
       <Container>
         <CardLottieView
-        source={require('../../../assets/worldcup/confetti.json')}
-        autoPlay={true}
-        loop={false}
-        resizeMode="cover"
-      />
+          source={require('../../../assets/worldcup/confetti.json')}
+          autoPlay={true}
+          loop={false}
+          resizeMode="cover"
+        />
         <InfoText>추천해주는 카드는! 🧚‍♂️</InfoText>
-        <CardImgContainer>
-          <CardImage uri={cardImageUrl} ImgWidth={200} ImgHeight={300} />
-        </CardImgContainer>
+        {imageUrl ? (
+          <GenerateCardContainer>
+            {isImgLoaded ? (
+              <ChipIcon style={{ position: 'absolute', zIndex: 1, top: 10 }} />
+            ) : (
+              <DoFarmingIcon width={'100%'} height={'100%'} />
+            )}
+            <Image
+              source={{ uri: imageUrl }}
+              style={{ width: 200, height: 300, borderRadius: 10 }}
+              onLoadEnd={() => setIsImgLoaded(true)}
+            />
+          </GenerateCardContainer>
+        ) : (
+          <CardImgContainer>
+            <CardImage uri={cardImageUrl} ImgWidth={200} ImgHeight={300} />
+          </CardImgContainer>
+        )}
         <CardName>{winner.name}</CardName>
         <CardBenefitList>
           {winner.top_benefit.map((benefit: any, benefitIndex: number) => {
@@ -95,8 +128,14 @@ export default function CardWorldCupWinnnerScreen({ route, navigation }: any) {
           })}
         </CardBenefitList>
         <ButtonContainer>
-          <CancelButton onPress={() => navigation.navigate('DoFarmingMain')}>
-            <EnterText>홈으로</EnterText>
+          <CancelButton onPress={() => {
+            if(imageUrl) {
+              setIsModalVisible(true);
+            } else {
+              navigation.navigate('DoFarmingMain')
+            }
+          }}>
+            <EnterText>{imageUrl ? '발급하기' : '홈으로'}</EnterText>
           </CancelButton>
           <Animated.View
             style={{
@@ -105,12 +144,23 @@ export default function CardWorldCupWinnnerScreen({ route, navigation }: any) {
               backgroundColor: interpolatedColor,
             }}
           >
-            <EnterButton onPress={() => navigation.navigate('GenerateCard')}>
+            <EnterButton
+              onPress={() => navigation.navigate('GenerateCard', { winner })}
+            >
               <EnterText>나만의 카드 생성</EnterText>
             </EnterButton>
           </Animated.View>
         </ButtonContainer>
       </Container>
+      <CustomModal
+        isVisible={isModalVisible}
+        onClose={onPressModalClose}
+        text={'발급되었습니다!'}
+      >
+        <ModalButton onPress={onPressBangCreate}>
+          <ModalButtonText>확인</ModalButtonText>
+        </ModalButton>
+      </CustomModal>
     </SafeAreaView>
   );
 }
