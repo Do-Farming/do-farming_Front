@@ -7,6 +7,7 @@ import {
   Dimensions,
   NativeSyntheticEvent,
   NativeScrollEvent,
+  View,
 } from 'react-native';
 import {
   Container,
@@ -39,10 +40,13 @@ import {
   CardBenefitSmallText,
   SafeAreaView,
   CardImgView,
+  IconView,
 } from './HomeScreen.styled';
 import axios from 'axios';
 import CardImage from '../../components/CardImage/CardImage';
 import { useAuth } from '../../contexts/authContext';
+import { DoFarmingIcon } from '../../assets';
+import { StyledImage } from '../bang/bangDetail/BangDetailScreen.styled';
 
 const { width: windowWidth } = Dimensions.get('window');
 
@@ -65,18 +69,19 @@ const products = [
     images: [],
     interestRate: {
       max: '2.6%',
-      min: '2.6%',
+      min: '1.0%',
     },
-    description: '이자 지급 방법도 내 맘대로! 이자 지급 시기도 내 맘대로!',
+    description: '이자 지급 방법도 내 맘대로! \n이자 지급 시기도 내 맘대로!',
   },
   {
     name: '정기예금',
     images: [],
     interestRate: {
-      max: '2.8%',
+      max: '3.0%',
       min: '2.8%',
     },
-    description: '목돈을 일정기간 동안 예치하여 안정적인 수익을 추구하는 예금',
+    description:
+      '목돈을 일정기간 동안 예치하여 안정적인 \n수익을 추구하는 예금',
   },
 ];
 
@@ -135,7 +140,7 @@ const CardList = React.memo(
   ),
 );
 
-export default function HomeScreen({ navigation } : any) {
+export default function HomeScreen({ navigation }: any) {
   const [selectedCardType, setSelectedCardType] = useState('check');
   const [currentIndex, setCurrentIndex] = useState(0);
   const [creditCardList, setCreditCardList] = useState([]);
@@ -225,13 +230,6 @@ export default function HomeScreen({ navigation } : any) {
   return (
     <SafeAreaView>
       <Container>
-        <Header>
-          <Row>
-            <TextNormal>안녕하세요 </TextNormal>
-            <Username>홍길동</Username>
-            <TextNormal> 님</TextNormal>
-          </Row>
-        </Header>
         <InfoText>주요 상품</InfoText>
         <MainProduct>
           <FlatList
@@ -242,11 +240,13 @@ export default function HomeScreen({ navigation } : any) {
             showsHorizontalScrollIndicator={false}
             keyExtractor={(item, index) => index.toString()}
             renderItem={({ item, index }) => (
-              <TouchableOpacity onPress={() => {
-                if(index === 0) {
-                  navigation.navigate('DoFarmingInfo')
-                }
-              }}>
+              <TouchableOpacity
+                onPress={() => {
+                  if (index === 0) {
+                    navigation.navigate('DoFarmingInfo');
+                  }
+                }}
+              >
                 <Product key={index} style={{ width: windowWidth - 40 }}>
                   <ProductName>{item.name}</ProductName>
                   <InterestRateContainer>
@@ -268,7 +268,7 @@ export default function HomeScreen({ navigation } : any) {
           />
           <Pagination length={products.length} currentIndex={currentIndex} />
         </MainProduct>
-        <InfoText>💳 요즘 가장 인기있는 카드에요!</InfoText>
+        <InfoText>요즘 가장 인기있는 카드에요! </InfoText>
         <Row>
           <TouchableOpacity onPress={() => setSelectedCardType('check')}>
             <Button isSelected={selectedCardType === 'check'}>

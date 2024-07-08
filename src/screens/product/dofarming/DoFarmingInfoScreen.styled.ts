@@ -19,20 +19,26 @@ export const DoFarmingInfoContainer = styled.View`
 `;
 
 export const ProductTitle = styled.Text`
-  font-size: 23px;
+  font-size: 20px;
   font-weight: 500;
   margin: 10% 0;
 `;
 
 export const ProductExplaination = styled.Text`
-  font-size: 30px;
+  font-size: 26px;
   font-weight: 800;
 `;
 
 export const ProductInterestLargeExplaination = styled.Text`
-  font-size: 30px;
+  font-size: 29px;
   font-weight: 800;
   margin-top: 13%;
+`;
+
+export const RedText = styled.Text`
+  font-size: 32px;
+  font-weight: 800;
+  color: #fa8282;
 `;
 
 export const ProductInterestSmallExplaination = styled.Text`
@@ -43,7 +49,7 @@ export const ProductInterestSmallExplaination = styled.Text`
 `;
 
 export const ProdcutImgContainer = styled.View`
-  width: 100%;
+  width: 68%;
   height: 60%;
   margin-top: 5%;
 `;
@@ -114,7 +120,7 @@ export const EnterButton = styled.TouchableOpacity`
 
 export const EnterText = styled.Text`
   color: ${(props) => props.theme.whiteColor};
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 600;
   text-align: center;
 `;

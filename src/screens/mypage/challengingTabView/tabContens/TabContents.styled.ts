@@ -12,7 +12,9 @@ export const Item = styled.View`
   align-items: center;
   background-color: ${(props) => props.theme.whiteColor};
   padding: 10px;
-  border-radius: 8px;
+  padding-bottom: 16px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 4px rgba(77, 77, 77, 0.25);
 `;
 
 export const ItemImage = styled.View`
@@ -33,28 +35,33 @@ export const ItemTitleBox = styled.View`
   margin-vertical: 5px;
 `;
 
-export const ItemTitle = styled.Text``;
+export const ItemTitle = styled.Text`
+  font-size: 16px;
+  font-weight: 600;
+`;
 
 export const ViewRankingButton = styled.TouchableOpacity`
   border-radius: 8px;
   background-color: ${(props) => props.theme.mainColor};
-  padding: 5px;
+  padding: 10px;
 `;
 
 export const ViewRankingButtonText = styled.Text`
-  font-size: 9px;
+  font-size: 12px;
   font-weight: bold;
 `;
 
 export const ItemStatus = styled.Text`
-  font-size: 10px;
+  font-size: 13px;
   color: #868686;
   margin-top: 4px;
 `;
 
 export const ItemProgressFigure = styled.Text`
   text-align: right;
-  font-size: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 3px;
   color: ${(props) => props.theme.mainLightColor};
 `;
 

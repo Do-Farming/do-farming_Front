@@ -13,12 +13,16 @@ import {
   ViewRankingButton,
   ViewRankingButtonText,
 } from '../TabContents.styled';
+import { Image } from 'react-native';
 
 const MyChallenging = () => {
   return (
     <Container>
       <Item>
-        <ItemImage />
+        <Image
+          source={require('../../../../../assets/running.gif')}
+          style={{ width: 60, height: 60 }}
+        />
         <ItemInfo>
           <ItemTitleBox>
             <ItemTitle>도파밍 상품</ItemTitle>
@@ -31,11 +35,11 @@ const MyChallenging = () => {
           <ItemProgressBar
             progress={0.5}
             width={null}
-            height={10}
+            height={13}
             color={theme.mainColor}
             unfilledColor="#D0D0D0"
             borderWidth={0}
-            borderRadius={5}
+            borderRadius={8}
           />
         </ItemInfo>
       </Item>
