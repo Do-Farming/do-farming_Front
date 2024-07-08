@@ -63,3 +63,18 @@ export const InterestRate = styled.Text`
   font-weight: bold;
   margin-left: auto;
 `;
+
+export const ChallengeButton = styled.Pressable`
+  background-color: #fdce2e;
+  border-radius: 10px;
+  padding: 15px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  box-shadow: 0px 4px 4px rgba(77, 77, 77, 0.25);
+`;
+
+export const ChallengeText = styled.Text`
+  font-size: 16px;
+  font-weight: 700;
+  text-align: center;
+`;
