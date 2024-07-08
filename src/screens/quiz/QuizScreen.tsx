@@ -34,6 +34,10 @@ export default function QuizScreen() {
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const [quizCompleted, setQuizCompleted] = useState(false);
   const [quizData, setQuizData] = useState<QuizItem[]>([])
+  const [startTime, setStartTime] = useState<Date | null>(null); // 퀴즈 시작 시간
+  const [endTime, setEndTime] = useState<Date | null>(null);
+
+  const currentQuiz = quizData[currentPage];
 
   const getQuizData = async (count: number) => {
     try {
@@ -47,17 +51,33 @@ export default function QuizScreen() {
     }
   }
 
+  const postQuizData = async (completionTime : number, score : number) => {
+    try {
+      const response = await axiosInstance.post(
+        `/quiz/post?score=${score}&completionTime=${completionTime}`
+      )
+      console.log(response)
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  const finishQuiz = () => {
+    setQuizCompleted(true); // 퀴즈 종료
+    setEndTime(new Date());
+  }
+
   useEffect(() => {
     getQuizData(5);
+    setStartTime(new Date());
   }, [])
 
-  const currentQuiz = quizData[currentPage];
-
-  interface QuizItem {
-    question: string;
-    choices: string[];
-    correctAnswer: number;
-  }
+  useEffect(() => {
+    if (startTime && endTime) {
+      const completionTime = endTime.getTime() - startTime?.getTime();
+      postQuizData(completionTime, score);
+    }
+  }, [endTime])
 
   useEffect(() => {
     if (quizCompleted) return; // 퀴즈가 종료된 경우에는 더 이상 실행하지 않음
@@ -125,7 +145,7 @@ export default function QuizScreen() {
       setSelectedChoice(null);
     } else {
       // 마지막 페이지인 경우 처리
-      setQuizCompleted(true); // 퀴즈 종료
+      finishQuiz();
       console.log('퀴즈 종료');
     }
   };
