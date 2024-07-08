@@ -1,4 +1,4 @@
-interface ObjectMappingType {
+export interface ObjectMappingType {
   [key: string]: string;
 }
 export const ObjectMapping: ObjectMappingType = {
