@@ -21,15 +21,15 @@ export const Profile = styled.View`
 `;
 
 export const ProfileImage = styled.Image`
-  width: 64px;
-  height: 64px;
+  width: 78px;
+  height: 76px;
   border-radius: 25px;
   object-fit: contain;
 `;
 
 export const ProfileName = styled.Text`
-  margin-top: 10px;
-  font-size: 13px;
+  margin-top: 13px;
+  font-size: 17px;
   font-weight: bold;
 `;
 
@@ -53,18 +53,20 @@ export const MenuItemButton = styled.TouchableOpacity`
   border-radius: 15px;
   justify-content: center;
   align-items: center;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 1);
+  box-shadow: 0px 4px 4px rgba(77, 77, 77, 0.25);
   elevation: 4;
+  margin-bottom: 4px;
 `;
 
 export const MenuItemImage = styled.Image`
-  width: 32px;
+  width: 34px;
   height: 32px;
 `;
 
 export const MenuItemText = styled.Text`
   margin-top: 5px;
-  font-size: 14px;
+  font-size: 15px;
+  font-weight: 600;
 `;
 
 export const Tabs = styled.View`
