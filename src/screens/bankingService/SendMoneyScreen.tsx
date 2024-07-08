@@ -23,7 +23,7 @@ import {
   InputContainer,
   ActionsContainer,
   TabContainer,
-  TextInputText,
+  TextInputText,RowWide,
   AnimatedTabContainer,
   StyledAccountInput,
   AccountTextInput,
@@ -44,11 +44,15 @@ import {
   ConfirmButtonText,
   StyledTextInputAccount,
   DotContainer,
-  Dot
+  Container2,
+  Dot,
+  Card, Title, InfoText, BoldText, ButtonContainer, CustomButton, ButtonText 
 } from './SendMoneyScreen.styled';
 import { Row } from '../home/HomeScreen.styled';
 import { Account } from '../../types/account/AccountTypes';
-
+import axios from 'axios';
+import { sendAccount } from '../../types/BankingSystem/AccountService';
+import { StyledImage } from '../bang/bangDetail/BangDetailScreen.styled';
 const { width: windowWidth, height: windowHeight } = Dimensions.get('window');
 
 const formatAmount = (amount: string) => {
@@ -59,47 +63,77 @@ const formatAmount = (amount: string) => {
 // Test용 Data > 추후 삭제 예정
 const accountData = [
   {
-    id: '1',
-    name: '서인석(옥수공예)',
-    bank: '국민',
-    account: '23560104202636',
+    id: 1,
+    name: '김민표',
+    bank: '하나',
+    accountNumber: 1110357059277,
     date: '2024-06-15',
   },
   {
-    id: '2',
-    name: '한국산업인력공단',
+    id: 2,
+    name: '한정선',
     bank: '하나',
-    account: '298-910862-02537',
+    accountNumber: 1110313457220,
     date: '2024-03-26',
   },
   {
-    id: '3',
+    id: 3,
     name: '오유나',
-    bank: '카카오뱅크',
-    account: '3333221546301',
+    bank: '하나',
+    accountNumber: 3333221546301,
     date: '2024-03-21',
   },
   {
-    id: '4',
+    id: 4,
     name: '오유나',
-    bank: '카카오뱅크',
-    account: '3333221546301',
+    bank: '하나',
+    accountNumber: 3333221546301,
     date: '2024-03-21',
   },
 ];
 
 const myAccountData = [
   {
-    accountName: '네이버페이머니통장',
-    accountNumber: '하나 355-911054-89907',
-    balance: '1,825,910원',
+    id:1,
+    name: 'string',
+    accountNumber: '1110357059277',
+    balance: 0,
   },
   {
-    accountName: '카카오뱅크 통장',
-    accountNumber: '카카오 3333-02-1234567',
-    balance: '2,345,678원',
+    id:2,
+    name: 'string',
+    accountNumber: 1110313457220,
+    balance: 5000000,
   },
 ];
+
+export const objectDetect = async (sendAccounts: sendAccount, send:string, recive:string) => {
+  const url = 'http://172.16.20.55/api/v1/account/simple';
+
+  const requestBody = {
+    accountId: sendAccounts.accountId,
+    amount: sendAccounts.amount,
+    password: sendAccounts.password,
+    recipientBank: sendAccounts.recipientBank,
+    recipientAccountNumber: sendAccounts.recipientAccountNumber,
+    recipientRemarks: send,
+    senderRemarks: recive,
+  };
+
+  try {
+    const response = await axios.post(url, requestBody, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    console.log(response.data);
+    return response.data.return_object;
+  } catch (error) {
+    throw error;
+  }
+};
+
+
 
 export const SendMoneyScreen = () => {
   const [activeTab, setActiveTab] = useState('one');
@@ -112,7 +146,18 @@ export const SendMoneyScreen = () => {
   const slideAnimTwo = useRef(new Animated.Value(windowHeight)).current;
   const slideAnimThree = useRef(new Animated.Value(windowHeight)).current;
   const slideAnimFour = useRef(new Animated.Value(windowHeight)).current;
+  const slideAnimFive = useRef(new Animated.Value(windowHeight)).current;
   const [account, setAccount] = useState(null);
+  const [myAccount, setMyAccount] = useState(null);
+  const [sendAccount, setSendAccount] = useState<sendAccount>({
+    accountId : myAccountData[currentAccountIndex].id,
+    amount: 0,
+    password: '',
+    recipientBank: '하나',
+    recipientAccountNumber: 0,
+    recipientRemarks: '',
+    senderRemarks: '',
+  })
   const [amount, setAmount] = useState('');
   const [send, setSend] = useState('강민주');
   const [recive, setRecive] = useState('');
@@ -121,9 +166,12 @@ export const SendMoneyScreen = () => {
     setActiveTab(tabName);
   };
 
+  
+
   const handleKeypadPress = (value: string) => {
     if (value === '완료') {
       handleBalanceInputPress();
+      setSendAccount({ ...sendAccount, amount: parseInt(amount.replace(/,/g, '').replace(' 원', '')) })
       return;
     }
     if (value === 'X') {
@@ -132,20 +180,25 @@ export const SendMoneyScreen = () => {
     }
     setAmount((prevAmount) => {
       const newAmount = prevAmount + value;
+      
       return formatAmount(newAmount);
     });
   };
   const handleSecretKeypadPress = (num: string) => {
     if (num === '완료') {
-      // 완료 버튼 처리
+      handleSecretInputPress();
+      AccountFinalPress();
+      setSendAccount({ ...sendAccount, password: secretKey})
       return;
     }
     if (num === '←') {
       setSecretKey((prevSecertKey) => prevSecertKey.slice(0, -1));
+      setSendAccount({ ...sendAccount, password: secretKey})
       return;
     }
     if (secretKey.length < 4) {
       setSecretKey((prevSecertKey) => prevSecertKey + num);
+      setSendAccount({ ...sendAccount, password: secretKey})
     }
   };
   const handleAmountButtonPress = (value: number) => {
@@ -168,10 +221,31 @@ export const SendMoneyScreen = () => {
 
   const AccountInputPress = (item: Account) => {
     setAccount(item);
+    setSendAccount({...sendAccount, recipientAccountNumber:item.accountNumber})
     setRecive(item.name);
     setIsTabVisible(!isTabVisible);
     Animated.timing(slideAnimTwo, {
       toValue: isTabVisible ? windowHeight + 100 : windowHeight * 0.5, // Adjust to the desired height of the tab container
+      duration: 300,
+      useNativeDriver: false,
+    }).start();
+  };
+
+  const AccountInputPress2 = (item: Account) => {
+    setMyAccount(item);
+    setSendAccount({...sendAccount, accountId:item.id})
+    setIsTabVisible(!isTabVisible);
+    Animated.timing(slideAnimOne, {
+      toValue: isAccountVisible ? windowHeight : windowHeight * 0.5, // Adjust to the desired height of the tab container
+      duration: 300,
+      useNativeDriver: false,
+    }).start();
+  };
+
+  const AccountFinalPress = () => {
+    setIsTabVisible(!isTabVisible);
+    Animated.timing(slideAnimFive, {
+      toValue: isTabVisible ? windowHeight + 100 : windowHeight * 0.3, // Adjust to the desired height of the tab container
       duration: 300,
       useNativeDriver: false,
     }).start();
@@ -205,9 +279,31 @@ export const SendMoneyScreen = () => {
   const renderItem = ({ item }) => (
     <ItemContainer onPress={() => AccountInputPress(item)}>
       <ItemTextContainer>
-        <ItemTitle>{item.name}</ItemTitle>
+        <ItemTitle>      
+          <StyledImage
+          source={require("../../assets/hana-symbol.png")}
+          width={20}
+          height={20}
+          ></StyledImage> {item.name}</ItemTitle>
         <ItemSubtitle>
-          {item.bank} {item.account}
+           {item.accountNumber}
+        </ItemSubtitle>
+      </ItemTextContainer>
+      <ItemDate>{item.date}</ItemDate>
+    </ItemContainer>
+  );
+
+  const renderItem2 = ({ item }) => (
+    <ItemContainer onPress={() => AccountInputPress2(item)}>
+      <ItemTextContainer>
+        <ItemTitle>      
+          <StyledImage
+          source={require("../../assets/hana-symbol.png")}
+          width={20}
+          height={20}
+          ></StyledImage> {item.name}</ItemTitle>
+        <ItemSubtitle>
+           {item.accountNumber}
         </ItemSubtitle>
       </ItemTextContainer>
       <ItemDate>{item.date}</ItemDate>
@@ -247,11 +343,29 @@ export const SendMoneyScreen = () => {
         <MenuButton>≡</MenuButton>
       </Header>
       <StyledAccountInput onPress={handleAccountInputPress}>
-        <AccountInfo>
+        {myAccount?
+        (<AccountInfo>
           <Row>
             <AccountIcon source={require('../../assets/hana-symbol.png')} />
             <AccountText>
-              {myAccountData[currentAccountIndex].accountName}
+              {myAccount.name}
+            </AccountText>
+          </Row>
+          <AccountDetails>
+            <AccountNumber>
+              {myAccount.accountNumber}
+            </AccountNumber>
+            <AccountBalance>
+              {myAccount.balance} 원
+            </AccountBalance>
+          </AccountDetails>
+        </AccountInfo>)
+          :
+        (<AccountInfo>
+          <Row>
+            <AccountIcon source={require('../../assets/hana-symbol.png')} />
+            <AccountText>
+              {myAccountData[currentAccountIndex].name}
             </AccountText>
           </Row>
           <AccountDetails>
@@ -259,10 +373,11 @@ export const SendMoneyScreen = () => {
               {myAccountData[currentAccountIndex].accountNumber}
             </AccountNumber>
             <AccountBalance>
-              {myAccountData[currentAccountIndex].balance}
+              {myAccountData[currentAccountIndex].balance} 원
             </AccountBalance>
           </AccountDetails>
-        </AccountInfo>
+        </AccountInfo>)
+        }
       </StyledAccountInput>
 
       {account ? (
@@ -326,8 +441,8 @@ export const SendMoneyScreen = () => {
         </TabContainer>
         <FlatList
           data={myAccountData}
-          renderItem={renderItem}
-          keyExtractor={(item) => item.accountNumber}
+          renderItem={renderItem2}
+          keyExtractor={(item) => item.id}
           contentContainerStyle={{ paddingBottom: 20 }}
         />
       </AnimatedTabContainer>
@@ -430,6 +545,44 @@ export const SendMoneyScreen = () => {
           ))}
         </KeypadContainer>
       </AnimatedBalanceContainer>
+
+
+
+      <AnimatedTabContainer style={{ top: slideAnimFive }}>
+        <Container2>
+        <Card>
+        <Title>{sendAccount.recipientBank} {recive}님께</Title>
+        <Title>{amount}원을 이체합니다.</Title>
+          <RowWide>
+            <InfoText>입금계좌</InfoText>
+            <InfoText><BoldText>{sendAccount.recipientBank} {sendAccount.recipientAccountNumber}</BoldText></InfoText>
+          </RowWide>
+          <RowWide>
+            <InfoText>수수료</InfoText>
+            <InfoText><BoldText>면제</BoldText></InfoText>
+          </RowWide>
+          <RowWide>
+            <InfoText>받는분에게 표기</InfoText>
+            <InfoText><BoldText>{send}</BoldText></InfoText>
+          </RowWide>
+          <RowWide>
+            <InfoText>나에게 표기</InfoText>
+            <InfoText><BoldText>{recive}</BoldText></InfoText>
+          </RowWide>
+
+            <ButtonContainer>
+              <CustomButton>
+                <ButtonText>취소</ButtonText>
+              </CustomButton>
+              <CustomButton primary onPress={() => objectDetect(sendAccount, send, recive)}
+              >
+                <ButtonText>강민주님에게 이체</ButtonText>
+              </CustomButton>
+            </ButtonContainer>
+        </Card>
+        </Container2>
+      </AnimatedTabContainer>
+      
     </Container>
   );
 };
