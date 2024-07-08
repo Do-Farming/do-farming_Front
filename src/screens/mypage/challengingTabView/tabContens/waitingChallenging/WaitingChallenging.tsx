@@ -9,11 +9,7 @@ import {
 } from '../TabContents.styled';
 import { Group } from '../../../../../types/group/GroupTypes';
 
-const WaitingChallenging: React.FC<{ myGroup: Group }> = ({
-  myGroup,
-}: {
-  myGroup: Group;
-}) => (
+const WaitingChallenging: React.FC<{ myGroup: Group }> = ({ myGroup }) => (
   <Container>
     {myGroup.status === 0 && (
       <Item>
