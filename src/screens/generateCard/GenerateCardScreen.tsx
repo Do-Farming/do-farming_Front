@@ -36,10 +36,6 @@ export default function GenerateCardScreen({ route, navigation }: any) {
   const [loadingText, setLoadingText] = useState('카드 생성 중입니다');
   const animatedValue = useRef(new Animated.Value(0)).current;
 
-  console.log('생성중', isGenerating);
-  console.log('이미지 ', isImageLoaded);
-  console.log('url', imageUrl);
-
   const generateImage = async () => {
     setImageUrl('');
 

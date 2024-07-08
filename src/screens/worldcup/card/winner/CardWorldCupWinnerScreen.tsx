@@ -34,7 +34,7 @@ export default function CardWorldCupWinnnerScreen({ route, navigation }: any) {
   const { winner, imageUrl } = route.params;
   const cardImageUrl = imageUrl
     ? imageUrl
-    : 'https://d1c5n4ri2guedi.cloudfront.net' + winner.card_img;
+    : winner.img;
   const animatedValue = useRef(new Animated.Value(0)).current;
   const [isImgLoaded, setIsImgLoaded] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
@@ -107,7 +107,7 @@ export default function CardWorldCupWinnnerScreen({ route, navigation }: any) {
             <CardImage uri={cardImageUrl} ImgWidth={200} ImgHeight={300} />
           </CardImgContainer>
         )}
-        <CardName>{winner.name}</CardName>
+        <CardName>{winner.cardName}</CardName>
         <CardBenefitList>
           {winner.top_benefit.map((benefit: any, benefitIndex: number) => {
             return (
