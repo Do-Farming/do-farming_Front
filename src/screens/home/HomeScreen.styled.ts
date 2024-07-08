@@ -161,7 +161,7 @@ export const CardInfo = styled.View`
 `;
 
 export const CardName = styled.Text`
-  font-size: 20px;
+  font-size: 17px;
   font-weight: bold;
   margin-left: 10px;
   margin-bottom: 10px;
