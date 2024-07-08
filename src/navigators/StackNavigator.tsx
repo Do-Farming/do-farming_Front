@@ -31,6 +31,7 @@ import BangJoinScreen2 from '../screens/bang/bangJoin/BangJoinScreen2';
 import SelectCategoryScreen from '../screens/worldcup/taste/selectCategory/SelectCategoryScreen';
 import TasteWorldCupWinnnerScreen from '../screens/worldcup/taste/winner/TasteWorldCupWinnerScreen';
 import TransactionHistoryScreen from '../screens/transactionHistory/TransactionHistoryScreen';
+import { ProductScreen } from '../screens/product/allproduct/ProductScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -204,6 +205,11 @@ function StackNavigator() {
         name="TransactionHistory"
         component={TransactionHistoryScreen}
         options={{ headerTransparent: true, headerTitle: '거래내역 조회' }}
+      />
+      <Stack.Screen
+        name="AllProduct"
+        component={ProductScreen}
+        options={{ title: '전체 상품 페이지' }}
       />
     </Stack.Navigator>
   );

@@ -66,6 +66,10 @@ export default function ExampleScreen({ navigation }: any) {
           title="거래내역 페이지로"
           onPress={() => navigation.navigate('TransactionHistory')}
         />
+        <Button
+          title="전체 상품 페이지로"
+          onPress={() => navigation.navigate('AllProduct')}
+        />
       </View>
     </SafeAreaView>
   );
