@@ -1,8 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { SafeAreaView } from '../home/HomeScreen.styled';
-import {
-  Container
-} from '../worldcup/winner/CardWorldCupWinnerScreen.styled';
+import { Container } from '../worldcup/card/CardWorldCupScreen.styled';
 import { Animated, Easing, Image, TouchableOpacity, View } from 'react-native';
 import {
   EnterText,

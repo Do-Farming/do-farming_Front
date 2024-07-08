@@ -16,10 +16,10 @@ import {
   EnterButton,
   EnterText,
 } from './CardWorldCupWinnerScreen.styled';
-import CardImage from '../../../components/CardImage/CardImage';
-import { SafeAreaView } from '../../home/HomeScreen.styled';
+import CardImage from '../../../../components/CardImage/CardImage';
 import { Animated, Easing } from 'react-native';
-import { CardLottieView } from '../../generateCard/GenerateCardScreen.styled';
+import { SafeAreaView } from '../../../home/HomeScreen.styled';
+import { CardLottieView } from '../../../generateCard/GenerateCardScreen.styled';
 
 export default function CardWorldCupWinnnerScreen({ route, navigation }: any) {
   const { winner } = route.params;
@@ -62,11 +62,11 @@ export default function CardWorldCupWinnnerScreen({ route, navigation }: any) {
     <SafeAreaView>
       <Container>
         <CardLottieView
-        source={require('../../../assets/worldcup/confetti.json')}
-        autoPlay={true}
-        loop={false}
-        resizeMode="cover"
-      />
+          source={require('../../../../assets/worldcup/confetti.json')}
+          autoPlay={true}
+          loop={false}
+          resizeMode="cover"
+        />
         <InfoText>추천해주는 카드는! 🧚‍♂️</InfoText>
         <CardImgContainer>
           <CardImage uri={cardImageUrl} ImgWidth={200} ImgHeight={300} />
