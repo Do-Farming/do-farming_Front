@@ -2,8 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { SafeAreaView } from '../home/HomeScreen.styled';
 import { Animated, Easing, Image, TouchableOpacity, View } from 'react-native';
 import {
-  EnterText,
-  InputTitle,
+  EnterText
 } from '../bang/bangCreate/BangCreateScreen.styled';
 import {
   Button,
@@ -22,6 +21,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import axiosInstance from '../../apis/axiosInstance';
 import { ChipIcon, DoFarmingIcon } from '../../assets';
 import { Container } from '../worldcup/card/winner/CardWorldCupWinnerScreen.styled';
+import { InputTitle } from '../bang/bangJoin/BangJoinScreen.styled';
 
 const styles = ['선택 없음', '동양풍', '만화책', '귀엽게'];
 
@@ -35,10 +35,6 @@ export default function GenerateCardScreen({ route, navigation }: any) {
   const [selectedType, setSelectedType] = useState('선택 없음');
   const [loadingText, setLoadingText] = useState('카드 생성 중입니다');
   const animatedValue = useRef(new Animated.Value(0)).current;
-
-  console.log('생성중', isGenerating);
-  console.log('이미지 ', isImageLoaded);
-  console.log('url', imageUrl);
 
   const generateImage = async () => {
     setImageUrl('');

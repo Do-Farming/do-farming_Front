@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
 
-export const Container = styled.View`
+export const Container = styled.ScrollView`
   background-color: #f5f5f5;
   flex-direction: column;
   padding: 20px;
@@ -36,7 +36,7 @@ export const MoreText = styled.Text`
   font-size: 12px;
 `;
 
-export const ProdContainer = styled.View`
+export const ProdContainer = styled.ScrollView`
   background-color: white;
   border-radius: 20px;
   gap: 12px;
@@ -44,6 +44,14 @@ export const ProdContainer = styled.View`
   padding-vertical: 25px;
   box-shadow: 0px 4px 4px rgba(77, 77, 77, 0.25);
   margin-bottom: 30px;
+  max-height: 400px;
+`;
+
+export const Divide = styled.View`
+  background-color: #e9e9e9;
+  height: 1px;
+  width: 100%;
+  margin-bottom: 10px;
 `;
 
 export const RowContainer = styled.View`

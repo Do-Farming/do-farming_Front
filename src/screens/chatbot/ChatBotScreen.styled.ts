@@ -63,4 +63,10 @@ export const Input = styled.TextInput`
   margin-right: 10px;
 `;
 
-export const SendButton = styled.Button``;
+export const SendButton = styled.Pressable``;
+
+export const SendText = styled.Text`
+  color: black;
+  font-weight: 600;
+  font-size: 18px;
+`;

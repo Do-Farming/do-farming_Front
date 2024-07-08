@@ -138,4 +138,5 @@ export const TransactionAmount = styled.Text`
 export const TransactionTotalBalance = styled.Text`
   font-size: 14px;
   color: #aaa;
+  margin-top: 5px;
 `;

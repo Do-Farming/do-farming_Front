@@ -27,6 +27,7 @@ import {
   ProductInterestSmallExplaination,
   ProductTermText,
   ProductTitle,
+  RedText,
   ScrollViewContainer,
 } from './DoFarmingInfoScreen.styled';
 import { MoneyIcon, MorningIcon, QuizIcon, RunningIcon } from '../../../assets';
@@ -54,7 +55,7 @@ export default function DoFarmingInfoScreen({ navigation }: any) {
             <ProductExplaination>한 주마다 이자받고</ProductExplaination>
 
             <ProductInterestLargeExplaination>
-              연 최대 6.0%
+              연 최대 <RedText>6.0%</RedText>
             </ProductInterestLargeExplaination>
             <ProductInterestSmallExplaination>
               최소 1.0%
@@ -78,7 +79,7 @@ export default function DoFarmingInfoScreen({ navigation }: any) {
             </MissionContainer>
             <MissionContainer>
               <MissionInfo>
-              <ProductExplaination>얼리버드</ProductExplaination>
+                <ProductExplaination>얼리버드</ProductExplaination>
                 <ProductExplaination>기상 미션</ProductExplaination>
               </MissionInfo>
               <MissionImgContainer>
@@ -90,7 +91,7 @@ export default function DoFarmingInfoScreen({ navigation }: any) {
                 <QuizIcon width={'100%'} height={'100%'} />
               </MissionImgContainer>
               <MissionInfo>
-              <ProductExplaination style={{ textAlign: 'right' }}>
+                <ProductExplaination style={{ textAlign: 'right' }}>
                   경제 상식으로
                 </ProductExplaination>
                 <ProductExplaination style={{ textAlign: 'right' }}>
