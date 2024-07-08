@@ -10,17 +10,16 @@ import {
   SubHeader,
   ButtonT,
 } from './ProductSignInScreen.styled';
-import { GreenCheckIcon } from '../../../assets';
+import { CancelIcon, GreenCheckIcon } from '../../../assets';
 
 const ProductSignInScreen = ({ navigation, route }: any) => {
   const { resMsg } = route.params || {};
-  console.log('원필아', resMsg);
   const message = resMsg?.message || '가입이 완료되었습니다!';
   return (
     <Container>
       <Header>{resMsg ? '가입에 실패했습니다..' : '축하드립니다!'}</Header>
       <GreenCheckContainer>
-        <GreenCheckIcon />
+        {resMsg ? <CancelIcon /> : <GreenCheckIcon />}
       </GreenCheckContainer>
       <SubHeader>{message}</SubHeader>
       <ButtonContainer onPress={() => navigation.navigate('DoFarmingMain')}>
