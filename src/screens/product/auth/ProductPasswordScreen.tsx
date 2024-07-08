@@ -15,6 +15,7 @@ import {
 import { Path, Svg } from 'react-native-svg';
 import { JoinDofarmingType } from '../../../types/account/AccountTypes';
 import { joinDofarmingProduct } from '../../../apis/accountService';
+import { bangCreate } from '../../../apis/bangService';
 
 // Array shuffle
 const shuffleArray = (array: string[]): string[] => {
@@ -40,7 +41,7 @@ const ProductPasswordScreen: React.FC<ProductPasswordScreenProps> = ({
   const [isConfirming, setIsConfirming] = useState(false);
   const [message, setMessage] = useState('계좌 비밀번호를 설정해주세요.');
   const shakeAnimation = new Animated.Value(0);
-  const { joinDofarming, from } = route.params;
+  const { joinDofarming, bang, from } = route.params;
 
   useEffect(() => {
     setKeypadNumbers(
@@ -77,6 +78,7 @@ const ProductPasswordScreen: React.FC<ProductPasswordScreenProps> = ({
 
       try {
         if (from == 'bangCreate') {
+          await bangCreate(bang);
           await joinDofarmingProduct(updatedJoinDofarming);
         }
 

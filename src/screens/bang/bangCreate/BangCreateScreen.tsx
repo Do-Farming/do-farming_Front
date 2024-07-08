@@ -120,10 +120,9 @@ export default function BangCreateScreen({ navigation, route }: any) {
   };
 
   const onPressBangCreate = () => {
-    bangCreate(bang);
     setIsModalVisible(false);
     const from = 'bangCreate';
-    navigation.navigate('ProductPassword', { joinDofarming, from });
+    navigation.navigate('ProductPassword', { joinDofarming, bang, from });
   };
 
   return (

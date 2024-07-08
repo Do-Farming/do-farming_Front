@@ -16,5 +16,7 @@ export const joinDofarmingProduct = async (
     '/api/v1/signsaving/dofarming/create',
     joinDoFarmingAcc,
   );
+  console.log('가입됐어??', response.data);
+
   return response.data;
 };
