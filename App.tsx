@@ -1,14 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Button, Platform, StyleSheet, Text, View, useColorScheme } from 'react-native';
-import * as Device from 'expo-device';
+import { Platform, useColorScheme } from 'react-native';
 import * as Notifications from 'expo-notifications';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Subscription } from 'expo-modules-core';
+import * as Device from 'expo-device';
 import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
 import { ThemeProvider as StyledComponentsThemeProvider } from 'styled-components/native';
 import { AuthProvider } from './src/contexts/authContext';
 import StackNavigator from './src/navigators/StackNavigator';
 import theme from './src/styles/theme';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 Notifications.setNotificationHandler({
     handleNotification: async () => ({

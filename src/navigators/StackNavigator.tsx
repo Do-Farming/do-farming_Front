@@ -28,6 +28,7 @@ import WakeupScreen from '../screens/wakeup/wakeup/WakeupScreen';
 import CameraScreen from '../screens/wakeup/camera/CameraScreen';
 import TabNavigator from './TabNavigator';
 import BangJoinScreen2 from '../screens/bang/bangJoin/BangJoinScreen2';
+import TransactionHistoryScreen from '../screens/transactionHistory/TransactionHistoryScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -186,6 +187,11 @@ function StackNavigator() {
         name="WakeUpCamera"
         component={CameraScreen}
         options={{ title: '기상 인증하기' }}
+      />
+      <Stack.Screen
+        name="TransactionHistory"
+        component={TransactionHistoryScreen}
+        options={{ headerTransparent: true, headerTitle: '거래내역 조회' }}
       />
     </Stack.Navigator>
   );
