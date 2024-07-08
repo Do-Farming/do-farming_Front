@@ -102,7 +102,7 @@ export default function CardWorldCupWinnnerScreen({ route, navigation }: any) {
           })}
         </CardBenefitList>
         <ButtonContainer>
-          <CancelButton onPress={() => navigation.navigate('Home')}>
+          <CancelButton onPress={() => navigation.navigate('DoFarmingMain')}>
             <EnterText>홈으로</EnterText>
           </CancelButton>
           <Animated.View
