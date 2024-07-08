@@ -22,7 +22,8 @@ import { Camera } from 'expo-camera/legacy';
 import { todayObject } from '../../../apis/wakeupService';
 import { ObjectMapping } from '../../../constants/WakeupObject';
 
-export default function WakeupScreen({ navigation }: any) {
+export default function WakeupScreen({ navigation, route }: any) {
+  const groupId = route.params;
   const [dailyRate, setDailyRate] = useState<DailyRanking['data']['ranking']>(
     [],
   );

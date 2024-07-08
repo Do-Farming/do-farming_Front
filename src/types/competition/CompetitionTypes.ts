@@ -1,23 +1,29 @@
 export interface DailyRanking {
-  status: number;
   message: string;
-  data: {
+  code: number;
+  result: {
     date: string;
-    ranking: Array<{
+    ranking: {
       name: string;
       dailyRate: string;
       challengeType: number;
       challengeDate: string;
-    }>;
+    }[];
   };
+  isSuccess: boolean;
 }
 
 export interface WeeklyRate {
-  data: {
-    weekly: number;
-    user: Array<{
-      name: string;
-      weeklyRate: number;
-    }>;
-  };
+  message: string;
+  code: number;
+  result: {
+    date: string; // 날짜
+    totalRate: number; // 총 이율
+  }[];
+  isSuccess: boolean;
+}
+
+export interface FormattedHistory {
+  name: string;
+  totalRate: number;
 }

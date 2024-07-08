@@ -26,7 +26,8 @@ import { ApiResponse, PedometerResponse } from '../../types';
 import axiosInstance from '../../apis/axiosInstance';
 import { RunIcon } from '../../assets';
 
-export default function PedometerScreen() {
+export default function PedometerScreen({ route }: any) {
+  const { groupId } = route.params;
   const [isPedometerAvailable, setIsPedometerAvailable] = useState('checking');
   const [pastStepCount, setPastStepCount] = useState(0);
   const [currentStepCount, setCurrentStepCount] = useState(0);
@@ -43,7 +44,7 @@ export default function PedometerScreen() {
     try {
       const response = await axiosInstance.get<
         ApiResponse<PedometerResponse[]>
-      >(`/pedometer/get?groupId=${2}`);
+      >(`/pedometer/get?groupId=${groupId}`);
       console.log(response);
 
       if (response.data.isSuccess) {
@@ -109,7 +110,7 @@ export default function PedometerScreen() {
     if (deviceId) {
       fetchPedometerData(deviceId);
 
-      ws.current = new WebSocket('ws://172.30.1.71/pedometer');
+      ws.current = new WebSocket('ws://172.30.1.99/pedometer');
 
       ws.current.onopen = () => {
         console.log('WebSocket 연결이 열렸습니다');
