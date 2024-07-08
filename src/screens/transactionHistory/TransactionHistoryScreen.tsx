@@ -59,7 +59,6 @@ export default function TransactionHistoryScreen({ navigation, route }: any) {
           `/api/v1/account/get?accountId=${accountId}`,
         );
         if (response.data.isSuccess) {
-          console.log(response.data.result);
           setAccount(response.data.result);
         } else {
           console.log('계좌 정보 조회 실패');
