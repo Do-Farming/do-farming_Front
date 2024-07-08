@@ -17,7 +17,8 @@ import axiosInstance from '../../../apis/axiosInstance';
 
 const { width: screenWidth } = Dimensions.get('window');
 
-export default function TasteWorldCupScreen({ navigation, category }: any) {
+export default function TasteWorldCupScreen({ navigation, route }: any) {
+  const { category } = route.params;
   const colorValue = useRef(new Animated.Value(0)).current;
   const hologramValue = useRef(new Animated.Value(0)).current;
   const [tasteList, setTasteList] = useState<Taste[]>([]); // 취향 리스트
@@ -42,7 +43,6 @@ export default function TasteWorldCupScreen({ navigation, category }: any) {
         const response = await axiosInstance.get<GetTasteListResponse>(
           `/api/v1/taste?category=${category}`,
         );
-        // console.log(response.data);
         if (response.data.isSuccess) {
           setTasteList(response.data.result.tasteList);
         } else {
@@ -52,7 +52,7 @@ export default function TasteWorldCupScreen({ navigation, category }: any) {
         console.error(error);
       }
     };
-    getTasteList('음식');
+    getTasteList(category);
   }, []);
 
   useEffect(() => {
@@ -88,16 +88,6 @@ export default function TasteWorldCupScreen({ navigation, category }: any) {
   }, [colorValue, hologramValue]);
 
   const renderTaste = (taste: Taste, handleTastePress: any) => {
-    const cardImageUrl = taste.tasteImg;
-    // const annualFeeParts = card.annual_fee_basic.split('/ ');
-
-    const hologramStyle = {
-      opacity: hologramValue.interpolate({
-        inputRange: [0, 1],
-        outputRange: [0, 0.4], // 투명도 조정
-      }),
-    };
-
     return (
       <>
         <TasteImgContainer onPress={() => handleTastePress(taste)}>
@@ -116,8 +106,8 @@ export default function TasteWorldCupScreen({ navigation, category }: any) {
 
     if (nextSelectedTasteList.length === 1 && round === 2) {
       // 최종 우승 취향이 결정됨
-      navigation.navigate('CardWorldCupWinner', {
-        winner: nextSelectedTasteList[0],
+      navigation.navigate('TasteWorldCupWinner', {
+        winnerTaste: nextSelectedTasteList[0],
       });
     } else if (nextIndex >= tasteList.length) {
       setTasteList(nextSelectedTasteList);

@@ -5,13 +5,16 @@ import {
   BoardContent,
   BoardDate,
   BoardTitle,
+  ButtonContainer,
   ColumnContainer,
   Container,
+  DeleteButton,
   EnterButton,
   EnterText,
   ParticipantContainer,
   ParticipantName,
   RowContainer,
+  StartButton,
   StyledImage,
   Title,
   WakeUpContainer,
@@ -20,18 +23,48 @@ import {
 import React, { useEffect, useState } from 'react';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { bangDetail } from '../../../apis/bangService';
+import { bangDelete, bangDetail } from '../../../apis/bangService';
 import { BangDetailType } from '../../../types/BangTypes';
+import CustomModal from '../../../components/CustomModal/CustomModal';
+import {
+  ModalButton,
+  ModalButtonText,
+} from '../bangCreate/BangCreateScreen.styled';
 
 export default function BangDetailScreen({ route, navigation }: any) {
+  const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
   const { id } = route.params;
-  const [bang, setBang] = useState<BangDetailType>();
+
   useEffect(() => {
     const fetchBangDetail = async (id: number) => {
       await bangDetail(id).then((res) => setBang(res));
     };
     fetchBangDetail(id);
   }, []);
+
+  const [bang, setBang] = useState<BangDetailType>();
+
+  const onPressModalOpen = () => {
+    console.log('팝업을 여는 중입니다.');
+    setIsModalVisible(true);
+  };
+
+  const onPressModalClose = () => {
+    setIsModalVisible(false);
+  };
+
+  const onPressBangDelete = async () => {
+    try {
+      setIsModalVisible(false);
+      await bangDelete(id);
+      setTimeout(() => {
+        navigation.navigate('BangSearch');
+      }, 1000);
+    } catch (error) {
+      console.log('챌린징 모집글 삭제 요청 중 에러발생');
+    }
+  };
+
   return (
     <>
       {bang && (
@@ -80,23 +113,47 @@ export default function BangDetailScreen({ route, navigation }: any) {
               </ParticipantContainer>
             ))}
           </BangParticipantContainer>
-          <EnterButton
-            status={bang.status}
-            disabled={bang.status !== 0}
-            onPress={() => {
-              if (bang.status === 0) {
-                navigation.navigate('BangJoin', { bang: bang.id });
-              }
-            }}
+          {bang.admin ? (
+            <ButtonContainer>
+              <DeleteButton
+                onPress={() => {
+                  onPressModalOpen();
+                }}
+              >
+                <EnterText>삭제하기</EnterText>
+              </DeleteButton>
+              <StartButton>
+                <EnterText>시작하기</EnterText>
+              </StartButton>
+            </ButtonContainer>
+          ) : (
+            <EnterButton
+              status={bang.status}
+              disabled={bang.status !== 0}
+              onPress={() => {
+                if (bang.status === 0) {
+                  navigation.navigate('BangJoin', { bang: bang.id });
+                }
+              }}
+            >
+              <EnterText>
+                {bang.status === 0
+                  ? '입장하기'
+                  : bang.status === 1
+                    ? '챌린지 시작 대기중 입니다...'
+                    : '이미 진행중인 챌린지입니다.'}
+              </EnterText>
+            </EnterButton>
+          )}
+          <CustomModal
+            isVisible={isModalVisible}
+            onClose={onPressModalClose}
+            text={'챌린지 모집글을 삭제하시겠습니까?'}
           >
-            <EnterText>
-              {bang.status === 0
-                ? '입장하기'
-                : bang.status === 1
-                  ? '챌린지 시작 대기중 입니다...'
-                  : '이미 진행중인 챌린지입니다.'}
-            </EnterText>
-          </EnterButton>
+            <ModalButton onPress={onPressBangDelete}>
+              <ModalButtonText>확인</ModalButtonText>
+            </ModalButton>
+          </CustomModal>
         </Container>
       )}
     </>

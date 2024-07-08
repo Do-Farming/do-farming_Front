@@ -22,3 +22,11 @@ export const bangJoin = async (id: number) => {
   console.log('방 가입 되었나', response.data);
   return response.data;
 };
+
+export const bangDelete = async (id: number) => {
+  const response = await axiosInstance.delete('/group/delete', {
+    data: { groupId: id },
+  });
+  console.log(response.data);
+  return response.data;
+};

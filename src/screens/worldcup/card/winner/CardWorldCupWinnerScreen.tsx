@@ -16,6 +16,7 @@ import {
   EnterButton,
   EnterText,
 } from './CardWorldCupWinnerScreen.styled';
+<<<<<<< HEAD:src/screens/worldcup/winner/CardWorldCupWinnerScreen.tsx
 import CardImage from '../../../components/CardImage/CardImage';
 import { SafeAreaView } from '../../home/HomeScreen.styled';
 import { Animated, Easing, Image } from 'react-native';
@@ -26,6 +27,12 @@ import {
 import { ChipIcon, DoFarmingIcon } from '../../../assets';
 import CustomModal from '../../../components/CustomModal/CustomModal';
 import { ModalButton, ModalButtonText } from '../../bang/bangCreate/BangCreateScreen.styled';
+=======
+import CardImage from '../../../../components/CardImage/CardImage';
+import { Animated, Easing } from 'react-native';
+import { SafeAreaView } from '../../../home/HomeScreen.styled';
+import { CardLottieView } from '../../../generateCard/GenerateCardScreen.styled';
+>>>>>>> b6f58d5484efb72334186d8ca674bc81c03ee9cf:src/screens/worldcup/card/winner/CardWorldCupWinnerScreen.tsx
 
 export default function CardWorldCupWinnnerScreen({ route, navigation }: any) {
   const { winner, imageUrl } = route.params;
@@ -80,7 +87,11 @@ export default function CardWorldCupWinnnerScreen({ route, navigation }: any) {
     <SafeAreaView>
       <Container>
         <CardLottieView
+<<<<<<< HEAD:src/screens/worldcup/winner/CardWorldCupWinnerScreen.tsx
           source={require('../../../assets/worldcup/confetti.json')}
+=======
+          source={require('../../../../assets/worldcup/confetti.json')}
+>>>>>>> b6f58d5484efb72334186d8ca674bc81c03ee9cf:src/screens/worldcup/card/winner/CardWorldCupWinnerScreen.tsx
           autoPlay={true}
           loop={false}
           resizeMode="cover"

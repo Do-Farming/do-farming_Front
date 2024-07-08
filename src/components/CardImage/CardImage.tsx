@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Image, ImageLoadEventData, NativeSyntheticEvent } from 'react-native';
 
 interface CardImageProps {
-  uri: string;
+  uri?: string;
   ImgHeight: number;
   ImgWidth: number;
 }

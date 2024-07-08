@@ -18,7 +18,7 @@ import WorldCupInfoScreen from '../screens/worldcup/information/WorldCupInfoScre
 import WorldCupSelectScreen from '../screens/worldcup/select/WorldCupSelectScreen';
 import CardWorldCupScreen from '../screens/worldcup/card/CardWorldCupScreen';
 import TasteWorldCupScreen from '../screens/worldcup/taste/TasteWorldCupScreen';
-import CardWorldCupWinnnerScreen from '../screens/worldcup/winner/CardWorldCupWinnerScreen';
+import CardWorldCupWinnnerScreen from '../screens/worldcup/card/winner/CardWorldCupWinnerScreen';
 import GenerateCardScreen from '../screens/generateCard/GenerateCardScreen';
 import QuizScreen from '../screens/quiz/QuizScreen';
 import ImageCreationScreen from '../screens/imageCreation/ImageCreationScreen';
@@ -28,6 +28,8 @@ import WakeupScreen from '../screens/wakeup/wakeup/WakeupScreen';
 import CameraScreen from '../screens/wakeup/camera/CameraScreen';
 import TabNavigator from './TabNavigator';
 import BangJoinScreen2 from '../screens/bang/bangJoin/BangJoinScreen2';
+import SelectCategoryScreen from '../screens/worldcup/taste/selectCategory/SelectCategoryScreen';
+import TasteWorldCupWinnnerScreen from '../screens/worldcup/taste/winner/TasteWorldCupWinnerScreen';
 import TransactionHistoryScreen from '../screens/transactionHistory/TransactionHistoryScreen';
 
 const Stack = createNativeStackNavigator();
@@ -139,9 +141,19 @@ function StackNavigator() {
         }}
       />
       <Stack.Screen
+        name="SelectCategory"
+        component={SelectCategoryScreen}
+        options={{ title: '취향 이상형 월드컵 카테고리 선택' }}
+      />
+      <Stack.Screen
         name="TasteWorldCup"
         component={TasteWorldCupScreen}
         options={{ title: '취향 이상형 월드컵' }}
+      />
+      <Stack.Screen
+        name="TasteWorldCupWinner"
+        component={TasteWorldCupWinnnerScreen}
+        options={{ headerTransparent: true, headerTitle: '' }}
       />
       <Stack.Screen
         name="CardWorldCup"
