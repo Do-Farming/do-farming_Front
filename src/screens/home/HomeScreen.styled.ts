@@ -1,5 +1,10 @@
 import styled from 'styled-components/native';
 
+export const SafeAreaView = styled.SafeAreaView`
+  flex: 1;
+  background-color: ${(props) => props.theme.whiteColor};
+`;
+
 export const Container = styled.View`
   flex: 1;
   padding: 20px;
@@ -116,29 +121,27 @@ export const ButtonText = styled.Text<{ isSelected: boolean }>`
 `;
 
 export const CardListView = styled.View`
+  flex: 1;
   margin: 15px 0;
+  justify-content: space-between;
 `;
 
 export const CardContainer = styled.View`
-  padding: 20px 15px;
-  padding-left: 10px;
-  margin-bottom: 15px;
-  display: flex;
+  padding: 25px 15px;
+  padding-left: 8px;
   flex-direction: row;
   background: ${(props) => props.theme.whiteColor};
   border: 1px solid #f8f8fa;
   box-shadow: 0px 4px 4px rgba(77, 77, 77, 0.25);
   border-radius: 15px;
+  height: 45%;
+  align-items: center;
 `;
 
 export const CardImgView = styled.View`
   display: flex;
   justify-content: center;
   align-items: center;
-`;
-
-export const CardImg = styled.Image`
-  object-fit: contain;
 `;
 
 export const CardInfo = styled.View`
@@ -189,4 +192,5 @@ export const CardBenefitText = styled.Text`
 export const CardBenefitImportantText = styled.Text`
   color: ${(props) => props.theme.mainColor};
   font-weight: bold;
+  font-size: 11.5px;
 `;

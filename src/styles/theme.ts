@@ -10,7 +10,7 @@ const theme: DefaultTheme = {
   grayColor: '#f2f2f5',
   whiteColor: '#FFFFFF',
   darkGrayColor: '#4A4A4A',
-
+  blackColor: '#000000',
   placeholderColor: '#CCCCCC',
 };
 

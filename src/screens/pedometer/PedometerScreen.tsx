@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import React, { useState, useEffect, useRef } from 'react';
+import { View, Text, TouchableOpacity, TextInput } from 'react-native';
 import { Pedometer } from 'expo-sensors';
 import * as Application from 'expo-application';
 import {
@@ -22,6 +22,8 @@ import {
   ProfileImage,
   ProgressLabelText,
 } from './PedometerScreen.styled';
+import { ApiResponse, PedometerResponse } from '../../types';
+import axiosInstance from '../../apis/axiosInstance';
 import { RunIcon } from '../../assets';
 
 export default function PedometerScreen() {
@@ -29,10 +31,30 @@ export default function PedometerScreen() {
   const [pastStepCount, setPastStepCount] = useState(0);
   const [currentStepCount, setCurrentStepCount] = useState(0);
   const [deviceId, setDeviceId] = useState<string | null>(null);
+  const [users, setUsers] = useState<PedometerResponse[]>([]);
   const [visibleLabelIndex, setVisibleLabelIndex] = useState<number | null>(
     null,
   );
+  const [inputSteps, setInputSteps] = useState<string>('');
+  const ws = useRef<WebSocket | null>(null);
 
+  // 특정 groupId에 대한 만보기 데이터를 가져오는 함수
+  const fetchPedometerData = async (groupId: string) => {
+    try {
+      const response = await axiosInstance.get<
+        ApiResponse<PedometerResponse[]>
+      >(`/pedometer/get?groupId=${2}`);
+      console.log(response);
+
+      if (response.data.isSuccess) {
+        setUsers(response.data.result);
+      }
+    } catch (error) {
+      console.error('만보기 데이터를 가져오는 데 실패했습니다:', error);
+    }
+  };
+
+  // 디바이스 ID를 설정하고 만보기 업데이트를 구독하는 useEffect 훅
   useEffect(() => {
     const getDeviceId = async () => {
       const id = await Application.getIosIdForVendorAsync();
@@ -48,7 +70,7 @@ export default function PedometerScreen() {
       if (isAvailable) {
         const end = new Date();
         const start = new Date();
-        start.setHours(0, 0, 0, 0); // Set startDate to the beginning of the day
+        start.setHours(0, 0, 0, 0); // start를 하루의 시작으로 설정
 
         const pastStepCountResult = await Pedometer.getStepCountAsync(
           start,
@@ -56,6 +78,7 @@ export default function PedometerScreen() {
         );
         if (pastStepCountResult) {
           setPastStepCount(pastStepCountResult.steps);
+          postPedometerData(pastStepCountResult.steps);
         }
 
         const subscription = Pedometer.watchStepCount((result) => {
@@ -81,43 +104,60 @@ export default function PedometerScreen() {
     };
   }, []);
 
-  const users = [
-    {
-      rank: 1,
-      name: '변정흠',
-      steps: 9000,
-      achieved: '11/12 달성',
-      rate: '이율 3.5%',
-    },
-    {
-      rank: 2,
-      name: '변정합',
-      steps: 8000,
-      achieved: '11/12 달성',
-      rate: '이율 3.5%',
-    },
-    {
-      rank: 3,
-      name: '변정헙',
-      steps: 7000,
-      achieved: '11/12 달성',
-      rate: '이율 3.5%',
-    },
-    {
-      rank: 4,
-      name: '변정홉',
-      steps: 5000,
-      achieved: '11/12 달성',
-      rate: '이율 3.5%',
-    },
-    {
-      rank: 5,
-      name: '변정훕',
-      steps: pastStepCount,
-      achieved: '11/13 달성',
-      rate: '이율 3.5%',
-    },
-  ];
+  // WebSocket을 통해 실시간으로 데이터를 업데이트하는 useEffect 훅
+  useEffect(() => {
+    if (deviceId) {
+      fetchPedometerData(deviceId);
+
+      ws.current = new WebSocket('ws://172.30.1.71/pedometer');
+
+      ws.current.onopen = () => {
+        console.log('WebSocket 연결이 열렸습니다');
+      };
+
+      ws.current.onmessage = (e) => {
+        const updatedUser = JSON.parse(e.data);
+        setUsers((prevUsers) =>
+          prevUsers.map((user) =>
+            user.name === updatedUser.name ? updatedUser : user,
+          ),
+        );
+      };
+
+      ws.current.onclose = () => {
+        console.log('WebSocket 연결이 닫혔습니다');
+      };
+
+      return () => {
+        if (ws.current) {
+          ws.current.close();
+        }
+      };
+    }
+  }, [deviceId]);
+
+  // 만보기 데이터를 서버에 POST하는 함수
+  const postPedometerData = async (steps: number) => {
+    try {
+      const response = await axiosInstance.post(
+        `/pedometer/post?step=${steps}`,
+      );
+      if (response.data.isSuccess) {
+        // POST 요청이 성공하면 데이터를 다시 가져옵니다.
+        fetchPedometerData(deviceId);
+      }
+    } catch (error) {
+      console.error('만보기 데이터를 전송하는 데 실패했습니다:', error);
+    }
+  };
+
+  // 사용자가 입력한 걸음 수를 서버에 전송하는 함수
+  const handlePostSteps = () => {
+    const steps = parseInt(inputSteps);
+    if (!isNaN(steps)) {
+      postPedometerData(steps);
+    }
+  };
 
   const progress = (pastStepCount / 10000) * 100;
 
@@ -125,6 +165,7 @@ export default function PedometerScreen() {
     setVisibleLabelIndex((prevIndex) => (prevIndex === index ? null : index));
   };
 
+  // 랜덤 색상을 반환하는 함수
   const getRandomColor = () => {
     const colors = ['#ffafaf', '#ffd700', '#90ee90', '#add8e6', '#ff69b4'];
     return colors[Math.floor(Math.random() * colors.length)];
@@ -140,7 +181,7 @@ export default function PedometerScreen() {
           <ProgressSmallHeader>
             총 걸음 수 <StepCount>{pastStepCount}</StepCount> 걸음
           </ProgressSmallHeader>
-          <Text>06.18.14:31 기준</Text>
+          <Text>07.07.11:12 기준</Text>
           <Text>Sensor: {isPedometerAvailable}</Text>
           <Text>24시간 걸음 수: {pastStepCount}</Text>
           <Text>실시간 걸음 수: {currentStepCount}</Text>
@@ -149,7 +190,7 @@ export default function PedometerScreen() {
             {users.map((user, index) => (
               <PinContainer
                 key={index}
-                style={{ left: `${(user.steps / 10000) * 100}%` }}
+                style={{ left: `${(user.step / 10000) * 100}%` }}
               >
                 <TouchableOpacity onPress={() => toggleLabelVisibility(index)}>
                   <RunIcon style={{ marginTop: -5 }} />
@@ -167,13 +208,13 @@ export default function PedometerScreen() {
       <UserList>
         {users.map((user, index) => (
           <UserCard key={index}>
-            <RankNumber>{user.rank}</RankNumber>
+            <RankNumber>{index + 1}</RankNumber>
             <ProfileImage source={require('../../assets/profile.png')} />
             <View>
               <UserName>{user.name}</UserName>
-              <AchievedGoal>{user.achieved}</AchievedGoal>
+              <AchievedGoal>{`${user.step} 걸음`}</AchievedGoal>
             </View>
-            <InterestRate>{user.rate}</InterestRate>
+            <InterestRate>{`이율 ${user.rate}%`}</InterestRate>
           </UserCard>
         ))}
       </UserList>

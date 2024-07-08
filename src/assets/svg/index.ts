@@ -1,3 +1,11 @@
 export { default as RunIcon } from './ic_run.svg';
 export { default as DoFarmingIcon } from './ic_doFarming.svg';
 export { default as GreenCheckIcon } from './ic_greenCheck.svg';
+export { default as ArrowUpIcon } from './ic_arrowUp.svg';
+export { default as WorldCupIcon } from './ic_worldCupInfo.svg';
+export { default as MoneyIcon } from './ic_money.svg';
+export { default as RunningIcon } from './ic_running.svg';
+export { default as MorningIcon } from './ic_morning.svg';
+export { default as QuizIcon } from './ic_quiz.svg';
+export { default as CustomIcon } from './ic_custom.svg';
+export { default as SketchBook } from './sketchbook.svg';

@@ -1,6 +1,6 @@
 import { ImageSourcePropType, ScrollView } from 'react-native';
 import styled from 'styled-components/native';
-import { BangProps } from '../../../types/BangTypes';
+import { BangStatus } from '../../../types/BangTypes';
 
 export const Container = styled.View`
   flex: 1;
@@ -107,11 +107,13 @@ export const ParticipantName = styled.Text`
   text-align: center;
 `;
 
-export const EnterButton = styled.TouchableOpacity<BangProps>`
+export const EnterButton = styled.TouchableOpacity<BangStatus>`
   background-color: ${(props) => props.theme.mainColor};
   border-radius: 10px;
   padding: 15px;
   margin-bottom: 50px;
+  width: 100%;
+  opacity: ${(props) => (props.status === 0 ? 1 : 0.5)};
 `;
 
 export const EnterText = styled.Text`

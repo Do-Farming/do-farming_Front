@@ -5,6 +5,8 @@ export const Container = styled.View`
   align-items: center;
   justify-content: space-between;
   background-color: ${(props) => props.theme.whiteColor};
+  padding-left: 20px;
+  padding-right: 20px;
 `;
 
 export const ContentBox = styled.View`
@@ -15,8 +17,6 @@ export const TitleBox = styled.View`
   display: flex;
   justify-content: center;
   align-items: center;
-  border-color: ${(props) => props.theme.grayColor};
-  border-bottom-width: 1px;
 `;
 
 export const Title = styled.Text`
@@ -46,26 +46,55 @@ export const InputLabel = styled.Text<{ width?: string }>`
 `;
 
 export const NonContainLabelBox = styled.View<{ width?: string }>`
-  width: 80%;
+  width: 100%;
   display: flex;
   flex-direction: row;
+  align-items: center;
   justify-content: space-between;
 `;
 
 export const Input = styled.TextInput.attrs((props) => ({
   placeholderTextColor: props.theme.placeholderColor,
-}))<{ width?: string }>`
+}))`
   background-color: ${(props) => props.theme.grayColor};
-  width: ${(props) => props.width || '80%'};
-  padding: 8px;
+  width: 100%;
+  padding-horizontal: 8px;
+  padding-vertical: 12px;
+  border-radius: 8px;
+`;
+
+export const Slash = styled.View`
+  background-color: black;
+  height: 1px;
+  width: 10px;
+  margin-horizontal: 3px;
+`;
+
+export const MediumInput = styled.TextInput.attrs((props) => ({
+  placeholderTextColor: props.theme.placeholderColor,
+}))`
+  width: 45%;
+  background-color: ${(props) => props.theme.grayColor};
+  padding-horizontal: 8px;
+  padding-vertical: 12px;
+  border-radius: 8px;
+`;
+
+export const LongInput = styled.TextInput.attrs((props) => ({
+  placeholderTextColor: props.theme.placeholderColor,
+}))`
+  width: 80%;
+  background-color: ${(props) => props.theme.grayColor};
+  padding-horizontal: 8px;
+  padding-vertical: 12px;
   border-radius: 8px;
 `;
 
 export const Button = styled.TouchableOpacity<{ width?: string }>`
-  width: ${(props) => props.width || '22%'};
   align-items: center;
   justify-content: center;
-  padding: 8px;
+  padding-horizontal: 9px;
+  padding-vertical: 12px;
   border-radius: 8px;
   background-color: ${(props) => props.theme.hanaMainColor};
 `;
@@ -79,12 +108,12 @@ export const ButtonBox = styled.View`
   flex-direction: column-reverse;
   align-items: center;
   width: 100%;
-  margin-bottom: 20%;
+  margin-bottom: 66px;
 `;
 
 export const LongButton = styled.TouchableOpacity`
   border-radius: 8px;
-  width: 80%;
+  width: 90%;
   height: 44px;
   display: flex;
   justify-content: center;

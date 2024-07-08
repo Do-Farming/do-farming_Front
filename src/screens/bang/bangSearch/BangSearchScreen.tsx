@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Bang,
   BangContainer,
@@ -12,8 +12,19 @@ import {
   RowContainer,
   Title,
 } from './BangSearchScreen.styled';
+import { bangList } from '../../../apis/bangService';
+import { BangListType } from '../../../types/BangTypes';
 
 export default function BangSearchScreen({ navigation }: any) {
+  const [bangs, setBangs] = useState<BangListType[]>();
+
+  useEffect(() => {
+    const fetchBangList = async () => {
+      await bangList().then((res) => setBangs(res));
+    };
+    fetchBangList();
+  }, []);
+
   return (
     <Container>
       <RowContainer>
@@ -23,25 +34,25 @@ export default function BangSearchScreen({ navigation }: any) {
         </NewBang>
       </RowContainer>
 
-      <BangContainer>
-        <Bang onPress={() => navigation.navigate('BangDetail')}>
-          <BangInfoContainer>
-            <BangText>갓생기</BangText>
-            <BangNumber>(3/5)</BangNumber>
-          </BangInfoContainer>
-          <BangDate>06/14</BangDate>
-        </Bang>
-      </BangContainer>
-
-      <BangContainer>
-        <Bang onPress={() => navigation.navigate('BangDetail')}>
-          <BangInfoContainer>
-            <BangText>갓생기</BangText>
-            <BangNumber>(3/5)</BangNumber>
-          </BangInfoContainer>
-          <BangDate>06/14</BangDate>
-        </Bang>
-      </BangContainer>
+      {bangs &&
+        bangs.map((bang, index) => (
+          <BangContainer key={bang.id + bang.groupName + bang.title + index}>
+            <Bang
+              onPress={() => navigation.navigate('BangDetail', { id: bang.id })}
+            >
+              <BangInfoContainer>
+                <BangText>{bang.title}</BangText>
+                <BangNumber>
+                  ({bang.participantNumber}/{bang.groupNumber})
+                </BangNumber>
+              </BangInfoContainer>
+              <BangDate>
+                {bang.createdDate[0]}/{bang.createdDate[1]}/
+                {bang.createdDate[2]}
+              </BangDate>
+            </Bang>
+          </BangContainer>
+        ))}
     </Container>
   );
 }
