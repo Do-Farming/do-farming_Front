@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { SafeAreaView } from '../home/HomeScreen.styled';
-import { Container } from '../worldcup/card/CardWorldCupScreen.styled';
 import { Animated, Easing, Image, TouchableOpacity, View } from 'react-native';
 import {
   EnterText,
@@ -22,10 +21,12 @@ import {
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import axiosInstance from '../../apis/axiosInstance';
 import { ChipIcon, DoFarmingIcon } from '../../assets';
+import { Container } from '../worldcup/card/winner/CardWorldCupWinnerScreen.styled';
 
 const styles = ['선택 없음', '동양풍', '만화책', '귀엽게'];
 
 export default function GenerateCardScreen({ route, navigation }: any) {
+  const { winner } = route.params;
   const [imgDesc, setImgDesc] = useState('');
   const [imageUrl, setImageUrl] = useState('');
   const [isImgDescNull, setIsImgDescNull] = useState(false);
@@ -145,7 +146,7 @@ export default function GenerateCardScreen({ route, navigation }: any) {
                 ? '나만의 카드가 생성되었습니다!'
                 : isGenerating
                   ? loadingText
-                  : '나만의 카드 생성 🧚‍♂️'}
+                  : '나만의 카드 생성하기 🧚‍♂️'}
           </InfoText>
           {isGenerating || imageUrl ? (
             <GenerateCardContainer>
@@ -205,9 +206,15 @@ export default function GenerateCardScreen({ route, navigation }: any) {
 
           <ButtonContainer>
             <CancelButton
-              onPress={() => navigation.navigate('CardWinnerScreen')}
+              onPress={() => {
+                if (isImageLoaded) {
+                  navigation.navigate('CardWorldCupWinner', { winner, imageUrl });
+                } else {
+                  navigation.goBack();
+                }
+              }}
             >
-              <EnterText>뒤로</EnterText>
+              <EnterText>{isImageLoaded ? '확인' : '취소'}</EnterText>
             </CancelButton>
             <Animated.View
               style={{
