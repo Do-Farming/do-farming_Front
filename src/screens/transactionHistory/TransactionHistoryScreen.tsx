@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   AccountBalance,
   AccountBalanceContainer,
@@ -24,120 +24,107 @@ import {
 } from './TransactionHistoryScreen.styled';
 import { ScrollView, View } from 'react-native';
 import { SafeAreaView } from '../home/HomeScreen.styled';
+import { ApiResponse } from '../../types';
+import { TransactionHistory } from '../../types/transactionHistory/TransactionHistoryTypes';
+import axiosInstance from '../../apis/axiosInstance';
+import { Account } from '../../types/account/AccountTypes';
 
-const balance = 139626;
+export default function TransactionHistoryScreen({ navigation, route }: any) {
+  // const { accountId } = route.params;
+  const accountId = 2; // 인자로 받아올 예정
+  const [history, setHistory] = useState<TransactionHistory[]>([]);
+  const [account, setAccount] = useState<Account>();
 
-const transactions = [
-  {
-    id: 1,
-    date: '5.29',
-    name: '임태규',
-    amount: 450000,
-    totalBalance: 54410400,
-  },
-  {
-    id: 2,
-    date: '5.28',
-    name: '홍길동',
-    amount: 300000,
-    totalBalance: 53950400,
-  },
-  {
-    id: 3,
-    date: '5.29',
-    name: '임태규',
-    amount: 450000,
-    totalBalance: 54410400,
-  },
-  {
-    id: 4,
-    date: '5.28',
-    name: '홍길동',
-    amount: 300000,
-    totalBalance: 53950400,
-  },
-  {
-    id: 5,
-    date: '5.29',
-    name: '임태규',
-    amount: 450000,
-    totalBalance: 54410400,
-  },
-  {
-    id: 6,
-    date: '5.28',
-    name: '홍길동',
-    amount: 300000,
-    totalBalance: 53950400,
-  },
-  {
-    id: 7,
-    date: '5.29',
-    name: '임태규',
-    amount: 450000,
-    totalBalance: 54410400,
-  },
-  {
-    id: 8,
-    date: '5.28',
-    name: '홍길동',
-    amount: 300000,
-    totalBalance: 53950400,
-  },
-  // 추가 거래 내역을 여기에 추가
-];
+  useEffect(() => {
+    const getHistory = async (accountId: number) => {
+      try {
+        const response = await axiosInstance.get<
+          ApiResponse<TransactionHistory[]>
+        >(`/api/history/account/${accountId}`);
+        if (response.data.isSuccess) {
+          setHistory(response.data.result);
+        } else {
+          console.log('계좌 내역 조회 실패');
+        }
+      } catch (error) {
+        console.error('계좌 내역 요청 중 에러 발생:', error);
+      }
+    };
 
-export default function TransactionHistoryScreen({ navigation }: any) {
+    getHistory(accountId);
+
+    const getAccount = async (accountId: number) => {
+      try {
+        const response = await axiosInstance.get<ApiResponse<Account>>(
+          `/api/v1/account/get?accountId=${accountId}`,
+        );
+        if (response.data.isSuccess) {
+          setAccount(response.data.result);
+        } else {
+          console.log('계좌 정보 조회 실패');
+        }
+      } catch (error) {
+        console.error('계좌 정보 요청 중 에러 발생:', error);
+      }
+    };
+
+    getAccount(accountId);
+  }, []);
+
   return (
-    <>
-      <SafeAreaView>
-        <ScrollViewContainer>
-          <ScrollView
-            contentContainerStyle={{
-              flexGrow: 1,
-              alignItems: 'center',
-            }}
-          >
-            <Container>
-              <AccountInfoContainer>
-                <View>
-                  <AccountTitle>달달 하나통장</AccountTitle>
-                  <AccountNumber>3333-19-160492</AccountNumber>
-                </View>
-                <AccountBalanceContainer>
-                  <AccountBalance>{balance} </AccountBalance>
-                  <AccountBalanceWon>원</AccountBalanceWon>
-                </AccountBalanceContainer>
-                <WithdrawAvailableMoneyContainer>
-                  <WithdrawAvailableMoney>
-                    출금가능금액 {balance} 원
-                  </WithdrawAvailableMoney>
-                </WithdrawAvailableMoneyContainer>
-                <ButtonContainer>
-                  <CancelButton>
-                    <ButtonText isTransfer={false}>가져오기</ButtonText>
-                  </CancelButton>
-                  <TransferButton>
-                    <ButtonText isTransfer={true}>이체</ButtonText>
-                  </TransferButton>
-                </ButtonContainer>
-              </AccountInfoContainer>
-            </Container>
-            {transactions.map((transaction) => (
-                <TransactionContainer key={transaction.id}>
-                  <TransactionDate>{transaction.date}</TransactionDate>
-                  <TransactionDetail>
-                    <TransactionName>{transaction.name}</TransactionName>
-                    <TransactionBalance>
-                      <TransactionAmount>{transaction.amount.toLocaleString()} 원</TransactionAmount>
-                      <TransactionTotalBalance>{transaction.totalBalance.toLocaleString()} 원</TransactionTotalBalance>
-                    </TransactionBalance>
-                  </TransactionDetail>
-                </TransactionContainer>
-              ))}
-          </ScrollView>
-        </ScrollViewContainer>
-      </SafeAreaView>
-    </>
+    <SafeAreaView>
+      <ScrollViewContainer>
+        <ScrollView
+          contentContainerStyle={{
+            flexGrow: 1,
+            alignItems: 'center',
+          }}
+        >
+          <Container>
+            <AccountInfoContainer>
+              <View>
+                <AccountTitle>{account?.name}</AccountTitle>
+                <AccountNumber>{account?.accountNumber}</AccountNumber>
+              </View>
+              <AccountBalanceContainer>
+                <AccountBalance>{account?.balance} </AccountBalance>
+                <AccountBalanceWon>원</AccountBalanceWon>
+              </AccountBalanceContainer>
+              <WithdrawAvailableMoneyContainer>
+                <WithdrawAvailableMoney>
+                  출금가능금액 {account?.balance} 원
+                </WithdrawAvailableMoney>
+              </WithdrawAvailableMoneyContainer>
+              <ButtonContainer>
+                <CancelButton>
+                  <ButtonText isTransfer={false}>가져오기</ButtonText>
+                </CancelButton>
+                <TransferButton>
+                  <ButtonText isTransfer={true}>이체</ButtonText>
+                </TransferButton>
+              </ButtonContainer>
+            </AccountInfoContainer>
+          </Container>
+          {history.map((transaction) => (
+            <TransactionContainer key={transaction.id}>
+              <TransactionDate>
+                {history[0].dealdate[1]}. {history[0].dealdate[2]}
+              </TransactionDate>
+              <TransactionDetail>
+                <TransactionName>{transaction.recipient}</TransactionName>
+                <TransactionBalance>
+                  <TransactionAmount>
+                    {transaction.amount.toLocaleString()} 원
+                  </TransactionAmount>
+                  <TransactionTotalBalance>
+                    {transaction.remainBalance.toLocaleString()} 원
+                  </TransactionTotalBalance>
+                </TransactionBalance>
+              </TransactionDetail>
+            </TransactionContainer>
+          ))}
+        </ScrollView>
+      </ScrollViewContainer>
+    </SafeAreaView>
   );
 }

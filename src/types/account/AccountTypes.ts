@@ -1,13 +1,11 @@
 export interface Account {
-  id: string;
+  id: number;
+  accountNumber: number;
   name: string;
-  bank: string;
-  account: string;
-  date: string;
-  // myAccount
-  accountName?: string;
-  accountNumber?: string;
-  balance?: string;
+  balance: number;
+  productType: string;
+  createdAt: number[];
+  histories: boolean;
 }
 
 export interface CheckingAccount {
