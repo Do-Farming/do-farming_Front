@@ -114,10 +114,35 @@ export const EnterButton = styled.TouchableOpacity<BangStatus>`
   margin-bottom: 50px;
   width: 100%;
   opacity: ${(props) => (props.status === 0 ? 1 : 0.5)};
+  box-shadow: 0px 4px 4px rgba(77, 77, 77, 0.25);
 `;
 
 export const EnterText = styled.Text`
   font-size: 15px;
   font-weight: 700;
   text-align: center;
+`;
+
+export const ButtonContainer = styled.View`
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 50px;
+  width: 100%;
+  gap: 10px;
+`;
+
+export const DeleteButton = styled.Pressable`
+  background-color: #fa8282;
+  border-radius: 10px;
+  padding: 15px;
+  width: 49%;
+  box-shadow: 0px 4px 4px rgba(77, 77, 77, 0.25);
+`;
+
+export const StartButton = styled.Pressable`
+  background-color: ${(props) => props.theme.mainColor};
+  border-radius: 10px;
+  padding: 15px;
+  width: 49%;
+  box-shadow: 0px 4px 4px rgba(77, 77, 77, 0.25);
 `;
