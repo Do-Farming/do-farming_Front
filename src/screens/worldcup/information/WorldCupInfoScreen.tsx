@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Image, ScrollView, TouchableOpacity, View } from 'react-native';
+import React from 'react';
+import { Image, TouchableOpacity } from 'react-native';
 import {
   Container,
   EnterButton,

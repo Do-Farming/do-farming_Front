@@ -13,6 +13,9 @@ import {
   SignUpButtonText,
 } from './ProductPasswordScreen.styled';
 import { Path, Svg } from 'react-native-svg';
+import { JoinDofarmingType } from '../../../types/account/AccountTypes';
+import { joinDofarmingProduct } from '../../../apis/accountService';
+import { bangCreate } from '../../../apis/bangService';
 
 // Array shuffle
 const shuffleArray = (array: string[]): string[] => {
@@ -23,8 +26,14 @@ const shuffleArray = (array: string[]): string[] => {
   return array;
 };
 
-const ProductPasswordScreen: React.FC<{ navigation: any }> = ({
+interface ProductPasswordScreenProps {
+  navigation: any;
+  route: any;
+}
+
+const ProductPasswordScreen: React.FC<ProductPasswordScreenProps> = ({
   navigation,
+  route,
 }) => {
   const [password, setPassword] = useState<string[]>([]);
   const [confirmedPassword, setConfirmedPassword] = useState<string[]>([]);
@@ -32,6 +41,7 @@ const ProductPasswordScreen: React.FC<{ navigation: any }> = ({
   const [isConfirming, setIsConfirming] = useState(false);
   const [message, setMessage] = useState('계좌 비밀번호를 설정해주세요.');
   const shakeAnimation = new Animated.Value(0);
+  const { joinDofarming, bang, from } = route.params;
 
   useEffect(() => {
     setKeypadNumbers(
@@ -59,10 +69,25 @@ const ProductPasswordScreen: React.FC<{ navigation: any }> = ({
     }
   };
 
-  const handleConfirm = () => {
+  const handleConfirm = async () => {
     if (password.join('') === confirmedPassword.join('')) {
-      setMessage('상품가입이 완료되었습니다.');
-      navigation.navigate('ProductSignIn');
+      const updatedJoinDofarming: JoinDofarmingType = {
+        ...joinDofarming,
+        accountPassword: password.join(''),
+      };
+
+      try {
+        if (from == 'bangCreate') {
+          await bangCreate(bang);
+          await joinDofarmingProduct(updatedJoinDofarming);
+        }
+
+        setMessage('상품가입이 완료되었습니다.');
+        navigation.navigate('ProductSignIn');
+      } catch (error) {
+        console.error('상품 가입 요청 중 오류가 발생했습니다:', error);
+        setMessage('상품 가입 요청 중 오류가 발생했습니다.');
+      }
     } else {
       setMessage('틀렸습니다, 계좌비밀번호를 다시 입력해주세요.');
       setConfirmedPassword([]);

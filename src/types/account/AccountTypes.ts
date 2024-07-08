@@ -19,3 +19,10 @@ export interface CheckingAccount {
   createdAt: number[];
   histories: any;
 }
+
+export interface JoinDofarmingType {
+  dofarmingProductId: number;
+  withdrawAccountId: number;
+  depositAmount: number;
+  accountPassword: string;
+}
