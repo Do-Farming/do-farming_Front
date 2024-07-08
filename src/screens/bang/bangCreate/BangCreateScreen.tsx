@@ -24,10 +24,13 @@ import { bangCreate } from '../../../apis/bangService';
 import { BangType, SelectBoxType } from '../../../types/BangTypes';
 import { InfoText } from '../bangJoin/BangJoinScreen.styled';
 import { getChecking } from '../../../apis/accountService';
-import { CheckingAccount } from '../../../types/account/AccountTypes';
+import {
+  CheckingAccount,
+  JoinDofarmingType,
+} from '../../../types/account/AccountTypes';
 import { accountList } from '../../../mocks/userAccount';
 
-export default function BangCreateScreen({ navigation }: any) {
+export default function BangCreateScreen({ navigation, route }: any) {
   const [personOpen, setPersonOpen] = useState(false);
   const [disclosureOpen, setDisclosureOpen] = useState(false);
   const [waketimeOpen, setWaketimeOpen] = useState(false);
@@ -37,6 +40,13 @@ export default function BangCreateScreen({ navigation }: any) {
 
   const [accountOpen, setAccountOpen] = useState<boolean>(false);
   const [outAccount, setOutAccount] = useState<string>('');
+
+  const [joinDofarming, setJoinDofarming] = useState<JoinDofarmingType>({
+    dofarmingProductId: 102,
+    withdrawAccountId: 0,
+    depositAmount: 1000000,
+    accountPassword: '',
+  });
 
   const debouncedSetBang = debounce((name, value) => {
     setBang((prevBang) => ({
@@ -66,6 +76,13 @@ export default function BangCreateScreen({ navigation }: any) {
   });
 
   useEffect(() => {
+    setJoinDofarming((prevjoin) => ({
+      ...prevjoin,
+      withdrawAccountId: Number(outAccount),
+    }));
+  }, [outAccount]);
+
+  useEffect(() => {
     setBang((prevBang) => ({
       ...prevBang,
       groupNumber: recruitNum,
@@ -85,7 +102,7 @@ export default function BangCreateScreen({ navigation }: any) {
     if (myChecking && myChecking.length > 0) {
       const updatedUserAccountList = myChecking.map((element) => ({
         label: `하나은행 ${element.accountNumber}`,
-        value: element.accountNumber,
+        value: element.id,
       }));
       setUserAccountList(updatedUserAccountList);
     }
@@ -105,7 +122,8 @@ export default function BangCreateScreen({ navigation }: any) {
   const onPressBangCreate = () => {
     bangCreate(bang);
     setIsModalVisible(false);
-    navigation.navigate('BangSearch');
+    const from = 'bangCreate';
+    navigation.navigate('ProductPassword', { joinDofarming, from });
   };
 
   return (
@@ -210,8 +228,8 @@ export default function BangCreateScreen({ navigation }: any) {
           />
         </InputContainer>
       </BoardContainer>
-      <BoardContainer style={{ zIndex: 1000 }}>
-        <InputContainer style={{ zIndex: 1000 }}>
+      <BoardContainer style={{ zIndex: 800 }}>
+        <InputContainer style={{ zIndex: 800 }}>
           {accountList && (
             <>
               <InputTitle>출금할 계좌를 선택해주세요.</InputTitle>
@@ -248,7 +266,7 @@ export default function BangCreateScreen({ navigation }: any) {
       <CustomModal
         isVisible={isModalVisible}
         onClose={onPressModalClose}
-        text={'챌린지 방이 생성되었습니다'}
+        text={'해당 상품의 계좌 비밀번호 설정페이지로 이동합니다.'}
       >
         <ModalButton onPress={onPressBangCreate}>
           <ModalButtonText>확인</ModalButtonText>

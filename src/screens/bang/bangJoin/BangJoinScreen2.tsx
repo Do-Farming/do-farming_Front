@@ -19,7 +19,7 @@ import {
 import { accountList } from '../../../mocks/userAccount';
 import { getChecking } from '../../../apis/accountService';
 import { CheckingAccount } from '../../../types/account/AccountTypes';
-import { Title } from '../bangSearch/BangSearchScreen.styled';
+import { View } from 'react-native';
 
 export default function BangJoinScreen2({ navigation }: any) {
   const [accountOpen, setAccountOpen] = useState<boolean>(false);
@@ -95,9 +95,11 @@ export default function BangJoinScreen2({ navigation }: any) {
         </InputContainer>
         <InfoText>🚨 상품 가입 금액은 1,000,000원 입니다.</InfoText>
       </BoardContainer>
-      <EnterButton onPressOut={onPressModalOpen} style={{ zIndex: 500 }}>
-        <EnterText>가입하기</EnterText>
-      </EnterButton>
+      <View style={{ marginHorizontal: 20 }}>
+        <EnterButton onPressOut={onPressModalOpen} style={{ zIndex: 500 }}>
+          <EnterText>가입하기</EnterText>
+        </EnterButton>
+      </View>
       <CustomModal
         isVisible={isModalVisible}
         onClose={onPressModalClose}
