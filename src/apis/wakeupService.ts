@@ -1,4 +1,5 @@
 import axios from 'axios';
+import axiosInstance from './axiosInstance';
 
 export const objectDetect = async (capturedImage: string) => {
   const url = 'http://aiopen.etri.re.kr:8000/ObjectDetect';
@@ -21,4 +22,9 @@ export const objectDetect = async (capturedImage: string) => {
   } catch (error) {
     throw error;
   }
+};
+
+export const todayObject = async () => {
+  const response = await axiosInstance.get('/wakeup/object');
+  return response.data.result;
 };
