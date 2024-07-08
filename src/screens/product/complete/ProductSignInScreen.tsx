@@ -17,9 +17,11 @@ const ProductSignInScreen = ({ navigation, route }: any) => {
   const message = resMsg?.message || '가입이 완료되었습니다!';
   return (
     <Container>
-      <Header>{resMsg ? '가입에 실패했습니다..' : '축하드립니다!'}</Header>
+      <Header>
+        {resMsg?.message ? '가입에 실패했습니다..' : '축하드립니다!'}
+      </Header>
       <GreenCheckContainer>
-        {resMsg ? <CancelIcon /> : <GreenCheckIcon />}
+        {resMsg?.message ? <CancelIcon /> : <GreenCheckIcon />}
       </GreenCheckContainer>
       <SubHeader>{message}</SubHeader>
       <ButtonContainer onPress={() => navigation.navigate('DoFarmingMain')}>
