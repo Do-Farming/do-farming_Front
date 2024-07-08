@@ -9,6 +9,7 @@ export const Container = styled.View`
   flex: 1;
   padding: 20px;
   background-color: ${(props) => props.theme.whiteColor};
+  margin-top: 20px;
 `;
 
 export const Header = styled.View`
@@ -18,6 +19,7 @@ export const Header = styled.View`
 export const Row = styled.View`
   flex-direction: row;
   align-items: baseline;
+  margin-top: 8px;
 `;
 
 export const TextNormal = styled.Text`
@@ -31,9 +33,10 @@ export const Username = styled.Text`
 `;
 
 export const InfoText = styled.Text`
-  font-size: 24px;
+  font-size: 20px;
   font-weight: bold;
   margin-bottom: 10px;
+  margin-left: 5px;
 `;
 
 export const SmallInfoText = styled.Text`
@@ -45,7 +48,9 @@ export const SmallInfoText = styled.Text`
 export const MainProduct = styled.View`
   width: 100%;
   border-radius: 15px;
-  margin-bottom: 25px;
+  margin-bottom: 30px;
+  margin-top: 5px;
+  box-shadow: 0px 4px 4px rgba(77, 77, 77, 0.25);
 `;
 
 export const Product = styled.View`
@@ -67,9 +72,9 @@ export const InterestRateContainer = styled.View`
   position: absolute;
   top: 16px;
   right: 16px;
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(0, 0, 0, 0.35);
   padding: 4px 8px;
-  border-radius: 4px;
+  border-radius: 8px;
 `;
 
 export const InterestRateText = styled.Text`
@@ -110,6 +115,7 @@ export const PaginationDot = styled.View<{ isActive: boolean }>`
 export const Button = styled.View<{ isSelected: boolean }>`
   padding: 10px 20px;
   background-color: ${(props) => (props.isSelected ? '#FFD262' : '#FFFFFF')};
+  border: 1px solid #e9e9e9;
   border-radius: 15px;
   margin-right: 10px;
 `;
@@ -122,19 +128,19 @@ export const ButtonText = styled.Text<{ isSelected: boolean }>`
 
 export const CardListView = styled.View`
   flex: 1;
-  margin: 15px 0;
-  justify-content: space-between;
+  margin: 25px 0;
+  gap: 30px;
 `;
 
 export const CardContainer = styled.View`
-  padding: 25px 15px;
+  padding: 20px 20px;
   padding-left: 8px;
   flex-direction: row;
   background: ${(props) => props.theme.whiteColor};
   border: 1px solid #f8f8fa;
   box-shadow: 0px 4px 4px rgba(77, 77, 77, 0.25);
   border-radius: 15px;
-  height: 45%;
+  height: 42%;
   align-items: center;
 `;
 
