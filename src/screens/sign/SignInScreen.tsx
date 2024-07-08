@@ -32,7 +32,7 @@ export default function SignInScreen({ navigation }: any) {
   const handleSubmit = async () => {
     try {
       const response = await login({ phoneNumber, password });
-      navigation.navigate('Home');
+      navigation.navigate('DoFarmingMain');
       setIsLogin(true);
 
       console.log('Login successful:', response);

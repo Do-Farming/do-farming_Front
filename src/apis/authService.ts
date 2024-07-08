@@ -40,3 +40,28 @@ export const logout = async ({ navigation }: any) => {
     }
   }
 };
+
+export const sendSms = async (phoneNumber: string) => {
+  try {
+    const response = await axiosInstance.get(
+      '/api/v1/sms/send?phoneNumber=' + phoneNumber,
+    );
+    return response.data;
+  } catch (error) {
+    console.error('SMS 전송 실패 : ', error);
+    throw error;
+  }
+};
+
+export const certificate = async (certInfo: any) => {
+  try {
+    const response = await axiosInstance.post('/api/v1/auth/certification', {
+      phoneNumber: certInfo.phoneNumber,
+      certificationCode: certInfo.certCode,
+    });
+    return response.data;
+  } catch (error) {
+    console.error('인증 전송 실패 ', error);
+    throw error;
+  }
+};
