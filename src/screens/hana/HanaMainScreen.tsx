@@ -233,7 +233,7 @@ export default function HanaMainScreen({ navigation }: any) {
                 <HanaTextContainer>
                   <HanaTitle>적립식 이율 적금</HanaTitle>
                   <HanaSubtitle>MZ를 위한 예금 상품</HanaSubtitle>
-                  <HanaSubtitle>최대 8% 이율</HanaSubtitle>
+                  <HanaSubtitle>최대 6% 이율</HanaSubtitle>
                 </HanaTextContainer>
                 <Image
                   source={require('../../assets/ch.png')}
