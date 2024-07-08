@@ -47,4 +47,6 @@ export const DetectFail = styled.Text`
 
 export const DetectView = styled.View`
   flex-direction: column;
+  justify-items: center;
+  align-items: center;
 `;

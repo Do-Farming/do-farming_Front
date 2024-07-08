@@ -28,10 +28,14 @@ export default function WakeupScreen({ navigation }: any) {
   );
 
   const [object, setObject] = useState<string>('');
+  const [objectEng, setObjectEng] = useState<string>('');
 
   useEffect(() => {
     const fetchTodayObject = async () => {
-      await todayObject().then((res) => setObject(ObjectMapping[res]));
+      await todayObject().then((res) => {
+        setObject(ObjectMapping[res]);
+        setObjectEng(res);
+      });
     };
     fetchTodayObject();
   }, []);
@@ -54,7 +58,7 @@ export default function WakeupScreen({ navigation }: any) {
     const { status } = await Camera.requestCameraPermissionsAsync();
 
     if (status === 'granted') {
-      navigation.navigate('WakeUpCamera');
+      navigation.navigate('WakeUpCamera', objectEng);
     } else {
       Alert.alert('카메라 접근 허용은 필수입니다.');
     }
