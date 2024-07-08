@@ -19,7 +19,6 @@ import {
 import { accountList } from '../../../mocks/userAccount';
 import { getChecking } from '../../../apis/accountService';
 import { CheckingAccount } from '../../../types/account/AccountTypes';
-import { Title } from '../bangSearch/BangSearchScreen.styled';
 import { View } from 'react-native';
 
 export default function BangJoinScreen2({ navigation }: any) {
