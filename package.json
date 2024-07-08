@@ -28,6 +28,7 @@
     "expo-notifications": "~0.28.9",
     "expo-permissions": "^14.4.0",
     "expo-sensors": "~13.0.9",
+    "expo-splash-screen": "^0.27.5",
     "expo-status-bar": "~1.12.1",
     "js-cookie": "^3.0.5",
     "lodash": "^4.17.21",

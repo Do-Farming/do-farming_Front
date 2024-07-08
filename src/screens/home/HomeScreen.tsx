@@ -37,13 +37,11 @@ import {
   CardBenefitSmallText,
   SafeAreaView,
   CardImgView,
-  IconView,
   ChatBotButton,
 } from './HomeScreen.styled';
 import axios from 'axios';
 import CardImage from '../../components/CardImage/CardImage';
 import { useAuth } from '../../contexts/authContext';
-
 import MsgIcon from 'react-native-vector-icons/AntDesign';
 
 const { width: windowWidth } = Dimensions.get('window');

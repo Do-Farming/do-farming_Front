@@ -34,6 +34,8 @@ import {
   Product2,
   Product3,
   BalanceTexts,
+  SplashContainer,
+  SplashImage,
 } from './HanaMainScreen.styled';
 import { mainContents, saleContents } from '../../mocks/hanaMainDatas';
 import { useAuth } from '../../contexts/authContext';
@@ -52,6 +54,7 @@ const Pagination2: React.FC<{ length: number; currentIndex2: number }> = ({
 export default function HanaMainScreen({ navigation }: any) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [currentIndex2, setCurrentIndex2] = useState(0);
+  const [showSplash, setShowSplash] = useState(false);
   const { isLogin } = useAuth();
   const flatListRef = useRef<FlatList>(null);
   const flatListRef2 = useRef<FlatList>(null);
@@ -96,6 +99,7 @@ export default function HanaMainScreen({ navigation }: any) {
         (prevIndex - 1 + saleContents.length) % saleContents.length,
     );
   };
+
   const handleMomentumScrollEnd2 = (
     event: NativeSyntheticEvent<NativeScrollEvent>,
   ) => {
@@ -103,8 +107,23 @@ export default function HanaMainScreen({ navigation }: any) {
     const index = Math.round(contentOffsetX / windowWidth);
     setCurrentIndex2(index);
   };
+
+  const handleNavigate = (screen: string) => {
+    setShowSplash(true);
+    setTimeout(() => {
+      setShowSplash(false);
+      navigation.navigate(screen);
+    }, 3000);
+  };
+
   return (
     <SafeAreaView>
+    {showSplash && (
+      <SplashContainer>
+        <SplashImage source={require('../../assets/splash.png')} />
+      </SplashContainer>
+    )}
+    {!showSplash && (
       <Container>
         <Header>
           <Row>
@@ -226,7 +245,7 @@ export default function HanaMainScreen({ navigation }: any) {
         </MainProduct>
         <MainProduct>
           <TouchableOpacity
-            onPress={() => navigation.navigate('DoFarmingMain')}
+            onPress={() => handleNavigate('DoFarmingMain')}
           >
             <Product3>
               <HanaCard>
@@ -244,6 +263,7 @@ export default function HanaMainScreen({ navigation }: any) {
           </TouchableOpacity>
         </MainProduct>
       </Container>
-    </SafeAreaView>
+    )}
+  </SafeAreaView>
   );
 }
