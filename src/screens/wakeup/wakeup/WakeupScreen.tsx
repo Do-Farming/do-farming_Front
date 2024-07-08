@@ -19,11 +19,23 @@ import {
 import { Alert, View } from 'react-native';
 import { DailyRanking } from '../../../types';
 import { Camera } from 'expo-camera/legacy';
+import { todayObject } from '../../../apis/wakeupService';
+import { ObjectMapping } from '../../../constants/WakeupObject';
 
 export default function WakeupScreen({ navigation }: any) {
   const [dailyRate, setDailyRate] = useState<DailyRanking['data']['ranking']>(
     [],
   );
+
+  const [object, setObject] = useState<string>('');
+
+  useEffect(() => {
+    const fetchTodayObject = async () => {
+      await todayObject().then((res) => setObject(ObjectMapping[res]));
+    };
+    fetchTodayObject();
+  }, []);
+
   useEffect(() => {
     const mockDailyRate: DailyRanking['data']['ranking'] = Array.from(
       { length: 4 },
@@ -54,7 +66,7 @@ export default function WakeupScreen({ navigation }: any) {
         오늘의 미션은 <MissionTitle>기상미션 </MissionTitle>입니다.
       </MissionInfo>
       <CameraButton onPress={openCameraHandler}>
-        <CameraText>치약 찍으러가기</CameraText>
+        <CameraText>{object || ''} 찍으러가기</CameraText>
       </CameraButton>
       <UserList>
         {dailyRate.map((user, index) => (
