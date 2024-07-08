@@ -31,16 +31,10 @@ import {
   YellowBackground,
 } from '../../product/ProductSignUpScreen.styled';
 
-export default function BangJoinScreen({ navigation }: any) {
-  const [accountOpen, setAccountOpen] = useState<boolean>(false);
-  const [outAccount, setOutAccount] = useState<string>('');
-
+export default function BangJoinScreen({ navigation, route }: any) {
   const [myChecking, setMyChecking] = useState<CheckingAccount[]>();
-  const [userAccountList, setUserAccountList] = useState<SelectBoxType[]>([]);
-
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
-
-  const [joinDofarming, setJoinDofarming] = useState<JoinDofarmingType>();
+  const { bang } = route.params;
 
   useEffect(() => {
     const fetchMyChecking = async () => {
@@ -49,19 +43,9 @@ export default function BangJoinScreen({ navigation }: any) {
     fetchMyChecking();
   }, []);
 
-  useEffect(() => {
-    if (myChecking && myChecking.length > 0) {
-      const updatedUserAccountList = myChecking.map((element) => ({
-        label: `하나은행 ${element.accountNumber}`,
-        value: element.accountNumber,
-      }));
-      setUserAccountList(updatedUserAccountList);
-    }
-  }, [myChecking]);
-
   const onPressBangJoin = () => {
     setIsModalVisible(false);
-    navigation.navigate('BangJoin2');
+    navigation.navigate('BangJoin2', { bang: bang });
   };
 
   const onPressModalClose = () => {

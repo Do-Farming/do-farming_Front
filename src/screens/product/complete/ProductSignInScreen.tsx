@@ -1,6 +1,6 @@
 // ProductSignInScreen.tsx
 import React from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { Text } from 'react-native';
 import {
   Container,
   Header,
@@ -12,16 +12,18 @@ import {
 } from './ProductSignInScreen.styled';
 import { GreenCheckIcon } from '../../../assets';
 
-const ProductSignInScreen = ({ navigation }: any) => {
+const ProductSignInScreen = ({ navigation, route }: any) => {
+  const { resMsg } = route.params || {};
+  console.log('원필아', resMsg);
+  const message = resMsg?.message || '가입이 완료되었습니다!';
   return (
     <Container>
-      <Header>축하드립니다!</Header>
+      <Header>{resMsg ? '가입에 실패했습니다..' : '축하드립니다!'}</Header>
       <GreenCheckContainer>
         <GreenCheckIcon />
       </GreenCheckContainer>
-      <SubHeader>가입이 완료되었습니다!</SubHeader>
-      <ButtonContainer onPress={() => navigation.navigate('StartScreen')}>
-        {/* TODO: 상품추천 페이지 만들고 적절한 경로로 변경 */}
+      <SubHeader>{message}</SubHeader>
+      <ButtonContainer onPress={() => navigation.navigate('DoFarmingMain')}>
         <Text>다른 상품을 찾아볼까요?</Text>
         <ButtonT>
           <ButtonText>다른 상품 알아보기</ButtonText>

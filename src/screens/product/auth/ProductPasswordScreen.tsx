@@ -15,7 +15,7 @@ import {
 import { Path, Svg } from 'react-native-svg';
 import { JoinDofarmingType } from '../../../types/account/AccountTypes';
 import { joinDofarmingProduct } from '../../../apis/accountService';
-import { bangCreate } from '../../../apis/bangService';
+import { bangCreate, bangJoin } from '../../../apis/bangService';
 
 // Array shuffle
 const shuffleArray = (array: string[]): string[] => {
@@ -41,6 +41,7 @@ const ProductPasswordScreen: React.FC<ProductPasswordScreenProps> = ({
   const [isConfirming, setIsConfirming] = useState(false);
   const [message, setMessage] = useState('계좌 비밀번호를 설정해주세요.');
   const shakeAnimation = new Animated.Value(0);
+
   const { joinDofarming, bang, from } = route.params;
 
   useEffect(() => {
@@ -77,13 +78,20 @@ const ProductPasswordScreen: React.FC<ProductPasswordScreenProps> = ({
       };
 
       try {
+        let resMsg = '';
         if (from == 'bangCreate') {
           await bangCreate(bang);
           await joinDofarmingProduct(updatedJoinDofarming);
+        } else if (from == 'bangJoin2') {
+          const res = await bangJoin(bang);
+          if (res.isSuccess) {
+            await joinDofarmingProduct(updatedJoinDofarming);
+          } else {
+            resMsg = res.message;
+            console.log(res.message);
+          }
         }
-
-        setMessage('상품가입이 완료되었습니다.');
-        navigation.navigate('ProductSignIn');
+        navigation.navigate('ProductSignIn', { resMsg: { message: resMsg } });
       } catch (error) {
         console.error('상품 가입 요청 중 오류가 발생했습니다:', error);
         setMessage('상품 가입 요청 중 오류가 발생했습니다.');
