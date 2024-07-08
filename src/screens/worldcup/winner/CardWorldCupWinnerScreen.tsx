@@ -3,7 +3,6 @@ import {
   Container,
   InfoText,
   CardName,
-  // CardLottieView,
   CardBenefit,
   CardBenefitImg,
   CardBenefitTextView,
@@ -20,14 +19,12 @@ import {
 import CardImage from '../../../components/CardImage/CardImage';
 import { SafeAreaView } from '../../home/HomeScreen.styled';
 import { Animated, Easing } from 'react-native';
+import { CardLottieView } from '../../generateCard/GenerateCardScreen.styled';
 
 export default function CardWorldCupWinnnerScreen({ route, navigation }: any) {
   const { winner } = route.params;
   const cardImageUrl =
     'https://d1c5n4ri2guedi.cloudfront.net' + winner.card_img;
-
-  // State and animated value for button color
-  const [colorIndex, setColorIndex] = useState(0);
   const animatedValue = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
@@ -61,19 +58,15 @@ export default function CardWorldCupWinnnerScreen({ route, navigation }: any) {
     ],
   });
 
-  const buttonStyle = {
-    backgroundColor: interpolatedColor,
-  };
-
   return (
     <SafeAreaView>
       <Container>
-        {/* <CardLottieView
+        <CardLottieView
         source={require('../../../assets/worldcup/confetti.json')}
         autoPlay={true}
         loop={false}
         resizeMode="cover"
-      /> */}
+      />
         <InfoText>추천해주는 카드는! 🧚‍♂️</InfoText>
         <CardImgContainer>
           <CardImage uri={cardImageUrl} ImgWidth={200} ImgHeight={300} />

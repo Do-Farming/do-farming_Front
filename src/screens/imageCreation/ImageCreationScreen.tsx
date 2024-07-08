@@ -6,7 +6,7 @@ import axiosInstance from '../../apis/axiosInstance';
 const ImageCreationScreen = () => {
   const [prompt, setPrompt] = useState('');
   const [imageUrl, setImageUrl] = useState('');
-
+  const PROMPT_ = "발랄하고 생기있게"
   const generateImage = async () => {
     try {
       const response = await axiosInstance.post(
