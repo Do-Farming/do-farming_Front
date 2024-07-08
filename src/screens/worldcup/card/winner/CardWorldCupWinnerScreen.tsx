@@ -17,10 +17,6 @@ import {
   EnterText,
 } from './CardWorldCupWinnerScreen.styled';
 import CardImage from '../../../../components/CardImage/CardImage';
-<<<<<<< HEAD
-import { SafeAreaView } from '../../../home/HomeScreen.styled';
-=======
->>>>>>> 6ddc762ee4599b359b6bdd6bda4fcec870ac2d88
 import { Animated, Easing, Image } from 'react-native';
 import { SafeAreaView } from '../../../home/HomeScreen.styled';
 import {
@@ -29,14 +25,10 @@ import {
 } from '../../../generateCard/GenerateCardScreen.styled';
 import { ChipIcon, DoFarmingIcon } from '../../../../assets';
 import CustomModal from '../../../../components/CustomModal/CustomModal';
-<<<<<<< HEAD
-import { ModalButton, ModalButtonText } from '../../../bang/bangCreate/BangCreateScreen.styled';
-=======
 import {
   ModalButton,
   ModalButtonText,
 } from '../../../bang/bangCreate/BangCreateScreen.styled';
->>>>>>> 6ddc762ee4599b359b6bdd6bda4fcec870ac2d88
 
 export default function CardWorldCupWinnnerScreen({ route, navigation }: any) {
   const { winner, imageUrl } = route.params;
