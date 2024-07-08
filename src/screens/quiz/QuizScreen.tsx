@@ -20,6 +20,7 @@ import {
 import { Animated } from 'react-native';
 import { InfoText } from '../home/HomeScreen.styled';
 import { SketchBook } from '../../assets';
+import axiosInstance from '../../apis/axiosInstance';
 
 export default function QuizScreen() {
   const [timeLeft, setTimeLeft] = useState(0); // 10초 타이머
@@ -32,38 +33,31 @@ export default function QuizScreen() {
   const progressAnim = useRef(new Animated.Value(0)).current;
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const [quizCompleted, setQuizCompleted] = useState(false);
+  const [quizData, setQuizData] = useState<QuizItem[]>([])
 
-  const quizData = [
-    {
-      question:
-        '‘안전자산’으로 분류되는 다음 투자처 가운데 이자나 배당수익을 기대할 수 있는 한 가지를 고르면?',
-      choices: ['예금', '주식', '펀드', '비트코인'],
-      correctAnswer: 0,
-    },
-    {
-      question: '다음 중 주식 투자에 대한 설명으로 올바르지 않은 것은?',
-      choices: [
-        '배당금을 받을 수 있다',
-        '매수와 매도를 통해 수익을 낼 수 있다',
-        '투자 원금이 보장된다',
-        '주가 상승으로 자본 이득을 얻을 수 있다',
-      ],
-      correctAnswer: 2,
-    },
-    {
-      question: '다음 중 채권 투자에 대한 설명으로 올바른 것은?',
-      choices: [
-        '이자 수익을 기대할 수 없다',
-        '원금 보장이 없다',
-        '정기적인 이자 지급을 받을 수 있다',
-        '배당 수익을 기대할 수 있다',
-      ],
-      correctAnswer: 2,
-    },
-    // 추가 퀴즈 데이터
-  ];
+  const getQuizData = async (count: number) => {
+    try {
+      const response = await axiosInstance.get(
+        `/api/v1/quiz?count=${count}`
+      )
+      console.log(response);
+      setQuizData(response.data.result);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  useEffect(() => {
+    getQuizData(5);
+  }, [])
 
   const currentQuiz = quizData[currentPage];
+
+  interface QuizItem {
+    question: string;
+    choices: string[];
+    correctAnswer: number;
+  }
 
   useEffect(() => {
     if (quizCompleted) return; // 퀴즈가 종료된 경우에는 더 이상 실행하지 않음
@@ -112,9 +106,9 @@ export default function QuizScreen() {
 
     setShowAnswer(true);
     setSelectedChoice(index);
-    if (index === currentQuiz.correctAnswer) {
+    if (index + 1 === currentQuiz.correctAnswer) {
       setAnswerText('정답입니다! 🙆');
-      setScore((prevScore) => prevScore + 10); // 정답일 경우 점수 추가
+      setScore((prevScore) => prevScore + 20); // 정답일 경우 점수 추가
       setCorrectCount((prevCount) => prevCount + 1); // 맞힌 문제 수 추가
     } else {
       setAnswerText('오답입니다! 🙅');
@@ -157,27 +151,27 @@ export default function QuizScreen() {
             </SketchbookImage>
             <QuizContainer>
               <QuizNumber>Q.</QuizNumber>
-              <QuizContent>{currentQuiz.question}</QuizContent>
+              <QuizContent>{currentQuiz?.question}</QuizContent>
               <QuizPage>
                 {currentPage + 1} / {quizData.length}
               </QuizPage>
             </QuizContainer>
             <AnswerText>{answerText}</AnswerText>
             <ChoicesContainer>
-              {currentQuiz.choices.map((choice, index) => (
+              {currentQuiz?.choices.map((choice, index) => (
                 <ChoiceButton
                   key={index}
                   onPress={() => handleChoiceClick(index)}
                   style={{
                     backgroundColor: showAnswer
-                      ? index === currentQuiz.correctAnswer
+                      ? index + 1 === currentQuiz.correctAnswer
                         ? '#85D788'
                         : index === selectedChoice
                           ? '#FA8282'
                           : '#fff'
                       : '#fff',
                     borderColor: showAnswer
-                      ? index === currentQuiz.correctAnswer
+                      ? index + 1 === currentQuiz.correctAnswer
                         ? '#85D788'
                         : index === selectedChoice
                           ? '#FA8282'

@@ -27,7 +27,7 @@ export const AccountInfoContainer = styled.View`
 `;
 
 export const AccountTitle = styled.Text`
-  font-size: 20x;
+  font-size: 20px;
   font-weight: 500;
   color: ${(props) => props.theme.blackColor};
 `;
