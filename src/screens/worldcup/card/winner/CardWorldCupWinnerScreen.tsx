@@ -62,7 +62,7 @@ export default function CardWorldCupWinnnerScreen({ route, navigation }: any) {
     <SafeAreaView>
       <Container>
         <CardLottieView
-          source={require('../../../assets/worldcup/confetti.json')}
+          source={require('../../../../assets/worldcup/confetti.json')}
           autoPlay={true}
           loop={false}
           resizeMode="cover"

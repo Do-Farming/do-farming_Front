@@ -25,13 +25,13 @@ import {
   ParsedCard,
 } from '../../../../types/card/CardTypes';
 import { SafeAreaView } from '../../../home/HomeScreen.styled';
+import { CardLottieView } from '../../../generateCard/GenerateCardScreen.styled';
 
 export default function TasteWorldCupWinnnerScreen({ navigation, route }: any) {
   const { winnerTaste } = route.params;
   const [recommendedCard, setRecommendedCard] = useState<ParsedCard>();
 
   // State and animated value for button color
-  const [colorIndex, setColorIndex] = useState(0);
   const animatedValue = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
@@ -88,19 +88,15 @@ export default function TasteWorldCupWinnnerScreen({ navigation, route }: any) {
     ],
   });
 
-  const buttonStyle = {
-    backgroundColor: interpolatedColor,
-  };
-
   return (
     <SafeAreaView>
       <Container>
-        {/* <CardLottieView
-            source={require('../../../assets/worldcup/confetti.json')}
-            autoPlay={true}
-            loop={false}
-            resizeMode="cover"
-          /> */}
+        <CardLottieView
+          source={require('../../../../assets/worldcup/confetti.json')}
+          autoPlay={true}
+          loop={false}
+          resizeMode="cover"
+        />
         <InfoText>추천해주는 카드는! 🧚‍♂️</InfoText>
         <CardImgContainer>
           <CardImage
