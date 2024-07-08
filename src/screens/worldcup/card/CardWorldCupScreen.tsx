@@ -23,9 +23,9 @@ import {
   Text,
   View,
 } from 'react-native';
-import axios from 'axios';
 import * as Progress from 'react-native-progress';
 import CardImage from '../../../components/CardImage/CardImage';
+import axiosInstance from '../../../apis/axiosInstance';
 
 const getRandomCards = (cardList: any[], count: number) => {
   let shuffled = cardList.sort(() => 0.5 - Math.random());
@@ -57,21 +57,13 @@ export default function CardWorldCupScreen({ navigation, route }: any) {
 
   useEffect(() => {
     async function getCardChart(CardAmount: number) {
-      const today = new Date();
-
-      const year = today.getFullYear();
-      const month = String(today.getMonth() + 1).padStart(2, '0');
-      const day = String(today.getDate()).padStart(2, '0');
-
-      const formattedDate = `${year}-${month}-${day}`;
       try {
-        const CardsResponse = await axios.get(
-          `https://api.card-gorilla.com:8080/v1/charts/ranking?date=${formattedDate}&term=weekly&card_gb=${type}&limit=${CardAmount}&chart=top100&idx=&idx2=`,
-        );
-
-        const cardData = CardsResponse.data.map((card: any) => ({
+        const CardsResponse = await axiosInstance.get(
+          `/api/v1/card?type=${type}&count=${CardAmount}`
+        )
+        const cardData = CardsResponse.data.result.cardList.map((card: any) => ({
           ...card,
-          top_benefit: JSON.parse(card.top_benefit),
+          top_benefit: JSON.parse(card.benefit),
           corp: JSON.parse(card.corp),
         }));
 
@@ -117,9 +109,8 @@ export default function CardWorldCupScreen({ navigation, route }: any) {
   }, [colorValue, hologramValue]);
 
   const renderCard = (card: any, handleCardPress: any) => {
-    const cardImageUrl =
-      'https://d1c5n4ri2guedi.cloudfront.net' + card.card_img;
-    const annualFeeParts = card.annual_fee_basic.split('/ ');
+    const cardImageUrl = card.img;
+    const annualFeeParts = card.annualFee.split('/ ');
 
     const hologramStyle = {
       opacity: hologramValue.interpolate({
@@ -161,7 +152,7 @@ export default function CardWorldCupScreen({ navigation, route }: any) {
               fontWeight: 'bold',
             }}
           >
-            {card.name}
+            {card.cardName}
           </Text>
           <Image
             source={{ uri: card.corp.logo_img.url }}
