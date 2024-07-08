@@ -64,7 +64,6 @@ export default function MyPageScreen() {
         const response =
           await axiosInstance.get<ApiResponse<Group>>(`/group/my`);
         if (response.data.isSuccess) {
-          console.log(response.data.result);
           setMyGroup(response.data.result);
         } else {
           console.log('내가 속한 그룹 데이터 요청 실패');
