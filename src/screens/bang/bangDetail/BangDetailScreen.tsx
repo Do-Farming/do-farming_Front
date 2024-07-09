@@ -21,6 +21,7 @@ import {
   WakeUpTime,
 } from './BangDetailScreen.styled';
 import React, { useEffect, useState } from 'react';
+import { Linking, Pressable, Share } from 'react-native';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { bangDelete, bangDetail } from '../../../apis/bangService';
@@ -55,6 +56,17 @@ export default function BangDetailScreen({ route, navigation }: any) {
     4: require('../../../assets/4.png'),
   };
 
+  const onShare = async () => {
+    try {
+      const url = await Linking.getInitialURL();
+      await Share.share({
+        message: url || 'No URL available',
+      });
+    } catch (error) {
+      console.log('Error sharing URL', error);
+    }
+  };
+
   const onPressModalOpen = () => {
     console.log('팝업을 여는 중입니다.');
     setIsModalVisible(true);
@@ -82,7 +94,9 @@ export default function BangDetailScreen({ route, navigation }: any) {
         <Container>
           <RowContainer>
             <Title>챌린지 모임모임</Title>
-            <Icon name="link" size={20} color="#4A4A4A" />
+            <Pressable onPress={onShare}>
+              <Icon name="link" size={20} color="#4A4A4A" />
+            </Pressable>
           </RowContainer>
           <BoardContainer>
             <ColumnContainer>
