@@ -31,6 +31,7 @@ export const Header = styled.View`
 export const Row = styled.View`
   flex-direction: row;
   align-items: center;
+  padding-horizontal: 3px;
 `;
 
 export const RowImage = styled.View`
@@ -44,6 +45,7 @@ export const RowCenter = styled.View`
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  margin-top: 15px;
 `;
 
 export const TextNormal = styled.Text`
@@ -76,8 +78,13 @@ export const DescriptionSmallTexts = styled.Text`
 export const DescriptionAccountTexts = styled.Text`
   font-size: 15px;
   color: gray;
+`;
+
+export const DescriptionView = styled.View`
+  flex-direction: row;
   align-items: center;
 `;
+
 export const BalanceTexts = styled.Text`
   font-size: 24px;
   font-weight: bold;
@@ -95,7 +102,7 @@ export const SmallInfoText = styled.Text`
 export const MainProduct = styled.View`
   width: 100%;
   border-radius: 15px;
-  margin-bottom: 25px;
+  margin-bottom: 18px;
 `;
 
 export const Product = styled.View`
@@ -107,7 +114,7 @@ export const Product2 = styled.View`
   width: 340px;
   border-radius: 15px;
   background-color: white;
-  padding: 30px 20px;
+  padding: 20px;
   margin: 0px 5px;
   display: flex;
 `;
@@ -326,4 +333,19 @@ export const HanaPageNumber = styled.Text`
   font-size: 11px;
   color: #888;
   margin-horizontal: 10px;
+`;
+
+export const HanaProduct = styled.Pressable`
+  width: 100%;
+  height: 40px;
+  border-radius: 15px;
+  background-color: #1ea698;
+  align-items: center;
+  justify-content: center;
+  padding-vertical: 5px;
+`;
+
+export const HanaProductText = styled.Text`
+  font-size: 16px;
+  color: white;
 `;

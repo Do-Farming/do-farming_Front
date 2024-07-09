@@ -35,8 +35,9 @@ import {
   Product2,
   Product3,
   BalanceTexts,
-  SplashContainer,
-  SplashImage,
+  HanaProduct,
+  HanaProductText,
+  DescriptionView,
 } from './HanaMainScreen.styled';
 import { StyledImage } from '../bang/bangDetail/BangDetailScreen.styled';
 import { mainContents, saleContents } from '../../mocks/hanaMainDatas';
@@ -197,27 +198,30 @@ export default function HanaMainScreen({ navigation }: any) {
                 keyExtractor={(item, index) => index.toString()}
                 renderItem={({ item, index }) => (
                   <Product2 key={index}>
-                    <DescriptionAccountTexts>
+                    <DescriptionView>
                       <StyledImage
                         source={require('../../assets/hana-symbol.png')}
                         width={20}
                         height={20}
                       />
-                      {item.name}
-                    </DescriptionAccountTexts>
+                      <DescriptionAccountTexts>
+                        {item.name}
+                      </DescriptionAccountTexts>
+                    </DescriptionView>
+
                     <RowCenter>
                       <DescriptionTexts>{item.accountNumber}</DescriptionTexts>
                     </RowCenter>
                     <BalanceTexts>{formatAmount(item.balance)}</BalanceTexts>
                     <Row>
-                      <Button width="50%" backgroundColor="#EFF0F4">
+                      <Button width="48%" backgroundColor="#EFF0F4">
                         <ButtonText
                           onPress={() => navigation.navigate('SendMoney')}
                         >
                           보내기
                         </ButtonText>
                       </Button>
-                      <Button width="50%" backgroundColor="#1EA698">
+                      <Button width="48%" backgroundColor="#1EA698">
                         <ButtonText color="white">가져오기</ButtonText>
                       </Button>
                     </Row>
@@ -243,7 +247,7 @@ export default function HanaMainScreen({ navigation }: any) {
                         {item.descriptrions.text2}
                       </DescriptionTexts>
                       <Image
-                        style={{ width: 20, height: 15 }}
+                        style={{ width: 20, height: 15, marginBottom: 10 }}
                         source={item.images[1]}
                       />
                     </RowCenter>
@@ -315,6 +319,13 @@ export default function HanaMainScreen({ navigation }: any) {
               onMomentumScrollEnd={handleMomentumScrollEnd}
             />
           </MainProduct>
+
+          <MainProduct>
+            <HanaProduct onPress={() => navigation.navigate('AllProduct')}>
+              <HanaProductText>하나은행 상품 보러가기</HanaProductText>
+            </HanaProduct>
+          </MainProduct>
+
           <MainProduct>
             <TouchableOpacity onPress={() => handleNavigate('DoFarmingMain')}>
               <Product3>
@@ -325,7 +336,7 @@ export default function HanaMainScreen({ navigation }: any) {
                     <HanaSubtitle>최대 6% 이율</HanaSubtitle>
                   </HanaTextContainer>
                   <Image
-                    source={require('../../assets/ch.png')}
+                    source={require('../../assets/running.gif')}
                     style={{ width: 100, height: 100 }}
                   />
                 </HanaCard>

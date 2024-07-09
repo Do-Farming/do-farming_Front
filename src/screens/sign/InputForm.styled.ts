@@ -101,6 +101,8 @@ export const Button = styled.TouchableOpacity<{ width?: string }>`
 
 export const ButtonText = styled.Text`
   color: ${(props) => props.theme.whiteColor};
+  font-weight: 600;
+  font-size: 16px;
 `;
 
 export const ButtonBox = styled.View`
@@ -120,4 +122,20 @@ export const LongButton = styled.TouchableOpacity`
   align-items: center;
   background-color: ${(props) => props.theme.hanaMainColor};
   margin-vertical: 12px;
+`;
+
+export const GotoJoinButton = styled.Pressable`
+  flex-direction: row;
+`;
+
+export const GotoInfoText = styled.Text`
+  font-size: 14px;
+  margin-right: 4px;
+  font-weight: 600;
+`;
+
+export const GotoJoinText = styled.Text`
+  font-size: 15px;
+  text-decoration: underline;
+  font-weight: 600;
 `;
