@@ -1,10 +1,8 @@
 import * as React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeScreen from '../screens/home/HomeScreen';
-import HanaMainScreen from '../screens/hana/HanaMainScreen';
 import MyPageScreen from '../screens/mypage/MyPageScreen';
 import WorldCupInfoScreen from '../screens/worldcup/information/WorldCupInfoScreen';
-import ExampleScreen from '../screens/ExampleScreen';
 
 import {
   HomeIcon,
