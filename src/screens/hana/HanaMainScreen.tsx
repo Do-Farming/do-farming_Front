@@ -330,7 +330,7 @@ export default function HanaMainScreen({ navigation }: any) {
                     <HanaSubtitle>최대 6% 이율</HanaSubtitle>
                   </HanaTextContainer>
                   <Image
-                    source={require('../../assets/ch.png')}
+                    source={require('../../assets/running.gif')}
                     style={{ width: 100, height: 100 }}
                   />
                 </HanaCard>
