@@ -4,7 +4,7 @@ import { isExpired } from 'react-jwt';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const axiosInstance = axios.create({
-  baseURL: 'http://172.16.20.62',
+  baseURL: 'http://172.16.20.74',
   headers: {
     'Content-Type': 'application/json',
   },
@@ -14,12 +14,10 @@ const axiosInstance = axios.create({
 // 요청 인터셉터 설정
 axiosInstance.interceptors.request.use(
   async (config) => {
-    // const accessToken = localStorage.getItem('jwtToken');
     const accessToken = await AsyncStorage.getItem('jwtToken');
     if (accessToken) {
       if (isExpired(accessToken)) {
         try {
-          // const refreshToken = localStorage.getItem('refreshToken');
           const refreshToken = await AsyncStorage.getItem('refreshToken');
           const response = await axios.post(
             `/api/v1/auth/reissue`,
@@ -33,14 +31,11 @@ axiosInstance.interceptors.request.use(
 
           const { accessToken: newAccessToken, refreshToken: newRefreshToken } =
             response.data.result;
-          // localStorage.setItem('jwtToken', newAccessToken);
-          // localStorage.setItem('refreshToken', newRefreshToken);
           await AsyncStorage.setItem('jwtToken', newAccessToken);
           await AsyncStorage.setItem('refreshToken', newRefreshToken);
           config.headers.Authorization = `Bearer ${newAccessToken}`;
         } catch (error) {
           console.error(error);
-          // localStorage.clear();
           await AsyncStorage.clear();
           // window.location.replace("/login");
           return config;

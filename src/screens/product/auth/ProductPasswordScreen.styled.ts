@@ -4,7 +4,7 @@ export const Container = styled.View`
   flex: 1;
   justify-content: center;
   align-items: center;
-  background-color: #ffffff;
+  background-color: ${(props) => props.theme.whiteColor};
 `;
 
 export const Header = styled.Text`
@@ -17,7 +17,7 @@ export const DotsContainer = styled.View`
   flex-direction: row;
   justify-content: space-between;
   width: 150px;
-  margin-bottom: 50px; /* 여기서 마진을 줄였습니다 */
+  margin-bottom: 50px;
 `;
 
 interface DotProps {
@@ -54,7 +54,7 @@ export const Num = styled.Text`
 export const GIFs = styled.View`
   justify-content: center;
   align-items: center;
-  margin-bottom: 30px; /* 추가된 부분 */
+  margin-bottom: 30px;
 `;
 
 export const SignUpButton = styled.TouchableOpacity`

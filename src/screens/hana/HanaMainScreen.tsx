@@ -153,7 +153,7 @@ export default function HanaMainScreen({ navigation }: any) {
     setShowSplash(true);
     setTimeout(() => {
       setShowSplash(false);
-      navigation.navigate(screen);
+      navigation.navigate('Tabs', { screen: screen });
     }, 3000);
   };
 
@@ -165,16 +165,14 @@ export default function HanaMainScreen({ navigation }: any) {
           <Header>
             <Row>
               {isLogin ? (
-                <TouchableOpacity onPress={() => navigation.navigate('SignIn')}>
-                  <Row>
-                    <StyledImage
-                      source={require('../../assets/hana-symbol.png')}
-                      width={30}
-                      height={30}
-                    />
-                    <Username> 환영합니다.</Username>
-                  </Row>
-                </TouchableOpacity>
+                <Row>
+                  <StyledImage
+                    source={require('../../assets/hana-symbol.png')}
+                    width={20}
+                    height={20}
+                  />
+                  <Username> 환영합니다.</Username>
+                </Row>
               ) : (
                 <TouchableOpacity onPress={() => navigation.navigate('SignIn')}>
                   <Row>

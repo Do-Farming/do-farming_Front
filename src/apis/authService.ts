@@ -9,8 +9,6 @@ export const login = async ({ phoneNumber, password }: LoginParams) => {
       password,
     });
     if (response.data.result.accessToken && response.data.result.refreshToken) {
-      // localStorage.setItem('jwtToken', response.data.result.accessToken);
-      // localStorage.setItem('refreshToken', response.data.result.refreshToken);
       await AsyncStorage.setItem('jwtToken', response.data.result.accessToken);
       await AsyncStorage.setItem(
         'refreshToken',
@@ -27,14 +25,11 @@ export const login = async ({ phoneNumber, password }: LoginParams) => {
 export const logout = async ({ navigation }: any) => {
   try {
     await axiosInstance.post('/api/v1/auth/logout');
-    // localStorage.removeItem('jwtToken');
-    // localStorage.removeItem('refreshToken');
     await AsyncStorage.removeItem('jwtToken');
     await AsyncStorage.removeItem('refreshToken');
   } catch (error: any) {
     if (error.response && error.response.status === 500) {
-      // window.location.href = '/login';
-      navigation.navigate('SignIn');
+      navigation.navigate('HanaMain');
     } else {
       console.error('Logout failed:', error);
     }

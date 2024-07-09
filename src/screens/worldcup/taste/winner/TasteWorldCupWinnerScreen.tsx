@@ -18,21 +18,39 @@ import {
   EnterText,
 } from './TasteWorldCupWinnerScreen.styled';
 import CardImage from '../../../../components/CardImage/CardImage';
-import { Animated, Easing, Text } from 'react-native';
+import { Animated, Easing, Image, Text } from 'react-native';
 import axiosInstance from '../../../../apis/axiosInstance';
 import {
   GetRecommendedCardResponse,
   ParsedCard,
 } from '../../../../types/card/CardTypes';
 import { SafeAreaView } from '../../../home/HomeScreen.styled';
-import { CardLottieView } from '../../../generateCard/GenerateCardScreen.styled';
+import {
+  CardLottieView,
+  GenerateCardContainer,
+} from '../../../generateCard/GenerateCardScreen.styled';
+import { ChipIcon, DoFarmingIcon } from '../../../../assets';
+import CustomModal from '../../../../components/CustomModal/CustomModal';
+import {
+  ModalButton,
+  ModalButtonText,
+} from '../../../bang/bangCreate/BangCreateScreen.styled';
 
 export default function TasteWorldCupWinnnerScreen({ navigation, route }: any) {
-  const { winnerTaste } = route.params;
-  const [recommendedCard, setRecommendedCard] = useState<ParsedCard>();
-
-  // State and animated value for button color
+  const { winnerTaste, imageUrl } = route.params;
   const animatedValue = useRef(new Animated.Value(0)).current;
+  const [recommendedCard, setRecommendedCard] = useState<ParsedCard>();
+  const [isImgLoaded, setIsImgLoaded] = useState(false);
+  const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
+
+  const onPressModalClose = () => {
+    setIsModalVisible(false);
+  };
+
+  const onPressConfirmButton = () => {
+    setIsModalVisible(false);
+    navigation.navigate('DoFarmingMain');
+  };
 
   useEffect(() => {
     const animateColor = () => {
@@ -98,13 +116,28 @@ export default function TasteWorldCupWinnnerScreen({ navigation, route }: any) {
           resizeMode="cover"
         />
         <InfoText>추천해주는 카드는! 🧚‍♂️</InfoText>
-        <CardImgContainer>
-          <CardImage
-            uri={recommendedCard?.img}
-            ImgWidth={200}
-            ImgHeight={300}
-          />
-        </CardImgContainer>
+        {imageUrl ? (
+          <GenerateCardContainer>
+            {isImgLoaded ? (
+              <ChipIcon style={{ position: 'absolute', zIndex: 1, top: 10 }} />
+            ) : (
+              <DoFarmingIcon width={'100%'} height={'100%'} />
+            )}
+            <Image
+              source={{ uri: imageUrl }}
+              style={{ width: 200, height: 300, borderRadius: 10 }}
+              onLoadEnd={() => setIsImgLoaded(true)}
+            />
+          </GenerateCardContainer>
+        ) : (
+          <CardImgContainer>
+            <CardImage
+              uri={recommendedCard?.img}
+              ImgWidth={200}
+              ImgHeight={300}
+            />
+          </CardImgContainer>
+        )}
         <CardName>{recommendedCard?.cardName}</CardName>
         <CardBenefitList>
           {recommendedCard?.benefit.map(
@@ -133,8 +166,16 @@ export default function TasteWorldCupWinnnerScreen({ navigation, route }: any) {
           )}
         </CardBenefitList>
         <ButtonContainer>
-          <CancelButton onPress={() => navigation.navigate('Home')}>
-            <EnterText>홈으로</EnterText>
+          <CancelButton
+            onPress={() => {
+              if (imageUrl) {
+                setIsModalVisible(true);
+              } else {
+                navigation.navigate('Tabs', { screen: 'DoFarmingMain' });
+              }
+            }}
+          >
+            <EnterText>{imageUrl ? '발급하기' : '홈으로'}</EnterText>
           </CancelButton>
           <Animated.View
             style={{
@@ -143,12 +184,25 @@ export default function TasteWorldCupWinnnerScreen({ navigation, route }: any) {
               backgroundColor: interpolatedColor,
             }}
           >
-            <EnterButton onPress={() => navigation.navigate('GenerateCard')}>
+            <EnterButton
+              onPress={() =>
+                navigation.navigate('GenerateCard', recommendedCard)
+              }
+            >
               <EnterText>나만의 카드 생성</EnterText>
             </EnterButton>
           </Animated.View>
         </ButtonContainer>
       </Container>
+      <CustomModal
+        isVisible={isModalVisible}
+        onClose={onPressModalClose}
+        text={'발급되었습니다!'}
+      >
+        <ModalButton onPress={onPressConfirmButton}>
+          <ModalButtonText>확인</ModalButtonText>
+        </ModalButton>
+      </CustomModal>
     </SafeAreaView>
   );
 }

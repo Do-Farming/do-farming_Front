@@ -32,9 +32,7 @@ import {
 
 export default function CardWorldCupWinnnerScreen({ route, navigation }: any) {
   const { winner, imageUrl } = route.params;
-  const cardImageUrl = imageUrl
-    ? imageUrl
-    : winner.img;
+  const cardImageUrl = imageUrl ? imageUrl : winner.img;
   const animatedValue = useRef(new Animated.Value(0)).current;
   const [isImgLoaded, setIsImgLoaded] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
@@ -43,7 +41,7 @@ export default function CardWorldCupWinnnerScreen({ route, navigation }: any) {
     setIsModalVisible(false);
   };
 
-  const onPressBangCreate = () => {
+  const onPressConfirmButton = () => {
     setIsModalVisible(false);
     navigation.navigate('DoFarmingMain');
   };
@@ -136,7 +134,7 @@ export default function CardWorldCupWinnnerScreen({ route, navigation }: any) {
               if (imageUrl) {
                 setIsModalVisible(true);
               } else {
-                navigation.navigate('DoFarmingMain');
+                navigation.navigate('Tabs', { screen: 'DoFarmingMain' });
               }
             }}
           >
@@ -162,7 +160,7 @@ export default function CardWorldCupWinnnerScreen({ route, navigation }: any) {
         onClose={onPressModalClose}
         text={'발급되었습니다!'}
       >
-        <ModalButton onPress={onPressBangCreate}>
+        <ModalButton onPress={onPressConfirmButton}>
           <ModalButtonText>확인</ModalButtonText>
         </ModalButton>
       </CustomModal>
