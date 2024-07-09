@@ -32,10 +32,12 @@ export default function SignInScreen({ navigation }: any) {
   const handleSubmit = async () => {
     try {
       const response = await login({ phoneNumber, password });
-      navigation.navigate('DoFarmingMain');
-      setIsLogin(true);
-
-      console.log('Login successful:', response);
+      if (response.isSuccess) {
+        setIsLogin(true);
+        navigation.navigate('HanaMain');
+      } else {
+        console.log('Login failed');
+      }
     } catch (error) {
       console.error('Login failed:', error);
     }
