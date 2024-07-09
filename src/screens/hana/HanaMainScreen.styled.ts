@@ -30,7 +30,7 @@ export const Header = styled.View`
 
 export const Row = styled.View`
   flex-direction: row;
-  align-items: baseline;
+  align-items: center;
 `;
 
 export const RowImage = styled.View`
@@ -174,13 +174,11 @@ export const PaginationDot = styled.View<PaginationDotProps>`
   width: ${(props) => `${100 / props.length}%`};
   height: 5px;
   border-radius: 5px;
-  background-color: ${(props) => (props.isActive ? '#1EA698' : '#69778a')};
+  background-color: ${(props) => (props.isActive ? '#1EA698' : '#E9E9E9')};
   position: absolute;
   left: ${(props) => `${props.index * (100 / props.length)}%`};
   transition: left 0.3s ease;
-  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1);
 `;
-
 
 export const Button = styled.TouchableOpacity<ButtonProps>`
   justify-content: center;
