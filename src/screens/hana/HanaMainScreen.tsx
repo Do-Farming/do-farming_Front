@@ -158,6 +158,10 @@ export default function HanaMainScreen({ navigation }: any) {
     }, 3000);
   };
 
+  const goToTransactionPage = () => {
+    navigation.navigate('TransactionHistory');
+  };
+
   return (
     <GraySafeAreaView>
       {showSplash && <Splash />}
@@ -217,23 +221,26 @@ export default function HanaMainScreen({ navigation }: any) {
                       </DescriptionAccountTexts>
                     </DescriptionView>
 
-                    <RowCenter>
-                      <DescriptionTexts>{item.accountNumber}</DescriptionTexts>
-                    </RowCenter>
-                    <BalanceTexts>{formatAmount(item.balance)}</BalanceTexts>
-                    <Row>
-                      <Button width="48%" backgroundColor="#EFF0F4">
-                        <ButtonText
-                          onPress={() => navigation.navigate('SendMoney')}
-                        >
-                          보내기
-                        </ButtonText>
-                      </Button>
-                      <Button width="48%" backgroundColor="#1EA698">
-                        <ButtonText color="white">가져오기</ButtonText>
-                      </Button>
-                    </Row>
-                  </Product2>
+                      <RowCenter>
+                        <DescriptionTexts>
+                          {item.accountNumber}
+                        </DescriptionTexts>
+                      </RowCenter>
+                      <BalanceTexts>{formatAmount(item.balance)}</BalanceTexts>
+                      <Row>
+                        <Button width="48%" backgroundColor="#EFF0F4">
+                          <ButtonText
+                            onPress={() => navigation.navigate('SendMoney')}
+                          >
+                            보내기
+                          </ButtonText>
+                        </Button>
+                        <Button width="48%" backgroundColor="#1EA698">
+                          <ButtonText color="white">가져오기</ButtonText>
+                        </Button>
+                      </Row>
+                    </Product2>
+                  </TouchableOpacity>
                 )}
                 onMomentumScrollEnd={handleMomentumScrollEnd2}
               />
