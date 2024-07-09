@@ -44,6 +44,7 @@ import { useAuth } from '../../contexts/authContext';
 import { SafeAreaView } from '../home/HomeScreen.styled';
 import { myAccount } from '../../types/BankingSystem/AccountService';
 import axiosInstance from '../../apis/axiosInstance';
+import Splash from '../../components/Splash/Splash';
 
 const { width: windowWidth } = Dimensions.get('window');
 export const getChecking = async () => {
@@ -157,26 +158,20 @@ export default function HanaMainScreen({ navigation }: any) {
 
   return (
     <SafeAreaView>
-      {showSplash && (
-        <SplashContainer>
-          <SplashImage source={require('../../assets/splash.png')} />
-        </SplashContainer>
-      )}
+      {showSplash && <Splash />}
       {!showSplash && (
         <Container>
           <Header>
             <Row>
               {isLogin ? (
-                <TouchableOpacity onPress={() => navigation.navigate('SignIn')}>
-                  <Row>
-                    <StyledImage
-                      source={require('../../assets/hana-symbol.png')}
-                      width={20}
-                      height={20}
-                    />
-                    <Username> 환영합니다.</Username>
-                  </Row>
-                </TouchableOpacity>
+                <Row>
+                  <StyledImage
+                    source={require('../../assets/hana-symbol.png')}
+                    width={20}
+                    height={20}
+                  />
+                  <Username> 환영합니다.</Username>
+                </Row>
               ) : (
                 <TouchableOpacity onPress={() => navigation.navigate('SignIn')}>
                   <Row>
