@@ -18,6 +18,9 @@ import {
 import { allProduct } from '../../../apis/productService';
 import { ProductType } from '../../../types/product/ProductTypes';
 import { ObjectMapping } from '../../../constants/Product';
+import { Text } from 'react-native';
+import Splash from '../../../components/Splash/Splash';
+
 export const ProductScreen = () => {
   const [product, setProduct] = useState({
     SAVING: [],
@@ -25,6 +28,7 @@ export const ProductScreen = () => {
     DOFARMING: [],
     DEPOSIT: [],
   });
+  const [loading, setLoading] = useState(true);
 
   const renderProductItem = (product: ProductType) => (
     <RowContainer key={product.prodCode}>
@@ -42,36 +46,47 @@ export const ProductScreen = () => {
 
   useEffect(() => {
     const fetchProduct = async () => {
-      await allProduct().then((res) => setProduct(res));
+      try {
+        const res = await allProduct();
+        setProduct(res);
+      } catch (error) {
+      } finally {
+        setLoading(false);
+      }
     };
     fetchProduct();
   }, []);
 
+  if (loading) {
+    return <Splash />;
+  }
+
   return (
     <Container>
-      {Object.entries(product).map(([type, productList]) => {
-        if (!Array.isArray(productList)) {
-          console.error(
-            `Expected an array but got ${typeof productList} for ${type}`,
-          );
-          return null;
-        }
+      {product &&
+        Object.entries(product).map(([type, productList]) => {
+          if (!Array.isArray(productList)) {
+            console.error(
+              `Expected an array but got ${typeof productList} for ${type}`,
+            );
+            return null;
+          }
 
-        return (
-          <React.Fragment key={type}>
-            <ProdTypeContainer>
-              <ProdTypeRow>
-                <ProdType>{ObjectMapping[type]}</ProdType>
-                <ProdCount>{productList.length}</ProdCount>
-              </ProdTypeRow>
-              <MoreText>확인하기</MoreText>
-            </ProdTypeContainer>
-            <ProdContainer>
-              {productList.map((product) => renderProductItem(product))}
-            </ProdContainer>
-          </React.Fragment>
-        );
-      })}
+          return (
+            <React.Fragment key={type}>
+              <ProdTypeContainer>
+                <ProdTypeRow>
+                  <ProdType>{ObjectMapping[type]}</ProdType>
+                  <ProdCount>{productList?.length}</ProdCount>
+                </ProdTypeRow>
+                <MoreText>확인하기</MoreText>
+              </ProdTypeContainer>
+              <ProdContainer>
+                {productList?.map((product) => renderProductItem(product))}
+              </ProdContainer>
+            </React.Fragment>
+          );
+        })}
     </Container>
   );
 };

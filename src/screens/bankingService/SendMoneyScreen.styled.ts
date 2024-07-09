@@ -5,6 +5,17 @@ export const Container = styled.View`
   background-color: #f9f9fb;
 `;
 
+export const Container2 = styled.View`
+  flex: 1;
+  background-color: #f9f9fb;
+`;
+
+export const RowWide = styled.View`
+  flex-direction: row;
+  align-items: baseline;
+  justify-content: space-between;
+`;
+
 export const Header = styled.View`
   flex-direction: row;
   justify-content: space-between;
@@ -336,4 +347,50 @@ export const ConfirmButton = styled(TouchableOpacity)`
 export const ConfirmButtonText = styled.Text`
   font-size: 18px;
   color: #fff;
+`;
+
+export const Card = styled.View`
+  width: 90%;
+  margin-left:5%;
+  padding: 20px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+`;
+
+export const Title = styled.Text`
+  align-items: center;
+  font-align:center;
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+`;
+
+export const InfoText = styled.Text`
+  font-size: 16px;
+  margin-bottom: 5px;
+`;
+
+export const BoldText = styled.Text`
+  font-weight: bold;
+`;
+
+export const ButtonContainer = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 20px;
+`;
+
+export const CustomButton = styled.TouchableOpacity`
+  flex: 1;
+  align-items: center;
+  padding: 10px;
+  margin: 0 5px;
+  border-radius: 5px;
+  background-color: ${props => (props.primary ? '#20b2aa' : '#d3d3d3')};
+`;
+
+export const ButtonText = styled.Text`
+  color: white;
+  font-size: 16px;
 `;

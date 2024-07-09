@@ -9,15 +9,26 @@ import {
   UserList,
   UserCard,
   RankNumber,
-  ProfileImage,
   UserName,
   AchievedGoal,
   InterestRate,
   ChallengeButton,
   ChallengeText,
+  ProgressHeader2,
+  UserInfo,
+  SplashContainer,
+  SplashImage,
 } from './CompetitiveScreen.styled';
 import axiosInstance from '../../apis/axiosInstance';
-import { DailyRanking, WeeklyRate, FormattedHistory } from '../../types';
+import { DailyRanking, FormattedHistory } from '../../types';
+import {
+  FifthIcon,
+  FirstIcon,
+  FourthIcon,
+  SecondIcon,
+  ThirdIcon,
+} from '../../assets';
+import Splash from '../../components/Splash/Splash';
 
 const getRandomColor = (): string => {
   const colors = [
@@ -33,6 +44,25 @@ const getRandomColor = (): string => {
   return colors[Math.floor(Math.random() * colors.length)];
 };
 
+const getIconByIndex = (index) => {
+  const size = { width: 40, height: 40 };
+
+  switch (index + 1) {
+    case 1:
+      return <FirstIcon style={size} />;
+    case 2:
+      return <SecondIcon style={size} />;
+    case 3:
+      return <ThirdIcon style={size} />;
+    case 4:
+      return <FourthIcon style={size} />;
+    case 5:
+      return <FifthIcon style={size} />;
+    default:
+      return null;
+  }
+};
+
 const CompetitiveScreen: React.FC = () => {
   const navigation = useNavigation<any>();
   const [weeklyData, setWeeklyData] = useState<FormattedHistory[]>([]);
@@ -41,7 +71,6 @@ const CompetitiveScreen: React.FC = () => {
   );
   const [groupId, setGroupId] = useState<number | null>(null); // Group ID 초기값 null로 설정
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [challengeType, setChallengeType] = useState<number | null>(null);
   const [challenge, setChallenge] = useState<string>('');
   const [challengeEmoji, setChallengeEmoji] = useState<string>('');
   const [challengeGoTO, setChallengeGoTO] = useState<string>('');
@@ -88,13 +117,13 @@ const CompetitiveScreen: React.FC = () => {
         const challengeResponse = await axiosInstance.get<any>(
           '/api/v1/challenge/getChallenge',
         );
-        setChallengeType(challengeResponse.data.result);
-        console.log('챌린지 리스폰스', challengeType);
-        if (challengeType === 0) {
+        console.log(challengeResponse.data.result);
+        console.log('챌린지 리스폰스', challengeResponse.data.result);
+        if (challengeResponse.data.result === 0) {
           setChallenge('걷기');
           setChallengeEmoji('🏃');
           setChallengeGoTO('Pedometer');
-        } else if (challengeType === 1) {
+        } else if (challengeResponse.data.result === 1) {
           setChallenge('기상');
           setChallengeEmoji('⏰');
           setChallengeGoTO('WakeUp');
@@ -122,16 +151,21 @@ const CompetitiveScreen: React.FC = () => {
   }));
 
   if (isLoading) {
-    return (
-      <View>
-        <Text>Loading...</Text>
-      </View>
-    );
+    return <Splash />;
   }
 
   const openCameraHandler = async () => {
     navigation.navigate(challengeGoTO, { groupId });
   };
+
+  const getCurrentDate = () => {
+    const date = new Date();
+    const month = (date.getMonth() + 1).toString().padStart(2, '0'); // Months are zero-indexed
+    const day = date.getDate().toString().padStart(2, '0');
+    return `${month}월${day}일`;
+  };
+
+  const currentDate = getCurrentDate();
 
   return (
     <ScrollView>
@@ -178,16 +212,17 @@ const CompetitiveScreen: React.FC = () => {
             {challengeEmoji} {challenge} 챌린지 하러가기 {challengeEmoji}
           </ChallengeText>
         </ChallengeButton>
+        <ProgressHeader2>{currentDate} 랭킹 👑</ProgressHeader2>
         <UserList>
           {dailyRate.map((user, index) => (
             <UserCard key={index}>
-              <RankNumber>{index + 1}</RankNumber>
-              <ProfileImage source={require('../../assets/profile.png')} />
-              <View>
-                <UserName>{user.name}</UserName>
-                <AchievedGoal>{`Challenge Type: ${user.challengeType}`}</AchievedGoal>
-              </View>
-              <InterestRate>{user.dailyRate}</InterestRate>
+              <RankNumber>{index + 1}등</RankNumber>
+              {getIconByIndex(index)}
+              <UserInfo>
+                <AchievedGoal>{`오늘의 미션: ${challenge}`}</AchievedGoal>
+                <UserName>{user.name}님</UserName>
+              </UserInfo>
+              <InterestRate>이율 {user.dailyRate}%</InterestRate>
             </UserCard>
           ))}
         </UserList>

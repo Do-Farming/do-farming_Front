@@ -81,6 +81,11 @@ function StackNavigator() {
         options={{ title: '방 만들기' }}
       />
       <Stack.Screen
+      name="SendSucess"
+      component={SendSucessScreen}
+      options={{ title: '이체 성공' }}
+    />
+      <Stack.Screen
         name="Pedometer"
         component={PedometerScreen}
         options={{ title: 'Pedometer' }}
