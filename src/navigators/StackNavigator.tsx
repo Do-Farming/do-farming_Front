@@ -54,7 +54,7 @@ function StackNavigator() {
       <Stack.Screen
         name="SignIn"
         component={SignInScreen}
-        options={{ title: '로그인' }}
+        options={{ title: '로그인', headerShown: false }}
       />
       <Stack.Screen
         name="SignUp"
@@ -114,7 +114,7 @@ function StackNavigator() {
       <Stack.Screen
         name="ProductPassword"
         component={ProductPasswordScreen}
-        options={{ title: '계좌 비밀번호' }}
+        options={{ title: '계좌 비밀번호', headerShown: false }}
       />
       <Stack.Screen
         name="ProductSignIn"
@@ -152,7 +152,7 @@ function StackNavigator() {
       <Stack.Screen
         name="SelectCategory"
         component={SelectCategoryScreen}
-        options={{ title: '취향 이상형 월드컵 카테고리 선택' }}
+        options={{ title: '', headerTransparent: true }}
       />
       <Stack.Screen
         name="TasteWorldCup"
@@ -162,7 +162,7 @@ function StackNavigator() {
       <Stack.Screen
         name="TasteWorldCupWinner"
         component={TasteWorldCupWinnnerScreen}
-        options={{ headerTransparent: true, headerTitle: '' }}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
         name="CardWorldCup"
