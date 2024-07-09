@@ -24,3 +24,11 @@ export interface JoinDofarmingType {
   depositAmount: number;
   accountPassword: string;
 }
+
+export interface JoinCheckingType {
+  branchCode: string;
+  accountName: string;
+  accountPassword: string;
+  balance: number;
+  accountCode: string;
+}
