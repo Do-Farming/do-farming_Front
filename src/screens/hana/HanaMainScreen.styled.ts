@@ -1,6 +1,23 @@
 import styled from 'styled-components/native';
 import { TouchableOpacity } from 'react-native';
 
+export const SplashContainer = styled.View`
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: white;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+`;
+
+export const SplashImage = styled.Image`
+  width: 200px;
+  height: 200px;
+`;
+
 export const Container = styled.View`
   flex: 1;
   padding: 20px;
