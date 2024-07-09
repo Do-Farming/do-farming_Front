@@ -29,7 +29,6 @@ export const logout = async ({ navigation }: any) => {
     await AsyncStorage.removeItem('refreshToken');
   } catch (error: any) {
     if (error.response && error.response.status === 500) {
-      // window.location.href = '/login';
       navigation.navigate('HanaMain');
     } else {
       console.error('Logout failed:', error);
