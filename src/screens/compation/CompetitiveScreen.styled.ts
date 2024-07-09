@@ -20,6 +20,12 @@ export const ProgressHeader = styled.Text`
   font-size: 18px;
 `;
 
+export const ProgressHeader2 = styled.Text`
+  font-weight: bold;
+  margin: 10px 0 5px 0;
+  font-size: 18px;
+`;
+
 export const UserList = styled.View`
   margin-top: 20px;
 `;
@@ -45,7 +51,7 @@ export const ProfileImage = styled.Image`
   width: 40px;
   height: 40px;
   border-radius: 20px;
-  margin-right: 10px;
+  margin-right: 20px;
 `;
 
 export const UserName = styled.Text`
@@ -55,6 +61,7 @@ export const UserName = styled.Text`
 export const AchievedGoal = styled.Text`
   font-size: 16px;
   color: #888888;
+  margin-bottom: 5px;
 `;
 
 export const InterestRate = styled.Text`
@@ -77,4 +84,25 @@ export const ChallengeText = styled.Text`
   font-size: 16px;
   font-weight: 700;
   text-align: center;
+`;
+
+export const UserInfo = styled.View`
+  margin-left: 10px;
+`;
+
+export const SplashContainer = styled.View`
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: white;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+`;
+
+export const SplashImage = styled.Image`
+  width: 200px;
+  height: 200px;
 `;
