@@ -107,6 +107,8 @@ export const ParticipantName = styled.Text`
   text-align: center;
 `;
 
+export const TextArea = styled.TextInput``;
+
 export const EnterButton = styled.TouchableOpacity<BangStatus>`
   background-color: ${(props) => props.theme.mainColor};
   border-radius: 10px;
