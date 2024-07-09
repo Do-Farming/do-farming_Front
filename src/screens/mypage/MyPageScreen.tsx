@@ -18,8 +18,10 @@ import { ApiResponse } from '../../types';
 import axiosInstance from '../../apis/axiosInstance';
 import { Account } from '../../types/account/AccountTypes';
 import { Group } from '../../types/group/GroupTypes';
+import { useAuth } from '../../contexts/authContext';
 
-export default function MyPageScreen() {
+export default function MyPageScreen({ navigation }: any) {
+  const { isLogin } = useAuth();
   const [selectedView, setSelectedView] = useState<string>('challenging');
   const [myInfo, setMyInfo] = useState<MyInfo>();
   const [myAccountList, setMyAccountList] = useState<Account[]>([]);
@@ -40,8 +42,6 @@ export default function MyPageScreen() {
       }
     };
 
-    getMyInfo();
-
     const getMyAccountList = async () => {
       try {
         const response = await axiosInstance.get<ApiResponse<Account[]>>(
@@ -57,8 +57,6 @@ export default function MyPageScreen() {
       }
     };
 
-    getMyAccountList();
-
     const getMyGroup = async () => {
       try {
         const response =
@@ -73,8 +71,14 @@ export default function MyPageScreen() {
       }
     };
 
-    getMyGroup();
-  }, []);
+    if (isLogin) {
+      getMyInfo();
+      getMyAccountList();
+      getMyGroup();
+    } else {
+      navigation.navigate('SignIn');
+    }
+  }, [isLogin]);
 
   return (
     <Container>
