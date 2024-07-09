@@ -16,20 +16,22 @@ import {
   UserList,
   UserName,
 } from '../../pedometer/PedometerScreen.styled';
-import { Alert, View } from 'react-native';
+import { Alert, Text, View } from 'react-native';
 import { DailyRanking } from '../../../types';
 import { Camera } from 'expo-camera/legacy';
 import { todayObject } from '../../../apis/wakeupService';
 import { ObjectMapping } from '../../../constants/WakeupObject';
+import axiosInstance from '../../../apis/axiosInstance';
 
-export default function WakeupScreen({ navigation, route }: any) {
-  const groupId = route.params;
-  const [dailyRate, setDailyRate] = useState<DailyRanking['data']['ranking']>(
-    [],
-  );
-
+export default function WakeupScreen({ navigation }: any) {
   const [object, setObject] = useState<string>('');
   const [objectEng, setObjectEng] = useState<string>('');
+
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [groupId, setGroupId] = useState<number>(0);
+  const [dailyRate, setDailyRate] = useState<DailyRanking['result']['ranking']>(
+    [],
+  );
 
   useEffect(() => {
     const fetchTodayObject = async () => {
@@ -37,23 +39,48 @@ export default function WakeupScreen({ navigation, route }: any) {
         setObject(ObjectMapping[res]);
         setObjectEng(res);
       });
+      const response = await axiosInstance.get(`/group/my`);
+      setGroupId(response.data.result.id);
+      const ranksResponse = await axiosInstance.get<DailyRanking>(
+        `/daily-rank/group`,
+        {
+          params: { groupId },
+        },
+      );
+      setDailyRate(ranksResponse.data.result.ranking);
     };
     fetchTodayObject();
   }, []);
 
   useEffect(() => {
-    const mockDailyRate: DailyRanking['data']['ranking'] = Array.from(
-      { length: 4 },
-      (_, index) => ({
-        name: `User${index + 1}`,
-        dailyRate: `${(Math.random() * 4 + 1).toFixed(2)}%`,
-        challengeType: Math.floor(Math.random() * 12) + 1,
-        challengeDate: `2024-06-26`,
-      }),
-    );
+    if (groupId === 0) return;
 
-    setDailyRate(mockDailyRate);
-  }, []);
+    const fetchData = async () => {
+      try {
+        setIsLoading(true);
+        const ranksResponse = await axiosInstance.get<DailyRanking>(
+          `/daily-rank/group`,
+          {
+            params: { groupId },
+          },
+        );
+        setDailyRate(ranksResponse.data.result.ranking);
+      } catch (error) {
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [groupId]);
+
+  if (isLoading) {
+    return (
+      <View>
+        <Text>Loading...</Text>
+      </View>
+    );
+  }
 
   const openCameraHandler = async () => {
     const { status } = await Camera.requestCameraPermissionsAsync();
