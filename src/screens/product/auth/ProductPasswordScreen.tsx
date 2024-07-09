@@ -88,7 +88,7 @@ const ProductPasswordScreen: React.FC<ProductPasswordScreenProps> = ({
 
       try {
         let resMsg = '';
-        if (from == 'bangCreate' || from == 'bangJoin2') {
+        if (from == 'bangCreate') {
           const res = await bangCreate(bang);
           if (res.isSuccess) {
             await joinDofarmingProduct(updatedJoinDofarming);
@@ -97,6 +97,13 @@ const ProductPasswordScreen: React.FC<ProductPasswordScreenProps> = ({
           }
         } else if (from == 'ProductSignUp') {
           await joinChecking(updatedJoinChecking);
+        } else if (from == 'bangJoin2') {
+          const res = await bangCreate(bang);
+          if (res.isSuccess) {
+            await joinDofarmingProduct(updatedJoinDofarming);
+          } else {
+            resMsg = res.message;
+          }
         }
         navigation.navigate('ProductSignIn', { resMsg: { message: resMsg } });
       } catch (error) {
