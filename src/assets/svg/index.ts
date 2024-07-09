@@ -18,3 +18,5 @@ export { default as FourthIcon } from './fourth.svg';
 export { default as FifthIcon } from './fifth.svg';
 export { default as Promote } from './Promote.svg';
 export { default as SplashLogo } from './SplashLogo.svg';
+export { default as FoodIcon } from "./food.svg";
+export { default as TripIcon } from "./trip.svg";

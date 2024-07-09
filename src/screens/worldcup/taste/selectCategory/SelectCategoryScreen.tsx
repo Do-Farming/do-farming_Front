@@ -13,6 +13,7 @@ import {
 } from '../../select/WorldCupSelectScreen.styled';
 import { Image } from 'react-native';
 import { SafeAreaView } from '../../../home/HomeScreen.styled';
+import { FoodIcon, TripIcon } from '../../../../assets';
 
 export default function SelectCategoryScreen({ navigation }: any) {
   return (
@@ -27,10 +28,7 @@ export default function SelectCategoryScreen({ navigation }: any) {
               }
             >
               <WorldCupImgView>
-                <Image
-                  source={require('../../../../assets/worldcup/taste.png')}
-                  style={{ width: 50, height: 50 }}
-                />
+                <FoodIcon width={50} height={50}/>
               </WorldCupImgView>
               <WorldCupTextView>
                 <WorldCupSelectionText>음식</WorldCupSelectionText>
@@ -49,10 +47,7 @@ export default function SelectCategoryScreen({ navigation }: any) {
               }
             >
               <WorldCupImgView>
-                <Image
-                  source={require('../../../../assets/worldcup/card.png')}
-                  style={{ width: 50, height: 50 }}
-                />
+                <TripIcon width={50} height={50}/>
               </WorldCupImgView>
               <WorldCupTextView>
                 <WorldCupSelectionText>여가</WorldCupSelectionText>
