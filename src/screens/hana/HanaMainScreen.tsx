@@ -12,7 +12,8 @@ import {
 import {
   Container,
   Header,
-  Row,DescriptionAccountTexts,
+  Row,
+  DescriptionAccountTexts,
   Username,
   MainProduct,
   Product,
@@ -56,7 +57,12 @@ const Pagination2: React.FC<{ length: number; currentIndex2: number }> = ({
 }) => (
   <PaginationContainer>
     {Array.from({ length }).map((_, index) => (
-      <PaginationDot key={index} isActive={index === currentIndex2} index={index} length={length} />
+      <PaginationDot
+        key={index}
+        isActive={index === currentIndex2}
+        index={index}
+        length={length}
+      />
     ))}
   </PaginationContainer>
 );
@@ -86,12 +92,11 @@ export default function HanaMainScreen({ navigation }: any) {
         setIsAccountLoading(false);
       }
     };
-    
+
     if (isLogin) {
       loadAccounts();
     }
   }, [isLogin]);
-
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -152,173 +157,188 @@ export default function HanaMainScreen({ navigation }: any) {
 
   return (
     <SafeAreaView>
-    {showSplash && (
-      <SplashContainer>
-        <SplashImage source={require('../../assets/splash.png')} />
-      </SplashContainer>
-    )}
-    {!showSplash && (
-      <Container>
-        <Header>
-          <Row>
-          {isLogin ? (
-            <TouchableOpacity onPress={() => navigation.navigate('SignIn')}>
-              <Row>
-              <StyledImage source={require("../../assets/hana-symbol.png")} width={20} height={20} /><Username> 환영합니다.</Username>
-              </Row></TouchableOpacity>
-          ):(
-            <TouchableOpacity onPress={() => navigation.navigate('SignIn')}>
-              <Row>
-              <StyledImage source={require("../../assets/hana-symbol.png")} width={20} height={20} /><Username> 로그인</Username>
-              </Row></TouchableOpacity>
-          )}
-            
-          </Row>
-        </Header>
-            <MainProduct>
+      {showSplash && (
+        <SplashContainer>
+          <SplashImage source={require('../../assets/splash.png')} />
+        </SplashContainer>
+      )}
+      {!showSplash && (
+        <Container>
+          <Header>
+            <Row>
               {isLogin ? (
-                <FlatList
-                  ref={flatListRef2}
-                  data={myAccounts}
-                  horizontal
-                  pagingEnabled
-                  showsHorizontalScrollIndicator={false}
-                  keyExtractor={(item, index) => index.toString()}
-                  renderItem={({ item, index }) => (
-                    <Product2 key={index}>
-                      <DescriptionAccountTexts>
-                      <StyledImage source={require("../../assets/hana-symbol.png")} width={20} height={20} />{item.name}
-                      </DescriptionAccountTexts>
-                      <RowCenter>
-                        <DescriptionTexts>
-                          {item.accountNumber}
-                        </DescriptionTexts>
-                      </RowCenter>
-                      <BalanceTexts>
-                        {formatAmount(item.balance)}
-                      </BalanceTexts>
-                      <Row>
-                        <Button width="50%" backgroundColor="#EFF0F4">
-                          <ButtonText onPress={() => navigation.navigate('SendMoney')}>보내기</ButtonText>
-                        </Button>
-                        <Button width="50%" backgroundColor="#1EA698">
-                          <ButtonText color="white">
-                            가져오기
-                          </ButtonText>
-                        </Button>
-                      </Row>
-                    </Product2>
-                  )}
-                  onMomentumScrollEnd={handleMomentumScrollEnd2}
-                />
+                <TouchableOpacity onPress={() => navigation.navigate('SignIn')}>
+                  <Row>
+                    <StyledImage
+                      source={require('../../assets/hana-symbol.png')}
+                      width={20}
+                      height={20}
+                    />
+                    <Username> 환영합니다.</Username>
+                  </Row>
+                </TouchableOpacity>
               ) : (
-                <FlatList
-                  ref={flatListRef2}
-                  data={mainContents}
-                  horizontal
-                  pagingEnabled
-                  showsHorizontalScrollIndicator={false}
-                  keyExtractor={(item, index) => index.toString()}
-                  renderItem={({ item, index }) => (
-                    <Product2 key={index}>
-                      <DescriptionSmallTexts>
-                        {item.descriptrions.text1}
-                      </DescriptionSmallTexts>
-                      <RowCenter>
-                        <DescriptionTexts>
-                          {item.descriptrions.text2}
-                        </DescriptionTexts>
-                        <Image
-                          style={{ width: 20, height: 15 }}
-                          source={item.images[1]}
-                        />
-                      </RowCenter>
-                      <ProductImgView>
-                        <Image
-                          style={{ width: 125, height: 100 }}
-                          source={item.images[0]}
-                        />
-                      </ProductImgView>
-                      <Row>
-                        <Button width="50%" backgroundColor="#EFF0F4">
-                          <ButtonText>{item.btnText.option1}</ButtonText>
-                        </Button>
-                        <Button width="50%" backgroundColor="#1EA698">
-                          <ButtonText color="white">
-                            {item.btnText.option2}
-                          </ButtonText>
-                        </Button>
-                      </Row>
-                    </Product2>
-                  )}
-                  onMomentumScrollEnd={handleMomentumScrollEnd2}
-                />
+                <TouchableOpacity onPress={() => navigation.navigate('SignIn')}>
+                  <Row>
+                    <StyledImage
+                      source={require('../../assets/hana-symbol.png')}
+                      width={30}
+                      height={30}
+                    />
+                    <Username> 로그인</Username>
+                  </Row>
+                </TouchableOpacity>
               )}
-              {isLogin?(<Pagination2
+            </Row>
+          </Header>
+          <MainProduct>
+            {isLogin ? (
+              <FlatList
+                ref={flatListRef2}
+                data={myAccounts}
+                horizontal
+                pagingEnabled
+                showsHorizontalScrollIndicator={false}
+                keyExtractor={(item, index) => index.toString()}
+                renderItem={({ item, index }) => (
+                  <Product2 key={index}>
+                    <DescriptionAccountTexts>
+                      <StyledImage
+                        source={require('../../assets/hana-symbol.png')}
+                        width={20}
+                        height={20}
+                      />
+                      {item.name}
+                    </DescriptionAccountTexts>
+                    <RowCenter>
+                      <DescriptionTexts>{item.accountNumber}</DescriptionTexts>
+                    </RowCenter>
+                    <BalanceTexts>{formatAmount(item.balance)}</BalanceTexts>
+                    <Row>
+                      <Button width="50%" backgroundColor="#EFF0F4">
+                        <ButtonText
+                          onPress={() => navigation.navigate('SendMoney')}
+                        >
+                          보내기
+                        </ButtonText>
+                      </Button>
+                      <Button width="50%" backgroundColor="#1EA698">
+                        <ButtonText color="white">가져오기</ButtonText>
+                      </Button>
+                    </Row>
+                  </Product2>
+                )}
+                onMomentumScrollEnd={handleMomentumScrollEnd2}
+              />
+            ) : (
+              <FlatList
+                ref={flatListRef2}
+                data={mainContents}
+                horizontal
+                pagingEnabled
+                showsHorizontalScrollIndicator={false}
+                keyExtractor={(item, index) => index.toString()}
+                renderItem={({ item, index }) => (
+                  <Product2 key={index}>
+                    <DescriptionSmallTexts>
+                      {item.descriptrions.text1}
+                    </DescriptionSmallTexts>
+                    <RowCenter>
+                      <DescriptionTexts>
+                        {item.descriptrions.text2}
+                      </DescriptionTexts>
+                      <Image
+                        style={{ width: 20, height: 15 }}
+                        source={item.images[1]}
+                      />
+                    </RowCenter>
+                    <ProductImgView>
+                      <Image
+                        style={{ width: 125, height: 100 }}
+                        source={item.images[0]}
+                      />
+                    </ProductImgView>
+                    <Row>
+                      <Button width="50%" backgroundColor="#EFF0F4">
+                        <ButtonText>{item.btnText.option1}</ButtonText>
+                      </Button>
+                      <Button width="50%" backgroundColor="#1EA698">
+                        <ButtonText color="white">
+                          {item.btnText.option2}
+                        </ButtonText>
+                      </Button>
+                    </Row>
+                  </Product2>
+                )}
+                onMomentumScrollEnd={handleMomentumScrollEnd2}
+              />
+            )}
+            {isLogin ? (
+              <Pagination2
                 length={myAccounts.length}
                 currentIndex2={currentIndex2}
-              />):(<Pagination2
+              />
+            ) : (
+              <Pagination2
                 length={mainContents.length}
                 currentIndex2={currentIndex2}
-              />)}
-              
-        </MainProduct>
-        <MainProduct>
-          <FlatList
-            ref={flatListRef}
-            data={saleContents}
-            horizontal
-            pagingEnabled
-            showsHorizontalScrollIndicator={false}
-            keyExtractor={(item, index) => index.toString()}
-            renderItem={({ item, index }) => (
-              <Product key={index}>
+              />
+            )}
+          </MainProduct>
+          <MainProduct>
+            <FlatList
+              ref={flatListRef}
+              data={saleContents}
+              horizontal
+              pagingEnabled
+              showsHorizontalScrollIndicator={false}
+              keyExtractor={(item, index) => index.toString()}
+              renderItem={({ item, index }) => (
+                <Product key={index}>
+                  <HanaCard>
+                    <HanaTextContainer>
+                      <HanaTitle>{item.descriptrions.text}</HanaTitle>
+                      <HanaSubtitle>{item.descriptrions.text1}</HanaSubtitle>
+                      <HanaSubtitle>{item.descriptrions.text2}</HanaSubtitle>
+                      <HanaPaginationContainer>
+                        <HanaPaginationButton onPress={handlePrev}>
+                          <Text>{'<'}</Text>
+                        </HanaPaginationButton>
+                        <HanaPageNumber>{`${currentIndex + 1} / ${saleContents.length}`}</HanaPageNumber>
+                        <HanaPaginationButton onPress={handleNext}>
+                          <Text>{'>'}</Text>
+                        </HanaPaginationButton>
+                      </HanaPaginationContainer>
+                    </HanaTextContainer>
+                    <Image
+                      source={item.images[0]}
+                      style={{ width: 100, height: 100 }}
+                    />
+                  </HanaCard>
+                </Product>
+              )}
+              onMomentumScrollEnd={handleMomentumScrollEnd}
+            />
+          </MainProduct>
+          <MainProduct>
+            <TouchableOpacity onPress={() => handleNavigate('DoFarmingMain')}>
+              <Product3>
                 <HanaCard>
                   <HanaTextContainer>
-                    <HanaTitle>{item.descriptrions.text}</HanaTitle>
-                    <HanaSubtitle>{item.descriptrions.text1}</HanaSubtitle>
-                    <HanaSubtitle>{item.descriptrions.text2}</HanaSubtitle>
-                    <HanaPaginationContainer>
-                      <HanaPaginationButton onPress={handlePrev}>
-                        <Text>{'<'}</Text>
-                      </HanaPaginationButton>
-                      <HanaPageNumber>{`${currentIndex + 1} / ${saleContents.length}`}</HanaPageNumber>
-                      <HanaPaginationButton onPress={handleNext}>
-                        <Text>{'>'}</Text>
-                      </HanaPaginationButton>
-                    </HanaPaginationContainer>
+                    <HanaTitle>적립식 이율 적금</HanaTitle>
+                    <HanaSubtitle>MZ를 위한 예금 상품</HanaSubtitle>
+                    <HanaSubtitle>최대 6% 이율</HanaSubtitle>
                   </HanaTextContainer>
                   <Image
-                    source={item.images[0]}
+                    source={require('../../assets/ch.png')}
                     style={{ width: 100, height: 100 }}
                   />
                 </HanaCard>
-              </Product>
-            )}
-            onMomentumScrollEnd={handleMomentumScrollEnd}
-          />
-        </MainProduct>
-        <MainProduct>
-          <TouchableOpacity
-            onPress={() => handleNavigate('DoFarmingMain')}
-          >
-            <Product3>
-              <HanaCard>
-                <HanaTextContainer>
-                  <HanaTitle>적립식 이율 적금</HanaTitle>
-                  <HanaSubtitle>MZ를 위한 예금 상품</HanaSubtitle>
-                  <HanaSubtitle>최대 6% 이율</HanaSubtitle>
-                </HanaTextContainer>
-                <Image
-                  source={require('../../assets/ch.png')}
-                  style={{ width: 100, height: 100 }}
-                />
-              </HanaCard>
-            </Product3>
-          </TouchableOpacity>
-        </MainProduct>
-      </Container>
-    )}
-  </SafeAreaView>
+              </Product3>
+            </TouchableOpacity>
+          </MainProduct>
+        </Container>
+      )}
+    </SafeAreaView>
   );
 }
