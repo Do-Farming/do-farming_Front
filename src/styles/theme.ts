@@ -12,6 +12,8 @@ const theme: DefaultTheme = {
   darkGrayColor: '#4A4A4A',
   blackColor: '#000000',
   placeholderColor: '#CCCCCC',
+
+  hanaGrayColor: '#F6F7F9'
 };
 
 export default theme;

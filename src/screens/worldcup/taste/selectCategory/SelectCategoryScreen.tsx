@@ -19,7 +19,7 @@ export default function SelectCategoryScreen({ navigation }: any) {
     <SafeAreaView>
       <Container>
         <InfoTextView>
-          <BoldText>Category를 선택하세요 🧚‍♂️</BoldText>
+          <BoldText>카테고리를 선택하세요 🧚‍♂️</BoldText>
           <WorldCupSelectionView>
             <WorldCupSelection
               onPress={() =>

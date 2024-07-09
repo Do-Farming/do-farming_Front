@@ -38,19 +38,20 @@ import {
   HanaProduct,
   HanaProductText,
   DescriptionView,
+  GraySafeAreaView,
+  ChatBotButton,
 } from './HanaMainScreen.styled';
 import { StyledImage } from '../bang/bangDetail/BangDetailScreen.styled';
 import { mainContents, saleContents } from '../../mocks/hanaMainDatas';
 import { useAuth } from '../../contexts/authContext';
-import { SafeAreaView } from '../home/HomeScreen.styled';
 import { myAccount } from '../../types/BankingSystem/AccountService';
 import axiosInstance from '../../apis/axiosInstance';
 import Splash from '../../components/Splash/Splash';
+import MsgIcon from 'react-native-vector-icons/AntDesign';
 
 const { width: windowWidth } = Dimensions.get('window');
 export const getChecking = async () => {
   const response = await axiosInstance.get('/api/v1/account/my');
-  console.log(response);
   return response.data.result as myAccount[];
 };
 const Pagination2: React.FC<{ length: number; currentIndex2: number }> = ({
@@ -157,12 +158,8 @@ export default function HanaMainScreen({ navigation }: any) {
     }, 3000);
   };
 
-  const goToTransactionPage = () => {
-    navigation.navigate('TransactionHistory');
-  };
-
   return (
-    <SafeAreaView>
+    <GraySafeAreaView>
       {showSplash && <Splash />}
       {!showSplash && (
         <Container>
@@ -201,39 +198,42 @@ export default function HanaMainScreen({ navigation }: any) {
                 showsHorizontalScrollIndicator={false}
                 keyExtractor={(item, index) => index.toString()}
                 renderItem={({ item, index }) => (
-                  <TouchableOpacity onPress={goToTransactionPage}>
-                    <Product2 key={index}>
-                      <DescriptionView>
-                        <StyledImage
-                          source={require('../../assets/hana-symbol.png')}
-                          width={20}
-                          height={20}
-                        />
-                        <DescriptionAccountTexts>
-                          {item.name}
-                        </DescriptionAccountTexts>
-                      </DescriptionView>
+                  <Product2
+                    key={index}
+                    onPress={() =>
+                      navigation.navigate('TransactionHistory', {
+                        accountId: item.id,
+                      })
+                    }
+                  >
+                    <DescriptionView>
+                      <StyledImage
+                        source={require('../../assets/hana-symbol.png')}
+                        width={20}
+                        height={20}
+                      />
+                      <DescriptionAccountTexts>
+                        {item.name}
+                      </DescriptionAccountTexts>
+                    </DescriptionView>
 
-                      <RowCenter>
-                        <DescriptionTexts>
-                          {item.accountNumber}
-                        </DescriptionTexts>
-                      </RowCenter>
-                      <BalanceTexts>{formatAmount(item.balance)}</BalanceTexts>
-                      <Row>
-                        <Button width="48%" backgroundColor="#EFF0F4">
-                          <ButtonText
-                            onPress={() => navigation.navigate('SendMoney')}
-                          >
-                            보내기
-                          </ButtonText>
-                        </Button>
-                        <Button width="48%" backgroundColor="#1EA698">
-                          <ButtonText color="white">가져오기</ButtonText>
-                        </Button>
-                      </Row>
-                    </Product2>
-                  </TouchableOpacity>
+                    <RowCenter>
+                      <DescriptionTexts>{item.accountNumber}</DescriptionTexts>
+                    </RowCenter>
+                    <BalanceTexts>{formatAmount(item.balance)}</BalanceTexts>
+                    <Row>
+                      <Button width="48%" backgroundColor="#EFF0F4">
+                        <ButtonText
+                          onPress={() => navigation.navigate('SendMoney')}
+                        >
+                          보내기
+                        </ButtonText>
+                      </Button>
+                      <Button width="48%" backgroundColor="#1EA698">
+                        <ButtonText color="white">가져오기</ButtonText>
+                      </Button>
+                    </Row>
+                  </Product2>
                 )}
                 onMomentumScrollEnd={handleMomentumScrollEnd2}
               />
@@ -351,8 +351,11 @@ export default function HanaMainScreen({ navigation }: any) {
               </Product3>
             </TouchableOpacity>
           </MainProduct>
+          <ChatBotButton onPress={() => navigation.navigate('ChatBot')}>
+            <MsgIcon name="message1" size={30} color="#FFFFFF" />
+          </ChatBotButton>
         </Container>
       )}
-    </SafeAreaView>
+    </GraySafeAreaView>
   );
 }

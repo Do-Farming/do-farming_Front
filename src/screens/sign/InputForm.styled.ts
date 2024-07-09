@@ -126,6 +126,7 @@ export const LongButton = styled.TouchableOpacity`
 
 export const GotoJoinButton = styled.Pressable`
   flex-direction: row;
+  align-items: center;
 `;
 
 export const GotoInfoText = styled.Text`
@@ -138,4 +139,6 @@ export const GotoJoinText = styled.Text`
   font-size: 15px;
   text-decoration: underline;
   font-weight: 600;
+  color: ${(props) => props.theme.hanaMainColor};
+  text-decoration-color: ${(props) => props.theme.hanaMainColor};
 `;

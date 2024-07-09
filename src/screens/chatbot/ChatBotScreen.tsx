@@ -5,7 +5,6 @@ import {
   Keyboard,
   KeyboardEvent,
 } from 'react-native';
-import axios from 'axios';
 import Markdown from 'react-native-markdown-display';
 import {
   Container,
@@ -86,7 +85,7 @@ const ChatBotScreen: React.FC = () => {
   const renderItem = ({ item }: { item: Message }) =>
     item.role === 'user' ? (
       <UserMessage>
-        <Markdown style={{ body: { fontSize: 17 } }}>{item.content}</Markdown>
+        <Markdown style={{ body: { fontSize: 17, color: "white" } }}>{item.content}</Markdown>
       </UserMessage>
     ) : (
       <AssistantMessage>
@@ -112,7 +111,7 @@ const ChatBotScreen: React.FC = () => {
       </TouchableWithoutFeedback>
       <InputContainer style={{ marginBottom: inputMarginBottom }}>
         <Input
-          placeholder="Type a message..."
+          placeholder="메시지를 입력하세요..."
           value={input}
           onChangeText={setInput}
         />

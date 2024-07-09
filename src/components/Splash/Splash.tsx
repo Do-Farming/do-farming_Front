@@ -1,15 +1,14 @@
 import React from 'react';
 import {
   SplashContainer,
-  SplashImage,
   SplashLogoContainer,
 } from './Splash.styled';
-import { Promote, SplashLogo } from '../../assets';
+import { DoFarmingIcon, Promote, SplashLogo } from '../../assets';
 
 const Splash: React.FC = () => {
   return (
     <SplashContainer>
-      <SplashImage source={require('../../assets/splash.png')} />
+      <DoFarmingIcon width={"80%"} height={200}/>
       <Promote />
       <SplashLogoContainer>
         <SplashLogo />

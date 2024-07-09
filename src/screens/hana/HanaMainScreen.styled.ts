@@ -1,6 +1,11 @@
 import styled from 'styled-components/native';
 import { TouchableOpacity } from 'react-native';
 
+export const GraySafeAreaView = styled.SafeAreaView`
+  flex: 1;
+  background-color: ${(props) => props.theme.hanaGrayColor};
+`;
+
 export const SplashContainer = styled.View`
   position: absolute;
   top: 0;
@@ -110,7 +115,7 @@ export const Product = styled.View`
   display: flex;
 `;
 
-export const Product2 = styled.View`
+export const Product2 = styled.TouchableOpacity`
   width: 340px;
   border-radius: 15px;
   background-color: white;
@@ -348,4 +353,17 @@ export const HanaProduct = styled.Pressable`
 export const HanaProductText = styled.Text`
   font-size: 16px;
   color: white;
+`;
+
+export const ChatBotButton = styled.Pressable`
+  position: absolute;
+  bottom: 30px;
+  right: 20px;
+  z-index: 1000;
+  background-color: #535353;
+  border-radius: 30px;
+  width: 60px;
+  height: 60px;
+  justify-content: center;
+  align-items: center;
 `;

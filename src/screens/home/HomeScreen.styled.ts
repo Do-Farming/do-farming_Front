@@ -205,16 +205,3 @@ export const CardBenefitImportantText = styled.Text`
   font-weight: bold;
   font-size: 11.5px;
 `;
-
-export const ChatBotButton = styled.Pressable`
-  position: absolute;
-  bottom: 30px;
-  right: 20px;
-  z-index: 1000;
-  background-color: #535353;
-  border-radius: 30px;
-  width: 60px;
-  height: 60px;
-  justify-content: center;
-  align-items: center;
-`;
