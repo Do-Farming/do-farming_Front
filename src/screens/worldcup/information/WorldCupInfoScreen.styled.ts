@@ -12,8 +12,8 @@ export const Container = styled.View`
 export const ScrollViewContainer = styled.ScrollView``;
 
 export const WorldCupInfoImgContainer = styled.View`
-  width: 67%;
-  height: 40%;
+  width: 80%;
+  height: 55%;
 `;
 
 export const WorldCupTitle = styled.Text`
@@ -33,7 +33,7 @@ export const WorldCupExplaination = styled.Text`
 export const EnterButton = styled.TouchableOpacity`
   background-color: ${(props) => props.theme.mainColor};
   border-radius: 15px;
-  padding-vertical: 12px;
+  padding-vertical: 14px;
   padding-horizontal: 10px;
   margin: 15% 0;
   width: 100%;

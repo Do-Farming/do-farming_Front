@@ -192,7 +192,7 @@ function StackNavigator() {
       <Stack.Screen
         name="ChatBot"
         component={ChatBotScreen}
-        options={{ title: '챗봇 스크린' }}
+        options={{ title: '챗봇' }}
       />
       <Stack.Screen
         name="DoFarmingInfo"

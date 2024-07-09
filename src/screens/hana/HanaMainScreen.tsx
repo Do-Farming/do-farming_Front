@@ -38,14 +38,16 @@ import {
   HanaProduct,
   HanaProductText,
   DescriptionView,
+  GraySafeAreaView,
+  ChatBotButton,
 } from './HanaMainScreen.styled';
 import { StyledImage } from '../bang/bangDetail/BangDetailScreen.styled';
 import { mainContents, saleContents } from '../../mocks/hanaMainDatas';
 import { useAuth } from '../../contexts/authContext';
-import { SafeAreaView } from '../home/HomeScreen.styled';
 import { myAccount } from '../../types/BankingSystem/AccountService';
 import axiosInstance from '../../apis/axiosInstance';
 import Splash from '../../components/Splash/Splash';
+import MsgIcon from 'react-native-vector-icons/AntDesign';
 
 const { width: windowWidth } = Dimensions.get('window');
 export const getChecking = async () => {
@@ -158,7 +160,7 @@ export default function HanaMainScreen({ navigation }: any) {
   };
 
   return (
-    <SafeAreaView>
+    <GraySafeAreaView>
       {showSplash && <Splash />}
       {!showSplash && (
         <Container>
@@ -343,8 +345,11 @@ export default function HanaMainScreen({ navigation }: any) {
               </Product3>
             </TouchableOpacity>
           </MainProduct>
+          <ChatBotButton onPress={() => navigation.navigate('ChatBot')}>
+            <MsgIcon name="message1" size={30} color="#FFFFFF" />
+          </ChatBotButton>
         </Container>
       )}
-    </SafeAreaView>
+    </GraySafeAreaView>
   );
 }

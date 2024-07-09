@@ -12,11 +12,6 @@ export const SplashContainer = styled.View`
   z-index: 10;
 `;
 
-export const SplashImage = styled.Image`
-  width: 370px;
-  height: 300px;
-`;
-
 export const SplashLogoContainer = styled.View`
   justify-content: center;
   align-items: center;
