@@ -185,7 +185,7 @@ const CompetitiveScreen: React.FC = () => {
               <ProfileImage source={require('../../assets/profile.png')} />
               <View>
                 <UserName>{user.name}</UserName>
-                <AchievedGoal>{`Challenge Type: ${user.challengeType}`}</AchievedGoal>
+                <AchievedGoal>{`챌린지 명: ${user.challengeType}`}</AchievedGoal>
               </View>
               <InterestRate>{user.dailyRate}</InterestRate>
             </UserCard>
