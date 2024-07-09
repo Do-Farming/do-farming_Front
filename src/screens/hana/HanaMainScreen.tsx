@@ -12,7 +12,7 @@ import {
 import {
   Container,
   Header,
-  Row,
+  Row,DescriptionAccountTexts,
   Username,
   MainProduct,
   Product,
@@ -37,17 +37,27 @@ import {
   SplashContainer,
   SplashImage,
 } from './HanaMainScreen.styled';
+import { StyledImage } from '../bang/bangDetail/BangDetailScreen.styled';
 import { mainContents, saleContents } from '../../mocks/hanaMainDatas';
 import { useAuth } from '../../contexts/authContext';
 import { SafeAreaView } from '../home/HomeScreen.styled';
+import { myAccount } from '../../types/BankingSystem/AccountService';
+import axiosInstance from '../../apis/axiosInstance';
 
 const { width: windowWidth } = Dimensions.get('window');
-
+export const getChecking = async () => {
+  const response = await axiosInstance.get('/api/v1/account/my');
+  console.log(response);
+  return response.data.result as myAccount[];
+};
 const Pagination2: React.FC<{ length: number; currentIndex2: number }> = ({
+  length,
   currentIndex2,
 }) => (
   <PaginationContainer>
-    <PaginationDot isActive={true} index={currentIndex2} />
+    {Array.from({ length }).map((_, index) => (
+      <PaginationDot key={index} isActive={index === currentIndex2} index={index} length={length} />
+    ))}
   </PaginationContainer>
 );
 
@@ -55,9 +65,33 @@ export default function HanaMainScreen({ navigation }: any) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [currentIndex2, setCurrentIndex2] = useState(0);
   const [showSplash, setShowSplash] = useState(false);
+  const [myAccounts, setMyAccounts] = useState<myAccount[]>([]);
   const { isLogin } = useAuth();
   const flatListRef = useRef<FlatList>(null);
   const flatListRef2 = useRef<FlatList>(null);
+  const [isAccountLoading, setIsAccountLoading] = useState(true);
+  const formatAmount = (amount: number) => {
+    if (amount === undefined || amount === null) return '';
+    return amount.toLocaleString() + ' 원';
+  };
+
+  useEffect(() => {
+    const loadAccounts = async () => {
+      try {
+        const data = await getChecking();
+        setMyAccounts(data);
+      } catch (error) {
+        console.error('Error fetching accounts:', error);
+      } finally {
+        setIsAccountLoading(false);
+      }
+    };
+    
+    if (isLogin) {
+      loadAccounts();
+    }
+  }, [isLogin]);
+
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -127,22 +161,65 @@ export default function HanaMainScreen({ navigation }: any) {
       <Container>
         <Header>
           <Row>
+          {isLogin ? (
             <TouchableOpacity onPress={() => navigation.navigate('SignIn')}>
-              <Username>로그인</Username>
-            </TouchableOpacity>
+              <Row>
+              <StyledImage source={require("../../assets/hana-symbol.png")} width={20} height={20} /><Username> 환영합니다.</Username>
+              </Row></TouchableOpacity>
+          ):(
+            <TouchableOpacity onPress={() => navigation.navigate('SignIn')}>
+              <Row>
+              <StyledImage source={require("../../assets/hana-symbol.png")} width={20} height={20} /><Username> 로그인</Username>
+              </Row></TouchableOpacity>
+          )}
+            
           </Row>
         </Header>
-        <MainProduct>
-          <FlatList
-            ref={flatListRef2}
-            data={mainContents}
-            horizontal
-            pagingEnabled
-            showsHorizontalScrollIndicator={false}
-            keyExtractor={(item, index) => index.toString()}
-            renderItem={
-              isLogin
-                ? ({ item, index }) => (
+            <MainProduct>
+              {isLogin ? (
+                <FlatList
+                  ref={flatListRef2}
+                  data={myAccounts}
+                  horizontal
+                  pagingEnabled
+                  showsHorizontalScrollIndicator={false}
+                  keyExtractor={(item, index) => index.toString()}
+                  renderItem={({ item, index }) => (
+                    <Product2 key={index}>
+                      <DescriptionAccountTexts>
+                      <StyledImage source={require("../../assets/hana-symbol.png")} width={20} height={20} />{item.name}
+                      </DescriptionAccountTexts>
+                      <RowCenter>
+                        <DescriptionTexts>
+                          {item.accountNumber}
+                        </DescriptionTexts>
+                      </RowCenter>
+                      <BalanceTexts>
+                        {formatAmount(item.balance)}
+                      </BalanceTexts>
+                      <Row>
+                        <Button width="50%" backgroundColor="#EFF0F4">
+                          <ButtonText>보내기</ButtonText>
+                        </Button>
+                        <Button width="50%" backgroundColor="#1EA698">
+                          <ButtonText color="white">
+                            가져오기
+                          </ButtonText>
+                        </Button>
+                      </Row>
+                    </Product2>
+                  )}
+                  onMomentumScrollEnd={handleMomentumScrollEnd2}
+                />
+              ) : (
+                <FlatList
+                  ref={flatListRef2}
+                  data={mainContents}
+                  horizontal
+                  pagingEnabled
+                  showsHorizontalScrollIndicator={false}
+                  keyExtractor={(item, index) => index.toString()}
+                  renderItem={({ item, index }) => (
                     <Product2 key={index}>
                       <DescriptionSmallTexts>
                         {item.descriptrions.text1}
@@ -173,40 +250,18 @@ export default function HanaMainScreen({ navigation }: any) {
                         </Button>
                       </Row>
                     </Product2>
-                  )
-                : ({ item, index }) => (
-                    <Product2 key={index}>
-                      <DescriptionTexts>
-                        {item.descriptrions.text2}
-                      </DescriptionTexts>
-                      <Row>
-                        <DescriptionSmallTexts>
-                          {item.descriptrions.text1}
-                        </DescriptionSmallTexts>
-                      </Row>
-                      <BalanceTexts>{item.balance} 원</BalanceTexts>
-                      <Row>
-                        <Button width="38%" backgroundColor="#EFF0F4" onPress={() => navigation.navigate('')}>
-                          <ButtonText>{item.btnText.option1}</ButtonText>
-                        </Button>
-                        <Button width="38%" backgroundColor="#1EA698" onPress={() => navigation.navigate('SendMoney')}>
-                          <ButtonText color="white">
-                            {item.btnText.option2}
-                          </ButtonText>
-                        </Button>
-                        <Button width="18%" backgroundColor="#EFF0F4">
-                          <ButtonText color="black">...</ButtonText>
-                        </Button>
-                      </Row>
-                    </Product2>
-                  )
-            }
-            onMomentumScrollEnd={handleMomentumScrollEnd2}
-          />
-          <Pagination2
-            length={mainContents.length}
-            currentIndex2={currentIndex2}
-          />
+                  )}
+                  onMomentumScrollEnd={handleMomentumScrollEnd2}
+                />
+              )}
+              {isLogin?(<Pagination2
+                length={myAccounts.length}
+                currentIndex2={currentIndex2}
+              />):(<Pagination2
+                length={mainContents.length}
+                currentIndex2={currentIndex2}
+              />)}
+              
         </MainProduct>
         <MainProduct>
           <FlatList
