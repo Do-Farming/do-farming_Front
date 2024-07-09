@@ -249,7 +249,7 @@ export default function HanaMainScreen({ navigation }: any) {
                         {item.descriptrions.text2}
                       </DescriptionTexts>
                       <Image
-                        style={{ width: 20, height: 15 }}
+                        style={{ width: 20, height: 15, marginBottom: 10 }}
                         source={item.images[1]}
                       />
                     </RowCenter>
