@@ -7,16 +7,29 @@ import {
   ItemTitle,
   ItemStatus,
 } from '../TabContents.styled';
+import { Group } from '../../../../../types/group/GroupTypes';
 
-const WaitingChallenging = () => (
+const WaitingChallenging: React.FC<{ myGroup: Group }> = ({ myGroup }) => (
   <Container>
-    <Item>
-      <ItemImage />
-      <ItemInfo>
-        <ItemTitle>도파밍 상품</ItemTitle>
-        <ItemStatus>대기중</ItemStatus>
-      </ItemInfo>
-    </Item>
+    {myGroup.status === 0 && (
+      <Item>
+        <ItemImage />
+        <ItemInfo>
+          <ItemTitle>도파밍 상품</ItemTitle>
+          <ItemStatus>준비 대기중</ItemStatus>
+        </ItemInfo>
+      </Item>
+    )}
+
+    {myGroup.status === 1 && (
+      <Item>
+        <ItemImage />
+        <ItemInfo>
+          <ItemTitle>도파밍 상품</ItemTitle>
+          <ItemStatus>시작 대기중</ItemStatus>
+        </ItemInfo>
+      </Item>
+    )}
   </Container>
 );
 
