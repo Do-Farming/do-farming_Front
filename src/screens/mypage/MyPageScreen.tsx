@@ -19,6 +19,7 @@ import axiosInstance from '../../apis/axiosInstance';
 import { Account } from '../../types/account/AccountTypes';
 import { Group } from '../../types/group/GroupTypes';
 import { useAuth } from '../../contexts/authContext';
+import Splash from '../../components/Splash/Splash';
 
 export default function MyPageScreen({ navigation }: any) {
   const { isLogin } = useAuth();
@@ -27,13 +28,13 @@ export default function MyPageScreen({ navigation }: any) {
   const [myAccountList, setMyAccountList] = useState<Account[]>([]);
   const [myGroup, setMyGroup] = useState<Group>();
   const [loading, setLoading] = useState<boolean>(true);
-  const [userImg, setUserImg] = useState<number>(0);
+  const [userImg, setUserImg] = useState<any>(0);
 
-  interface profileType {
-    [key: number]: string;
+  interface ProfileType {
+    [key: number]: any;
   }
 
-  const profileImages: profileType = {
+  const profileImages: ProfileType = {
     1: require('../../assets/1.png'),
     2: require('../../assets/2.png'),
     3: require('../../assets/3.png'),
@@ -47,7 +48,6 @@ export default function MyPageScreen({ navigation }: any) {
           await axiosInstance.get<ApiResponse<MyInfo>>(`/api/v1/customer/me`);
         if (response.data.isSuccess) {
           setMyInfo(response.data.result);
-          setUserImg(response.data.result.userImg);
         } else {
           console.log('내 정보 데이터 요청 실패');
         }
@@ -95,18 +95,15 @@ export default function MyPageScreen({ navigation }: any) {
   }, [isLogin]);
 
   if (loading) {
-    return <div>로딩 중...</div>;
+    return <Splash />;
   }
-  console.log(myInfo?.userImg);
 
   return (
     <Container>
       <Header>
         {myInfo && (
           <Profile>
-            <ProfileImage
-              source={require(profileImageList[myInfo?.userImg - 1])}
-            />
+            <ProfileImage source={profileImages[myInfo?.userImg]} />
             <ProfileName>{myInfo?.name}님</ProfileName>
           </Profile>
         )}
@@ -118,7 +115,10 @@ export default function MyPageScreen({ navigation }: any) {
                 setSelectedView('challenging');
               }}
             >
-              <MenuItemImage source={require('../../assets/challenging.png')} />
+              <MenuItemImage
+                source={require('../../assets/challenging.png')}
+                style={{ width: 40, height: 40 }}
+              />
             </MenuItemButton>
             <MenuItemText>챌린징</MenuItemText>
           </MenuItem>
@@ -128,7 +128,10 @@ export default function MyPageScreen({ navigation }: any) {
                 setSelectedView('myAccount');
               }}
             >
-              <MenuItemImage source={require('../../assets/myaccount.png')} />
+              <MenuItemImage
+                source={require('../../assets/myaccount.png')}
+                style={{ width: 40, height: 40 }}
+              />
             </MenuItemButton>
             <MenuItemText>내 계좌</MenuItemText>
           </MenuItem>
