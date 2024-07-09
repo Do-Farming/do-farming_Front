@@ -38,7 +38,7 @@ export const ButtonContainer = styled.Pressable`
   margin-top: 20px;
 `;
 
-export const ButtonT = styled.TouchableOpacity`
+export const HomeButton = styled.TouchableOpacity`
   margin-top: 10px;
   background-color: ${(props) => props.theme.whiteColor};
   padding: 15px;

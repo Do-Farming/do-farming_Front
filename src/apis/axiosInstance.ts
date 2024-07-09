@@ -4,7 +4,7 @@ import { isExpired } from 'react-jwt';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const axiosInstance = axios.create({
-  baseURL: 'http://192.168.78.120',
+  baseURL: 'http://192.168.78.86',
   headers: {
     'Content-Type': 'application/json',
   },
