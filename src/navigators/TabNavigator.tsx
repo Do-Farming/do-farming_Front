@@ -21,20 +21,10 @@ function TabNavigator() {
   return (
     <Tab.Navigator>
       <Tab.Screen
-        name="HanaMain"
-        component={HanaMainScreen}
-        options={{
-          headerTransparent: true,
-          // tabBarIcon: ({ focused }) => (
-          //   // <HomeIcon name="home" size={30} color={'red'} />
-          // ),
-        }}
-      />
-      <Tab.Screen
-        name="홈"
+        name="DoFarmingMain"
         component={HomeScreen}
         options={{
-          headerTransparent: true,
+          headerShown: false,
           tabBarIcon: ({ focused }) =>
             focused ? (
               <HomeIconActive width={'32px'} height={'32px'} />
@@ -43,20 +33,12 @@ function TabNavigator() {
             ),
         }}
       />
-      <Tab.Screen
-        name="작업용"
-        component={ExampleScreen}
-        options={{
-          headerTransparent: true,
-          // tabBarIcon: ({ focused }) => (
-          //   <HomeIcon name="home" size={30} color={'red'} />
-          // ),
-        }}
-      />
+      <Tab.Screen name="작업용" component={ExampleScreen} />
       <Tab.Screen
         name="이상형 월드컵"
         component={WorldCupInfoScreen}
         options={{
+          headerShown: false,
           tabBarIcon: ({ focused }) =>
             focused ? (
               <IdealIconActive width={'32px'} height={'32px'} />
@@ -69,7 +51,7 @@ function TabNavigator() {
         name="마이페이지"
         component={MyPageScreen}
         options={{
-          headerTransparent: true,
+          headerShown: false,
           tabBarIcon: ({ focused }) =>
             focused ? (
               <MypageIconActive width={'32px'} height={'32px'} />

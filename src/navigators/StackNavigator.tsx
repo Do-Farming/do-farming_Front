@@ -37,7 +37,7 @@ const Stack = createNativeStackNavigator();
 
 function StackNavigator() {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator initialRouteName="HanaMain">
       <Stack.Screen
         name="Tabs"
         component={TabNavigator}
@@ -46,7 +46,9 @@ function StackNavigator() {
       <Stack.Screen
         name="HanaMain"
         component={HanaMainScreen}
-        options={{ title: '하나은행 메인화면' }}
+        options={{
+          headerShown: false,
+        }}
       />
       <Stack.Screen
         name="SignIn"
