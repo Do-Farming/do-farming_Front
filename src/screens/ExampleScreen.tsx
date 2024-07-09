@@ -70,6 +70,22 @@ export default function ExampleScreen({ navigation }: any) {
           title="전체 상품 페이지로"
           onPress={() => navigation.navigate('AllProduct')}
         />
+        <Button
+          title="만보계 페이지로"
+          onPress={() => navigation.navigate('Pedometer')}
+        />
+        <Button
+          title="경쟁화면 페이지로"
+          onPress={() => navigation.navigate('Competitive')}
+        />
+        <Button
+          title="상품가입 페이지로"
+          onPress={() => navigation.navigate('ProductSignUp')}
+        />
+        <Button
+          title="페이스아이디 페이지로"
+          onPress={() => navigation.navigate('FaceId')}
+        />
       </View>
     </SafeAreaView>
   );

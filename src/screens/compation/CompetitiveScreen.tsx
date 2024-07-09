@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, ScrollView } from 'react-native';
+import { View, ScrollView, Text } from 'react-native';
 import { LineChart } from 'react-native-gifted-charts';
-
+import { useNavigation } from '@react-navigation/native';
 import {
   Container,
   ChartCard,
@@ -13,8 +13,11 @@ import {
   UserName,
   AchievedGoal,
   InterestRate,
+  ChallengeButton,
+  ChallengeText,
 } from './CompetitiveScreen.styled';
-import { DailyRanking, WeeklyRate } from '../../types';
+import axiosInstance from '../../apis/axiosInstance';
+import { DailyRanking, WeeklyRate, FormattedHistory } from '../../types';
 
 const getRandomColor = (): string => {
   const colors = [
@@ -31,33 +34,104 @@ const getRandomColor = (): string => {
 };
 
 const CompetitiveScreen: React.FC = () => {
-  const [weeklyData, setWeeklyData] = useState<WeeklyRate['data']['user']>([]);
-  const [dailyRate, setDailyRate] = useState<DailyRanking['data']['ranking']>(
+  const navigation = useNavigation<any>();
+  const [weeklyData, setWeeklyData] = useState<FormattedHistory[]>([]);
+  const [dailyRate, setDailyRate] = useState<DailyRanking['result']['ranking']>(
     [],
   );
+  const [groupId, setGroupId] = useState<number | null>(null); // Group ID 초기값 null로 설정
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [challengeType, setChallengeType] = useState<number | null>(null);
+  const [challenge, setChallenge] = useState<string>('');
+  const [challengeEmoji, setChallengeEmoji] = useState<string>('');
+  const [challengeGoTO, setChallengeGoTO] = useState<string>('');
 
   useEffect(() => {
-    const mockWeeklyData: WeeklyRate['data']['user'] = [
-      { name: '0주차', weeklyRate: 3.5 }, // 0주차 데이터 추가
-      ...Array.from({ length: 8 }, (_, index) => ({
-        name: `User${index + 1}`,
-        weeklyRate: parseFloat((Math.random() * 4 + 1).toFixed(2)), // Random rate between 1% and 5%
-      })),
-    ];
+    const fetchGroupId = async () => {
+      try {
+        const response = await axiosInstance.get(`/group/my`);
+        setGroupId(response.data.result.id);
+      } catch (error) {
+        console.error('Failed to fetch group ID', error);
+      }
+    };
 
-    const mockDailyRate: DailyRanking['data']['ranking'] = Array.from(
-      { length: 4 },
-      (_, index) => ({
-        name: `User${index + 1}`,
-        dailyRate: `${(Math.random() * 4 + 1).toFixed(2)}%`, // Random rate between 1% and 5%
-        challengeType: Math.floor(Math.random() * 12) + 1, // Random challenge type between 1 and 12
-        challengeDate: `2024-06-26`,
-      }),
-    );
-
-    setWeeklyData(mockWeeklyData);
-    setDailyRate(mockDailyRate);
+    fetchGroupId();
   }, []);
+
+  useEffect(() => {
+    if (groupId === null) return;
+
+    const fetchData = async () => {
+      try {
+        setIsLoading(true);
+        const ranksResponse = await axiosInstance.get<DailyRanking>(
+          `/daily-rank/group`,
+          {
+            params: { groupId },
+          },
+        );
+        setDailyRate(ranksResponse.data.result.ranking);
+
+        const historyResponse = await axiosInstance.get<{
+          message: string;
+          code: number;
+          result: { date: string; totalRate: number }[];
+        }>(`/daily-rank/group/history`, { params: { groupId } });
+        const formattedHistory: FormattedHistory[] =
+          historyResponse.data.result.map((history) => ({
+            name: history.date, // 날짜를 이름으로 사용
+            totalRate: parseFloat(history.totalRate.toFixed(2)),
+          }));
+        setWeeklyData(formattedHistory);
+        // Fetch challenge type
+        const challengeResponse = await axiosInstance.get<any>(
+          '/api/v1/challenge/getChallenge',
+        );
+        setChallengeType(challengeResponse.data.result);
+        console.log('챌린지 리스폰스', challengeType);
+        if (challengeType === 0) {
+          setChallenge('걷기');
+          setChallengeEmoji('🏃');
+          setChallengeGoTO('Pedometer');
+        } else if (challengeType === 1) {
+          setChallenge('기상');
+          setChallengeEmoji('⏰');
+          setChallengeGoTO('WakeUp');
+        } else {
+          setChallenge('퀴즈');
+          setChallengeEmoji('📚');
+          setChallengeGoTO('Quiz');
+        }
+      } catch (error) {
+        console.error('Failed to fetch data', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [groupId]);
+
+  const chartData = weeklyData.map((user) => ({
+    value: user.totalRate,
+    label: user.name,
+    dataPointText: `${user.totalRate}%`,
+    textShiftY: -5,
+    textColor: 'black',
+  }));
+
+  if (isLoading) {
+    return (
+      <View>
+        <Text>Loading...</Text>
+      </View>
+    );
+  }
+
+  const openCameraHandler = async () => {
+    navigation.navigate(challengeGoTO, { groupId });
+  };
 
   return (
     <ScrollView>
@@ -66,22 +140,7 @@ const CompetitiveScreen: React.FC = () => {
         <ChartCard>
           <ScrollView horizontal={true}>
             <LineChart
-              data={[
-                {
-                  value: 3.5,
-                  label: '',
-                  dataPointText: '',
-                  textShiftY: -5,
-                  //   textColor: 'black',
-                }, // 0주차 데이터
-                ...weeklyData.map((user, index) => ({
-                  value: user.weeklyRate,
-                  label: `${index + 1}주차`,
-                  dataPointText: `${user.weeklyRate}%`,
-                  textShiftY: -5, // margin-bottom of 5px
-                  textColor: 'black', // text color to black
-                })),
-              ]}
+              data={chartData}
               maxValue={5}
               noOfSections={5}
               animateOnDataChange={true}
@@ -114,6 +173,11 @@ const CompetitiveScreen: React.FC = () => {
             />
           </ScrollView>
         </ChartCard>
+        <ChallengeButton onPress={openCameraHandler}>
+          <ChallengeText>
+            {challengeEmoji} {challenge} 챌린지 하러가기 {challengeEmoji}
+          </ChallengeText>
+        </ChallengeButton>
         <UserList>
           {dailyRate.map((user, index) => (
             <UserCard key={index}>
