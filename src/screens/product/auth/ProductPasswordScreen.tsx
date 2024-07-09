@@ -13,9 +13,13 @@ import {
   SignUpButtonText,
 } from './ProductPasswordScreen.styled';
 import { Path, Svg } from 'react-native-svg';
-import { JoinDofarmingType } from '../../../types/account/AccountTypes';
+import {
+  JoinCheckingType,
+  JoinDofarmingType,
+} from '../../../types/account/AccountTypes';
 import { joinDofarmingProduct } from '../../../apis/accountService';
 import { bangCreate, bangJoin } from '../../../apis/bangService';
+import { joinChecking } from '../../../apis/productService';
 
 // Array shuffle
 const shuffleArray = (array: string[]): string[] => {
@@ -77,6 +81,11 @@ const ProductPasswordScreen: React.FC<ProductPasswordScreenProps> = ({
         accountPassword: password.join(''),
       };
 
+      const updatedJoinChecking: JoinCheckingType = {
+        ...joinDofarming,
+        accountPassword: password.join(''),
+      };
+
       try {
         let resMsg = '';
         if (from == 'bangCreate') {
@@ -88,8 +97,9 @@ const ProductPasswordScreen: React.FC<ProductPasswordScreenProps> = ({
             await joinDofarmingProduct(updatedJoinDofarming);
           } else {
             resMsg = res.message;
-            console.log(res.message);
           }
+        } else if (from == 'ProductSignUp') {
+          await joinChecking(updatedJoinChecking);
         }
         navigation.navigate('ProductSignIn', { resMsg: { message: resMsg } });
       } catch (error) {

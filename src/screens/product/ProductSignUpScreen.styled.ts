@@ -99,6 +99,16 @@ export const SignUpButton = styled.TouchableOpacity`
   right: 20px;
 `;
 
+export const SignUpGreenButton = styled.TouchableOpacity`
+  background-color: ${(props) => props.theme.hanaMainColor};
+  padding: 15px;
+  border-radius: 15px;
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  right: 20px;
+`;
+
 export const SignUpButtonText = styled.Text`
   color: white;
   text-align: center;
