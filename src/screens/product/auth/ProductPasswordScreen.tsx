@@ -88,11 +88,8 @@ const ProductPasswordScreen: React.FC<ProductPasswordScreenProps> = ({
 
       try {
         let resMsg = '';
-        if (from == 'bangCreate') {
-          await bangCreate(bang);
-          await joinDofarmingProduct(updatedJoinDofarming);
-        } else if (from == 'bangJoin2') {
-          const res = await bangJoin(bang);
+        if (from == 'bangCreate' || from == 'bangJoin2') {
+          const res = await bangCreate(bang);
           if (res.isSuccess) {
             await joinDofarmingProduct(updatedJoinDofarming);
           } else {
