@@ -8,6 +8,13 @@ export const Container = styled.View`
   align-items: center;
 `;
 
+export const QuizResultContainer = styled.View`
+  flex: 1;
+  padding: 20px;
+  background-color: ${(props) => props.theme.grayColor};
+  align-items: center;
+`;
+
 export const ProgressBarContainer = styled.View`
   width: 100%;
   height: 5px;
@@ -88,24 +95,60 @@ export const ChoiceButtonText = styled.Text`
 
 export const ResultContainer = styled.View`
   width: 100%;
-  align-items: center;
-  background-color: ${(props) => props.theme.mainColor};
-  border: 1px solid ${(props) => props.theme.mainColor};
-  box-shadow: 0px 4px 4px rgba(77, 77, 77, 0.25);
-  border-radius: 15px;
-  padding: 10% 0;
-  margin: 5% 0;
+  padding: 5%;
   justify-content: space-between;
 `;
+
+export const ScoreContainer = styled.View`
+  flex-direction: row;
+  align-items: center;
+`
 
 export const ResultScoreText = styled.Text`
   font-weight: bold;
   font-size: 35px;
-  margin-bottom: 5%;
+`;
+
+export const ResultScoreRightText = styled.Text`
+  font-weight: 600;
+  font-size: 20px;
+  color: ${(props) => props.theme.darkGrayColor};
 `;
 
 export const ResultText = styled.Text`
-  font-weight: bold;
-  font-size: 25px;
+  font-weight: 600;
+  font-size: 20px;
   margin: 5%;
+  position: absolute;
+  left: 18%;
+`;
+
+export const GIFContainer = styled.View`
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+`
+
+export const Separator = styled.View`
+  height: 1px;
+  background-color: #e0e0e0;
+  margin-vertical: 10px;
+`;
+
+export const ScoreInfoView = styled.View`
+  padding: 5% 0;
+  justify-content: space-between;
+`
+
+export const ScoreInfoContainer = styled.View`
+  padding: 15px 10px;
+  flex-direction: row;
+  background: ${(props) => props.theme.whiteColor};
+  border: 1px solid #f8f8fa;
+  box-shadow: 0px 4px 4px rgba(77, 77, 77, 0.25);
+  border-radius: 15px;
+  align-items: center;
+  margin: 10px 0;
+  position: relative;
+  height: 80px;
 `;
