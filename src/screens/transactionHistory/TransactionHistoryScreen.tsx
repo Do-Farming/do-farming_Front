@@ -30,8 +30,7 @@ import axiosInstance from '../../apis/axiosInstance';
 import { Account } from '../../types/account/AccountTypes';
 
 export default function TransactionHistoryScreen({ navigation, route }: any) {
-  // const { accountId } = route.params;
-  const accountId = 2; // 인자로 받아올 예정
+  const { accountId } = route.params;
   const [history, setHistory] = useState<TransactionHistory[]>([]);
   const [account, setAccount] = useState<Account>();
 

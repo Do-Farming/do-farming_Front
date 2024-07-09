@@ -50,7 +50,6 @@ import Splash from '../../components/Splash/Splash';
 const { width: windowWidth } = Dimensions.get('window');
 export const getChecking = async () => {
   const response = await axiosInstance.get('/api/v1/account/my');
-  console.log(response);
   return response.data.result as myAccount[];
 };
 const Pagination2: React.FC<{ length: number; currentIndex2: number }> = ({
@@ -197,7 +196,14 @@ export default function HanaMainScreen({ navigation }: any) {
                 showsHorizontalScrollIndicator={false}
                 keyExtractor={(item, index) => index.toString()}
                 renderItem={({ item, index }) => (
-                  <Product2 key={index}>
+                  <Product2
+                    key={index}
+                    onPress={() =>
+                      navigation.navigate('TransactionHistory', {
+                        accountId: item.id,
+                      })
+                    }
+                  >
                     <DescriptionView>
                       <StyledImage
                         source={require('../../assets/hana-symbol.png')}

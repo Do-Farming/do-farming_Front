@@ -110,7 +110,7 @@ export const Product = styled.View`
   display: flex;
 `;
 
-export const Product2 = styled.View`
+export const Product2 = styled.TouchableOpacity`
   width: 340px;
   border-radius: 15px;
   background-color: white;
