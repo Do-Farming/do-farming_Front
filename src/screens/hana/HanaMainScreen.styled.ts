@@ -70,13 +70,20 @@ export const DescriptionTexts = styled.Text`
 export const DescriptionSmallTexts = styled.Text`
   font-size: 15px;
   color: gray;
+  align-items: center;
+  text-align: center;
 `;
-
+export const DescriptionAccountTexts = styled.Text`
+  font-size: 15px;
+  color: gray;
+  align-items: center;
+`;
 export const BalanceTexts = styled.Text`
   font-size: 24px;
   font-weight: bold;
   margin: 15px 0px;
   margin-bottom: 30px;
+  text-align: center;
 `;
 
 export const SmallInfoText = styled.Text`
@@ -157,17 +164,23 @@ export const PaginationContainer = styled.View`
   align-items: center;
   position: relative;
 `;
+export interface PaginationDotProps {
+  index: number;
+  length: number;
+  isActive: boolean;
+}
 
 export const PaginationDot = styled.View<PaginationDotProps>`
-  width: 25%;
+  width: ${(props) => `${100 / props.length}%`};
   height: 5px;
   border-radius: 5px;
-  background-color: #69778a;
+  background-color: ${(props) => (props.isActive ? '#1EA698' : '#69778a')};
   position: absolute;
-  left: ${(props) => `${props.index * 25}%`};
+  left: ${(props) => `${props.index * (100 / props.length)}%`};
   transition: left 0.3s ease;
   box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1);
 `;
+
 
 export const Button = styled.TouchableOpacity<ButtonProps>`
   justify-content: center;
