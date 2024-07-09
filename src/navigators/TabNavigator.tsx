@@ -33,7 +33,6 @@ function TabNavigator() {
             ),
         }}
       />
-      <Tab.Screen name="작업용" component={ExampleScreen} />
       <Tab.Screen
         name="이상형 월드컵"
         component={WorldCupInfoScreen}

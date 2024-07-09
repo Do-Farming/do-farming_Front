@@ -158,8 +158,9 @@ export default function HanaMainScreen({ navigation }: any) {
 
   return (
     <SafeAreaView>
-      {showSplash && <Splash />}
-      {!showSplash && (
+      {showSplash ? (
+        <Splash />
+      ) : (
         <Container>
           <Header>
             <Row>
