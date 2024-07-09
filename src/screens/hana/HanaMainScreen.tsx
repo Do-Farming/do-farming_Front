@@ -35,8 +35,9 @@ import {
   Product2,
   Product3,
   BalanceTexts,
-  SplashContainer,
-  SplashImage,
+  HanaProduct,
+  HanaProductText,
+  DescriptionView,
 } from './HanaMainScreen.styled';
 import { StyledImage } from '../bang/bangDetail/BangDetailScreen.styled';
 import { mainContents, saleContents } from '../../mocks/hanaMainDatas';
@@ -44,6 +45,7 @@ import { useAuth } from '../../contexts/authContext';
 import { SafeAreaView } from '../home/HomeScreen.styled';
 import { myAccount } from '../../types/BankingSystem/AccountService';
 import axiosInstance from '../../apis/axiosInstance';
+import Splash from '../../components/Splash/Splash';
 
 const { width: windowWidth } = Dimensions.get('window');
 export const getChecking = async () => {
@@ -157,11 +159,7 @@ export default function HanaMainScreen({ navigation }: any) {
 
   return (
     <SafeAreaView>
-      {showSplash && (
-        <SplashContainer>
-          <SplashImage source={require('../../assets/splash.png')} />
-        </SplashContainer>
-      )}
+      {showSplash && <Splash />}
       {!showSplash && (
         <Container>
           <Header>
@@ -171,8 +169,8 @@ export default function HanaMainScreen({ navigation }: any) {
                   <Row>
                     <StyledImage
                       source={require('../../assets/hana-symbol.png')}
-                      width={20}
-                      height={20}
+                      width={30}
+                      height={30}
                     />
                     <Username> 환영합니다.</Username>
                   </Row>
@@ -202,27 +200,30 @@ export default function HanaMainScreen({ navigation }: any) {
                 keyExtractor={(item, index) => index.toString()}
                 renderItem={({ item, index }) => (
                   <Product2 key={index}>
-                    <DescriptionAccountTexts>
+                    <DescriptionView>
                       <StyledImage
                         source={require('../../assets/hana-symbol.png')}
                         width={20}
                         height={20}
                       />
-                      {item.name}
-                    </DescriptionAccountTexts>
+                      <DescriptionAccountTexts>
+                        {item.name}
+                      </DescriptionAccountTexts>
+                    </DescriptionView>
+
                     <RowCenter>
                       <DescriptionTexts>{item.accountNumber}</DescriptionTexts>
                     </RowCenter>
                     <BalanceTexts>{formatAmount(item.balance)}</BalanceTexts>
                     <Row>
-                      <Button width="50%" backgroundColor="#EFF0F4">
+                      <Button width="48%" backgroundColor="#EFF0F4">
                         <ButtonText
                           onPress={() => navigation.navigate('SendMoney')}
                         >
                           보내기
                         </ButtonText>
                       </Button>
-                      <Button width="50%" backgroundColor="#1EA698">
+                      <Button width="48%" backgroundColor="#1EA698">
                         <ButtonText color="white">가져오기</ButtonText>
                       </Button>
                     </Row>
@@ -248,7 +249,7 @@ export default function HanaMainScreen({ navigation }: any) {
                         {item.descriptrions.text2}
                       </DescriptionTexts>
                       <Image
-                        style={{ width: 20, height: 15 }}
+                        style={{ width: 20, height: 15, marginBottom: 10 }}
                         source={item.images[1]}
                       />
                     </RowCenter>
@@ -320,6 +321,13 @@ export default function HanaMainScreen({ navigation }: any) {
               onMomentumScrollEnd={handleMomentumScrollEnd}
             />
           </MainProduct>
+
+          <MainProduct>
+            <HanaProduct onPress={() => navigation.navigate('AllProduct')}>
+              <HanaProductText>하나은행 상품 보러가기</HanaProductText>
+            </HanaProduct>
+          </MainProduct>
+
           <MainProduct>
             <TouchableOpacity onPress={() => handleNavigate('DoFarmingMain')}>
               <Product3>

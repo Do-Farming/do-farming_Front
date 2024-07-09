@@ -98,7 +98,7 @@ export const StyledImage = styled.Image<StyledImageProps>`
   width: ${({ width }) => (width ? `${width}px` : '100px')};
   height: ${({ height }) => (height ? `${height}px` : '100px')};
   border-radius: 99px;
-  margin-top: 3px;
+  margin-right: 3px;
 `;
 
 export const ParticipantName = styled.Text`
