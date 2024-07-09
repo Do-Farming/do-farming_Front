@@ -32,6 +32,7 @@ import SelectCategoryScreen from '../screens/worldcup/taste/selectCategory/Selec
 import TasteWorldCupWinnnerScreen from '../screens/worldcup/taste/winner/TasteWorldCupWinnerScreen';
 import TransactionHistoryScreen from '../screens/transactionHistory/TransactionHistoryScreen';
 import { ProductScreen } from '../screens/product/allproduct/ProductScreen';
+import { SendSucessScreen } from '../screens/bankingService/SendCompleteScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -81,10 +82,10 @@ function StackNavigator() {
         options={{ title: '방 만들기' }}
       />
       <Stack.Screen
-      name="SendSucess"
-      component={SendSucessScreen}
-      options={{ title: '이체 성공' }}
-    />
+        name="SendSucess"
+        component={SendSucessScreen}
+        options={{ title: '이체 성공' }}
+      />
       <Stack.Screen
         name="Pedometer"
         component={PedometerScreen}

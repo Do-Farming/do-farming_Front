@@ -54,7 +54,7 @@ export const Divide = styled.View`
   margin-bottom: 10px;
 `;
 
-export const RowContainer = styled.View`
+export const RowContainer = styled.Pressable`
   background-color: white;
   flex-direction: column;
 `;

@@ -16,3 +16,10 @@ export const SplashImage = styled.Image`
   width: 370px;
   height: 300px;
 `;
+
+export const SplashLogoContainer = styled.View`
+  justify-content: center;
+  align-items: center;
+  margin-top: 250px;
+  margin-bottom: 50px;
+`;

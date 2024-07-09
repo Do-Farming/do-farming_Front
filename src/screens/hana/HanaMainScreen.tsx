@@ -182,8 +182,8 @@ export default function HanaMainScreen({ navigation }: any) {
                   <Row>
                     <StyledImage
                       source={require('../../assets/hana-symbol.png')}
-                      width={20}
-                      height={20}
+                      width={30}
+                      height={30}
                     />
                     <Username> 로그인</Username>
                   </Row>
