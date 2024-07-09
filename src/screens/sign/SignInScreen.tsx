@@ -15,8 +15,10 @@ import {
 import { login } from '../../apis/authService';
 import { useAuth } from '../../contexts/authContext';
 import { Button } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
-export default function SignInScreen({ navigation }: any) {
+export default function SignInScreen() {
+  const navigation = useNavigation<any>();
   const [phoneNumber, setPhoneNumber] = useState('');
   const [password, setPassword] = useState('');
   const { setIsLogin } = useAuth();
@@ -32,7 +34,7 @@ export default function SignInScreen({ navigation }: any) {
   const handleSubmit = async () => {
     try {
       const response = await login({ phoneNumber, password });
-      navigation.navigate('DoFarmingMain');
+      navigation.navigate('HanaMain');
       setIsLogin(true);
 
       console.log('Login successful:', response);
