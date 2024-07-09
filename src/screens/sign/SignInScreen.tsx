@@ -4,6 +4,9 @@ import {
   ButtonText,
   Container,
   ContentBox,
+  GotoInfoText,
+  GotoJoinButton,
+  GotoJoinText,
   Input,
   InputBox,
   InputContent,
@@ -69,13 +72,13 @@ export default function SignInScreen() {
         </InputBox>
       </ContentBox>
       <ButtonBox>
+        <GotoJoinButton onPress={() => navigation.navigate('SignUp')}>
+          <GotoInfoText>아직 회원이 아니신가요?</GotoInfoText>
+          <GotoJoinText>회원가입하기</GotoJoinText>
+        </GotoJoinButton>
         <LongButton onPress={handleSubmit}>
           <ButtonText>로그인</ButtonText>
         </LongButton>
-        <Button
-          title="회원가입 페이지로"
-          onPress={() => navigation.navigate('SignUp')}
-        />
       </ButtonBox>
     </Container>
   );
