@@ -111,7 +111,6 @@ export const MainProduct = styled.View`
 `;
 
 export const Product = styled.View`
-  width: 340px;
   display: flex;
 `;
 
@@ -295,7 +294,6 @@ export const HanaCardBenefitImportantText = styled.Text`
 
 export const HanaCard = styled.View`
   width: 100%;
-  max-width: 400px;
   border-radius: 10px;
   padding: 20px;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 00);
