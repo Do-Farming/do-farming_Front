@@ -16,12 +16,20 @@ import {
   ResultText,
   ResultScoreText,
   TimeLeftText,
+  GIFContainer,
+  ScoreContainer,
+  ResultScoreRightText,
+  Separator,
+  ScoreInfoContainer,
+  ScoreInfoView,
+  QuizResultContainer,
 } from './QuizScreen.styled';
-import { Animated } from 'react-native';
+import { Animated, Image } from 'react-native';
 import { InfoText } from '../home/HomeScreen.styled';
 import { SketchBook } from '../../assets';
 import axiosInstance from '../../apis/axiosInstance';
 import { QuizItem } from '../../types/quiz/QuizTypes';
+import { CardLottieView } from '../generateCard/GenerateCardScreen.styled';
 
 export default function QuizScreen() {
   const [timeLeft, setTimeLeft] = useState(0); // 10초 타이머
@@ -34,7 +42,7 @@ export default function QuizScreen() {
   const progressAnim = useRef(new Animated.Value(0)).current;
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const [quizCompleted, setQuizCompleted] = useState(false);
-  const [quizData, setQuizData] = useState<QuizItem[]>([])
+  const [quizData, setQuizData] = useState<QuizItem[]>([]);
   const [startTime, setStartTime] = useState<Date | null>(null); // 퀴즈 시작 시간
   const [endTime, setEndTime] = useState<Date | null>(null);
 
@@ -42,43 +50,39 @@ export default function QuizScreen() {
 
   const getQuizData = async (count: number) => {
     try {
-      const response = await axiosInstance.get(
-        `/api/v1/quiz?count=${count}`
-      )
-      console.log(response);
+      const response = await axiosInstance.get(`/api/v1/quiz?count=${count}`);
       setQuizData(response.data.result);
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
-  const postQuizData = async (completionTime : number, score : number) => {
+  const postQuizData = async (completionTime: number, score: number) => {
     try {
       const response = await axiosInstance.post(
-        `/quiz/post?score=${score}&completionTime=${completionTime}`
-      )
-      console.log(response)
+        `/quiz/post?score=${score}&completionTime=${completionTime}`,
+      );
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
   const finishQuiz = () => {
     setQuizCompleted(true); // 퀴즈 종료
     setEndTime(new Date());
-  }
+  };
 
   useEffect(() => {
     getQuizData(5);
     setStartTime(new Date());
-  }, [])
+  }, []);
 
   useEffect(() => {
     if (startTime && endTime) {
       const completionTime = endTime.getTime() - startTime?.getTime();
       postQuizData(completionTime, score);
     }
-  }, [endTime])
+  }, [endTime]);
 
   useEffect(() => {
     if (quizCompleted) return; // 퀴즈가 종료된 경우에는 더 이상 실행하지 않음
@@ -165,7 +169,9 @@ export default function QuizScreen() {
               }}
             />
           </ProgressBarContainer>
-          <TimeLeftText>{Math.max(0, parseInt((10 - timeLeft).toFixed(0)))}초</TimeLeftText>
+          <TimeLeftText>
+            {Math.max(0, parseInt((10 - timeLeft).toFixed(0)))}초
+          </TimeLeftText>
           <Container>
             <SketchbookImage>
               <SketchBook width={'100%'} height={'100%'} />
@@ -207,16 +213,65 @@ export default function QuizScreen() {
           </Container>
         </>
       ) : (
-        <Container>
+        <QuizResultContainer>
+          <CardLottieView
+            source={require('../../assets/worldcup/confetti.json')}
+            autoPlay={true}
+            loop={false}
+            resizeMode="cover"
+          />
           <InfoText>오늘의 퀴즈 종료!</InfoText>
+          {score >= 50 ? (
+            <>
+              <GIFContainer>
+                <Image
+                  source={require('../../assets/quiz/happyQuiz.gif')}
+                  style={{ width: 200, height: 200 }}
+                  resizeMode="contain"
+                />
+              </GIFContainer>
+              <InfoText>참 잘했어요!</InfoText>
+            </>
+          ) : (
+            <>
+              <GIFContainer>
+                <Image
+                  source={require('../../assets/quiz/sadQuiz.gif')}
+                  style={{ width: 200, height: 200 }}
+                  resizeMode="contain"
+                />
+              </GIFContainer>
+              <InfoText>다음엔 더 잘할 거야...</InfoText>
+            </>
+          )}
           <ResultContainer>
-            <ResultScoreText>{score}점</ResultScoreText>
-            <ResultText>맞힌 문제: {correctCount}개</ResultText>
-            <ResultText>
-              틀린 문제: {quizData.length - correctCount}개
-            </ResultText>
+            <ScoreContainer>
+              <ResultScoreText>{score} </ResultScoreText>
+              <ResultScoreRightText>점</ResultScoreRightText>
+            </ScoreContainer>
+            <Separator />
+            <ScoreInfoView>
+              <ScoreInfoContainer>
+                <Image
+                  source={require('../../assets/quiz/o.png')}
+                  style={{ width: 50, height: 50 }}
+                  resizeMode="contain"
+                />
+                <ResultText>맞힌 문제: {correctCount} 개</ResultText>
+              </ScoreInfoContainer>
+              <ScoreInfoContainer>
+                <Image
+                  source={require('../../assets/quiz/x.png')}
+                  style={{ width: 35, height: 35, marginLeft: 5 }}
+                  resizeMode="contain"
+                />
+                <ResultText>
+                  틀린 문제: {quizData.length - correctCount} 개
+                </ResultText>
+              </ScoreInfoContainer>
+            </ScoreInfoView>
           </ResultContainer>
-        </Container>
+        </QuizResultContainer>
       )}
     </>
   );
