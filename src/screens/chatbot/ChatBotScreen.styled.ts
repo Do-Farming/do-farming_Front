@@ -29,7 +29,7 @@ export const MessageContainer2 = styled.View`
 
 export const UserMessage = styled(MessageContainer)`
   align-self: flex-end;
-  background-color: ${(props) => props.theme.hanaMainColor};
+  background-color: #008e71;
 `;
 
 export const AssistantMessage = styled(MessageContainer2)`
