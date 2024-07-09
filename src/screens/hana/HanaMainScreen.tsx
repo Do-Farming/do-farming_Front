@@ -103,7 +103,9 @@ export default function HanaMainScreen({ navigation }: any) {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % saleContents.length);
+      setCurrentIndex((prevIndex) =>
+        prevIndex === saleContents.length - 1 ? 0 : prevIndex + 1,
+      );
     }, 3000);
 
     return () => clearInterval(interval);
@@ -114,7 +116,7 @@ export default function HanaMainScreen({ navigation }: any) {
       if (flatListRef.current) {
         flatListRef.current.scrollToIndex({
           animated: true,
-          index: currentIndex % saleContents.length,
+          index: currentIndex,
         });
       }
     }, 120);
@@ -127,9 +129,8 @@ export default function HanaMainScreen({ navigation }: any) {
   ) => {
     const contentOffsetX = event.nativeEvent.contentOffset.x;
     const index = Math.round(contentOffsetX / windowWidth);
-    setCurrentIndex(index % saleContents.length);
+    setCurrentIndex(index);
   };
-  
   const handleNext = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % saleContents.length);
   };
@@ -300,7 +301,7 @@ export default function HanaMainScreen({ navigation }: any) {
               showsHorizontalScrollIndicator={false}
               keyExtractor={(item, index) => index.toString()}
               renderItem={({ item, index }) => (
-                <Product key={index} style={{ width: windowWidth - 40 }}>
+                <Product key={index}>
                   <HanaCard>
                     <HanaTextContainer>
                       <HanaTitle>{item.descriptrions.text}</HanaTitle>
