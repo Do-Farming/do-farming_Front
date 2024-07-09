@@ -28,7 +28,6 @@ export default function MyPageScreen({ navigation }: any) {
   const [myAccountList, setMyAccountList] = useState<Account[]>([]);
   const [myGroup, setMyGroup] = useState<Group>();
   const [loading, setLoading] = useState<boolean>(true);
-  const [userImg, setUserImg] = useState<any>(0);
 
   interface ProfileType {
     [key: number]: any;

@@ -34,6 +34,7 @@ export interface BangListType {
 export interface GroupMemberType {
   id: number;
   memberName: string;
+  memberProfile: number;
 }
 
 export interface BangDetailType {

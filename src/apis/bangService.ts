@@ -19,7 +19,6 @@ export const bangDetail = async (id: number) => {
 
 export const bangJoin = async (id: number) => {
   const response = await axiosInstance.post('/group/join', id);
-  console.log('방 가입 되었나', response.data);
   return response.data;
 };
 

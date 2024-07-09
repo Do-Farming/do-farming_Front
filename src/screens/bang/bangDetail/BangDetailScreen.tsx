@@ -44,6 +44,17 @@ export default function BangDetailScreen({ route, navigation }: any) {
 
   const [bang, setBang] = useState<BangDetailType>();
 
+  interface ProfileType {
+    [key: number]: any;
+  }
+
+  const profileImages: ProfileType = {
+    1: require('../../../assets/1.png'),
+    2: require('../../../assets/2.png'),
+    3: require('../../../assets/3.png'),
+    4: require('../../../assets/4.png'),
+  };
+
   const onPressModalOpen = () => {
     console.log('팝업을 여는 중입니다.');
     setIsModalVisible(true);
@@ -105,7 +116,7 @@ export default function BangDetailScreen({ route, navigation }: any) {
             {bang.groupMembers.map((member, index) => (
               <ParticipantContainer>
                 <StyledImage
-                  source={require('../../../assets/1.png')}
+                  source={profileImages[member?.memberProfile]}
                   width={50}
                   height={50}
                 ></StyledImage>
