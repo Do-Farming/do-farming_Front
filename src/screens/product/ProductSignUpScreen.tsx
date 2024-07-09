@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, ScrollView } from 'react-native';
 import {
   AmountContainer,
@@ -15,18 +15,30 @@ import {
   Section,
   SignUpButton,
   SignUpButtonText,
+  SignUpGreenButton,
   SmallText,
   SubHeader,
 } from './ProductSignUpScreen.styled';
+import {
+  JoinCheckingType,
+  JoinDofarmingType,
+} from '../../types/account/AccountTypes';
 
 const ProductSignUpScreen: React.FC = ({ navigation }: any) => {
+  const [joinChecking, setJoinChecking] = useState<JoinCheckingType>({
+    branchCode: '111',
+    accountName: '달달하나 입출금 통장',
+    accountPassword: '',
+    balance: 0,
+    accountCode: '',
+  });
   return (
     <Container>
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
         <GreenBackground>
           <Header>오늘의 금리는?</Header>
           <Header>기간도 금액도 자유롭게</Header>
-          <SubHeader>급여하나 월복리 적금</SubHeader>
+          <SubHeader>달달하나 입출금통장</SubHeader>
           <InterestRateContainer>
             <SmallText>연(세전, 1년)</SmallText>
             <InterestRateText>최고 3.50%</InterestRateText>
@@ -51,14 +63,19 @@ const ProductSignUpScreen: React.FC = ({ navigation }: any) => {
           </BenefitText2>
         </Section>
       </ScrollView>
-      <SignUpButton
+      <SignUpGreenButton
         onPress={() => {
-          navigation.navigate('ProductPassword');
-          console.log('클릭');
+          const bang = null;
+          const from = 'ProductSignUp';
+          navigation.navigate('ProductPassword', {
+            joinDofarming: joinChecking,
+            bang,
+            from,
+          });
         }}
       >
         <SignUpButtonText>가입 신청하기</SignUpButtonText>
-      </SignUpButton>
+      </SignUpGreenButton>
     </Container>
   );
 };
