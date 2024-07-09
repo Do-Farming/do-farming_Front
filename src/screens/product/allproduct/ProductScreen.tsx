@@ -18,10 +18,9 @@ import {
 import { allProduct } from '../../../apis/productService';
 import { ProductType } from '../../../types/product/ProductTypes';
 import { ObjectMapping } from '../../../constants/Product';
-import { Text } from 'react-native';
 import Splash from '../../../components/Splash/Splash';
 
-export const ProductScreen = () => {
+export const ProductScreen = ({ navigation }: any) => {
   const [product, setProduct] = useState({
     SAVING: [],
     CHECKING: [],
@@ -31,7 +30,10 @@ export const ProductScreen = () => {
   const [loading, setLoading] = useState(true);
 
   const renderProductItem = (product: ProductType) => (
-    <RowContainer key={product.prodCode}>
+    <RowContainer
+      key={product.prodCode}
+      onPress={() => navigation.navigate('ProductSignUp')}
+    >
       <Row>
         <NameText>{product.prodName}</NameText>
         <PeriodText>1년</PeriodText>
