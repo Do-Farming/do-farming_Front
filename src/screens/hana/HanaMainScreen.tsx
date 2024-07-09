@@ -199,7 +199,7 @@ export default function HanaMainScreen({ navigation }: any) {
                       </BalanceTexts>
                       <Row>
                         <Button width="50%" backgroundColor="#EFF0F4">
-                          <ButtonText>보내기</ButtonText>
+                          <ButtonText onPress={() => navigation.navigate('SendMoney')}>보내기</ButtonText>
                         </Button>
                         <Button width="50%" backgroundColor="#1EA698">
                           <ButtonText color="white">
