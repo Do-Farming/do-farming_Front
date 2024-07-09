@@ -1,5 +1,7 @@
-import React, { useRef, useState } from 'react';
-import { View, Text, Animated, Dimensions, FlatList } from 'react-native';
+import React, { useRef, useState, useEffect } from 'react';
+import { View, Text, Animated, Dimensions, FlatList, ActivityIndicator} from 'react-native'; // ActivityIndicator 추가
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
+import axios from 'axios';
 import {
   ItemContainer,
   ItemTextContainer,
@@ -23,7 +25,7 @@ import {
   InputContainer,
   ActionsContainer,
   TabContainer,
-  TextInputText,RowWide,
+  TextInputText,
   AnimatedTabContainer,
   StyledAccountInput,
   AccountTextInput,
@@ -45,22 +47,29 @@ import {
   StyledTextInputAccount,
   DotContainer,
   Container2,
-  Dot,
+  Dot, RowWide,
   Card, Title, InfoText, BoldText, ButtonContainer, CustomButton, ButtonText 
 } from './SendMoneyScreen.styled';
 import { Row } from '../home/HomeScreen.styled';
 import { Account } from '../../types/account/AccountTypes';
-import axios from 'axios';
-import { sendAccount } from '../../types/BankingSystem/AccountService';
+import axiosInstance from '../../apis/axiosInstance';
+import { sendAccount, myAccount } from '../../types/BankingSystem/AccountService';
 import { StyledImage } from '../bang/bangDetail/BangDetailScreen.styled';
+
 const { width: windowWidth, height: windowHeight } = Dimensions.get('window');
 
 const formatAmount = (amount: string) => {
+
   if (!amount) return '';
   const number = parseInt(amount.replace(/,/g, ''));
   return number.toLocaleString();
 };
-// Test용 Data > 추후 삭제 예정
+
+export const getChecking = async () => {
+  const response = await axiosInstance.get('/api/v1/account/my');
+  console.log(response);
+  return response.data.result as myAccount[];
+};
 const accountData = [
   {
     id: 1,
@@ -92,24 +101,10 @@ const accountData = [
   },
 ];
 
-const myAccountData = [
-  {
-    id:1,
-    name: 'string',
-    accountNumber: '1110357059277',
-    balance: 0,
-  },
-  {
-    id:2,
-    name: 'string',
-    accountNumber: 1110313457220,
-    balance: 5000000,
-  },
-];
 
-export const objectDetect = async (sendAccounts: sendAccount, send:string, recive:string) => {
+
+export const objectDetect = async (sendAccounts: sendAccount, send: string, recive: string, navigation:any) => {
   const url = 'http://172.16.20.55/api/v1/account/simple';
-
   const requestBody = {
     accountId: sendAccounts.accountId,
     amount: sendAccounts.amount,
@@ -127,13 +122,12 @@ export const objectDetect = async (sendAccounts: sendAccount, send:string, reciv
       },
     });
     console.log(response.data);
+    navigation.navigate('SendSucess');
     return response.data.return_object;
   } catch (error) {
     throw error;
   }
 };
-
-
 
 export const SendMoneyScreen = () => {
   const [activeTab, setActiveTab] = useState('one');
@@ -141,37 +135,57 @@ export const SendMoneyScreen = () => {
   const [isAccountVisible, setIsAccountVisible] = useState(false);
   const [isBalanceVisible, setIsBalanceVisible] = useState(false);
   const [isSecretVisible, setIsSecretVisible] = useState(false);
+  const [myAccounts, setMyAccounts] = useState<myAccount[]>([]);
+  const [isAccountLoading, setIsAccountLoading] = useState(true);
   const [currentAccountIndex, setCurrentAccountIndex] = useState(0);
   const slideAnimOne = useRef(new Animated.Value(windowHeight)).current;
   const slideAnimTwo = useRef(new Animated.Value(windowHeight)).current;
   const slideAnimThree = useRef(new Animated.Value(windowHeight)).current;
   const slideAnimFour = useRef(new Animated.Value(windowHeight)).current;
   const slideAnimFive = useRef(new Animated.Value(windowHeight)).current;
-  const [account, setAccount] = useState(null);
-  const [myAccount, setMyAccount] = useState(null);
+  const [account, setAccount] = useState<Account | null>(null);
   const [sendAccount, setSendAccount] = useState<sendAccount>({
-    accountId : myAccountData[currentAccountIndex].id,
+    accountId: 0,
     amount: 0,
     password: '',
     recipientBank: '하나',
     recipientAccountNumber: 0,
     recipientRemarks: '',
     senderRemarks: '',
-  })
+  });
   const [amount, setAmount] = useState('');
   const [send, setSend] = useState('강민주');
   const [recive, setRecive] = useState('');
   const [secretKey, setSecretKey] = useState('');
+  
+const navigation = useNavigation<any>();
+
+  useEffect(() => {
+    const loadAccounts = async () => {
+      try {
+        const data = await getChecking();
+        setMyAccounts(data);
+        if (data.length > 0) {
+          setSendAccount({ ...sendAccount, accountId: data[0].id });
+        }
+      } catch (error) {
+        console.error('Error fetching accounts:', error);
+      } finally {
+        setIsAccountLoading(false);
+      }
+    };
+
+    loadAccounts();
+  }, []);
+
   const handleTabPress = (tabName: string) => {
     setActiveTab(tabName);
   };
 
-  
-
   const handleKeypadPress = (value: string) => {
     if (value === '완료') {
       handleBalanceInputPress();
-      setSendAccount({ ...sendAccount, amount: parseInt(amount.replace(/,/g, '').replace(' 원', '')) })
+      setSendAccount({ ...sendAccount, amount: parseInt(amount.replace(/,/g, '').replace(' 원', '')) });
       return;
     }
     if (value === 'X') {
@@ -180,27 +194,25 @@ export const SendMoneyScreen = () => {
     }
     setAmount((prevAmount) => {
       const newAmount = prevAmount + value;
-      
       return formatAmount(newAmount);
     });
   };
+
   const handleSecretKeypadPress = (num: string) => {
     if (num === '완료') {
       handleSecretInputPress();
       AccountFinalPress();
-      setSendAccount({ ...sendAccount, password: secretKey})
       return;
     }
     if (num === '←') {
-      setSecretKey((prevSecertKey) => prevSecertKey.slice(0, -1));
-      setSendAccount({ ...sendAccount, password: secretKey})
+      setSecretKey((prevSecretKey) => prevSecretKey.slice(0, -1));
       return;
     }
     if (secretKey.length < 4) {
-      setSecretKey((prevSecertKey) => prevSecertKey + num);
-      setSendAccount({ ...sendAccount, password: secretKey})
+      setSecretKey((prevSecretKey) => prevSecretKey + num);
     }
   };
+
   const handleAmountButtonPress = (value: number) => {
     setAmount((prevAmount) => {
       const currentAmount =
@@ -213,7 +225,7 @@ export const SendMoneyScreen = () => {
   const handleAccountInputPress = () => {
     setIsAccountVisible(!isAccountVisible);
     Animated.timing(slideAnimOne, {
-      toValue: isAccountVisible ? windowHeight : windowHeight * 0.5, // Adjust to the desired height of the tab container
+      toValue: isAccountVisible ? windowHeight : windowHeight * 0.5,
       duration: 300,
       useNativeDriver: false,
     }).start();
@@ -221,22 +233,22 @@ export const SendMoneyScreen = () => {
 
   const AccountInputPress = (item: Account) => {
     setAccount(item);
-    setSendAccount({...sendAccount, recipientAccountNumber:item.accountNumber})
+    setSendAccount({ ...sendAccount, recipientAccountNumber: item.accountNumber });
     setRecive(item.name);
     setIsTabVisible(!isTabVisible);
     Animated.timing(slideAnimTwo, {
-      toValue: isTabVisible ? windowHeight + 100 : windowHeight * 0.5, // Adjust to the desired height of the tab container
+      toValue: isTabVisible ? windowHeight + 100 : windowHeight * 0.5,
       duration: 300,
       useNativeDriver: false,
     }).start();
   };
 
-  const AccountInputPress2 = (item: Account) => {
-    setMyAccount(item);
-    setSendAccount({...sendAccount, accountId:item.id})
+  const AccountInputPress2 = (item: myAccount, index : number) => {
+    setSendAccount({ ...sendAccount, accountId: item.id });
+    setCurrentAccountIndex(index);
     setIsTabVisible(!isTabVisible);
     Animated.timing(slideAnimOne, {
-      toValue: isAccountVisible ? windowHeight : windowHeight * 0.5, // Adjust to the desired height of the tab container
+      toValue: isAccountVisible ? windowHeight : windowHeight * 0.5,
       duration: 300,
       useNativeDriver: false,
     }).start();
@@ -245,7 +257,7 @@ export const SendMoneyScreen = () => {
   const AccountFinalPress = () => {
     setIsTabVisible(!isTabVisible);
     Animated.timing(slideAnimFive, {
-      toValue: isTabVisible ? windowHeight + 100 : windowHeight * 0.3, // Adjust to the desired height of the tab container
+      toValue: isTabVisible ? windowHeight + 100 : windowHeight * 0.3,
       duration: 300,
       useNativeDriver: false,
     }).start();
@@ -254,7 +266,7 @@ export const SendMoneyScreen = () => {
   const handleTextInputPress = () => {
     setIsTabVisible(!isTabVisible);
     Animated.timing(slideAnimTwo, {
-      toValue: isTabVisible ? windowHeight + 100 : windowHeight * 0.5, // Adjust to the desired height of the tab container
+      toValue: isTabVisible ? windowHeight + 100 : windowHeight * 0.5,
       duration: 300,
       useNativeDriver: false,
     }).start();
@@ -263,50 +275,42 @@ export const SendMoneyScreen = () => {
   const handleBalanceInputPress = () => {
     setIsBalanceVisible(!isBalanceVisible);
     Animated.timing(slideAnimThree, {
-      toValue: isBalanceVisible ? windowHeight + 100 : windowHeight - 350, // Adjust to the desired height of the tab container
+      toValue: isBalanceVisible ? windowHeight + 100 : windowHeight - 350,
       duration: 300,
       useNativeDriver: false,
     }).start();
   };
+
   const handleSecretInputPress = () => {
     setIsSecretVisible(!isSecretVisible);
     Animated.timing(slideAnimFour, {
-      toValue: isSecretVisible ? windowHeight + 100 : windowHeight -300, // Adjust to the desired height of the tab container
+      toValue: isSecretVisible ? windowHeight + 100 : windowHeight - 300,
       duration: 300,
       useNativeDriver: false,
     }).start();
   };
-  const renderItem = ({ item }) => (
+
+  const renderItem = ({ item }: { item: Account }) => (
     <ItemContainer onPress={() => AccountInputPress(item)}>
       <ItemTextContainer>
-        <ItemTitle>      
-          <StyledImage
-          source={require("../../assets/hana-symbol.png")}
-          width={20}
-          height={20}
-          ></StyledImage> {item.name}</ItemTitle>
-        <ItemSubtitle>
-           {item.accountNumber}
-        </ItemSubtitle>
+        <ItemTitle>
+          <StyledImage source={require("../../assets/hana-symbol.png")} width={20} height={20} /> {item.name}
+        </ItemTitle>
+        <ItemSubtitle>{item.accountNumber}</ItemSubtitle>
       </ItemTextContainer>
-      <ItemDate>{item.date}</ItemDate>
+      {/*<ItemDate>{item.date}</ItemDate>*/}
     </ItemContainer>
   );
 
-  const renderItem2 = ({ item }) => (
-    <ItemContainer onPress={() => AccountInputPress2(item)}>
+  const renderItem2 = ({ item, index }: { item: myAccount, index : number }) => (
+    <ItemContainer onPress={() => AccountInputPress2(item, index)}>
       <ItemTextContainer>
-        <ItemTitle>      
-          <StyledImage
-          source={require("../../assets/hana-symbol.png")}
-          width={20}
-          height={20}
-          ></StyledImage> {item.name}</ItemTitle>
-        <ItemSubtitle>
-           {item.accountNumber}
-        </ItemSubtitle>
+        <ItemTitle>
+          <StyledImage source={require("../../assets/hana-symbol.png")} width={20} height={20} /> {item.name}
+        </ItemTitle>
+        <ItemSubtitle>{item.accountNumber}</ItemSubtitle>
       </ItemTextContainer>
-      <ItemDate>{item.date}</ItemDate>
+      {/*<ItemDate>{item.date}</ItemDate>*/}
     </ItemContainer>
   );
 
@@ -326,14 +330,22 @@ export const SendMoneyScreen = () => {
         placeholder="입금계좌번호 직접입력"
         value={recive}
         onChangeText={setRecive}
-        editable={false} // 수정 불가하게 설정
+        editable={false}
       />
 
-<ConfirmButton onPress={handleSecretInputPress}>
+      <ConfirmButton onPress={handleSecretInputPress}>
         <ConfirmButtonText>확인</ConfirmButtonText>
       </ConfirmButton>
     </>
   );
+
+  if (isAccountLoading) {
+    return (
+      <Container>
+        <ActivityIndicator size="large" color="#0000ff" />
+      </Container>
+    );
+  }
 
   return (
     <Container>
@@ -343,48 +355,27 @@ export const SendMoneyScreen = () => {
         <MenuButton>≡</MenuButton>
       </Header>
       <StyledAccountInput onPress={handleAccountInputPress}>
-        {myAccount?
-        (<AccountInfo>
-          <Row>
-            <AccountIcon source={require('../../assets/hana-symbol.png')} />
-            <AccountText>
-              {myAccount.name}
-            </AccountText>
-          </Row>
-          <AccountDetails>
-            <AccountNumber>
-              {myAccount.accountNumber}
-            </AccountNumber>
-            <AccountBalance>
-              {myAccount.balance} 원
-            </AccountBalance>
-          </AccountDetails>
-        </AccountInfo>)
-          :
-        (<AccountInfo>
-          <Row>
-            <AccountIcon source={require('../../assets/hana-symbol.png')} />
-            <AccountText>
-              {myAccountData[currentAccountIndex].name}
-            </AccountText>
-          </Row>
-          <AccountDetails>
-            <AccountNumber>
-              {myAccountData[currentAccountIndex].accountNumber}
-            </AccountNumber>
-            <AccountBalance>
-              {myAccountData[currentAccountIndex].balance} 원
-            </AccountBalance>
-          </AccountDetails>
-        </AccountInfo>)
-        }
+        {myAccounts.length > 0 ? (
+          <AccountInfo>
+            <Row>
+              <AccountIcon source={require('../../assets/hana-symbol.png')} />
+              <AccountText>{myAccounts[currentAccountIndex].name}</AccountText>
+            </Row>
+            <AccountDetails>
+              <AccountNumber>{myAccounts[currentAccountIndex].accountNumber}</AccountNumber>
+              <AccountBalance>{myAccounts[currentAccountIndex].balance} 원</AccountBalance>
+            </AccountDetails>
+          </AccountInfo>
+        ) : (
+          <Text>계좌 정보를 불러올 수 없습니다.</Text>
+        )}
       </StyledAccountInput>
 
       {account ? (
         <View>
           <StyledTextInput onPress={handleTextInputPress}>
             <TextInputText>{account.name}</TextInputText>
-            <TextInputText>{account.account}</TextInputText>
+            <TextInputText>{account.accountNumber}</TextInputText>
           </StyledTextInput>
           <InputContainer>
             <ActionsContainer>
@@ -397,7 +388,7 @@ export const SendMoneyScreen = () => {
             </ActionsContainer>
           </InputContainer>
 
-          {amount == '' ? (
+          {amount === '' ? (
             <AccountInput onPress={handleBalanceInputPress}>
               <LabelText>얼마를 보낼까요?</LabelText>
             </AccountInput>
@@ -426,23 +417,17 @@ export const SendMoneyScreen = () => {
 
       <AnimatedTabContainer style={{ top: slideAnimOne }}>
         <TabContainer>
-          <Tab
-            onPress={() => handleTabPress('one')}
-            isActive={activeTab === 'one'}
-          >
+          <Tab onPress={() => handleTabPress('one')} isActive={activeTab === 'one'}>
             <TabText isActive={activeTab === 'one'}>최근</TabText>
           </Tab>
-          <Tab
-            onPress={() => handleTabPress('two')}
-            isActive={activeTab === 'two'}
-          >
+          <Tab onPress={() => handleTabPress('two')} isActive={activeTab === 'two'}>
             <TabText isActive={activeTab === 'two'}>자주</TabText>
           </Tab>
         </TabContainer>
         <FlatList
-          data={myAccountData}
+          data={myAccounts}
           renderItem={renderItem2}
-          keyExtractor={(item) => item.id}
+          keyExtractor={(item) => item.id.toString()}
           contentContainerStyle={{ paddingBottom: 20 }}
         />
       </AnimatedTabContainer>
@@ -452,35 +437,23 @@ export const SendMoneyScreen = () => {
           <TextInputText>이름, 계좌번호, 연락처, 국세 등 입력 </TextInputText>
         </AccountTextInput>
         <TabContainer>
-          <Tab
-            onPress={() => handleTabPress('one')}
-            isActive={activeTab === 'one'}
-          >
+          <Tab onPress={() => handleTabPress('one')} isActive={activeTab === 'one'}>
             <TabText isActive={activeTab === 'one'}>최근</TabText>
           </Tab>
-          <Tab
-            onPress={() => handleTabPress('two')}
-            isActive={activeTab === 'two'}
-          >
+          <Tab onPress={() => handleTabPress('two')} isActive={activeTab === 'two'}>
             <TabText isActive={activeTab === 'two'}>자주</TabText>
           </Tab>
-          <Tab
-            onPress={() => handleTabPress('three')}
-            isActive={activeTab === 'three'}
-          >
+          <Tab onPress={() => handleTabPress('three')} isActive={activeTab === 'three'}>
             <TabText isActive={activeTab === 'three'}>내계좌</TabText>
           </Tab>
-          <Tab
-            onPress={() => handleTabPress('four')}
-            isActive={activeTab === 'four'}
-          >
+          <Tab onPress={() => handleTabPress('four')} isActive={activeTab === 'four'}>
             <TabText isActive={activeTab === 'four'}>심플</TabText>
           </Tab>
         </TabContainer>
         <FlatList
           data={accountData}
           renderItem={renderItem}
-          keyExtractor={(item) => item.id}
+          keyExtractor={(item) => item.id.toString()}
           contentContainerStyle={{ paddingBottom: 20 }}
         />
       </AnimatedTabContainer>
@@ -488,7 +461,6 @@ export const SendMoneyScreen = () => {
       <AnimatedBalanceContainer style={{ top: slideAnimThree }}>
         <KeypadContainer>
           <LabelText2>얼마를 보낼까요?</LabelText2>
-
           <AmountInputContainer>
             {Object.entries({
               '+1만': 10000,
@@ -497,10 +469,7 @@ export const SendMoneyScreen = () => {
               '+100만': 1000000,
               전액: 1000000,
             }).map(([key, value]) => (
-              <AmountButton
-                key={key}
-                onPress={() => handleAmountButtonPress(value)}
-              >
+              <AmountButton key={key} onPress={() => handleAmountButtonPress(value)}>
                 <AmountButtonText>{key}</AmountButtonText>
               </AmountButton>
             ))}
@@ -521,14 +490,14 @@ export const SendMoneyScreen = () => {
           ))}
         </KeypadContainer>
       </AnimatedBalanceContainer>
+
       <AnimatedBalanceContainer style={{ top: slideAnimFour }}>
         <KeypadContainer>
-        <DotContainer>
-        {[0, 1, 2, 3].map((index) => (
-          <Dot key={index} filled={index < secretKey.length} />
-        ))}
-      </DotContainer>       
-          
+          <DotContainer>
+            {[0, 1, 2, 3].map((index) => (
+              <Dot key={index} filled={index < secretKey.length} />
+            ))}
+          </DotContainer>
           {[
             ['1', '2', '3'],
             ['4', '5', '6'],
@@ -546,43 +515,39 @@ export const SendMoneyScreen = () => {
         </KeypadContainer>
       </AnimatedBalanceContainer>
 
-
-
       <AnimatedTabContainer style={{ top: slideAnimFive }}>
         <Container2>
-        <Card>
-        <Title>{sendAccount.recipientBank} {recive}님께</Title>
-        <Title>{amount}원을 이체합니다.</Title>
-          <RowWide>
-            <InfoText>입금계좌</InfoText>
-            <InfoText><BoldText>{sendAccount.recipientBank} {sendAccount.recipientAccountNumber}</BoldText></InfoText>
-          </RowWide>
-          <RowWide>
-            <InfoText>수수료</InfoText>
-            <InfoText><BoldText>면제</BoldText></InfoText>
-          </RowWide>
-          <RowWide>
-            <InfoText>받는분에게 표기</InfoText>
-            <InfoText><BoldText>{send}</BoldText></InfoText>
-          </RowWide>
-          <RowWide>
-            <InfoText>나에게 표기</InfoText>
-            <InfoText><BoldText>{recive}</BoldText></InfoText>
-          </RowWide>
+          <Card>
+            <Title>{sendAccount.recipientBank} {recive}님께</Title>
+            <Title>{amount}원을 이체합니다.</Title>
+            <RowWide>
+              <InfoText>입금계좌</InfoText>
+              <InfoText><BoldText>{sendAccount.recipientBank} {sendAccount.recipientAccountNumber}</BoldText></InfoText>
+            </RowWide>
+            <RowWide>
+              <InfoText>수수료</InfoText>
+              <InfoText><BoldText>면제</BoldText></InfoText>
+            </RowWide>
+            <RowWide>
+              <InfoText>받는분에게 표기</InfoText>
+              <InfoText><BoldText>{send}</BoldText></InfoText>
+            </RowWide>
+            <RowWide>
+              <InfoText>나에게 표기</InfoText>
+              <InfoText><BoldText>{recive}</BoldText></InfoText>
+            </RowWide>
 
             <ButtonContainer>
               <CustomButton>
                 <ButtonText>취소</ButtonText>
               </CustomButton>
-              <CustomButton primary onPress={() => objectDetect(sendAccount, send, recive)}
-              >
-                <ButtonText>강민주님에게 이체</ButtonText>
+              <CustomButton primary onPress={() => objectDetect(sendAccount, send, recive, navigation)}>
+                <ButtonText>{send}님에게 이체</ButtonText>
               </CustomButton>
             </ButtonContainer>
-        </Card>
+          </Card>
         </Container2>
       </AnimatedTabContainer>
-      
     </Container>
   );
 };
