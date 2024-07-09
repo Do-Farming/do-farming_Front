@@ -24,10 +24,12 @@ const ProductSignInScreen = ({ navigation, route }: any) => {
         {resMsg?.message ? <CancelIcon /> : <GreenCheckIcon />}
       </GreenCheckContainer>
       <SubHeader>{message}</SubHeader>
-      <ButtonContainer onPress={() => navigation.navigate('DoFarmingMain')}>
-        <Text>다른 상품을 찾아볼까요?</Text>
+      <ButtonContainer
+        onPress={() => navigation.navigate('Tabs', { screen: 'DofarmingMain' })}
+      >
+        <Text>홈화면으로 이동할까요?</Text>
         <ButtonT>
-          <ButtonText>다른 상품 알아보기</ButtonText>
+          <ButtonText>홈 화면으로 이동하기</ButtonText>
         </ButtonT>
       </ButtonContainer>
     </Container>
