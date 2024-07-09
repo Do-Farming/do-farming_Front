@@ -8,7 +8,7 @@ import {
   ButtonContainer,
   ButtonText,
   SubHeader,
-  ButtonT,
+  HomeButton,
 } from './ProductSignInScreen.styled';
 import { CancelIcon, GreenCheckIcon } from '../../../assets';
 
@@ -24,13 +24,11 @@ const ProductSignInScreen = ({ navigation, route }: any) => {
         {resMsg?.message ? <CancelIcon /> : <GreenCheckIcon />}
       </GreenCheckContainer>
       <SubHeader>{message}</SubHeader>
-      <ButtonContainer
-        onPress={() => navigation.navigate('Tabs', { screen: 'DofarmingMain' })}
-      >
+      <ButtonContainer>
         <Text>홈화면으로 이동할까요?</Text>
-        <ButtonT>
+        <HomeButton onPress={() => navigation.navigate('HanaMain')}>
           <ButtonText>홈 화면으로 이동하기</ButtonText>
-        </ButtonT>
+        </HomeButton>
       </ButtonContainer>
     </Container>
   );
