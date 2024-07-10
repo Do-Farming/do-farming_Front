@@ -40,6 +40,7 @@ import {
   DescriptionView,
   GraySafeAreaView,
   ChatBotButton,
+  AccountTexts,
 } from './HanaMainScreen.styled';
 import { StyledImage } from '../bang/bangDetail/BangDetailScreen.styled';
 import { mainContents, saleContents } from '../../mocks/hanaMainDatas';
@@ -218,7 +219,7 @@ export default function HanaMainScreen({ navigation }: any) {
                     </DescriptionView>
 
                     <RowCenter>
-                      <DescriptionTexts>{item.accountNumber}</DescriptionTexts>
+                      <AccountTexts>{item.accountNumber}</AccountTexts>
                     </RowCenter>
                     <BalanceTexts>{formatAmount(item.balance)}</BalanceTexts>
                     <Row>
