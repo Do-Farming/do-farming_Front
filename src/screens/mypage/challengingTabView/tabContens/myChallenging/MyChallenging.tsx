@@ -15,6 +15,7 @@ import {
 } from '../TabContents.styled';
 import { Image } from 'react-native';
 import { Group } from '../../../../../types/group/GroupTypes';
+import { useNavigation } from '@react-navigation/native';
 
 const parseDate = (dateString: string): Date => {
   const [year, month, day] = dateString.split('-').map(Number);
@@ -40,7 +41,12 @@ const getProgressFigure = (startedAt: string, endedAt: string): number => {
   return Math.round((elapsedDuration / totalDuration) * 100);
 };
 
-const MyChallenging: React.FC<{ myGroup: Group }> = ({ myGroup }) => {
+const MyChallenging: React.FC<{ myGroup: Group }> = ({
+  myGroup,
+}: {
+  myGroup: Group;
+}) => {
+  const navigation = useNavigation<any>();
   return (
     <Container>
       {myGroup.status === 2 && (
@@ -52,20 +58,18 @@ const MyChallenging: React.FC<{ myGroup: Group }> = ({ myGroup }) => {
           <ItemInfo>
             <ItemTitleBox>
               <ItemTitle>도파밍 상품</ItemTitle>
-              <ViewRankingButton>
+              <ViewRankingButton
+                onPress={() => navigation.navigate('Competitive')}
+              >
                 <ViewRankingButtonText>랭킹보기</ViewRankingButtonText>
               </ViewRankingButton>
             </ItemTitleBox>
             <ItemStatus>
               {myGroup.startedAt} ~ {myGroup.endedAt}
             </ItemStatus>
-            <ItemProgressFigure>
-              {getProgressFigure(myGroup.startedAt, myGroup.endedAt)}%
-            </ItemProgressFigure>
+            <ItemProgressFigure>50%</ItemProgressFigure>
             <ItemProgressBar
-              progress={
-                getProgressFigure(myGroup.startedAt, myGroup.endedAt) / 100
-              }
+              progress={50 / 100}
               width={null}
               height={10}
               color={theme.mainColor}
