@@ -108,9 +108,9 @@ export default function PedometerScreen({ route }: any) {
   // WebSocket을 통해 실시간으로 데이터를 업데이트하는 useEffect 훅
   useEffect(() => {
     if (deviceId) {
-      fetchPedometerData(deviceId);
+      fetchPedometerData(groupId);
 
-      ws.current = new WebSocket('ws://172.30.1.99/pedometer');
+      ws.current = new WebSocket('ws://172.16.21.100/pedometer');
 
       ws.current.onopen = () => {
         console.log('WebSocket 연결이 열렸습니다');
