@@ -1,8 +1,15 @@
 import styled from 'styled-components/native';
 import { View, Text, TouchableOpacity, Animated } from 'react-native';
+
 export const Container = styled.View`
   flex: 1;
   background-color: #f9f9fb;
+`;
+
+export const Row = styled.View`
+  flex-direction: row;
+  align-items: center;
+  margin-top: 8px;
 `;
 
 export const Container2 = styled.View`
@@ -122,8 +129,7 @@ export const AccountTextInput = styled(TouchableOpacity)`
 export const ActionsContainer = styled.View`
   flex-direction: row;
   display: flex;
-  justify-content: right;
-  align-items: right;
+  align-items: center;
   text-align: right;
 `;
 
@@ -393,4 +399,14 @@ export const CustomButton = styled.TouchableOpacity`
 export const ButtonText = styled.Text`
   color: white;
   font-size: 16px;
+`;
+
+export const Button = styled.TouchableOpacity`
+  justify-content: center;
+  align-items: center;
+  padding: 5px 20px;
+  background-color: ${(props) => props.theme.backgroundColor};
+  width: 100%;
+  border-radius: 10px;
+  margin-right: 10px;
 `;

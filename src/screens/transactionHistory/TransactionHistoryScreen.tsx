@@ -98,7 +98,7 @@ export default function TransactionHistoryScreen({ navigation, route }: any) {
                 <CancelButton>
                   <ButtonText isTransfer={false}>가져오기</ButtonText>
                 </CancelButton>
-                <TransferButton>
+                <TransferButton onPress={() => navigation.navigate('SendMoney')}>
                   <ButtonText isTransfer={true}>이체</ButtonText>
                 </TransferButton>
               </ButtonContainer>

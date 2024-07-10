@@ -223,12 +223,12 @@ export default function HanaMainScreen({ navigation }: any) {
                     </RowCenter>
                     <BalanceTexts>{formatAmount(item.balance)}</BalanceTexts>
                     <Row>
-                      <Button width="48%" backgroundColor="#EFF0F4">
-                        <ButtonText
-                          onPress={() => navigation.navigate('SendMoney')}
-                        >
-                          보내기
-                        </ButtonText>
+                      <Button
+                        width="48%"
+                        backgroundColor="#EFF0F4"
+                        onPress={() => navigation.navigate('SendMoney')}
+                      >
+                        <ButtonText>보내기</ButtonText>
                       </Button>
                       <Button width="48%" backgroundColor="#1EA698">
                         <ButtonText color="white">가져오기</ButtonText>
