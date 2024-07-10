@@ -86,12 +86,12 @@ export default function TransactionHistoryScreen({ navigation, route }: any) {
                 <AccountNumber>{account?.accountNumber}</AccountNumber>
               </View>
               <AccountBalanceContainer>
-                <AccountBalance>{account?.balance} </AccountBalance>
+                <AccountBalance>{(account?.balance)?.toLocaleString()} </AccountBalance>
                 <AccountBalanceWon>원</AccountBalanceWon>
               </AccountBalanceContainer>
               <WithdrawAvailableMoneyContainer>
                 <WithdrawAvailableMoney>
-                  출금가능금액 {account?.balance} 원
+                  출금가능금액 {(account?.balance)?.toLocaleString()} 원
                 </WithdrawAvailableMoney>
               </WithdrawAvailableMoneyContainer>
               <ButtonContainer>

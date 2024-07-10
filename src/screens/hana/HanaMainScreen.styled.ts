@@ -69,6 +69,12 @@ export const InfoText = styled.Text`
   margin-bottom: 10px;
 `;
 
+export const AccountTexts = styled.Text`
+  font-size: 18px;
+  margin-bottom: 10px;
+  text-decoration: underline;
+`;
+
 export const DescriptionTexts = styled.Text`
   font-size: 18px;
   margin-bottom: 10px;

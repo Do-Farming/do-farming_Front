@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, ScrollView } from 'react-native';
+import { Text, ScrollView } from 'react-native';
 import {
   AmountContainer,
   BenefitContainer,
@@ -13,7 +13,6 @@ import {
   InterestRateText,
   ProductName,
   Section,
-  SignUpButton,
   SignUpButtonText,
   SignUpGreenButton,
   SmallText,
@@ -21,7 +20,6 @@ import {
 } from './ProductSignUpScreen.styled';
 import {
   JoinCheckingType,
-  JoinDofarmingType,
 } from '../../types/account/AccountTypes';
 
 const ProductSignUpScreen: React.FC = ({ navigation }: any) => {
@@ -58,7 +56,7 @@ const ProductSignUpScreen: React.FC = ({ navigation }: any) => {
           </BenefitContainer>
           <BenefitText2>
             <HighlightedText>10,000,000원</HighlightedText> 을{'\n'}
-            <HighlightedText> 12개월 </HighlightedText>
+            <HighlightedText>12개월 </HighlightedText>
             동안 저축하기
           </BenefitText2>
         </Section>
