@@ -9,8 +9,8 @@ export interface Group {
   createdDate: number[];
   status: number;
   groupMembers: object[];
-  startedAt: string;
-  endedAt: string;
+  startedAt: number[];
+  endedAt: number[];
   joined: boolean;
   admin: boolean;
   public: boolean;
