@@ -17,12 +17,12 @@ import { Image } from 'react-native';
 import { Group } from '../../../../../types/group/GroupTypes';
 import { useNavigation } from '@react-navigation/native';
 
-const parseDate = (dateString: string): Date => {
-  const [year, month, day] = dateString.split('-').map(Number);
+const parseDate = (date: number[]): Date => {
+  const [year, month, day] = date;
   return new Date(year, month - 1, day);
 };
 
-const getProgressFigure = (startedAt: string, endedAt: string): number => {
+const getProgressFigure = (startedAt: number[], endedAt: number[]) => {
   const startDate = parseDate(startedAt);
   const endDate = parseDate(endedAt);
   const currentDate = new Date();
@@ -41,11 +41,7 @@ const getProgressFigure = (startedAt: string, endedAt: string): number => {
   return Math.round((elapsedDuration / totalDuration) * 100);
 };
 
-const MyChallenging: React.FC<{ myGroup: Group }> = ({
-  myGroup,
-}: {
-  myGroup: Group;
-}) => {
+const MyChallenging: React.FC<{ myGroup: Group }> = ({ myGroup }) => {
   const navigation = useNavigation<any>();
   return (
     <Container>
@@ -67,9 +63,13 @@ const MyChallenging: React.FC<{ myGroup: Group }> = ({
             <ItemStatus>
               {myGroup.startedAt} ~ {myGroup.endedAt}
             </ItemStatus>
-            <ItemProgressFigure>50%</ItemProgressFigure>
+            <ItemProgressFigure>
+              {getProgressFigure(myGroup.startedAt, myGroup.endedAt)}%
+            </ItemProgressFigure>
             <ItemProgressBar
-              progress={50 / 100}
+              progress={
+                getProgressFigure(myGroup.startedAt, myGroup.endedAt) / 100
+              }
               width={null}
               height={10}
               color={theme.mainColor}
