@@ -98,6 +98,7 @@ const ProductPasswordScreen: React.FC<ProductPasswordScreenProps> = ({
           await joinChecking(updatedJoinChecking);
         } else if (from === 'bangJoin2') {
           await joinDofarmingProduct(updatedJoinDofarming);
+          await bangJoin(bang);
         }
         navigation.navigate('ProductSignIn', { resMsg: { message: resMsg } });
       } catch (error) {
