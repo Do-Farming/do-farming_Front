@@ -61,7 +61,9 @@ const MyChallenging: React.FC<{ myGroup: Group }> = ({ myGroup }) => {
               </ViewRankingButton>
             </ItemTitleBox>
             <ItemStatus>
-              {myGroup.startedAt} ~ {myGroup.endedAt}
+              {myGroup.startedAt[0]}.{myGroup.startedAt[1]}.
+              {myGroup.startedAt[2]} ~ {myGroup.endedAt[0]}.{myGroup.endedAt[1]}
+              .{myGroup.endedAt[2]}
             </ItemStatus>
             <ItemProgressFigure>
               {getProgressFigure(myGroup.startedAt, myGroup.endedAt)}%
