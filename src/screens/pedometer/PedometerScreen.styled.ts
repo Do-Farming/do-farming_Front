@@ -111,6 +111,7 @@ export const UserName = styled.Text`
 `;
 
 export const AchievedGoal = styled.Text`
+  margin-top: 5px;
   font-size: 15px;
   color: #888888;
 `;
@@ -120,4 +121,19 @@ export const InterestRate = styled.Text`
   color: #e22f2f;
   font-weight: bold;
   margin-left: auto;
+`;
+
+export const MissionInfo = styled.Text`
+  font-size: 16px;
+  font-weight: 800;
+  margin-bottom: 14px;
+`;
+
+export const MissionTitle = styled.Text`
+  font-size: 22px;
+  font-weight: 800;
+`;
+
+export const UserInfo = styled.View`
+  margin-left: 10px;
 `;
