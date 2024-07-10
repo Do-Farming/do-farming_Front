@@ -17,7 +17,7 @@ import { Image } from 'react-native';
 import { Group } from '../../../../../types/group/GroupTypes';
 
 const parseDate = (dateString: string): Date => {
-  const [year, month, day] = dateString.split('.').map(Number);
+  const [year, month, day] = dateString.split('-').map(Number);
   return new Date(year, month - 1, day);
 };
 
